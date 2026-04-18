@@ -7,7 +7,7 @@
 <title>RxDesk — CarePoint Pharmacy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
 
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -21,19 +21,17 @@
   --border2: rgba(255,255,255,0.12);
   --text: #e6edf3;
   --text-muted: rgba(255,255,255,0.4);
-  --text-dim: rgba(255,255,255,0.25);
+  --text-dim: rgba(255,255,255,0.2);
   --accent: #1a6b4a;
   --accent-glow: rgba(26,107,74,0.15);
   --accent-bright: #22c55e;
-  --gold: #c9a84c;
-  --gold-glow: rgba(201,168,76,0.12);
   --red: #ef4444;
-  --red-glow: rgba(239,68,68,0.12);
+  --red-glow: rgba(239,68,68,0.1);
   --amber: #f59e0b;
-  --amber-glow: rgba(245,158,11,0.12);
+  --amber-glow: rgba(245,158,11,0.1);
   --blue: #3b82f6;
-  --blue-glow: rgba(59,130,246,0.12);
-  --sidebar-w: 230px;
+  --blue-glow: rgba(59,130,246,0.1);
+  --gold: #c9a84c;
 }
 
 html, body { height: 100%; overflow: hidden; }
@@ -48,111 +46,80 @@ body {
 
 /* ── SIDEBAR ── */
 .sidebar {
-  width: var(--sidebar-w);
+  width: 200px;
   background: var(--surface);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  position: relative;
-  z-index: 10;
 }
 
 .sidebar-logo {
-  padding: 22px 20px 20px;
+  padding: 18px 16px;
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .logo-mark {
-  width: 32px; height: 32px;
+  width: 28px; height: 28px;
   background: var(--accent);
-  border-radius: 7px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Instrument Serif', serif;
   font-style: italic;
-  font-size: 15px;
+  font-size: 13px;
   color: white;
   flex-shrink: 0;
 }
 
-.logo-text {
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
-}
-
+.logo-text { font-size: 14px; font-weight: 700; letter-spacing: -0.3px; }
 .logo-text span { color: var(--accent-bright); }
 
-.sidebar-pharmacy {
-  padding: 14px 20px;
+.pharmacy-info {
+  padding: 10px 16px;
   border-bottom: 1px solid var(--border);
 }
 
-.pharmacy-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin-bottom: 4px;
-}
+.pharmacy-name { font-size: 12px; font-weight: 600; color: var(--text); }
 
-.pharmacy-name {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text);
-}
-
-.pharmacy-status {
+.clara-live {
   display: flex;
   align-items: center;
-  gap: 5px;
-  margin-top: 4px;
-  font-size: 11px;
+  gap: 4px;
+  margin-top: 3px;
+  font-size: 10px;
   color: var(--accent-bright);
+  font-weight: 600;
 }
 
-.status-dot {
+.live-dot {
   width: 5px; height: 5px;
   background: var(--accent-bright);
   border-radius: 50%;
-  animation: pulse 2s infinite;
+  animation: pulse 1.5s infinite;
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
 .sidebar-nav {
   flex: 1;
-  padding: 12px 10px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-}
-
-.nav-section-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  padding: 8px 10px 4px;
+  gap: 1px;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 9px 12px;
-  border-radius: 7px;
-  font-size: 13.5px;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--text-muted);
   cursor: pointer;
@@ -161,295 +128,234 @@ body {
   position: relative;
 }
 
-.nav-item:hover {
-  background: rgba(255,255,255,0.04);
-  color: var(--text);
-}
-
-.nav-item.active {
-  background: var(--accent-glow);
-  color: var(--accent-bright);
-  border-color: rgba(26,107,74,0.2);
-}
-
-.nav-icon { font-size: 15px; width: 18px; text-align: center; }
+.nav-item:hover { background: rgba(255,255,255,0.04); color: var(--text); }
+.nav-item.active { background: var(--accent-glow); color: var(--accent-bright); border-color: rgba(26,107,74,0.2); }
+.nav-icon { font-size: 14px; width: 16px; text-align: center; }
 
 .nav-badge {
   margin-left: auto;
-  background: var(--red);
-  color: white;
   font-size: 10px;
   font-weight: 700;
-  padding: 2px 7px;
+  padding: 1px 6px;
   border-radius: 100px;
-  min-width: 20px;
+  min-width: 18px;
   text-align: center;
 }
 
-.nav-badge.amber { background: var(--amber); }
-.nav-badge.green { background: var(--accent); }
+.badge-red { background: var(--red); color: white; }
+.badge-amber { background: var(--amber); color: var(--bg); }
+.badge-green { background: var(--accent); color: white; }
 
 .sidebar-bottom {
-  padding: 14px 10px;
+  padding: 10px 8px;
   border-top: 1px solid var(--border);
 }
 
-.sidebar-user {
+.user-row {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
-  border-radius: 7px;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 6px;
   cursor: pointer;
   transition: background 0.15s;
 }
 
-.sidebar-user:hover { background: rgba(255,255,255,0.04); }
+.user-row:hover { background: rgba(255,255,255,0.04); }
 
 .user-avatar {
-  width: 28px; height: 28px;
+  width: 24px; height: 24px;
   background: var(--accent);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 700;
   flex-shrink: 0;
 }
 
-.user-name { font-size: 13px; font-weight: 500; }
-.user-role { font-size: 11px; color: var(--text-muted); }
+.user-name { font-size: 12px; font-weight: 500; }
+.user-role { font-size: 10px; color: var(--text-muted); }
 
 /* ── MAIN ── */
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 
 /* ── TOPBAR ── */
 .topbar {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
-  padding: 0 28px;
-  height: 58px;
+  padding: 0 24px;
+  height: 52px;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
   flex-shrink: 0;
 }
 
 .topbar-title {
   font-family: 'Instrument Serif', serif;
-  font-size: 20px;
+  font-size: 18px;
   letter-spacing: -0.3px;
 }
 
-.topbar-date {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-left: 4px;
-}
+.topbar-date { font-size: 11px; color: var(--text-muted); }
 
-.topbar-right {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+.topbar-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
 
 .topbar-btn {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  padding: 7px 14px;
-  border-radius: 7px;
-  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
   font-weight: 600;
   border: 1px solid var(--border2);
   background: transparent;
   color: var(--text);
   cursor: pointer;
   transition: all 0.15s;
+  font-family: 'DM Sans', sans-serif;
 }
 
-.topbar-btn:hover { background: rgba(255,255,255,0.06); }
-
-.topbar-btn.primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: white;
-}
-
+.topbar-btn:hover { background: rgba(255,255,255,0.05); }
+.topbar-btn.primary { background: var(--accent); border-color: var(--accent); color: white; }
 .topbar-btn.primary:hover { opacity: 0.88; }
-
-.live-indicator {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--accent-bright);
-  background: var(--accent-glow);
-  border: 1px solid rgba(34,197,94,0.2);
-  padding: 5px 12px;
-  border-radius: 100px;
-}
 
 /* ── CONTENT ── */
 .content {
   flex: 1;
   overflow-y: auto;
-  padding: 24px 28px;
+  padding: 20px 24px;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.content::-webkit-scrollbar { width: 4px; }
-.content::-webkit-scrollbar-track { background: transparent; }
+.content::-webkit-scrollbar { width: 3px; }
 .content::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
 
-/* ── KPI ROW ── */
-.kpi-row {
+/* ── STATS ROW ── */
+.stats-row {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
 }
 
-.kpi-card {
+.stat-card {
   background: var(--surface2);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 18px 20px;
+  border-radius: 10px;
+  padding: 16px 18px;
   position: relative;
   overflow: hidden;
   transition: border-color 0.2s;
 }
 
-.kpi-card:hover { border-color: var(--border2); }
+.stat-card:hover { border-color: var(--border2); }
 
-.kpi-card::before {
+.stat-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 2px;
-  border-radius: 12px 12px 0 0;
+  border-radius: 10px 10px 0 0;
 }
 
-.kpi-card.green::before { background: var(--accent-bright); }
-.kpi-card.amber::before { background: var(--amber); }
-.kpi-card.red::before { background: var(--red); }
-.kpi-card.blue::before { background: var(--blue); }
-.kpi-card.gold::before { background: var(--gold); }
+.stat-card.green::before { background: var(--accent-bright); }
+.stat-card.red::before { background: var(--red); }
+.stat-card.amber::before { background: var(--amber); }
+.stat-card.blue::before { background: var(--blue); }
 
-.kpi-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.4px;
+.stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
-.kpi-value {
+.stat-value {
   font-family: 'Instrument Serif', serif;
-  font-size: 34px;
+  font-size: 30px;
   letter-spacing: -1px;
   line-height: 1;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
-.kpi-delta {
-  font-size: 11px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 3px;
-}
+.stat-delta { font-size: 10px; color: var(--text-muted); }
+.stat-delta.up { color: var(--accent-bright); }
+.stat-delta.down { color: var(--red); }
 
-.kpi-delta.up { color: var(--accent-bright); }
-.kpi-delta.down { color: var(--red); }
-.kpi-delta.neutral { color: var(--text-muted); }
-
-/* ── GRID LAYOUT ── */
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: 14px;
-}
-
-.grid-3 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 14px;
-}
-
-/* ── PANEL ── */
-.panel {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.panel-header {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border);
+/* ── SECTION HEADER ── */
+.section-header {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-bottom: 10px;
 }
 
-.panel-title {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: -0.1px;
-}
-
-.panel-subtitle {
-  font-size: 11px;
-  color: var(--text-muted);
-  margin-left: auto;
-}
-
-.panel-action {
-  margin-left: auto;
+.section-title {
   font-size: 12px;
-  font-weight: 600;
-  color: var(--accent-bright);
-  cursor: pointer;
-  padding: 4px 10px;
-  border-radius: 5px;
-  transition: background 0.15s;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
-.panel-action:hover { background: var(--accent-glow); }
+.section-count {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 100px;
+}
 
-/* ── CALL FEED ── */
-.call-feed { display: flex; flex-direction: column; }
+.count-red { background: var(--red-glow); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
+.count-amber { background: var(--amber-glow); color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
+.count-green { background: var(--accent-glow); color: var(--accent-bright); border: 1px solid rgba(34,197,94,0.2); }
 
-.call-item {
-  padding: 14px 20px;
-  border-bottom: 1px solid var(--border);
+/* ── TASK CARD ── */
+.tasks-list { display: flex; flex-direction: column; gap: 8px; }
+
+.task-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 18px;
   display: grid;
-  grid-template-columns: 36px 1fr auto;
-  gap: 12px;
-  align-items: center;
+  grid-template-columns: auto 1fr auto;
+  gap: 14px;
+  align-items: start;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: all 0.15s;
   position: relative;
+  overflow: hidden;
+  animation: slideIn 0.3s ease both;
 }
 
-.call-item:hover { background: rgba(255,255,255,0.02); }
-.call-item:last-child { border-bottom: none; }
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-.call-item.urgent { background: rgba(239,68,68,0.04); border-left: 3px solid var(--red); }
-.call-item.urgent:hover { background: rgba(239,68,68,0.07); }
+.task-card:hover { border-color: var(--border2); background: var(--surface3); }
 
-.call-avatar {
+.task-card.urgent {
+  border-left: 3px solid var(--red);
+  background: rgba(239,68,68,0.03);
+}
+
+.task-card.urgent:hover { background: rgba(239,68,68,0.06); }
+
+.task-card.new {
+  border-left: 3px solid var(--amber);
+}
+
+.task-card.reviewed {
+  border-left: 3px solid var(--accent);
+  opacity: 0.7;
+}
+
+.task-avatar {
   width: 36px; height: 36px;
   border-radius: 50%;
   display: flex;
@@ -460,333 +366,164 @@ body {
   flex-shrink: 0;
 }
 
-.avatar-green { background: var(--accent-glow); color: var(--accent-bright); border: 1px solid rgba(34,197,94,0.2); }
-.avatar-blue { background: var(--blue-glow); color: var(--blue); border: 1px solid rgba(59,130,246,0.2); }
-.avatar-amber { background: var(--amber-glow); color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
-.avatar-red { background: var(--red-glow); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
+.av-red { background: var(--red-glow); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
+.av-amber { background: var(--amber-glow); color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
+.av-green { background: var(--accent-glow); color: var(--accent-bright); border: 1px solid rgba(34,197,94,0.2); }
+.av-blue { background: var(--blue-glow); color: var(--blue); border: 1px solid rgba(59,130,246,0.2); }
 
-.call-info { min-width: 0; }
+.task-body { min-width: 0; }
 
-.call-name {
+.task-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
+.task-name {
   font-size: 13.5px;
   font-weight: 600;
-  margin-bottom: 3px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: var(--text);
 }
 
-.call-detail {
-  font-size: 12px;
-  color: var(--text-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.call-meta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 5px;
-  flex-shrink: 0;
-}
-
-.call-time { font-size: 11px; color: var(--text-dim); }
-
-.status-pill {
+.task-type {
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.3px;
   text-transform: uppercase;
-  padding: 3px 9px;
+  padding: 2px 8px;
   border-radius: 100px;
 }
 
-.pill-new { background: rgba(201,168,76,0.15); color: var(--gold); }
-.pill-booked { background: var(--blue-glow); color: var(--blue); }
-.pill-ready { background: var(--amber-glow); color: var(--amber); }
-.pill-collected { background: var(--accent-glow); color: var(--accent-bright); }
-.pill-urgent { background: var(--red-glow); color: var(--red); }
-.pill-callback { background: rgba(255,255,255,0.06); color: var(--text-muted); }
+.type-repeat { background: var(--blue-glow); color: var(--blue); }
+.type-urgent { background: var(--red-glow); color: var(--red); }
+.type-query { background: rgba(168,85,247,0.1); color: #a855f7; }
+.type-collection { background: var(--accent-glow); color: var(--accent-bright); }
 
-/* ── LIVE CALL PANEL ── */
-.live-call-panel {
-  background: var(--surface2);
-  border: 1px solid rgba(34,197,94,0.2);
-  border-radius: 12px;
+.task-meds {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  white-space: nowrap;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  text-overflow: ellipsis;
 }
 
-.live-call-header {
-  background: linear-gradient(135deg, rgba(26,107,74,0.3), rgba(26,107,74,0.1));
-  padding: 16px 18px;
-  border-bottom: 1px solid rgba(34,197,94,0.15);
+.task-meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.task-meta-item {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--text-dim);
 }
 
-.live-pulse {
+.confidence-bar {
+  width: 40px;
+  height: 3px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.confidence-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--accent-bright);
+}
+
+.confidence-fill.medium { background: var(--amber); }
+.confidence-fill.low { background: var(--red); }
+
+.task-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.task-btn {
+  padding: 5px 12px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: 'DM Sans', sans-serif;
+  white-space: nowrap;
+}
+
+.task-btn:hover { transform: translateY(-1px); }
+.btn-confirm { background: var(--accent); color: white; }
+.btn-edit { background: rgba(255,255,255,0.06); color: var(--text-muted); border: 1px solid var(--border2); }
+.btn-escalate { background: var(--red-glow); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
+
+/* ── TRANSCRIPT PILL ── */
+.transcript-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 10.5px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-top: 6px;
+}
+
+.transcript-pill:hover { background: rgba(255,255,255,0.08); color: var(--text); }
+
+/* ── LIVE CALL BANNER ── */
+.live-banner {
+  background: linear-gradient(135deg, rgba(26,107,74,0.2), rgba(26,107,74,0.05));
+  border: 1px solid rgba(34,197,94,0.2);
+  border-radius: 10px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.live-banner-pulse {
   width: 8px; height: 8px;
   background: var(--accent-bright);
   border-radius: 50%;
-  animation: pulse 1.2s infinite;
+  animation: pulse 1s infinite;
   box-shadow: 0 0 8px var(--accent-bright);
+  flex-shrink: 0;
 }
 
-.live-call-title { font-size: 13px; font-weight: 700; color: var(--accent-bright); }
-.live-call-sub { font-size: 11px; color: rgba(34,197,94,0.6); margin-top: 1px; }
+.live-banner-text { flex: 1; }
+.live-banner-title { font-size: 13px; font-weight: 700; color: var(--accent-bright); margin-bottom: 2px; }
+.live-banner-sub { font-size: 11px; color: rgba(34,197,94,0.6); }
 
-.live-call-timer {
-  margin-left: auto;
-  font-size: 13px;
+.live-banner-timer {
+  font-size: 18px;
   font-weight: 700;
+  color: var(--accent-bright);
   font-variant-numeric: tabular-nums;
-  color: var(--accent-bright);
 }
 
-.live-transcript {
-  flex: 1;
-  padding: 14px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-.transcript-msg { display: flex; gap: 8px; align-items: flex-start; }
-
-.msg-tag {
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  padding: 2px 7px;
-  border-radius: 3px;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.tag-patient { background: var(--blue-glow); color: var(--blue); }
-.tag-clara { background: var(--accent-glow); color: var(--accent-bright); }
-
-.msg-text { font-size: 12.5px; line-height: 1.5; color: rgba(255,255,255,0.7); }
-
-.typing-indicator {
-  display: flex;
-  gap: 3px;
-  align-items: center;
-  padding: 3px 0;
-}
-
-.typing-indicator span {
-  width: 4px; height: 4px;
-  background: var(--accent-bright);
-  border-radius: 50%;
-  animation: typingBounce 1.2s infinite;
-}
-
-.typing-indicator span:nth-child(2) { animation-delay: 0.15s; }
-.typing-indicator span:nth-child(3) { animation-delay: 0.3s; }
-
-@keyframes typingBounce {
-  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
-  30% { transform: translateY(-5px); opacity: 1; }
-}
-
-.live-actions {
-  padding: 12px 16px;
-  border-top: 1px solid var(--border);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-
-.live-btn {
-  padding: 9px 12px;
-  border-radius: 7px;
-  font-size: 12px;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  transition: opacity 0.15s;
-}
-
-.live-btn:hover { opacity: 0.82; }
-.btn-book { background: var(--accent); color: white; }
-.btn-urgent { background: var(--red-glow); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
-.btn-callback { background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--border); }
-.btn-claim { background: var(--blue-glow); color: var(--blue); border: 1px solid rgba(59,130,246,0.15); }
-
-/* ── COLLECTIONS TABLE ── */
-.collections-table { width: 100%; border-collapse: collapse; }
-
-.collections-table th {
-  padding: 10px 20px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+/* ── EMPTY STATE ── */
+.empty-state {
+  padding: 32px 20px;
+  text-align: center;
   color: var(--text-dim);
-  text-align: left;
-  border-bottom: 1px solid var(--border);
-}
-
-.collections-table td {
-  padding: 12px 20px;
-  font-size: 13px;
-  color: rgba(255,255,255,0.75);
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-}
-
-.collections-table tr:last-child td { border-bottom: none; }
-
-.collections-table tr:hover td { background: rgba(255,255,255,0.02); }
-
-.time-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  background: var(--surface3);
-  border: 1px solid var(--border);
-  padding: 3px 10px;
-  border-radius: 5px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-/* ── CLAIMS PANEL ── */
-.claims-summary { padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; }
-
-.claim-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   font-size: 13px;
 }
 
-.claim-label { color: var(--text-muted); }
-.claim-value { font-weight: 600; }
-
-.claim-progress {
-  margin-top: 4px;
-}
-
-.progress-bar-bg {
-  height: 5px;
-  background: rgba(255,255,255,0.06);
-  border-radius: 3px;
-  overflow: hidden;
-  margin-top: 8px;
-}
-
-.progress-bar {
-  height: 100%;
-  border-radius: 3px;
-  transition: width 1s ease;
-}
-
-.bar-green { background: var(--accent-bright); }
-.bar-gold { background: var(--gold); }
-
-.claim-total-box {
-  background: linear-gradient(135deg, var(--accent-glow), rgba(26,107,74,0.05));
-  border: 1px solid rgba(26,107,74,0.2);
-  border-radius: 9px;
-  padding: 14px 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.claim-total-label { font-size: 12px; color: rgba(255,255,255,0.5); }
-.claim-total-value {
-  font-family: 'Instrument Serif', serif;
-  font-size: 26px;
-  color: var(--accent-bright);
-  letter-spacing: -0.5px;
-}
-
-/* ── URGENT ALERTS ── */
-.alert-item {
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-}
-
-.alert-item:last-child { border-bottom: none; }
-
-.alert-icon {
-  width: 32px; height: 32px;
-  background: var(--red-glow);
-  border: 1px solid rgba(239,68,68,0.2);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  flex-shrink: 0;
-}
-
-.alert-name { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
-.alert-detail { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
-.alert-time { font-size: 11px; color: var(--red); margin-top: 4px; font-weight: 600; }
-
-.alert-resolve {
-  margin-left: auto;
-  padding: 5px 12px;
-  background: transparent;
-  border: 1px solid var(--border2);
-  border-radius: 5px;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-muted);
-  cursor: pointer;
-  white-space: nowrap;
-  align-self: center;
-  transition: all 0.15s;
-}
-
-.alert-resolve:hover { background: rgba(255,255,255,0.06); color: var(--text); }
-
-/* ── AI SUMMARY ── */
-.ai-summary-box {
-  margin: 0 20px 16px;
-  background: linear-gradient(135deg, rgba(26,107,74,0.1), rgba(26,107,74,0.04));
-  border: 1px solid rgba(26,107,74,0.2);
-  border-radius: 9px;
-  padding: 14px 16px;
-}
-
-.ai-label {
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-  color: var(--accent-bright);
-  margin-bottom: 7px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.ai-text {
-  font-size: 12.5px;
-  line-height: 1.6;
-  color: rgba(255,255,255,0.6);
-}
-
-/* ── NEW ORDER MODAL ── */
+/* ── MODAL ── */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -801,164 +538,95 @@ body {
   transition: opacity 0.2s;
 }
 
-.modal-overlay.open {
-  opacity: 1;
-  pointer-events: all;
-}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
 
 .modal {
   background: var(--surface2);
   border: 1px solid var(--border2);
-  border-radius: 16px;
+  border-radius: 14px;
   width: 480px;
   max-width: 95vw;
   overflow: hidden;
-  transform: translateY(20px);
+  transform: translateY(16px);
   transition: transform 0.2s;
 }
 
 .modal-overlay.open .modal { transform: translateY(0); }
 
 .modal-header {
-  padding: 20px 24px;
+  padding: 18px 22px;
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.modal-title { font-size: 16px; font-weight: 700; letter-spacing: -0.2px; }
-.modal-close { background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; padding: 2px; line-height: 1; }
+.modal-title { font-size: 15px; font-weight: 700; }
+.modal-close { background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; line-height: 1; }
 
-.modal-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.modal-body { padding: 22px; display: flex; flex-direction: column; gap: 14px; }
 
-.form-group { display: flex; flex-direction: column; gap: 6px; }
-.form-label { font-size: 12px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.3px; }
+.modal-field { display: flex; flex-direction: column; gap: 5px; }
+.modal-label { font-size: 11px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; color: var(--text-muted); }
+.modal-value { font-size: 14px; color: var(--text); background: var(--surface3); border: 1px solid var(--border); border-radius: 7px; padding: 10px 14px; }
 
-.form-input {
+.modal-transcript {
   background: var(--surface3);
-  border: 1px solid var(--border2);
-  border-radius: 8px;
-  padding: 10px 14px;
-  font-size: 14px;
-  color: var(--text);
-  font-family: 'DM Sans', sans-serif;
-  transition: border-color 0.15s;
-  width: 100%;
-}
-
-.form-input:focus {
-  outline: none;
-  border-color: var(--accent);
-}
-
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-
-.form-select {
-  background: var(--surface3);
-  border: 1px solid var(--border2);
-  border-radius: 8px;
-  padding: 10px 14px;
-  font-size: 14px;
-  color: var(--text);
-  font-family: 'DM Sans', sans-serif;
-  width: 100%;
-  cursor: pointer;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 14px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-height: 160px;
+  overflow-y: auto;
 }
 
 .modal-footer {
-  padding: 16px 24px;
+  padding: 14px 22px;
   border-top: 1px solid var(--border);
   display: flex;
-  gap: 10px;
+  gap: 8px;
   justify-content: flex-end;
 }
 
-.btn-cancel {
-  padding: 9px 20px;
-  border-radius: 7px;
-  font-size: 13px;
-  font-weight: 600;
-  background: transparent;
-  border: 1px solid var(--border2);
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.btn-cancel:hover { background: rgba(255,255,255,0.04); color: var(--text); }
-
-.btn-save {
-  padding: 9px 22px;
+.modal-btn {
+  padding: 8px 18px;
   border-radius: 7px;
   font-size: 13px;
   font-weight: 700;
-  background: var(--accent);
   border: none;
-  color: white;
   cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
   transition: opacity 0.15s;
 }
 
-.btn-save:hover { opacity: 0.88; }
+.modal-btn:hover { opacity: 0.85; }
+.mbtn-confirm { background: var(--accent); color: white; }
+.mbtn-escalate { background: var(--red-glow); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
+.mbtn-close { background: rgba(255,255,255,0.06); color: var(--text-muted); border: 1px solid var(--border2); }
 
-/* ── NOTIFICATION TOAST ── */
+/* ── TOAST ── */
 .toast {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: 20px; right: 20px;
   background: var(--surface2);
   border: 1px solid var(--border2);
-  border-radius: 10px;
-  padding: 14px 18px;
+  border-radius: 9px;
+  padding: 11px 16px;
+  font-size: 13px;
+  font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 13.5px;
-  font-weight: 500;
+  gap: 8px;
   z-index: 200;
-  transform: translateY(80px);
+  transform: translateY(60px);
   opacity: 0;
   transition: all 0.3s;
   box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
 
 .toast.show { transform: translateY(0); opacity: 1; }
-.toast-icon { font-size: 18px; }
-
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
-
-/* ── ANIMATIONS ── */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.call-item { animation: fadeIn 0.3s ease both; }
-.call-item:nth-child(1) { animation-delay: 0.05s; }
-.call-item:nth-child(2) { animation-delay: 0.1s; }
-.call-item:nth-child(3) { animation-delay: 0.15s; }
-.call-item:nth-child(4) { animation-delay: 0.2s; }
-.call-item:nth-child(5) { animation-delay: 0.25s; }
-.call-item:nth-child(6) { animation-delay: 0.3s; }
-
-.kpi-card { animation: fadeIn 0.4s ease both; }
-.kpi-card:nth-child(1) { animation-delay: 0.0s; }
-.kpi-card:nth-child(2) { animation-delay: 0.06s; }
-.kpi-card:nth-child(3) { animation-delay: 0.12s; }
-.kpi-card:nth-child(4) { animation-delay: 0.18s; }
-.kpi-card:nth-child(5) { animation-delay: 0.24s; }
-
-/* new call flash */
-@keyframes newCallFlash {
-  0% { background: rgba(34,197,94,0.12); }
-  100% { background: transparent; }
-}
-
-.call-item.new-flash { animation: newCallFlash 1.5s ease forwards; }
 </style>
 
 </head>
@@ -971,50 +639,36 @@ body {
     <div class="logo-mark">Rx</div>
     <span class="logo-text">Rx<span>Desk</span></span>
   </div>
-  <div class="sidebar-pharmacy">
-    <div class="pharmacy-label">Active Branch</div>
+  <div class="pharmacy-info">
     <div class="pharmacy-name">CarePoint Pharmacy</div>
-    <div class="pharmacy-status">
-      <div class="status-dot"></div>
-      Clara is live
-    </div>
+    <div class="clara-live"><div class="live-dot"></div> Clara is live</div>
   </div>
   <nav class="sidebar-nav">
-    <div class="nav-section-label">Overview</div>
     <div class="nav-item active" onclick="setNav(this)">
-      <span class="nav-icon">📊</span> Dashboard
-    </div>
-    <div class="nav-item" onclick="setNav(this)">
-      <span class="nav-icon">📞</span> All Calls
-      <span class="nav-badge amber" id="calls-badge">12</span>
-    </div>
-    <div class="nav-item" onclick="setNav(this)">
-      <span class="nav-icon">📋</span> Orders
-      <span class="nav-badge amber" id="orders-badge">7</span>
-    </div>
-    <div class="nav-section-label">Operations</div>
-    <div class="nav-item" onclick="setNav(this)">
-      <span class="nav-icon">📅</span> Collections
+      <span class="nav-icon">📋</span> All Tasks
+      <span class="nav-badge badge-amber" id="badge-all">8</span>
     </div>
     <div class="nav-item" onclick="setNav(this)">
       <span class="nav-icon">⚑</span> Urgent
-      <span class="nav-badge" id="urgent-badge">2</span>
-    </div>
-    <div class="nav-section-label">Finance</div>
-    <div class="nav-item" onclick="setNav(this)">
-      <span class="nav-icon">📈</span> Claims
-      <span class="nav-badge green">Apr</span>
+      <span class="nav-badge badge-red" id="badge-urgent">2</span>
     </div>
     <div class="nav-item" onclick="setNav(this)">
-      <span class="nav-icon">🏥</span> Pharmacies
+      <span class="nav-icon">🆕</span> New Requests
+      <span class="nav-badge badge-amber" id="badge-new">5</span>
     </div>
-    <div class="nav-section-label">System</div>
+    <div class="nav-item" onclick="setNav(this)">
+      <span class="nav-icon">✅</span> Reviewed
+      <span class="nav-badge badge-green" id="badge-reviewed">1</span>
+    </div>
+    <div class="nav-item" onclick="setNav(this)">
+      <span class="nav-icon">📞</span> Call Log
+    </div>
     <div class="nav-item" onclick="setNav(this)">
       <span class="nav-icon">⚙</span> Settings
     </div>
   </nav>
   <div class="sidebar-bottom">
-    <div class="sidebar-user">
+    <div class="user-row">
       <div class="user-avatar">CP</div>
       <div>
         <div class="user-name">CarePoint Admin</div>
@@ -1030,16 +684,12 @@ body {
   <!-- TOPBAR -->
   <div class="topbar">
     <div>
-      <span class="topbar-title">Dashboard</span>
+      <span class="topbar-title">Task Queue</span>
       <span class="topbar-date" id="live-date"></span>
     </div>
-    <div class="live-indicator">
-      <div class="status-dot"></div>
-      Clara Active — 3 calls handled today
-    </div>
     <div class="topbar-right">
-      <button class="topbar-btn" onclick="openModal()">+ Log Order</button>
-      <button class="topbar-btn primary">📊 Export Claims</button>
+      <button class="topbar-btn" onclick="simulateCall()">+ Simulate Call</button>
+      <button class="topbar-btn primary">📤 Export</button>
     </div>
   </div>
 
@@ -1048,281 +698,276 @@ body {
   <div class="content">
 
 ```
-<!-- KPI ROW -->
-<div class="kpi-row">
-  <div class="kpi-card green">
-    <div class="kpi-label">Calls Handled</div>
-    <div class="kpi-value" id="kpi-calls">47</div>
-    <div class="kpi-delta up">↑ 12 vs yesterday</div>
+<!-- LIVE CALL BANNER -->
+<div class="live-banner" id="live-banner" style="display:none;">
+  <div class="live-banner-pulse"></div>
+  <div class="live-banner-text">
+    <div class="live-banner-title">Clara is on a call now</div>
+    <div class="live-banner-sub" id="live-caller">Capturing patient details...</div>
   </div>
-  <div class="kpi-card amber">
-    <div class="kpi-label">Orders Pending</div>
-    <div class="kpi-value" id="kpi-orders">7</div>
-    <div class="kpi-delta neutral">Needs dispensing</div>
+  <div class="live-banner-timer" id="live-timer">00:00</div>
+</div>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat-card green">
+    <div class="stat-label">Calls Today</div>
+    <div class="stat-value" id="stat-calls">12</div>
+    <div class="stat-delta up">↑ 4 vs yesterday</div>
   </div>
-  <div class="kpi-card red">
-    <div class="kpi-label">Urgent Flags</div>
-    <div class="kpi-value" id="kpi-urgent">2</div>
-    <div class="kpi-delta down">Needs review</div>
+  <div class="stat-card red">
+    <div class="stat-label">Urgent</div>
+    <div class="stat-value" id="stat-urgent">2</div>
+    <div class="stat-delta down">Needs review</div>
   </div>
-  <div class="kpi-card blue">
-    <div class="kpi-label">Collections Today</div>
-    <div class="kpi-value">9</div>
-    <div class="kpi-delta up">3 remaining</div>
+  <div class="stat-card amber">
+    <div class="stat-label">Pending</div>
+    <div class="stat-value" id="stat-pending">5</div>
+    <div class="stat-delta">Awaiting action</div>
   </div>
-  <div class="kpi-card gold">
-    <div class="kpi-label">April Claim</div>
-    <div class="kpi-value">£14.2k</div>
-    <div class="kpi-delta up">↑ 72% complete</div>
+  <div class="stat-card blue">
+    <div class="stat-label">Reviewed</div>
+    <div class="stat-value" id="stat-reviewed">5</div>
+    <div class="stat-delta up">↑ Good progress</div>
   </div>
 </div>
 
-<!-- MAIN GRID -->
-<div class="grid-2">
-
-  <!-- CALL FEED -->
-  <div class="panel">
-    <div class="panel-header">
-      <span>📞</span>
-      <span class="panel-title">Today's Call Log</span>
-      <span class="panel-subtitle" id="call-count">6 calls shown</span>
-      <span class="panel-action">View all →</span>
-    </div>
-    <div class="call-feed" id="call-feed">
-      <div class="call-item urgent">
-        <div class="call-avatar avatar-red">JW</div>
-        <div class="call-info">
-          <div class="call-name">James Whitfield</div>
-          <div class="call-detail">⚑ Warfarin query — side effects concern</div>
-        </div>
-        <div class="call-meta">
-          <span class="call-time">14:32</span>
-          <span class="status-pill pill-urgent">Urgent</span>
-        </div>
-      </div>
-      <div class="call-item">
-        <div class="call-avatar avatar-green">MT</div>
-        <div class="call-info">
-          <div class="call-name">Margaret Thompson</div>
-          <div class="call-detail">Metformin · Amlodipine — Thu 2:00pm collection</div>
-        </div>
-        <div class="call-meta">
-          <span class="call-time">14:18</span>
-          <span class="status-pill pill-booked">Booked</span>
-        </div>
-      </div>
-      <div class="call-item">
-        <div class="call-avatar avatar-blue">PM</div>
-        <div class="call-info">
-          <div class="call-name">Priya Mehta</div>
-          <div class="call-detail">Sertraline · Atorvastatin — Mon 10am collection</div>
-        </div>
-        <div class="call-meta">
-          <span class="call-time">13:55</span>
-          <span class="status-pill pill-booked">Booked</span>
-        </div>
-      </div>
-      <div class="call-item">
-        <div class="call-avatar avatar-green">DO</div>
-        <div class="call-info">
-          <div class="call-name">David Okafor</div>
-          <div class="call-detail">Lisinopril — collected at 5pm</div>
-        </div>
-        <div class="call-meta">
-          <span class="call-time">13:10</span>
-          <span class="status-pill pill-collected">Collected</span>
-        </div>
-      </div>
-      <div class="call-item">
-        <div class="call-avatar avatar-amber">SC</div>
-        <div class="call-info">
-          <div class="call-name">Susan Clarke</div>
-          <div class="call-detail">Levothyroxine · Omeprazole — callback requested</div>
-        </div>
-        <div class="call-meta">
-          <span class="call-time">12:44</span>
-          <span class="status-pill pill-callback">Callback</span>
-        </div>
-      </div>
-      <div class="call-item">
-        <div class="call-avatar avatar-blue">RB</div>
-        <div class="call-info">
-          <div class="call-name">Robert Barnes</div>
-          <div class="call-detail">Ramipril — Fri 11am collection</div>
-        </div>
-        <div class="call-meta">
-          <span class="call-time">11:20</span>
-          <span class="status-pill pill-booked">Booked</span>
-        </div>
-      </div>
-    </div>
+<!-- URGENT SECTION -->
+<div>
+  <div class="section-header">
+    <span class="section-title">⚑ Urgent</span>
+    <span class="section-count count-red" id="urgent-count">2</span>
   </div>
+  <div class="tasks-list" id="urgent-list">
 
-  <!-- RIGHT COLUMN -->
-  <div style="display:flex; flex-direction:column; gap:14px;">
-
-    <!-- LIVE CALL -->
-    <div class="live-call-panel">
-      <div class="live-call-header">
-        <div class="live-pulse"></div>
-        <div>
-          <div class="live-call-title">Live Call — Clara Active</div>
-          <div class="live-call-sub">Margaret Thompson · 07700 900142</div>
+    <div class="task-card urgent" data-id="1">
+      <div class="task-avatar av-red">JW</div>
+      <div class="task-body">
+        <div class="task-top">
+          <span class="task-name">James Whitfield</span>
+          <span class="task-type type-urgent">⚑ Urgent</span>
         </div>
-        <div class="live-call-timer" id="call-timer">02:14</div>
-      </div>
-      <div class="live-transcript" id="live-transcript">
-        <div class="transcript-msg">
-          <span class="msg-tag tag-patient">Patient</span>
-          <span class="msg-text">Hello, I need to order my repeat prescriptions — metformin and amlodipine.</span>
+        <div class="task-meds">💊 Warfarin — patient reporting unusual bruising and dizziness</div>
+        <div class="task-meta">
+          <span class="task-meta-item">🕐 14:32</span>
+          <span class="task-meta-item">DOB: 12/04/1948</span>
+          <span class="task-meta-item">📞 07700 900234</span>
+          <span class="task-meta-item">
+            AI confidence:
+            <div class="confidence-bar"><div class="confidence-fill" style="width:92%"></div></div>
+            92%
+          </span>
         </div>
-        <div class="transcript-msg">
-          <span class="msg-tag tag-clara">Clara</span>
-          <span class="msg-text">Of course, Margaret. Would you like to collect from us, or shall I arrange delivery?</span>
-        </div>
-        <div class="transcript-msg">
-          <span class="msg-tag tag-patient">Patient</span>
-          <span class="msg-text">Collection please — Thursday around 2pm.</span>
-        </div>
-        <div class="transcript-msg">
-          <span class="msg-tag tag-clara">Clara</span>
-          <div class="typing-indicator"><span></span><span></span><span></span></div>
+        <div class="transcript-pill" onclick="openModal('James Whitfield', 'Warfarin', 'Urgent', '07700 900234', '12/04/1948', 'Patient called reporting unusual bruising on arms and dizziness when standing. Has been taking Warfarin 5mg daily. Mentioned they increased their dose last week without consulting the pharmacist. Flagged as urgent — pharmacist callback required immediately.')">
+          📝 View transcript
         </div>
       </div>
-      <div class="live-actions">
-        <button class="live-btn btn-book">✓ Book Collection</button>
-        <button class="live-btn btn-urgent">⚑ Flag Urgent</button>
-        <button class="live-btn btn-callback">↩ Callback</button>
-        <button class="live-btn btn-claim">📋 Add to Claim</button>
+      <div class="task-actions">
+        <button class="task-btn btn-escalate" onclick="escalateTask(this, '1')">⚑ Escalate</button>
+        <button class="task-btn btn-edit" onclick="openModal('James Whitfield', 'Warfarin', 'Urgent', '07700 900234', '12/04/1948', 'Patient called reporting unusual bruising on arms and dizziness when standing.')">Edit</button>
       </div>
     </div>
 
-    <!-- URGENT ALERTS -->
-    <div class="panel">
-      <div class="panel-header">
-        <span>⚑</span>
-        <span class="panel-title">Urgent Alerts</span>
-        <span class="panel-action" style="margin-left:auto;">Resolve all</span>
-      </div>
-      <div class="alert-item">
-        <div class="alert-icon">🚨</div>
-        <div style="flex:1; min-width:0;">
-          <div class="alert-name">James Whitfield</div>
-          <div class="alert-detail">Warfarin — patient reporting unusual bruising and dizziness</div>
-          <div class="alert-time">⚑ 14:32 — Needs pharmacist review</div>
+    <div class="task-card urgent" data-id="2">
+      <div class="task-avatar av-red">SC</div>
+      <div class="task-body">
+        <div class="task-top">
+          <span class="task-name">Susan Clarke</span>
+          <span class="task-type type-urgent">⚑ Urgent</span>
         </div>
-        <button class="alert-resolve">Resolve</button>
-      </div>
-      <div class="alert-item">
-        <div class="alert-icon">⚠️</div>
-        <div style="flex:1; min-width:0;">
-          <div class="alert-name">Susan Clarke</div>
-          <div class="alert-detail">Callback pending — prescription readiness query</div>
-          <div class="alert-time">⏱ 12:44 — Awaiting dispensary</div>
+        <div class="task-meds">💊 Insulin — patient out of medication, running low</div>
+        <div class="task-meta">
+          <span class="task-meta-item">🕐 13:45</span>
+          <span class="task-meta-item">DOB: 03/09/1955</span>
+          <span class="task-meta-item">📞 07700 900567</span>
+          <span class="task-meta-item">
+            AI confidence:
+            <div class="confidence-bar"><div class="confidence-fill" style="width:88%"></div></div>
+            88%
+          </span>
         </div>
-        <button class="alert-resolve">Resolve</button>
+        <div class="transcript-pill" onclick="openModal('Susan Clarke', 'Insulin', 'Urgent', '07700 900567', '03/09/1955', 'Patient called saying she has run out of insulin and cannot get a GP appointment until next week. Very distressed. Flagged as urgent — pharmacist to action immediately.')">
+          📝 View transcript
+        </div>
+      </div>
+      <div class="task-actions">
+        <button class="task-btn btn-escalate" onclick="escalateTask(this, '2')">⚑ Escalate</button>
+        <button class="task-btn btn-edit">Edit</button>
       </div>
     </div>
+
   </div>
 </div>
 
-<!-- BOTTOM GRID -->
-<div class="grid-2">
-
-  <!-- COLLECTIONS -->
-  <div class="panel">
-    <div class="panel-header">
-      <span>📅</span>
-      <span class="panel-title">Today's Collections</span>
-      <span class="panel-subtitle">9 total · 3 remaining</span>
-    </div>
-    <table class="collections-table">
-      <thead>
-        <tr>
-          <th>Patient</th>
-          <th>Medication</th>
-          <th>Time</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>David Okafor</td>
-          <td>Lisinopril</td>
-          <td><span class="time-chip">⏰ 17:00</span></td>
-          <td><span class="status-pill pill-collected">Collected</span></td>
-        </tr>
-        <tr>
-          <td>Margaret Thompson</td>
-          <td>Metformin · Amlodipine</td>
-          <td><span class="time-chip">⏰ Thu 14:00</span></td>
-          <td><span class="status-pill pill-booked">Scheduled</span></td>
-        </tr>
-        <tr>
-          <td>Robert Barnes</td>
-          <td>Ramipril</td>
-          <td><span class="time-chip">⏰ Fri 11:00</span></td>
-          <td><span class="status-pill pill-booked">Scheduled</span></td>
-        </tr>
-        <tr>
-          <td>Priya Mehta</td>
-          <td>Sertraline · Atorvastatin</td>
-          <td><span class="time-chip">⏰ Mon 10:00</span></td>
-          <td><span class="status-pill pill-new">Pending</span></td>
-        </tr>
-      </tbody>
-    </table>
+<!-- NEW REQUESTS SECTION -->
+<div>
+  <div class="section-header">
+    <span class="section-title">🆕 New Requests</span>
+    <span class="section-count count-amber" id="new-count">5</span>
   </div>
+  <div class="tasks-list" id="new-list">
 
-  <!-- CLAIMS + AI SUMMARY -->
-  <div style="display:flex; flex-direction:column; gap:14px;">
-    <div class="panel">
-      <div class="panel-header">
-        <span>📈</span>
-        <span class="panel-title">April 2025 — FP34C</span>
-        <span class="panel-action">Full report →</span>
+    <div class="task-card new" data-id="3">
+      <div class="task-avatar av-amber">MT</div>
+      <div class="task-body">
+        <div class="task-top">
+          <span class="task-name">Margaret Thompson</span>
+          <span class="task-type type-repeat">Repeat Order</span>
+        </div>
+        <div class="task-meds">💊 Metformin 500mg · Amlodipine 5mg</div>
+        <div class="task-meta">
+          <span class="task-meta-item">🕐 14:18</span>
+          <span class="task-meta-item">Collection: Thu 2pm</span>
+          <span class="task-meta-item">
+            AI confidence:
+            <div class="confidence-bar"><div class="confidence-fill" style="width:96%"></div></div>
+            96%
+          </span>
+        </div>
+        <div class="transcript-pill" onclick="openModal('Margaret Thompson', 'Metformin 500mg · Amlodipine 5mg', 'Repeat Order', '07700 900142', '15/06/1952', 'Patient called to order repeat prescriptions for Metformin 500mg and Amlodipine 5mg. Requested collection on Thursday at 2pm. Confirmed details back to patient. Call handled smoothly.')">
+          📝 View transcript
+        </div>
       </div>
-      <div class="claims-summary">
-        <div class="claim-row">
-          <span class="claim-label">Items dispensed</span>
-          <span class="claim-value">738</span>
-        </div>
-        <div class="claim-progress">
-          <div class="claim-row">
-            <span class="claim-label">EPS Electronic</span>
-            <span class="claim-value">612</span>
-          </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar bar-green" style="width: 83%"></div>
-          </div>
-        </div>
-        <div class="claim-progress">
-          <div class="claim-row">
-            <span class="claim-label">FP10 Paper</span>
-            <span class="claim-value">126</span>
-          </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar bar-gold" style="width: 17%"></div>
-          </div>
-        </div>
-        <div class="claim-total-box">
-          <div>
-            <div class="claim-total-label">Estimated claim</div>
-          </div>
-          <div class="claim-total-value">£14,210</div>
-        </div>
+      <div class="task-actions">
+        <button class="task-btn btn-confirm" onclick="confirmTask(this, '3')">✓ Confirm</button>
+        <button class="task-btn btn-edit">Edit</button>
       </div>
     </div>
 
-    <!-- AI SUMMARY -->
-    <div class="panel" style="padding-bottom: 4px;">
-      <div class="panel-header">
-        <span>🤖</span>
-        <span class="panel-title">Clara's Daily Summary</span>
+    <div class="task-card new" data-id="4">
+      <div class="task-avatar av-blue">PM</div>
+      <div class="task-body">
+        <div class="task-top">
+          <span class="task-name">Priya Mehta</span>
+          <span class="task-type type-repeat">Repeat Order</span>
+        </div>
+        <div class="task-meds">💊 Sertraline 50mg · Atorvastatin 20mg</div>
+        <div class="task-meta">
+          <span class="task-meta-item">🕐 13:55</span>
+          <span class="task-meta-item">Collection: Mon 10am</span>
+          <span class="task-meta-item">
+            AI confidence:
+            <div class="confidence-bar"><div class="confidence-fill" style="width:94%"></div></div>
+            94%
+          </span>
+        </div>
+        <div class="transcript-pill" onclick="openModal('Priya Mehta', 'Sertraline 50mg · Atorvastatin 20mg', 'Repeat Order', '07700 900891', '22/11/1978', 'Patient called to order repeat prescriptions. Requested Monday morning collection at 10am. All details confirmed.')">
+          📝 View transcript
+        </div>
       </div>
-      <div class="ai-summary-box" style="margin-top:16px;">
-        <div class="ai-label">🤖 RxDesk AI</div>
-        <div class="ai-text" id="ai-summary-text">47 calls handled today — 12 more than yesterday. James Whitfield's Warfarin query needs your urgent review. Susan Clarke is waiting on a callback from dispensary. Your April FP34C claim is 72% complete — projected at £14,210. On track for month-end submission.</div>
+      <div class="task-actions">
+        <button class="task-btn btn-confirm" onclick="confirmTask(this, '4')">✓ Confirm</button>
+        <button class="task-btn btn-edit">Edit</button>
+      </div>
+    </div>
+
+    <div class="task-card new" data-id="5">
+      <div class="task-avatar av-amber">RB</div>
+      <div class="task-body">
+        <div class="task-top">
+          <span class="task-name">Robert Barnes</span>
+          <span class="task-type type-repeat">Repeat Order</span>
+        </div>
+        <div class="task-meds">💊 Ramipril 10mg · Bisoprolol 2.5mg</div>
+        <div class="task-meta">
+          <span class="task-meta-item">🕐 11:20</span>
+          <span class="task-meta-item">Collection: Fri 11am</span>
+          <span class="task-meta-item">
+            AI confidence:
+            <div class="confidence-bar"><div class="confidence-fill medium" style="width:78%"></div></div>
+            78%
+          </span>
+        </div>
+        <div class="transcript-pill" onclick="openModal('Robert Barnes', 'Ramipril 10mg · Bisoprolol 2.5mg', 'Repeat Order', '07700 900445', '08/03/1965', 'Patient called for repeat prescription. Medication name was slightly unclear — AI captured Ramipril and Bisoprolol but confidence is moderate. Recommend confirming medication dosage before processing.')">
+          📝 View transcript
+        </div>
+      </div>
+      <div class="task-actions">
+        <button class="task-btn btn-confirm" onclick="confirmTask(this, '5')">✓ Confirm</button>
+        <button class="task-btn btn-edit">Edit</button>
+      </div>
+    </div>
+
+    <div class="task-card new" data-id="6">
+      <div class="task-avatar av-blue">DO</div>
+      <div class="task-body">
+        <div class="task-top">
+          <span class="task-name">David Okafor</span>
+          <span class="task-type type-query">Query</span>
+        </div>
+        <div class="task-meds">❓ Checking if Lisinopril prescription is ready</div>
+        <div class="task-meta">
+          <span class="task-meta-item">🕐 10:44</span>
+          <span class="task-meta-item">Callback needed</span>
+          <span class="task-meta-item">
+            AI confidence:
+            <div class="confidence-bar"><div class="confidence-fill" style="width:99%"></div></div>
+            99%
+          </span>
+        </div>
+        <div class="transcript-pill" onclick="openModal('David Okafor', 'Lisinopril', 'Ready Check', '07700 900773', '14/07/1970', 'Patient called to check if Lisinopril prescription is ready for collection. Clara informed patient that dispensary will call back to confirm. Callback required from dispensary team.')">
+          📝 View transcript
+        </div>
+      </div>
+      <div class="task-actions">
+        <button class="task-btn btn-confirm" onclick="confirmTask(this, '6')">✓ Confirm</button>
+        <button class="task-btn btn-edit">Edit</button>
+      </div>
+    </div>
+
+    <div class="task-card new" data-id="7">
+      <div class="task-avatar av-amber">EH</div>
+      <div class="task-body">
+        <div class="task-top">
+          <span class="task-name">Eleanor Hughes</span>
+          <span class="task-type type-collection">Collection</span>
+        </div>
+        <div class="task-meds">📅 Changing collection — Levothyroxine</div>
+        <div class="task-meta">
+          <span class="task-meta-item">🕐 09:30</span>
+          <span class="task-meta-item">New slot: Wed 3pm</span>
+          <span class="task-meta-item">
+            AI confidence:
+            <div class="confidence-bar"><div class="confidence-fill" style="width:91%"></div></div>
+            91%
+          </span>
+        </div>
+        <div class="transcript-pill" onclick="openModal('Eleanor Hughes', 'Levothyroxine 50mcg', 'Collection Change', '07700 900112', '29/01/1960', 'Patient called to change her collection time. Original booking was Monday at 11am. Patient requested Wednesday at 3pm instead. Clara confirmed the change.')">
+          📝 View transcript
+        </div>
+      </div>
+      <div class="task-actions">
+        <button class="task-btn btn-confirm" onclick="confirmTask(this, '7')">✓ Confirm</button>
+        <button class="task-btn btn-edit">Edit</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- REVIEWED SECTION -->
+<div>
+  <div class="section-header">
+    <span class="section-title">✅ Reviewed</span>
+    <span class="section-count count-green" id="reviewed-count">1</span>
+  </div>
+  <div class="tasks-list" id="reviewed-list">
+    <div class="task-card reviewed" data-id="8">
+      <div class="task-avatar av-green">AF</div>
+      <div class="task-body">
+        <div class="task-top">
+          <span class="task-name">Alan Foster</span>
+          <span class="task-type type-repeat">Repeat Order</span>
+        </div>
+        <div class="task-meds">💊 Atenolol 50mg — confirmed ✓</div>
+        <div class="task-meta">
+          <span class="task-meta-item">🕐 09:15</span>
+          <span class="task-meta-item">Collection: Today 4pm</span>
+          <span class="task-meta-item">Reviewed by pharmacist</span>
+        </div>
+      </div>
+      <div class="task-actions">
+        <button class="task-btn btn-edit" style="opacity:0.5">Completed</button>
       </div>
     </div>
   </div>
@@ -1332,66 +977,46 @@ body {
   </div>
 </div>
 
-<!-- NEW ORDER MODAL -->
+<!-- TASK DETAIL MODAL -->
 
-<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
   <div class="modal">
     <div class="modal-header">
-      <span class="modal-title">Log New Order</span>
+      <span class="modal-title" id="modal-title">Task Detail</span>
       <button class="modal-close" onclick="closeModal()">×</button>
     </div>
     <div class="modal-body">
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Patient Full Name</label>
-          <input class="form-input" type="text" placeholder="e.g. Margaret Thompson">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div class="modal-field">
+          <div class="modal-label">Patient Name</div>
+          <div class="modal-value" id="m-name">—</div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Date of Birth</label>
-          <input class="form-input" type="date">
+        <div class="modal-field">
+          <div class="modal-label">Date of Birth</div>
+          <div class="modal-value" id="m-dob">—</div>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Contact Number</label>
-        <input class="form-input" type="tel" placeholder="e.g. 07700 900142">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Medication(s)</label>
-        <input class="form-input" type="text" placeholder="e.g. Metformin 500mg, Amlodipine 5mg">
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Collection Date</label>
-          <input class="form-input" type="date">
+        <div class="modal-field">
+          <div class="modal-label">Medication</div>
+          <div class="modal-value" id="m-meds">—</div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Collection Time</label>
-          <select class="form-select">
-            <option>Select time</option>
-            <option>09:00</option><option>10:00</option><option>11:00</option>
-            <option>12:00</option><option>13:00</option><option>14:00</option>
-            <option>15:00</option><option>16:00</option><option>17:00</option><option>18:00</option>
-          </select>
+        <div class="modal-field">
+          <div class="modal-label">Request Type</div>
+          <div class="modal-value" id="m-type">—</div>
+        </div>
+        <div class="modal-field">
+          <div class="modal-label">Contact Number</div>
+          <div class="modal-value" id="m-phone">—</div>
         </div>
       </div>
-      <div class="form-group">
-        <label class="form-label">Call Type</label>
-        <select class="form-select">
-          <option>Repeat Order</option>
-          <option>Ready Check</option>
-          <option>Collection Booking</option>
-          <option>Urgent</option>
-          <option>General Enquiry</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Notes</label>
-        <input class="form-input" type="text" placeholder="Any additional details...">
+      <div class="modal-field">
+        <div class="modal-label">Call Transcript Summary</div>
+        <div class="modal-transcript" id="m-transcript">—</div>
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
-      <button class="btn-save" onclick="saveOrder()">Save Order</button>
+      <button class="modal-btn mbtn-close" onclick="closeModal()">Close</button>
+      <button class="modal-btn mbtn-escalate" onclick="closeModal(); showToast('⚑ Escalated to pharmacist')">⚑ Escalate</button>
+      <button class="modal-btn mbtn-confirm" onclick="closeModal(); showToast('✅ Task confirmed')">✓ Confirm</button>
     </div>
   </div>
 </div>
@@ -1399,18 +1024,13 @@ body {
 <!-- TOAST -->
 
 <div class="toast" id="toast">
-  <span class="toast-icon">✅</span>
-  <span id="toast-msg">Order saved successfully</span>
+  <span id="toast-msg">Done</span>
 </div>
 
 <script>
-  // Live date
-  function updateDate() {
-    const now = new Date();
-    const opts = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-    document.getElementById('live-date').textContent = '· ' + now.toLocaleDateString('en-GB', opts);
-  }
-  updateDate();
+  // Date
+  const now = new Date();
+  document.getElementById('live-date').textContent = ' · ' + now.toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long' });
 
   // Nav
   function setNav(el) {
@@ -1418,107 +1038,172 @@ body {
     el.classList.add('active');
   }
 
-  // Call timer
-  let seconds = 134;
-  setInterval(() => {
-    seconds++;
-    const m = String(Math.floor(seconds / 60)).padStart(2, '0');
-    const s = String(seconds % 60).padStart(2, '0');
-    document.getElementById('call-timer').textContent = `${m}:${s}`;
-  }, 1000);
+  // Confirm task
+  function confirmTask(btn, id) {
+    const card = document.querySelector(`[data-id="${id}"]`);
+    if (!card) return;
 
-  // Clara typing → response
-  setTimeout(() => {
-    const typingMsg = document.querySelector('.typing-indicator').parentElement;
-    typingMsg.innerHTML = "I've booked your collection for Thursday at 2pm. You'll receive a text reminder the day before. Is there anything else I can help you with?";
-    typingMsg.style.opacity = '0';
-    typingMsg.style.transition = 'opacity 0.3s';
-    setTimeout(() => { typingMsg.style.opacity = '1'; }, 100);
-    showToast('📞 Clara booked Margaret Thompson — Thu 2:00pm');
-  }, 3500);
+    card.style.transition = 'opacity 0.3s, transform 0.3s';
+    card.style.opacity = '0';
+    card.style.transform = 'translateX(20px)';
 
-  // Simulate a new incoming call after 8 seconds
-  setTimeout(() => {
-    addNewCall('Alan Foster', 'AF', 'avatar-blue', 'Atenolol — repeat prescription', 'New');
-    updateKPIs();
-  }, 8000);
-
-  function addNewCall(name, initials, avatarClass, detail, status) {
-    const feed = document.getElementById('call-feed');
-    const item = document.createElement('div');
-    item.className = 'call-item new-flash';
-    const now = new Date();
-    const time = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
-    item.innerHTML = `
-      <div class="call-avatar ${avatarClass}">${initials}</div>
-      <div class="call-info">
-        <div class="call-name">${name}</div>
-        <div class="call-detail">${detail}</div>
-      </div>
-      <div class="call-meta">
-        <span class="call-time">${time}</span>
-        <span class="status-pill pill-new">${status}</span>
-      </div>`;
-    feed.insertBefore(item, feed.firstChild);
-    document.getElementById('call-count').textContent = feed.children.length + ' calls shown';
-    showToast('📞 New call — ' + name);
+    setTimeout(() => {
+      card.remove();
+      addToReviewed(id);
+      updateCounts(-1, 0, 1);
+      showToast('✅ Task confirmed and moved to Reviewed');
+    }, 300);
   }
 
-  function updateKPIs() {
-    const callsEl = document.getElementById('kpi-calls');
-    callsEl.textContent = parseInt(callsEl.textContent) + 1;
-    const ordersEl = document.getElementById('kpi-orders');
-    ordersEl.textContent = parseInt(ordersEl.textContent) + 1;
-    document.getElementById('orders-badge').textContent = parseInt(document.getElementById('orders-badge').textContent) + 1;
-    document.getElementById('calls-badge').textContent = parseInt(document.getElementById('calls-badge').textContent) + 1;
+  // Escalate task
+  function escalateTask(btn, id) {
+    showToast('🚨 Escalated — pharmacist alerted immediately');
+    btn.textContent = '⚑ Alerted';
+    btn.style.background = 'rgba(239,68,68,0.3)';
+    btn.disabled = true;
+  }
+
+  // Add to reviewed
+  function addToReviewed(id) {
+    const names = { '3':'MT', '4':'PM', '5':'RB', '6':'DO', '7':'EH' };
+    const fullNames = { '3':'Margaret Thompson', '4':'Priya Mehta', '5':'Robert Barnes', '6':'David Okafor', '7':'Eleanor Hughes' };
+    const meds = { '3':'Metformin · Amlodipine', '4':'Sertraline · Atorvastatin', '5':'Ramipril · Bisoprolol', '6':'Lisinopril', '7':'Levothyroxine' };
+
+    const list = document.getElementById('reviewed-list');
+    const item = document.createElement('div');
+    item.className = 'task-card reviewed';
+    item.innerHTML = `
+      <div class="task-avatar av-green">${names[id] || 'P'}</div>
+      <div class="task-body">
+        <div class="task-top">
+          <span class="task-name">${fullNames[id] || 'Patient'}</span>
+          <span class="task-type type-repeat">Repeat Order</span>
+        </div>
+        <div class="task-meds">💊 ${meds[id] || 'Medication'} — confirmed ✓</div>
+        <div class="task-meta">
+          <span class="task-meta-item">🕐 ${new Date().toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'})}</span>
+          <span class="task-meta-item">Reviewed by pharmacist</span>
+        </div>
+      </div>
+      <div class="task-actions">
+        <button class="task-btn btn-edit" style="opacity:0.5">Completed</button>
+      </div>`;
+    list.insertBefore(item, list.firstChild);
+  }
+
+  // Update counts
+  function updateCounts(newDelta, urgentDelta, reviewedDelta) {
+    const newCount = document.getElementById('new-count');
+    const reviewedCount = document.getElementById('reviewed-count');
+    const badgeNew = document.getElementById('badge-new');
+    const badgeReviewed = document.getElementById('badge-reviewed');
+    const statPending = document.getElementById('stat-pending');
+    const statReviewed = document.getElementById('stat-reviewed');
+
+    let n = parseInt(newCount.textContent) + newDelta;
+    let r = parseInt(reviewedCount.textContent) + reviewedDelta;
+    let sp = parseInt(statPending.textContent) + newDelta;
+    let sr = parseInt(statReviewed.textContent) + reviewedDelta;
+
+    newCount.textContent = Math.max(0, n);
+    reviewedCount.textContent = Math.max(0, r);
+    badgeNew.textContent = Math.max(0, n);
+    badgeReviewed.textContent = Math.max(0, r);
+    statPending.textContent = Math.max(0, sp);
+    statReviewed.textContent = Math.max(0, sr);
+  }
+
+  // Simulate new call arriving
+  let simCount = 0;
+  function simulateCall() {
+    const names = ['Patricia Green', 'Mohammed Ahmed', 'Linda Watson', 'Thomas Hill'];
+    const meds = ['Omeprazole 20mg', 'Lisinopril 5mg · Aspirin 75mg', 'Amoxicillin 500mg', 'Codeine Phosphate'];
+    const initials = ['PG', 'MA', 'LW', 'TH'];
+    const times = ['Mon 9am', 'Tue 2pm', 'Wed 11am', 'Thu 4pm'];
+
+    const i = simCount % 4;
+    simCount++;
+
+    // Show live banner
+    const banner = document.getElementById('live-banner');
+    document.getElementById('live-caller').textContent = `${names[i]} · Clara capturing details...`;
+    banner.style.display = 'flex';
+
+    let secs = 0;
+    const timerInterval = setInterval(() => {
+      secs++;
+      const m = String(Math.floor(secs/60)).padStart(2,'0');
+      const s = String(secs%60).padStart(2,'0');
+      document.getElementById('live-timer').textContent = `${m}:${s}`;
+    }, 1000);
+
+    // After 4 seconds — call ends, task appears
+    setTimeout(() => {
+      clearInterval(timerInterval);
+      banner.style.display = 'none';
+
+      const list = document.getElementById('new-list');
+      const card = document.createElement('div');
+      const id = 'sim-' + simCount;
+      card.className = 'task-card new';
+      card.setAttribute('data-id', id);
+      card.innerHTML = `
+        <div class="task-avatar av-amber">${initials[i]}</div>
+        <div class="task-body">
+          <div class="task-top">
+            <span class="task-name">${names[i]}</span>
+            <span class="task-type type-repeat">Repeat Order</span>
+          </div>
+          <div class="task-meds">💊 ${meds[i]}</div>
+          <div class="task-meta">
+            <span class="task-meta-item">🕐 Just now</span>
+            <span class="task-meta-item">Collection: ${times[i]}</span>
+            <span class="task-meta-item">
+              AI confidence:
+              <div class="confidence-bar"><div class="confidence-fill" style="width:${85 + Math.floor(Math.random()*14)}%"></div></div>
+              ${85 + Math.floor(Math.random()*14)}%
+            </span>
+          </div>
+          <div class="transcript-pill">📝 View transcript</div>
+        </div>
+        <div class="task-actions">
+          <button class="task-btn btn-confirm" onclick="confirmTask(this, '${id}')">✓ Confirm</button>
+          <button class="task-btn btn-edit">Edit</button>
+        </div>`;
+
+      list.insertBefore(card, list.firstChild);
+
+      // Update stats
+      const statCalls = document.getElementById('stat-calls');
+      statCalls.textContent = parseInt(statCalls.textContent) + 1;
+      updateCounts(1, 0, 0);
+
+      showToast('📞 New task from ' + names[i]);
+    }, 4000);
   }
 
   // Modal
-  function openModal() {
-    document.getElementById('modal-overlay').classList.add('open');
+  function openModal(name, meds, type, phone, dob, transcript) {
+    document.getElementById('modal-title').textContent = name + ' — Task Detail';
+    document.getElementById('m-name').textContent = name;
+    document.getElementById('m-dob').textContent = dob;
+    document.getElementById('m-meds').textContent = meds;
+    document.getElementById('m-type').textContent = type;
+    document.getElementById('m-phone').textContent = phone;
+    document.getElementById('m-transcript').textContent = transcript;
+    document.getElementById('modal').classList.add('open');
   }
 
-  function closeModal() {
-    document.getElementById('modal-overlay').classList.remove('open');
-  }
-
-  function closeModalOutside(e) {
-    if (e.target === document.getElementById('modal-overlay')) closeModal();
-  }
-
-  function saveOrder() {
-    closeModal();
-    showToast('✅ Order logged successfully');
-    addNewCall('Manual Entry', 'ME', 'avatar-amber', 'Order logged manually', 'New');
-    updateKPIs();
-  }
+  function closeModal() { document.getElementById('modal').classList.remove('open'); }
+  function closeModalOutside(e) { if (e.target === document.getElementById('modal')) closeModal(); }
 
   // Toast
   function showToast(msg) {
     const toast = document.getElementById('toast');
     document.getElementById('toast-msg').textContent = msg;
     toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 3500);
+    setTimeout(() => toast.classList.remove('show'), 3000);
   }
-
-  // Alert resolve buttons
-  document.querySelectorAll('.alert-resolve').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const item = this.closest('.alert-item');
-      item.style.opacity = '0';
-      item.style.transition = 'opacity 0.3s';
-      setTimeout(() => {
-        item.remove();
-        const urgentEl = document.getElementById('kpi-urgent');
-        const val = parseInt(urgentEl.textContent);
-        if (val > 0) urgentEl.textContent = val - 1;
-        const badge = document.getElementById('urgent-badge');
-        const bval = parseInt(badge.textContent);
-        if (bval > 0) badge.textContent = bval - 1;
-      }, 300);
-      showToast('✅ Alert resolved');
-    });
-  });
 </script>
 
 </body>
