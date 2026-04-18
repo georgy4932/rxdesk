@@ -1,1207 +1,1209 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RxDesk — AI Pharmacy Secretary</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
-
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --ink: #0d1117;
-    --surface: #f5f2ec;
-    --card: #ffffff;
-    --accent: #1a6b4a;
-    --accent-light: #e8f5ef;
-    --accent-warm: #c8f0dc;
-    --gold: #c9a84c;
-    --muted: #6b7280;
-    --border: #e2ddd6;
-    --red: #d93025;
-    --red-light: #fce8e6;
-    --amber: #e37400;
-    --amber-light: #fef3e2;
-    --blue: #1a73e8;
-    --blue-light: #e8f0fe;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--surface);
-    color: var(--ink);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* ── NAV ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 18px 48px;
-    background: rgba(245,242,236,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-  }
-
-  .logo-mark {
-    width: 34px; height: 34px;
-    background: var(--accent);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 16px;
-    font-family: 'Instrument Serif', serif;
-    font-style: italic;
-  }
-
-  .logo-text {
-    font-size: 17px;
-    font-weight: 600;
-    letter-spacing: -0.3px;
-    color: var(--ink);
-  }
-
-  .logo-text span { color: var(--accent); }
-
-  nav ul {
-    display: flex;
-    list-style: none;
-    gap: 36px;
-    align-items: center;
-  }
-
-  nav ul a {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  nav ul a:hover { color: var(--ink); }
-
-  .nav-cta {
-    background: var(--accent) !important;
-    color: white !important;
-    padding: 9px 22px;
-    border-radius: 6px;
-    font-size: 14px !important;
-    transition: opacity 0.2s !important;
-  }
-
-  .nav-cta:hover { opacity: 0.88 !important; }
-
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 120px 48px 80px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -200px; right: -200px;
-    width: 700px; height: 700px;
-    background: radial-gradient(circle, rgba(26,107,74,0.07) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: -100px; left: -100px;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .hero-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-    width: 100%;
-  }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    background: var(--accent-light);
-    border: 1px solid rgba(26,107,74,0.2);
-    color: var(--accent);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    padding: 6px 14px;
-    border-radius: 100px;
-    margin-bottom: 28px;
-    width: fit-content;
-  }
-
-  .badge-dot {
-    width: 6px; height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
-
-  h1 {
-    font-family: 'Instrument Serif', serif;
-    font-size: 58px;
-    line-height: 1.08;
-    letter-spacing: -1.5px;
-    margin-bottom: 24px;
-    color: var(--ink);
-  }
-
-  h1 em {
-    font-style: italic;
-    color: var(--accent);
-  }
-
-  .hero-sub {
-    font-size: 18px;
-    line-height: 1.65;
-    color: var(--muted);
-    font-weight: 300;
-    margin-bottom: 40px;
-    max-width: 480px;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 14px;
-    align-items: center;
-  }
-
-  .btn-primary {
-    background: var(--accent);
-    color: white;
-    padding: 14px 30px;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.15s, box-shadow 0.15s;
-    text-decoration: none;
-    display: inline-block;
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba(26,107,74,0.28);
-  }
-
-  .btn-secondary {
-    background: transparent;
-    color: var(--ink);
-    padding: 14px 24px;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 500;
-    border: 1.5px solid var(--border);
-    cursor: pointer;
-    transition: border-color 0.2s;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .btn-secondary:hover { border-color: var(--ink); }
-
-  .hero-stats {
-    display: flex;
-    gap: 36px;
-    margin-top: 52px;
-    padding-top: 32px;
-    border-top: 1px solid var(--border);
-  }
-
-  .stat-num {
-    font-family: 'Instrument Serif', serif;
-    font-size: 32px;
-    color: var(--ink);
-    letter-spacing: -1px;
-    line-height: 1;
-  }
-
-  .stat-label {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 4px;
-    font-weight: 400;
-  }
-
-  /* ── CALL WIDGET ── */
-  .call-widget {
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 4px 40px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
-    overflow: hidden;
-    animation: floatIn 0.8s ease both;
-    border: 1px solid var(--border);
-  }
-
-  @keyframes floatIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .widget-header {
-    background: var(--ink);
-    padding: 18px 22px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .call-avatar {
-    width: 38px; height: 38px;
-    background: var(--accent);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-  }
-
-  .call-info { flex: 1; }
-  .call-name { font-size: 14px; font-weight: 600; color: white; }
-  .call-status { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 2px; }
-
-  .call-live {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    background: rgba(255,255,255,0.1);
-    padding: 4px 10px;
-    border-radius: 100px;
-    font-size: 11px;
-    font-weight: 600;
-    color: #4ade80;
-    letter-spacing: 0.3px;
-  }
-
-  .live-dot {
-    width: 5px; height: 5px;
-    background: #4ade80;
-    border-radius: 50%;
-    animation: pulse 1.5s infinite;
-  }
-
-  .transcript {
-    padding: 20px 22px;
-    max-height: 220px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .msg { display: flex; gap: 10px; align-items: flex-start; }
-
-  .msg-tag {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
-    margin-top: 2px;
-    flex-shrink: 0;
-  }
-
-  .msg.caller .msg-tag { background: var(--blue-light); color: var(--blue); }
-  .msg.ai .msg-tag { background: var(--accent-light); color: var(--accent); }
-  .msg-text { font-size: 13.5px; line-height: 1.5; color: var(--ink); }
-
-  .typing { display: flex; gap: 3px; align-items: center; padding: 2px 0; }
-  .typing span {
-    width: 5px; height: 5px;
-    background: var(--accent);
-    border-radius: 50%;
-    animation: bounce 1.2s infinite;
-  }
-  .typing span:nth-child(2) { animation-delay: 0.2s; }
-  .typing span:nth-child(3) { animation-delay: 0.4s; }
-
-  @keyframes bounce {
-    0%, 60%, 100% { transform: translateY(0); }
-    30% { transform: translateY(-5px); }
-  }
-
-  .widget-actions { padding: 16px 22px; display: flex; flex-direction: column; gap: 10px; }
-  .action-row { display: flex; gap: 8px; }
-
-  .action-chip {
-    flex: 1;
-    padding: 10px 14px;
-    border-radius: 8px;
-    font-size: 12.5px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    transition: transform 0.15s;
-  }
-
-  .action-chip:hover { transform: translateY(-1px); }
-  .chip-book { background: var(--accent-light); color: var(--accent); }
-  .chip-callback { background: var(--amber-light); color: var(--amber); }
-  .chip-urgent { background: var(--red-light); color: var(--red); }
-  .chip-claim { background: var(--blue-light); color: var(--blue); }
-
-  /* ── SECTION SHARED ── */
-  section { padding: 100px 48px; }
-  .section-inner { max-width: 1200px; margin: 0 auto; }
-
-  .section-label {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 16px;
-  }
-
-  h2 {
-    font-family: 'Instrument Serif', serif;
-    font-size: 44px;
-    line-height: 1.1;
-    letter-spacing: -1px;
-    margin-bottom: 16px;
-  }
-
-  .section-sub {
-    font-size: 17px;
-    color: var(--muted);
-    font-weight: 300;
-    max-width: 540px;
-    line-height: 1.65;
-  }
-
-  /* ── FEATURES ── */
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 64px;
-  }
-
-  .feature-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 32px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .feature-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
-
-  .feature-card.featured {
-    background: var(--ink);
-    border-color: var(--ink);
-    grid-row: span 2;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .feature-icon {
-    width: 44px; height: 44px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
-
-  .icon-green { background: var(--accent-light); }
-  .icon-amber { background: var(--amber-light); }
-  .icon-blue { background: var(--blue-light); }
-  .icon-red { background: var(--red-light); }
-  .icon-white { background: rgba(255,255,255,0.12); }
-
-  .feature-title { font-size: 17px; font-weight: 600; margin-bottom: 10px; letter-spacing: -0.3px; }
-  .feature-card.featured .feature-title { color: white; }
-  .feature-card.featured .feature-desc { color: rgba(255,255,255,0.6); }
-  .feature-desc { font-size: 14px; line-height: 1.6; color: var(--muted); font-weight: 300; }
-
-  .feature-tag {
-    display: inline-block;
-    margin-top: 18px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    color: var(--gold);
-    background: rgba(201,168,76,0.12);
-    padding: 4px 10px;
-    border-radius: 4px;
-  }
-
-  /* ── DASHBOARD PREVIEW ── */
-  .dashboard-section { background: var(--ink); padding: 100px 48px; }
-  .dashboard-section h2 { color: white; }
-  .dashboard-section .section-sub { color: rgba(255,255,255,0.5); }
-
-  .dashboard-ui {
-    margin-top: 60px;
-    background: #161b22;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 40px 80px rgba(0,0,0,0.4);
-  }
-
-  .dash-topbar {
-    background: #0d1117;
-    padding: 14px 24px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-
-  .dot-row { display: flex; gap: 7px; }
-  .dot { width: 12px; height: 12px; border-radius: 50%; }
-  .dot-r { background: #ff5f56; }
-  .dot-y { background: #ffbd2e; }
-  .dot-g { background: #27c93f; }
-
-  .dash-title { font-size: 13px; color: rgba(255,255,255,0.4); flex: 1; text-align: center; letter-spacing: 0.3px; }
-
-  .dash-body { display: grid; grid-template-columns: 220px 1fr 280px; min-height: 480px; }
-
-  .dash-sidebar { background: #0d1117; border-right: 1px solid rgba(255,255,255,0.06); padding: 24px 0; }
-
-  .dash-nav-item {
-    padding: 10px 22px;
-    font-size: 13px;
-    color: rgba(255,255,255,0.4);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    transition: background 0.15s;
-    border-left: 3px solid transparent;
-  }
-
-  .dash-nav-item.active { color: white; background: rgba(255,255,255,0.05); border-left-color: var(--accent); }
-  .dash-nav-item span { font-size: 15px; }
-
-  .dash-main { padding: 28px; display: flex; flex-direction: column; gap: 20px; }
-  .dash-heading { font-size: 18px; font-weight: 600; color: white; margin-bottom: 4px; letter-spacing: -0.3px; }
-  .dash-sub { font-size: 12px; color: rgba(255,255,255,0.4); }
-
-  .kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-
-  .kpi { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 16px; }
-  .kpi-label { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 8px; font-weight: 500; letter-spacing: 0.3px; }
-  .kpi-value { font-family: 'Instrument Serif', serif; font-size: 28px; color: white; letter-spacing: -0.5px; }
-  .kpi-delta { font-size: 11px; color: #4ade80; margin-top: 4px; }
-  .kpi-delta.down { color: #f87171; }
-
-  .calls-list { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; overflow: hidden; flex: 1; }
-
-  .calls-list-header {
-    padding: 12px 16px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    font-size: 12px;
-    font-weight: 600;
-    color: rgba(255,255,255,0.5);
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    display: grid;
-    grid-template-columns: 2fr 1.5fr 1fr 1fr;
-    gap: 8px;
-  }
-
-  .call-row {
-    padding: 12px 16px;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    display: grid;
-    grid-template-columns: 2fr 1.5fr 1fr 1fr;
-    gap: 8px;
-    align-items: center;
-    font-size: 13px;
-    color: rgba(255,255,255,0.75);
-    transition: background 0.15s;
-    cursor: pointer;
-  }
-
-  .call-row:hover { background: rgba(255,255,255,0.04); }
-  .call-row:last-child { border-bottom: none; }
-
-  .status-pill { font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 100px; letter-spacing: 0.3px; text-transform: uppercase; width: fit-content; }
-  .pill-done { background: rgba(74,222,128,0.12); color: #4ade80; }
-  .pill-booked { background: rgba(96,165,250,0.12); color: #60a5fa; }
-  .pill-urgent { background: rgba(248,113,113,0.12); color: #f87171; }
-  .pill-pending { background: rgba(250,204,21,0.12); color: #facc15; }
-
-  .dash-panel { border-left: 1px solid rgba(255,255,255,0.06); padding: 24px 20px; display: flex; flex-direction: column; gap: 20px; }
-  .panel-section-title { font-size: 12px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 12px; }
-
-  .claim-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 12px; margin-bottom: 8px; }
-  .claim-name { font-size: 13px; font-weight: 600; color: white; }
-  .claim-detail { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 3px; }
-  .claim-bar-bg { height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; margin-top: 10px; overflow: hidden; }
-  .claim-bar { height: 100%; border-radius: 2px; background: var(--accent); }
-
-  .ai-summary { background: rgba(26,107,74,0.12); border: 1px solid rgba(26,107,74,0.25); border-radius: 10px; padding: 14px; flex: 1; }
-  .ai-summary-label { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--accent-warm); margin-bottom: 8px; }
-  .ai-summary-text { font-size: 12.5px; color: rgba(255,255,255,0.65); line-height: 1.6; }
-
-  /* ── CLAIM SECTION ── */
-  .claim-section { background: var(--accent-light); }
-
-  .claim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 60px; }
-  .claim-steps { display: flex; flex-direction: column; gap: 28px; }
-  .claim-step { display: flex; gap: 20px; align-items: flex-start; }
-
-  .step-num {
-    width: 40px; height: 40px;
-    background: var(--accent);
-    color: white;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Instrument Serif', serif;
-    font-size: 20px;
-    flex-shrink: 0;
-  }
-
-  .step-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; letter-spacing: -0.2px; }
-  .step-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
-
-  .claim-card { background: white; border-radius: 20px; padding: 32px; box-shadow: 0 8px 40px rgba(0,0,0,0.06); border: 1px solid var(--border); }
-  .claim-card-title { font-size: 15px; font-weight: 700; margin-bottom: 24px; display: flex; align-items: center; gap: 8px; }
-
-  .claim-summary-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
-  .claim-summary-row:last-of-type { border-bottom: none; }
-  .claim-summary-label { color: var(--muted); }
-  .claim-summary-value { font-weight: 600; }
-
-  .claim-total { margin-top: 20px; background: var(--accent); color: white; border-radius: 10px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
-  .claim-total-label { font-size: 14px; font-weight: 500; }
-  .claim-total-value { font-family: 'Instrument Serif', serif; font-size: 28px; letter-spacing: -0.5px; }
-
-  /* ── PRICING ── */
-  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 64px; }
-
-  .price-card { background: white; border: 1px solid var(--border); border-radius: 20px; padding: 36px 32px; position: relative; transition: transform 0.2s; }
-  .price-card:hover { transform: translateY(-4px); }
-  .price-card.popular { background: var(--ink); border-color: var(--ink); transform: scale(1.03); }
-  .price-card.popular:hover { transform: scale(1.03) translateY(-4px); }
-
-  .popular-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--ink); font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 5px 16px; border-radius: 100px; white-space: nowrap; }
-
-  .plan-name { font-size: 13px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
-  .price-card.popular .plan-name { color: rgba(255,255,255,0.5); }
-
-  .price-amount { font-family: 'Instrument Serif', serif; font-size: 48px; letter-spacing: -2px; line-height: 1; margin-bottom: 6px; }
-  .price-card.popular .price-amount { color: white; }
-
-  .price-period { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
-  .price-card.popular .price-period { color: rgba(255,255,255,0.4); }
-
-  .price-divider { height: 1px; background: var(--border); margin-bottom: 24px; }
-  .price-card.popular .price-divider { background: rgba(255,255,255,0.1); }
-
-  .price-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
-  .price-features li { font-size: 14px; color: var(--muted); display: flex; gap: 10px; align-items: flex-start; }
-  .price-card.popular .price-features li { color: rgba(255,255,255,0.6); }
-
-  .check { color: var(--accent); font-size: 15px; flex-shrink: 0; margin-top: 1px; }
-  .price-card.popular .check { color: #4ade80; }
-
-  .price-btn {
-    width: 100%;
-    padding: 13px;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
-    border: 1.5px solid var(--border);
-    background: transparent;
-    color: var(--ink);
-    cursor: pointer;
-    transition: all 0.2s;
-    text-decoration: none;
-    display: block;
-    text-align: center;
-  }
-
-  .price-btn:hover { background: var(--ink); color: white; border-color: var(--ink); }
-  .price-card.popular .price-btn { background: var(--accent); color: white; border-color: var(--accent); }
-  .price-card.popular .price-btn:hover { background: white; color: var(--ink); border-color: white; }
-
-  /* ── CTA ── */
-  .cta-section { padding: 120px 48px; text-align: center; position: relative; overflow: hidden; }
-  .cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(26,107,74,0.06) 0%, transparent 70%); }
-  .cta-section h2 { margin-bottom: 20px; }
-  .cta-section .section-sub { margin: 0 auto 40px; text-align: center; }
-
-  /* ── FOOTER ── */
-  footer { background: var(--ink); padding: 60px 48px 36px; color: rgba(255,255,255,0.5); }
-
-  .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 36px; }
-
-  .footer-brand .logo-text { color: white; font-size: 18px; }
-  .footer-tagline { font-size: 14px; line-height: 1.6; margin-top: 12px; max-width: 240px; font-weight: 300; }
-
-  .footer-col h4 { font-size: 12px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 16px; }
-  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .footer-col a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 14px; transition: color 0.15s; }
-  .footer-col a:hover { color: white; }
-
-  .footer-bottom { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 13px; flex-wrap: wrap; gap: 10px; }
-
-  .nhs-note { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.05); padding: 5px 12px; border-radius: 6px; font-size: 12px; }
-
-  /* ── SCROLL ANIMATIONS ── */
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-  .reveal.visible { opacity: 1; transform: none; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    nav { padding: 16px 24px; }
-    nav ul { display: none; }
-    h1 { font-size: 38px; }
-    .hero { padding: 100px 24px 60px; }
-    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-    .features-grid { grid-template-columns: 1fr; }
-    .dash-body { grid-template-columns: 1fr; }
-    .dash-sidebar, .dash-panel { display: none; }
-    section { padding: 64px 24px; }
-    .pricing-grid { grid-template-columns: 1fr; }
-    .claim-grid { grid-template-columns: 1fr; }
-    .footer-inner { grid-template-columns: 1fr 1fr; }
-  }
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RxDesk — AI Workflow Support for Pharmacies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0d1117;
+      --surface: #f5f2ec;
+      --card: #ffffff;
+      --accent: #1a6b4a;
+      --accent-light: #e8f5ef;
+      --accent-warm: #c8f0dc;
+      --gold: #c9a84c;
+      --muted: #6b7280;
+      --border: #e2ddd6;
+      --red: #d93025;
+      --red-light: #fce8e6;
+      --amber: #e37400;
+      --amber-light: #fef3e2;
+      --blue: #1a73e8;
+      --blue-light: #e8f0fe;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--surface);
+      color: var(--ink);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(245,242,236,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 34px; height: 34px;
+      background: var(--accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+    }
+
+    .logo-text {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      color: var(--ink);
+    }
+
+    .logo-text span { color: var(--accent); }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 36px;
+      align-items: center;
+    }
+
+    nav ul a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover { color: var(--ink); }
+
+    .nav-cta {
+      background: var(--accent) !important;
+      color: white !important;
+      padding: 9px 22px;
+      border-radius: 6px;
+      font-size: 14px !important;
+      transition: opacity 0.2s !important;
+    }
+
+    .nav-cta:hover { opacity: 0.88 !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(26,107,74,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--accent-light);
+      border: 1px solid rgba(26,107,74,0.2);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      width: fit-content;
+    }
+
+    .badge-dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    h1 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 58px;
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+      margin-bottom: 24px;
+      color: var(--ink);
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 40px;
+      max-width: 520px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      padding: 14px 30px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(26,107,74,0.28);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink);
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      border: 1.5px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-secondary:hover { border-color: var(--ink); }
+
+    .hero-stats {
+      display: flex;
+      gap: 36px;
+      margin-top: 52px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .stat-num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 32px;
+      color: var(--ink);
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+      font-weight: 400;
+    }
+
+    /* CALL WIDGET */
+    .call-widget {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
+      overflow: hidden;
+      animation: floatIn 0.8s ease both;
+      border: 1px solid var(--border);
+    }
+
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .widget-header {
+      background: var(--ink);
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .call-avatar {
+      width: 38px; height: 38px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .call-info { flex: 1; }
+    .call-name { font-size: 14px; font-weight: 600; color: white; }
+    .call-status { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+
+    .call-live {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255,255,255,0.1);
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #4ade80;
+      letter-spacing: 0.3px;
+    }
+
+    .live-dot {
+      width: 5px; height: 5px;
+      background: #4ade80;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    .transcript {
+      padding: 20px 22px;
+      max-height: 220px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .msg { display: flex; gap: 10px; align-items: flex-start; }
+
+    .msg-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .msg.caller .msg-tag { background: var(--blue-light); color: var(--blue); }
+    .msg.ai .msg-tag { background: var(--accent-light); color: var(--accent); }
+    .msg-text { font-size: 13.5px; line-height: 1.5; color: var(--ink); }
+
+    .typing { display: flex; gap: 3px; align-items: center; padding: 2px 0; }
+    .typing span {
+      width: 5px; height: 5px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: bounce 1.2s infinite;
+    }
+    .typing span:nth-child(2) { animation-delay: 0.2s; }
+    .typing span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-5px); }
+    }
+
+    .widget-actions { padding: 16px 22px; display: flex; flex-direction: column; gap: 10px; }
+    .action-row { display: flex; gap: 8px; }
+
+    .action-chip {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: transform 0.15s;
+    }
+
+    .action-chip:hover { transform: translateY(-1px); }
+    .chip-book { background: var(--accent-light); color: var(--accent); }
+    .chip-callback { background: var(--amber-light); color: var(--amber); }
+    .chip-urgent { background: var(--red-light); color: var(--red); }
+    .chip-claim { background: var(--blue-light); color: var(--blue); }
+
+    /* SECTION SHARED */
+    section { padding: 100px 48px; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 44px;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 17px;
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 620px;
+      line-height: 1.65;
+    }
+
+    /* FEATURES */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 64px;
+    }
+
+    .feature-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+
+    .feature-card.featured {
+      background: var(--ink);
+      border-color: var(--ink);
+      grid-row: span 2;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feature-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .icon-green { background: var(--accent-light); }
+    .icon-amber { background: var(--amber-light); }
+    .icon-blue { background: var(--blue-light); }
+    .icon-red { background: var(--red-light); }
+    .icon-white { background: rgba(255,255,255,0.12); }
+
+    .feature-title { font-size: 17px; font-weight: 600; margin-bottom: 10px; letter-spacing: -0.3px; }
+    .feature-card.featured .feature-title { color: white; }
+    .feature-card.featured .feature-desc { color: rgba(255,255,255,0.6); }
+    .feature-desc { font-size: 14px; line-height: 1.6; color: var(--muted); font-weight: 300; }
+
+    .feature-tag {
+      display: inline-block;
+      margin-top: 18px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(201,168,76,0.12);
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    /* DASHBOARD PREVIEW */
+    .dashboard-section { background: var(--ink); padding: 100px 48px; }
+    .dashboard-section h2 { color: white; }
+    .dashboard-section .section-sub { color: rgba(255,255,255,0.5); }
+
+    .dashboard-ui {
+      margin-top: 60px;
+      background: #161b22;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+    }
+
+    .dash-topbar {
+      background: #0d1117;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .dot-row { display: flex; gap: 7px; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-r { background: #ff5f56; }
+    .dot-y { background: #ffbd2e; }
+    .dot-g { background: #27c93f; }
+
+    .dash-title { font-size: 13px; color: rgba(255,255,255,0.4); flex: 1; text-align: center; letter-spacing: 0.3px; }
+
+    .dash-body { display: grid; grid-template-columns: 220px 1fr 280px; min-height: 480px; }
+
+    .dash-sidebar { background: #0d1117; border-right: 1px solid rgba(255,255,255,0.06); padding: 24px 0; }
+
+    .dash-nav-item {
+      padding: 10px 22px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: background 0.15s;
+      border-left: 3px solid transparent;
+    }
+
+    .dash-nav-item.active { color: white; background: rgba(255,255,255,0.05); border-left-color: var(--accent); }
+    .dash-nav-item span { font-size: 15px; }
+
+    .dash-main { padding: 28px; display: flex; flex-direction: column; gap: 20px; }
+    .dash-heading { font-size: 18px; font-weight: 600; color: white; margin-bottom: 4px; letter-spacing: -0.3px; }
+    .dash-sub { font-size: 12px; color: rgba(255,255,255,0.4); }
+
+    .kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+    .kpi { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 16px; }
+    .kpi-label { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 8px; font-weight: 500; letter-spacing: 0.3px; }
+    .kpi-value { font-family: 'Instrument Serif', serif; font-size: 28px; color: white; letter-spacing: -0.5px; }
+    .kpi-delta { font-size: 11px; color: #4ade80; margin-top: 4px; }
+    .kpi-delta.down { color: #f87171; }
+
+    .calls-list { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; overflow: hidden; flex: 1; }
+
+    .calls-list-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      display: grid;
+      grid-template-columns: 2fr 1.5fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .call-row {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: grid;
+      grid-template-columns: 2fr 1.5fr 1fr 1fr;
+      gap: 8px;
+      align-items: center;
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+      transition: background 0.15s;
+      cursor: pointer;
+    }
+
+    .call-row:hover { background: rgba(255,255,255,0.04); }
+    .call-row:last-child { border-bottom: none; }
+
+    .status-pill { font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 100px; letter-spacing: 0.3px; text-transform: uppercase; width: fit-content; }
+    .pill-reviewed { background: rgba(74,222,128,0.12); color: #4ade80; }
+    .pill-callback { background: rgba(96,165,250,0.12); color: #60a5fa; }
+    .pill-urgent { background: rgba(248,113,113,0.12); color: #f87171; }
+    .pill-pending { background: rgba(250,204,21,0.12); color: #facc15; }
+
+    .dash-panel { border-left: 1px solid rgba(255,255,255,0.06); padding: 24px 20px; display: flex; flex-direction: column; gap: 20px; }
+    .panel-section-title { font-size: 12px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 12px; }
+
+    .claim-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 12px; margin-bottom: 8px; }
+    .claim-name { font-size: 13px; font-weight: 600; color: white; }
+    .claim-detail { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 3px; }
+    .claim-bar-bg { height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; margin-top: 10px; overflow: hidden; }
+    .claim-bar { height: 100%; border-radius: 2px; background: var(--accent); }
+
+    .ai-summary { background: rgba(26,107,74,0.12); border: 1px solid rgba(26,107,74,0.25); border-radius: 10px; padding: 14px; flex: 1; }
+    .ai-summary-label { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--accent-warm); margin-bottom: 8px; }
+    .ai-summary-text { font-size: 12.5px; color: rgba(255,255,255,0.65); line-height: 1.6; }
+
+    /* CLAIM SECTION */
+    .claim-section { background: var(--accent-light); }
+
+    .claim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 60px; }
+    .claim-steps { display: flex; flex-direction: column; gap: 28px; }
+    .claim-step { display: flex; gap: 20px; align-items: flex-start; }
+
+    .step-num {
+      width: 40px; height: 40px;
+      background: var(--accent);
+      color: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Instrument Serif', serif;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .step-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; letter-spacing: -0.2px; }
+    .step-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    .claim-card { background: white; border-radius: 20px; padding: 32px; box-shadow: 0 8px 40px rgba(0,0,0,0.06); border: 1px solid var(--border); }
+    .claim-card-title { font-size: 15px; font-weight: 700; margin-bottom: 24px; display: flex; align-items: center; gap: 8px; }
+
+    .claim-summary-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+    .claim-summary-row:last-of-type { border-bottom: none; }
+    .claim-summary-label { color: var(--muted); }
+    .claim-summary-value { font-weight: 600; }
+
+    .claim-total { margin-top: 20px; background: var(--accent); color: white; border-radius: 10px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
+    .claim-total-label { font-size: 14px; font-weight: 500; }
+    .claim-total-value { font-family: 'Instrument Serif', serif; font-size: 28px; letter-spacing: -0.5px; }
+
+    /* PRICING */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 64px; }
+
+    .price-card { background: white; border: 1px solid var(--border); border-radius: 20px; padding: 36px 32px; position: relative; transition: transform 0.2s; }
+    .price-card:hover { transform: translateY(-4px); }
+    .price-card.popular { background: var(--ink); border-color: var(--ink); transform: scale(1.03); }
+    .price-card.popular:hover { transform: scale(1.03) translateY(-4px); }
+
+    .popular-badge {
+      position: absolute;
+      top: -14px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .plan-name { font-size: 13px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .price-card.popular .plan-name { color: rgba(255,255,255,0.5); }
+
+    .price-amount { font-family: 'Instrument Serif', serif; font-size: 48px; letter-spacing: -2px; line-height: 1; margin-bottom: 6px; }
+    .price-card.popular .price-amount { color: white; }
+
+    .price-period { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+    .price-card.popular .price-period { color: rgba(255,255,255,0.4); }
+
+    .price-divider { height: 1px; background: var(--border); margin-bottom: 24px; }
+    .price-card.popular .price-divider { background: rgba(255,255,255,0.1); }
+
+    .price-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+    .price-features li { font-size: 14px; color: var(--muted); display: flex; gap: 10px; align-items: flex-start; }
+    .price-card.popular .price-features li { color: rgba(255,255,255,0.6); }
+
+    .check { color: var(--accent); font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+    .price-card.popular .check { color: #4ade80; }
+
+    .price-btn {
+      width: 100%;
+      padding: 13px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      border: 1.5px solid var(--border);
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+    }
+
+    .price-btn:hover { background: var(--ink); color: white; border-color: var(--ink); }
+    .price-card.popular .price-btn { background: var(--accent); color: white; border-color: var(--accent); }
+    .price-card.popular .price-btn:hover { background: white; color: var(--ink); border-color: white; }
+
+    /* CTA */
+    .cta-section { padding: 120px 48px; text-align: center; position: relative; overflow: hidden; }
+    .cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(26,107,74,0.06) 0%, transparent 70%); }
+    .cta-section h2 { margin-bottom: 20px; }
+    .cta-section .section-sub { margin: 0 auto 40px; text-align: center; }
+
+    /* FOOTER */
+    footer { background: var(--ink); padding: 60px 48px 36px; color: rgba(255,255,255,0.5); }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 36px;
+    }
+
+    .footer-brand .logo-text { color: white; font-size: 18px; }
+    .footer-tagline { font-size: 14px; line-height: 1.6; margin-top: 12px; max-width: 280px; font-weight: 300; }
+
+    .footer-col h4 { font-size: 12px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 14px; transition: color 0.15s; }
+    .footer-col a:hover { color: white; }
+
+    .footer-bottom { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 13px; flex-wrap: wrap; gap: 10px; }
+
+    .nhs-note { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.05); padding: 5px 12px; border-radius: 6px; font-size: 12px; }
+
+    /* SCROLL ANIMATIONS */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      nav ul { display: none; }
+      h1 { font-size: 38px; }
+      .hero { padding: 100px 24px 60px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .dash-body { grid-template-columns: 1fr; }
+      .dash-sidebar, .dash-panel { display: none; }
+      section { padding: 64px 24px; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .claim-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- NAV -->
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo">
+      <div class="logo-mark">Rx</div>
+      <span class="logo-text">Rx<span>Desk</span></span>
+    </a>
+    <ul>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#claims">Month-end</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="demo.html" class="nav-cta">Request a Demo</a></li>
+    </ul>
+  </nav>
 
-<nav>
-  <a href="#" class="logo">
-    <div class="logo-mark">Rx</div>
-    <span class="logo-text">Rx<span>Desk</span></span>
-  </a>
-  <ul>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#dashboard">Dashboard</a></li>
-    <li><a href="#claims">Claims</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="demo.html" class="nav-cta">Book a Demo</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <div class="badge-dot"></div>
-        Built for UK Pharmacies
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <div class="badge-dot"></div>
+          Built for UK Pharmacies
+        </div>
+        <h1>Your pharmacy,<br>never <em>misses</em><br>a request again.</h1>
+        <p class="hero-sub">RxDesk captures pharmacy calls, structures requests instantly, books collections, flags urgent issues, and prepares work for your team to review — so staff can stay focused on patients.</p>
+        <div class="hero-actions">
+          <a href="demo.html" class="btn-primary">Request a Free Demo</a>
+          <a href="#dashboard" class="btn-secondary">
+            <span>▶</span> See it live
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">94%</div>
+            <div class="stat-label">Calls captured instantly</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">3.2h</div>
+            <div class="stat-label">Potential staff time saved daily</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">0</div>
+            <div class="stat-label">Requests left unlogged</div>
+          </div>
+        </div>
       </div>
-      <h1>Your pharmacy,<br>never <em>misses</em><br>a call again.</h1>
-      <p class="hero-sub">RxDesk is an AI-powered secretary that answers calls, takes prescription orders, books collections, and handles your end-of-month NHS claims — while your team focuses on patients.</p>
-      <div class="hero-actions">
-        <a href="demo.html" class="btn-primary">Book a Free Demo</a>
-        <a href="#dashboard" class="btn-secondary">
-          <span>▶</span> See it live
+
+      <!-- LIVE CALL WIDGET -->
+      <div class="call-widget">
+        <div class="widget-header">
+          <div class="call-avatar">📞</div>
+          <div class="call-info">
+            <div class="call-name">Margaret Thompson — 07700 900142</div>
+            <div class="call-status">Incoming call · CarePoint Pharmacy</div>
+          </div>
+          <div class="call-live"><div class="live-dot"></div> LIVE</div>
+        </div>
+        <div class="transcript">
+          <div class="msg caller">
+            <div class="msg-tag">Patient</div>
+            <div class="msg-text">Hello, I need to order my repeat prescriptions. I take metformin and amlodipine.</div>
+          </div>
+          <div class="msg ai">
+            <div class="msg-tag">RxDesk AI</div>
+            <div class="msg-text">Of course, Margaret. I can capture that repeat request for the team and arrange a collection time. Would Thursday at 2pm suit you?</div>
+          </div>
+          <div class="msg caller">
+            <div class="msg-tag">Patient</div>
+            <div class="msg-text">Thursday collection please, around 2pm would be ideal.</div>
+          </div>
+          <div class="msg ai">
+            <div class="msg-tag">RxDesk AI</div>
+            <div class="msg-text">
+              <div class="typing"><span></span><span></span><span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="widget-actions">
+          <div class="action-row">
+            <button class="action-chip chip-book">✓ &nbsp;Capture Request</button>
+            <button class="action-chip chip-callback">↩ &nbsp;Assign Callback</button>
+          </div>
+          <div class="action-row">
+            <button class="action-chip chip-urgent">⚑ &nbsp;Flag Urgent</button>
+            <button class="action-chip chip-claim">📋 &nbsp;Add to Review Queue</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" style="background: white;">
+    <div class="section-inner">
+      <div class="reveal">
+        <div class="section-label">Core Features</div>
+        <h2>Everything your pharmacy<br>needs to run calmer.</h2>
+        <p class="section-sub">Built around the real daily pressures of community pharmacy — not a generic call centre tool.</p>
+      </div>
+
+      <div class="features-grid reveal">
+        <div class="feature-card featured">
+          <div class="feature-icon icon-white">📞</div>
+          <div class="feature-title">AI Call Capture</div>
+          <div class="feature-desc">Captures every inbound call, structures patient requests, books collection slots, and flags urgent concerns so your team can review and act quickly.</div>
+          <div class="feature-tag">Core Feature</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-green">📋</div>
+          <div class="feature-title">Structured Request Logging</div>
+          <div class="feature-desc">Every request is captured with patient details, medication information, and collection preference — ready for staff review and processing.</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-amber">📅</div>
+          <div class="feature-title">Collection Scheduling</div>
+          <div class="feature-desc">Capture preferred collection times during the call and pass them straight into your team’s workflow.</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-blue">📊</div>
+          <div class="feature-title">Month-End Claims Support</div>
+          <div class="feature-desc">RxDesk helps surface claim-related work throughout the month and prepares summaries and flagged issues for staff review.</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-red">⚑</div>
+          <div class="feature-title">Urgent Review Flags</div>
+          <div class="feature-desc">Detects urgent language and flags calls for immediate pharmacist or team review, helping nothing important get missed.</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-green">📝</div>
+          <div class="feature-title">Full Call Transcripts</div>
+          <div class="feature-desc">Every call is transcribed, summarised, and searchable. Your team always has context — even if they never heard the call.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD PREVIEW -->
+  <section id="dashboard" class="dashboard-section">
+    <div class="section-inner">
+      <div class="reveal">
+        <div class="section-label" style="color: #4ade80;">Live Dashboard</div>
+        <h2>Your whole workflow,<br>at a glance.</h2>
+        <p class="section-sub">One screen to review every call, request, collection change, urgent flag, and outstanding workflow item across your pharmacy.</p>
+      </div>
+
+      <div class="dashboard-ui reveal">
+        <div class="dash-topbar">
+          <div class="dot-row">
+            <div class="dot dot-r"></div>
+            <div class="dot dot-y"></div>
+            <div class="dot dot-g"></div>
+          </div>
+          <div class="dash-title">RxDesk — CarePoint Pharmacy · Live View</div>
+        </div>
+        <div class="dash-body">
+          <div class="dash-sidebar">
+            <div class="dash-nav-item active"><span>📞</span> Calls</div>
+            <div class="dash-nav-item"><span>📋</span> Requests</div>
+            <div class="dash-nav-item"><span>📅</span> Collections</div>
+            <div class="dash-nav-item"><span>📊</span> Month-end</div>
+            <div class="dash-nav-item"><span>⚑</span> Urgent</div>
+            <div class="dash-nav-item"><span>📝</span> Transcripts</div>
+            <div class="dash-nav-item"><span>⚙</span> Settings</div>
+          </div>
+          <div class="dash-main">
+            <div>
+              <div class="dash-heading">Today's Overview</div>
+              <div class="dash-sub">CarePoint Pharmacy · 3 staff on duty</div>
+            </div>
+            <div class="kpi-row">
+              <div class="kpi">
+                <div class="kpi-label">Calls Captured</div>
+                <div class="kpi-value">47</div>
+                <div class="kpi-delta">↑ 12 vs yesterday</div>
+              </div>
+              <div class="kpi">
+                <div class="kpi-label">Requests Logged</div>
+                <div class="kpi-value">31</div>
+                <div class="kpi-delta">↑ 8 new today</div>
+              </div>
+              <div class="kpi">
+                <div class="kpi-label">Urgent Review</div>
+                <div class="kpi-value">2</div>
+                <div class="kpi-delta down">Needs attention</div>
+              </div>
+            </div>
+            <div class="calls-list">
+              <div class="calls-list-header">
+                <span>Patient</span>
+                <span>Request</span>
+                <span>Next Step</span>
+                <span>Status</span>
+              </div>
+              <div class="call-row">
+                <span>Margaret Thompson</span>
+                <span>Metformin · Amlodipine</span>
+                <span>Thu 2:00pm collection</span>
+                <div class="status-pill pill-pending">Needs Review</div>
+              </div>
+              <div class="call-row">
+                <span>David Okafor</span>
+                <span>Lisinopril ready-check</span>
+                <span>Callback assigned</span>
+                <div class="status-pill pill-callback">Callback</div>
+              </div>
+              <div class="call-row">
+                <span>Susan Clarke</span>
+                <span>Insulin concern</span>
+                <span>Immediate pharmacist review</span>
+                <div class="status-pill pill-urgent">Urgent</div>
+              </div>
+              <div class="call-row">
+                <span>James Whitfield</span>
+                <span>Warfarin query</span>
+                <span>Action taken</span>
+                <div class="status-pill pill-reviewed">Reviewed</div>
+              </div>
+              <div class="call-row">
+                <span>Priya Mehta</span>
+                <span>Sertraline · Atorvastatin</span>
+                <span>Queued for processing</span>
+                <div class="status-pill pill-reviewed">Reviewed</div>
+              </div>
+            </div>
+          </div>
+          <div class="dash-panel">
+            <div>
+              <div class="panel-section-title">Month-End Summary</div>
+              <div class="claim-item">
+                <div class="claim-name">April 2026 Draft</div>
+                <div class="claim-detail">738 items · 12 flagged for review</div>
+                <div class="claim-bar-bg"><div class="claim-bar" style="width:72%"></div></div>
+              </div>
+              <div class="claim-item">
+                <div class="claim-name">Exceptions surfaced</div>
+                <div class="claim-detail">7 items requiring staff check</div>
+                <div class="claim-bar-bg"><div class="claim-bar" style="width:58%; background: #c9a84c;"></div></div>
+              </div>
+            </div>
+            <div class="ai-summary">
+              <div class="ai-summary-label">🤖 RxDesk Summary</div>
+              <div class="ai-summary-text">47 calls captured today. Two urgent reviews need attention, one callback has been assigned, and your April month-end draft is 72% prepared with 12 items flagged for staff review.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLAIMS SECTION -->
+  <section id="claims" class="claim-section">
+    <div class="section-inner">
+      <div class="reveal">
+        <div class="section-label">Month-End Support</div>
+        <h2>Month-end support,<br>without the last-minute scramble.</h2>
+        <p class="section-sub">RxDesk helps your team surface claim-related work throughout the month, organise it clearly, and prepare summaries for final review.</p>
+      </div>
+
+      <div class="claim-grid reveal">
+        <div class="claim-steps">
+          <div class="claim-step">
+            <div class="step-num">1</div>
+            <div>
+              <div class="step-title">Claim-related work is surfaced throughout the month</div>
+              <div class="step-desc">Requests, dispensing activity, and exceptions can be organised as they happen, reducing end-of-month catch-up.</div>
+            </div>
+          </div>
+          <div class="claim-step">
+            <div class="step-num">2</div>
+            <div>
+              <div class="step-title">Exceptions and missing items are easier to review</div>
+              <div class="step-desc">RxDesk helps flag work that may need staff attention so month-end review feels more structured and less rushed.</div>
+            </div>
+          </div>
+          <div class="claim-step">
+            <div class="step-num">3</div>
+            <div>
+              <div class="step-title">Your team reviews before final submission</div>
+              <div class="step-desc">Generate a draft summary for review so your team can check details before completing submission in their normal workflow.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="claim-card">
+          <div class="claim-card-title">📊 April 2026 — Month-End Summary Draft</div>
+          <div class="claim-summary-row">
+            <div class="claim-summary-label">Total items surfaced</div>
+            <div class="claim-summary-value">738</div>
+          </div>
+          <div class="claim-summary-row">
+            <div class="claim-summary-label">EPS electronic prescriptions</div>
+            <div class="claim-summary-value">612</div>
+          </div>
+          <div class="claim-summary-row">
+            <div class="claim-summary-label">Paper prescriptions</div>
+            <div class="claim-summary-value">126</div>
+          </div>
+          <div class="claim-summary-row">
+            <div class="claim-summary-label">Exceptions flagged</div>
+            <div class="claim-summary-value">7</div>
+          </div>
+          <div class="claim-summary-row">
+            <div class="claim-summary-label">Missing endorsements to review</div>
+            <div class="claim-summary-value">12</div>
+          </div>
+          <div class="claim-summary-row">
+            <div class="claim-summary-label">Prepared this month</div>
+            <div class="claim-summary-value">72%</div>
+          </div>
+          <div class="claim-total">
+            <div class="claim-total-label">Estimated Month-End Total</div>
+            <div class="claim-total-value">£14,210</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" style="background: white;">
+    <div class="section-inner">
+      <div class="reveal" style="text-align: center;">
+        <div class="section-label" style="text-align:center;">Pricing</div>
+        <h2>Straightforward pricing.<br>No workflow headaches.</h2>
+        <p class="section-sub" style="margin: 0 auto;">One flat monthly fee per pharmacy. No per-call charges. No hidden costs.</p>
+      </div>
+
+      <div class="pricing-grid reveal">
+        <div class="price-card">
+          <div class="plan-name">Starter</div>
+          <div class="price-amount">£149</div>
+          <div class="price-period">per month, per branch</div>
+          <div class="price-divider"></div>
+          <ul class="price-features">
+            <li><span class="check">✓</span> Up to 200 calls/month</li>
+            <li><span class="check">✓</span> Structured request logging</li>
+            <li><span class="check">✓</span> Collection scheduling</li>
+            <li><span class="check">✓</span> Call transcripts</li>
+            <li><span class="check">✓</span> Email notifications</li>
+          </ul>
+          <a href="demo.html" class="price-btn">Get Started</a>
+        </div>
+
+        <div class="price-card popular">
+          <div class="popular-badge">Most Popular</div>
+          <div class="plan-name">Professional</div>
+          <div class="price-amount">£299</div>
+          <div class="price-period">per month, per branch</div>
+          <div class="price-divider"></div>
+          <ul class="price-features">
+            <li><span class="check">✓</span> Unlimited calls</li>
+            <li><span class="check">✓</span> Structured request management</li>
+            <li><span class="check">✓</span> Smart collection scheduling</li>
+            <li><span class="check">✓</span> Urgent review flags</li>
+            <li><span class="check">✓</span> Month-end claims support</li>
+            <li><span class="check">✓</span> Live dashboard</li>
+            <li><span class="check">✓</span> Priority support</li>
+          </ul>
+          <a href="demo.html" class="price-btn">Request a Demo</a>
+        </div>
+
+        <div class="price-card">
+          <div class="plan-name">Multi-Branch</div>
+          <div class="price-amount">£199</div>
+          <div class="price-period">per branch / 3+ branches</div>
+          <div class="price-divider"></div>
+          <ul class="price-features">
+            <li><span class="check">✓</span> Everything in Professional</li>
+            <li><span class="check">✓</span> Central multi-branch dashboard</li>
+            <li><span class="check">✓</span> Consolidated workflow reporting</li>
+            <li><span class="check">✓</span> Staff performance analytics</li>
+            <li><span class="check">✓</span> Dedicated account manager</li>
+            <li><span class="check">✓</span> Custom integrations</li>
+          </ul>
+          <a href="demo.html" class="price-btn">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="section-inner reveal" style="text-align:center;">
+      <div class="section-label" style="text-align:center;">Get Started</div>
+      <h2>Give your pharmacy<br>a calmer way to work.</h2>
+      <p class="section-sub">No long contracts. No setup fees. See how RxDesk fits your workflow in a live demo.</p>
+      <a href="demo.html" class="btn-primary" style="font-size:16px; padding: 16px 40px;">Request Your Free Demo →</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <div class="logo-mark">Rx</div>
+          <span class="logo-text">Rx<span>Desk</span></span>
         </a>
+        <div class="footer-tagline">AI-powered workflow support for UK community pharmacies — built to capture calls, structure requests, and keep teams in control.</div>
       </div>
-      <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-num">94%</div>
-          <div class="stat-label">Calls answered instantly</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">3.2h</div>
-          <div class="stat-label">Staff time saved daily</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">£0</div>
-          <div class="stat-label">Missed prescriptions</div>
-        </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#dashboard">Dashboard</a></li>
+          <li><a href="#claims">Month-End Support</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
       </div>
-    </div>
-
-```
-<!-- LIVE CALL WIDGET -->
-<div class="call-widget">
-  <div class="widget-header">
-    <div class="call-avatar">📞</div>
-    <div class="call-info">
-      <div class="call-name">Margaret Thompson — 07700 900142</div>
-      <div class="call-status">Incoming call · CarePoint Pharmacy</div>
-    </div>
-    <div class="call-live"><div class="live-dot"></div> LIVE</div>
-  </div>
-  <div class="transcript">
-    <div class="msg caller">
-      <div class="msg-tag">Patient</div>
-      <div class="msg-text">Hello, I need to order my repeat prescriptions. I take metformin and amlodipine.</div>
-    </div>
-    <div class="msg ai">
-      <div class="msg-tag">RxDesk AI</div>
-      <div class="msg-text">Of course, Margaret. I can see your repeat prescription is due. Would you like to collect from us on Thursday, or shall I arrange delivery?</div>
-    </div>
-    <div class="msg caller">
-      <div class="msg-tag">Patient</div>
-      <div class="msg-text">Thursday collection please, around 2pm would be ideal.</div>
-    </div>
-    <div class="msg ai">
-      <div class="msg-tag">RxDesk AI</div>
-      <div class="msg-text">
-        <div class="typing"><span></span><span></span><span></span></div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="demo.html">Request a Demo</a></li>
+          <li><a href="mailto:hello@rxdesk.co.uk">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy & Security</a></li>
+          <li><a href="#">Data Processing</a></li>
+        </ul>
       </div>
     </div>
-  </div>
-  <div class="widget-actions">
-    <div class="action-row">
-      <button class="action-chip chip-book">✓ &nbsp;Book Collection</button>
-      <button class="action-chip chip-callback">↩ &nbsp;Schedule Callback</button>
+    <div class="footer-bottom">
+      <span>© 2026 RxDesk Ltd. All rights reserved.</span>
+      <div class="nhs-note">✉️ hello@rxdesk.co.uk</div>
+      <div class="nhs-note">🔒 Secure handling · Human review built in · Built for pharmacy workflows</div>
     </div>
-    <div class="action-row">
-      <button class="action-chip chip-urgent">⚑ &nbsp;Flag Urgent</button>
-      <button class="action-chip chip-claim">📋 &nbsp;Add to Claim</button>
-    </div>
-  </div>
-</div>
-```
+  </footer>
 
-  </div>
-</section>
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
 
-<!-- FEATURES -->
+    const aiResponse = "Perfect, Margaret. I’ve captured your request and booked Thursday at 2pm for collection review. The pharmacy team will prepare it and follow up if anything needs checking.";
+    const typingEl = document.querySelector('.typing').parentElement;
 
-<section id="features" style="background: white;">
-  <div class="section-inner">
-    <div class="reveal">
-      <div class="section-label">Core Features</div>
-      <h2>Everything your pharmacy<br>needs to run smoother.</h2>
-      <p class="section-sub">Built around the real daily pressures of NHS community pharmacies — not a generic call centre tool.</p>
-    </div>
-
-```
-<div class="features-grid reveal">
-  <div class="feature-card featured">
-    <div class="feature-icon icon-white">📞</div>
-    <div class="feature-title">AI Phone Secretary</div>
-    <div class="feature-desc">Answers every inbound call instantly. Verifies patient identity, captures prescription requests, books collection slots, and escalates emergencies — all without your team lifting the receiver.</div>
-    <div class="feature-tag">Core Feature</div>
-  </div>
-  <div class="feature-card">
-    <div class="feature-icon icon-green">📋</div>
-    <div class="feature-title">Prescription Order Management</div>
-    <div class="feature-desc">Every order is logged with patient name, NHS number, medication, and pickup preference. Syncs to your dispensary queue automatically.</div>
-  </div>
-  <div class="feature-card">
-    <div class="feature-icon icon-amber">📅</div>
-    <div class="feature-title">Collection Booking</div>
-    <div class="feature-desc">Patients book their own collection times during the call. No more missed handoffs or queues at the counter at 5pm.</div>
-  </div>
-  <div class="feature-card">
-    <div class="feature-icon icon-blue">📊</div>
-    <div class="feature-title">End-of-Month FP34 Claims</div>
-    <div class="feature-desc">RxDesk auto-compiles your dispensed items throughout the month and generates a ready-to-submit NHS Digital FP34C summary — reviewed and ready in minutes, not hours.</div>
-  </div>
-  <div class="feature-card">
-    <div class="feature-icon icon-red">⚑</div>
-    <div class="feature-title">Urgent Escalation</div>
-    <div class="feature-desc">Detects urgent language and escalates in real-time — ringing the pharmacist directly or sending an immediate alert to the dispensary team.</div>
-  </div>
-  <div class="feature-card">
-    <div class="feature-icon icon-green">📝</div>
-    <div class="feature-title">Full Call Transcripts</div>
-    <div class="feature-desc">Every call is transcribed, summarised, and searchable. Your team always has context — even if they never heard the call.</div>
-  </div>
-</div>
-```
-
-  </div>
-</section>
-
-<!-- DASHBOARD PREVIEW -->
-
-<section id="dashboard" class="dashboard-section">
-  <div class="section-inner">
-    <div class="reveal">
-      <div class="section-label" style="color: #4ade80;">Live Dashboard</div>
-      <h2>Your whole operation,<br>at a glance.</h2>
-      <p class="section-sub">One screen to see every call, order, collection, and outstanding claim across your pharmacy.</p>
-    </div>
-
-```
-<div class="dashboard-ui reveal">
-  <div class="dash-topbar">
-    <div class="dot-row">
-      <div class="dot dot-r"></div>
-      <div class="dot dot-y"></div>
-      <div class="dot dot-g"></div>
-    </div>
-    <div class="dash-title">RxDesk — CarePoint Pharmacy · Live View</div>
-  </div>
-  <div class="dash-body">
-    <div class="dash-sidebar">
-      <div class="dash-nav-item active"><span>📞</span> Live Calls</div>
-      <div class="dash-nav-item"><span>📋</span> Orders</div>
-      <div class="dash-nav-item"><span>📅</span> Bookings</div>
-      <div class="dash-nav-item"><span>📊</span> Claims</div>
-      <div class="dash-nav-item"><span>⚑</span> Urgent</div>
-      <div class="dash-nav-item"><span>📝</span> Transcripts</div>
-      <div class="dash-nav-item"><span>⚙</span> Settings</div>
-    </div>
-    <div class="dash-main">
-      <div>
-        <div class="dash-heading">Today's Overview</div>
-        <div class="dash-sub">CarePoint Pharmacy · 3 staff on duty</div>
-      </div>
-      <div class="kpi-row">
-        <div class="kpi">
-          <div class="kpi-label">Calls Handled</div>
-          <div class="kpi-value">47</div>
-          <div class="kpi-delta">↑ 12 vs yesterday</div>
-        </div>
-        <div class="kpi">
-          <div class="kpi-label">Orders Logged</div>
-          <div class="kpi-value">31</div>
-          <div class="kpi-delta">↑ 8 new today</div>
-        </div>
-        <div class="kpi">
-          <div class="kpi-label">Escalated Urgent</div>
-          <div class="kpi-value">2</div>
-          <div class="kpi-delta down">Needs review</div>
-        </div>
-      </div>
-      <div class="calls-list">
-        <div class="calls-list-header">
-          <span>Patient</span>
-          <span>Medication</span>
-          <span>Collection</span>
-          <span>Status</span>
-        </div>
-        <div class="call-row">
-          <span>Margaret Thompson</span>
-          <span>Metformin · Amlodipine</span>
-          <span>Thu 2:00pm</span>
-          <div class="status-pill pill-booked">Booked</div>
-        </div>
-        <div class="call-row">
-          <span>David Okafor</span>
-          <span>Lisinopril</span>
-          <span>Today 5pm</span>
-          <div class="status-pill pill-done">Collected</div>
-        </div>
-        <div class="call-row">
-          <span>Susan Clarke</span>
-          <span>Levothyroxine · Omeprazole</span>
-          <span>Fri 11am</span>
-          <div class="status-pill pill-pending">Pending</div>
-        </div>
-        <div class="call-row">
-          <span>James Whitfield</span>
-          <span>Warfarin — urgent query</span>
-          <span>Escalated</span>
-          <div class="status-pill pill-urgent">Urgent</div>
-        </div>
-        <div class="call-row">
-          <span>Priya Mehta</span>
-          <span>Sertraline · Atorvastatin</span>
-          <span>Mon 10am</span>
-          <div class="status-pill pill-booked">Booked</div>
-        </div>
-      </div>
-    </div>
-    <div class="dash-panel">
-      <div>
-        <div class="panel-section-title">Monthly Claims</div>
-        <div class="claim-item">
-          <div class="claim-name">FP34C — April 2026</div>
-          <div class="claim-detail">738 items · £14,210 estimated</div>
-          <div class="claim-bar-bg"><div class="claim-bar" style="width:72%"></div></div>
-        </div>
-        <div class="claim-item">
-          <div class="claim-name">EPS Items This Month</div>
-          <div class="claim-detail">612 of 850 target</div>
-          <div class="claim-bar-bg"><div class="claim-bar" style="width:58%; background: #c9a84c;"></div></div>
-        </div>
-      </div>
-      <div class="ai-summary">
-        <div class="ai-summary-label">🤖 RxDesk AI Summary</div>
-        <div class="ai-summary-text">47 calls handled today. Warfarin query for James Whitfield has been escalated and needs pharmacist review. Your April FP34C claim is 72% complete — projected total £14,210. You're on track to submit by month end.</div>
-      </div>
-    </div>
-  </div>
-</div>
-```
-
-  </div>
-</section>
-
-<!-- CLAIMS SECTION -->
-
-<section id="claims" class="claim-section">
-  <div class="section-inner">
-    <div class="reveal">
-      <div class="section-label">End-of-Month Claims</div>
-      <h2>FP34C. Done in minutes,<br>not a whole Friday afternoon.</h2>
-      <p class="section-sub">RxDesk tracks every dispensed item throughout the month and auto-generates your NHS claim — so month-end is just a review, not a rebuild.</p>
-    </div>
-
-```
-<div class="claim-grid reveal">
-  <div class="claim-steps">
-    <div class="claim-step">
-      <div class="step-num">1</div>
-      <div>
-        <div class="step-title">Every dispensed item is logged automatically</div>
-        <div class="step-desc">As prescriptions are processed via call, the item, quantity, and endorsement data are captured in real-time — no manual entry required.</div>
-      </div>
-    </div>
-    <div class="claim-step">
-      <div class="step-num">2</div>
-      <div>
-        <div class="step-title">AI reconciles against NHS pricing</div>
-        <div class="step-desc">RxDesk cross-references the NHS Drug Tariff and calculates your contractor fees, broken bulk, and out-of-pocket items.</div>
-      </div>
-    </div>
-    <div class="claim-step">
-      <div class="step-num">3</div>
-      <div>
-        <div class="step-title">One-click FP34C submission</div>
-        <div class="step-desc">Review your generated summary, approve it, and submit directly to NHS Business Services Authority — fully compliant.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="claim-card">
-    <div class="claim-card-title">📊 April 2026 — FP34C Preview</div>
-    <div class="claim-summary-row">
-      <div class="claim-summary-label">Total items dispensed</div>
-      <div class="claim-summary-value">738</div>
-    </div>
-    <div class="claim-summary-row">
-      <div class="claim-summary-label">EPS electronic prescriptions</div>
-      <div class="claim-summary-value">612</div>
-    </div>
-    <div class="claim-summary-row">
-      <div class="claim-summary-label">Paper FP10 prescriptions</div>
-      <div class="claim-summary-value">126</div>
-    </div>
-    <div class="claim-summary-row">
-      <div class="claim-summary-label">Broken bulk items</div>
-      <div class="claim-summary-value">14</div>
-    </div>
-    <div class="claim-summary-row">
-      <div class="claim-summary-label">Contractor basic price</div>
-      <div class="claim-summary-value">£11,840.00</div>
-    </div>
-    <div class="claim-summary-row">
-      <div class="claim-summary-label">Dispensing fees</div>
-      <div class="claim-summary-value">£2,370.00</div>
-    </div>
-    <div class="claim-total">
-      <div class="claim-total-label">Estimated Total Claim</div>
-      <div class="claim-total-value">£14,210</div>
-    </div>
-  </div>
-</div>
-```
-
-  </div>
-</section>
-
-<!-- PRICING -->
-
-<section id="pricing" style="background: white;">
-  <div class="section-inner">
-    <div class="reveal" style="text-align: center;">
-      <div class="section-label" style="text-align:center;">Pricing</div>
-      <h2>Straightforward pricing.<br>No NHS headaches.</h2>
-      <p class="section-sub" style="margin: 0 auto;">One flat monthly fee per pharmacy. No per-call charges. No hidden costs.</p>
-    </div>
-
-```
-<div class="pricing-grid reveal">
-  <div class="price-card">
-    <div class="plan-name">Starter</div>
-    <div class="price-amount">£149</div>
-    <div class="price-period">per month, per branch</div>
-    <div class="price-divider"></div>
-    <ul class="price-features">
-      <li><span class="check">✓</span> Up to 200 calls/month</li>
-      <li><span class="check">✓</span> Prescription order logging</li>
-      <li><span class="check">✓</span> Collection booking</li>
-      <li><span class="check">✓</span> Call transcripts</li>
-      <li><span class="check">✓</span> Email notifications</li>
-    </ul>
-    <a href="demo.html" class="price-btn">Get Started</a>
-  </div>
-
-  <div class="price-card popular">
-    <div class="popular-badge">Most Popular</div>
-    <div class="plan-name">Professional</div>
-    <div class="price-amount">£299</div>
-    <div class="price-period">per month, per branch</div>
-    <div class="price-divider"></div>
-    <ul class="price-features">
-      <li><span class="check">✓</span> Unlimited calls</li>
-      <li><span class="check">✓</span> Prescription management</li>
-      <li><span class="check">✓</span> Smart collection scheduling</li>
-      <li><span class="check">✓</span> Urgent escalation alerts</li>
-      <li><span class="check">✓</span> FP34C claims assistant</li>
-      <li><span class="check">✓</span> Live dashboard</li>
-      <li><span class="check">✓</span> Priority support</li>
-    </ul>
-    <a href="demo.html" class="price-btn">Book a Demo</a>
-  </div>
-
-  <div class="price-card">
-    <div class="plan-name">Multi-Branch</div>
-    <div class="price-amount">£199</div>
-    <div class="price-period">per branch / 3+ branches</div>
-    <div class="price-divider"></div>
-    <ul class="price-features">
-      <li><span class="check">✓</span> Everything in Professional</li>
-      <li><span class="check">✓</span> Central multi-branch dashboard</li>
-      <li><span class="check">✓</span> Consolidated claims reporting</li>
-      <li><span class="check">✓</span> Staff performance analytics</li>
-      <li><span class="check">✓</span> Dedicated account manager</li>
-      <li><span class="check">✓</span> Custom integrations</li>
-    </ul>
-    <a href="demo.html" class="price-btn">Contact Sales</a>
-  </div>
-</div>
-```
-
-  </div>
-</section>
-
-<!-- CTA -->
-
-<section class="cta-section">
-  <div class="section-inner reveal" style="text-align:center;">
-    <div class="section-label" style="text-align:center;">Get Started</div>
-    <h2>Give your pharmacy<br>the secretary it deserves.</h2>
-    <p class="section-sub">No long contracts. No setup fees. Be live in 48 hours.</p>
-    <a href="demo.html" class="btn-primary" style="font-size:16px; padding: 16px 40px;">Book Your Free Demo →</a>
-  </div>
-</section>
-
-<!-- FOOTER -->
-
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <a href="#" class="logo">
-        <div class="logo-mark">Rx</div>
-        <span class="logo-text">Rx<span>Desk</span></span>
-      </a>
-      <div class="footer-tagline">AI-powered secretary for UK community pharmacies. Built for the NHS. Trusted by dispensing teams.</div>
-    </div>
-    <div class="footer-col">
-      <h4>Product</h4>
-      <ul>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#dashboard">Dashboard</a></li>
-        <li><a href="#claims">Claims Assistant</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Company</h4>
-      <ul>
-        <li><a href="demo.html">Book a Demo</a></li>
-        <li><a href="mailto:hello@rxdesk.co.uk">Contact Us</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Terms of Service</a></li>
-        <li><a href="#">GDPR Compliance</a></li>
-        <li><a href="#">ICO Registration</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 RxDesk Ltd. All rights reserved.</span>
-    <div class="nhs-note">✉️ hello@rxdesk.co.uk</div>
-    <div class="nhs-note">🔒 GDPR Compliant · ICO Registered · NHS Approved Framework</div>
-  </div>
-</footer>
-
-<script>
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
-
-  const aiResponse = "Perfect, Margaret. I've booked your collection for Thursday at 2pm. You'll receive a text reminder the day before. Is there anything else I can help you with?";
-  const typingEl = document.querySelector('.typing').parentElement;
-
-  setTimeout(() => {
-    typingEl.innerHTML = aiResponse;
-    typingEl.style.transition = 'opacity 0.4s';
-    typingEl.style.opacity = '0';
-    setTimeout(() => { typingEl.style.opacity = '1'; }, 100);
-  }, 3200);
-</script>
-
+    setTimeout(() => {
+      typingEl.innerHTML = aiResponse;
+      typingEl.style.transition = 'opacity 0.4s';
+      typingEl.style.opacity = '0';
+      setTimeout(() => { typingEl.style.opacity = '1'; }, 100);
+    }, 3200);
+  </script>
 </body>
 </html>
