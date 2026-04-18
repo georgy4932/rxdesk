@@ -11,200 +11,198 @@
 
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
-  --bg: #080c10; --surface: #0d1117; --surface2: #161b22; --surface3: #1c2330;
-  --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.12);
-  --text: #e6edf3; --text-muted: rgba(255,255,255,0.4); --text-dim: rgba(255,255,255,0.2);
-  --accent: #1a6b4a; --accent-glow: rgba(26,107,74,0.15); --accent-bright: #22c55e;
-  --red: #ef4444; --red-glow: rgba(239,68,68,0.1);
-  --amber: #f59e0b; --amber-glow: rgba(245,158,11,0.1);
-  --blue: #3b82f6; --blue-glow: rgba(59,130,246,0.1);
-  --purple: #a855f7; --purple-glow: rgba(168,85,247,0.1);
+  --bg:#080c10;--surface:#0d1117;--surface2:#161b22;--surface3:#1c2330;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+  --text:#e6edf3;--text-muted:rgba(255,255,255,0.4);--text-dim:rgba(255,255,255,0.2);
+  --accent:#1a6b4a;--accent-glow:rgba(26,107,74,0.15);--accent-bright:#22c55e;
+  --red:#ef4444;--red-glow:rgba(239,68,68,0.1);
+  --amber:#f59e0b;--amber-glow:rgba(245,158,11,0.1);
+  --blue:#3b82f6;--blue-glow:rgba(59,130,246,0.1);
+  --purple:#a855f7;--purple-glow:rgba(168,85,247,0.1);
 }
-
-html, body { height: 100%; overflow: hidden; }
-body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); display: flex; height: 100vh; }
+html,body{height:100%;overflow:hidden;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;height:100vh;}
 
 /* SIDEBAR */
-.sidebar { width: 210px; background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; flex-shrink: 0; }
-.sidebar-logo { padding: 18px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
-.logo-mark { width: 28px; height: 28px; background: var(--accent); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-family: 'Instrument Serif', serif; font-style: italic; font-size: 13px; color: white; }
-.logo-text { font-size: 14px; font-weight: 700; letter-spacing: -0.3px; }
-.logo-text span { color: var(--accent-bright); }
-.pharmacy-info { padding: 10px 16px; border-bottom: 1px solid var(--border); }
-.pharmacy-name { font-size: 12px; font-weight: 600; }
-.clara-live { display: flex; align-items: center; gap: 4px; margin-top: 3px; font-size: 10px; color: var(--accent-bright); font-weight: 600; }
-.live-dot { width: 5px; height: 5px; background: var(--accent-bright); border-radius: 50%; animation: pulse 1.5s infinite; }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-.sidebar-nav { flex: 1; padding: 8px; display: flex; flex-direction: column; gap: 1px; }
-.nav-item { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 6px; font-size: 13px; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: all 0.15s; border: 1px solid transparent; }
-.nav-item:hover { background: rgba(255,255,255,0.04); color: var(--text); }
-.nav-item.active { background: var(--accent-glow); color: var(--accent-bright); border-color: rgba(26,107,74,0.2); }
-.nav-item.disabled { opacity: 0.35; cursor: default; pointer-events: none; }
-.nav-icon { font-size: 14px; width: 16px; text-align: center; }
-.nav-badge { margin-left: auto; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 100px; min-width: 18px; text-align: center; }
-.badge-red { background: var(--red); color: white; }
-.badge-amber { background: var(--amber); color: var(--bg); }
-.badge-green { background: var(--accent); color: white; }
-.nav-soon { margin-left: auto; font-size: 9px; font-weight: 700; color: var(--text-dim); letter-spacing: 0.3px; text-transform: uppercase; }
-.sidebar-bottom { padding: 10px 8px; border-top: 1px solid var(--border); }
-.user-row { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 6px; cursor: pointer; }
-.user-row:hover { background: rgba(255,255,255,0.04); }
-.user-avatar { width: 24px; height: 24px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; }
-.user-name { font-size: 12px; font-weight: 500; }
-.user-role { font-size: 10px; color: var(--text-muted); }
+.sidebar{width:210px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;}
+.sidebar-logo{padding:18px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+.logo-mark{width:28px;height:28px;background:var(--accent);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',serif;font-style:italic;font-size:13px;color:white;}
+.logo-text{font-size:14px;font-weight:700;letter-spacing:-0.3px;}
+.logo-text span{color:var(--accent-bright);}
+.pharmacy-info{padding:10px 16px;border-bottom:1px solid var(--border);}
+.pharmacy-name{font-size:12px;font-weight:600;}
+.clara-live{display:flex;align-items:center;gap:4px;margin-top:3px;font-size:10px;color:var(--accent-bright);font-weight:600;}
+.live-dot{width:5px;height:5px;background:var(--accent-bright);border-radius:50%;animation:pulse 1.5s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.sidebar-nav{flex:1;padding:8px;display:flex;flex-direction:column;gap:1px;}
+.nav-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:6px;font-size:13px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:all 0.15s;border:1px solid transparent;}
+.nav-item:hover{background:rgba(255,255,255,0.04);color:var(--text);}
+.nav-item.active{background:var(--accent-glow);color:var(--accent-bright);border-color:rgba(26,107,74,0.2);}
+.nav-item.disabled{opacity:0.35;cursor:default;pointer-events:none;}
+.nav-icon{font-size:14px;width:16px;text-align:center;}
+.nav-badge{margin-left:auto;font-size:10px;font-weight:700;padding:1px 6px;border-radius:100px;min-width:18px;text-align:center;}
+.badge-red{background:var(--red);color:white;}
+.badge-amber{background:var(--amber);color:var(--bg);}
+.badge-green{background:var(--accent);color:white;}
+.nav-soon{margin-left:auto;font-size:9px;font-weight:700;color:var(--text-dim);letter-spacing:0.3px;text-transform:uppercase;}
+.sidebar-bottom{padding:10px 8px;border-top:1px solid var(--border);}
+.user-row{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:6px;cursor:pointer;}
+.user-row:hover{background:rgba(255,255,255,0.04);}
+.user-avatar{width:24px;height:24px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;}
+.user-name{font-size:12px;font-weight:500;}
+.user-role{font-size:10px;color:var(--text-muted);}
 
 /* MAIN */
-.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
-.topbar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 24px; height: 52px; display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
-.topbar-title { font-family: 'Instrument Serif', serif; font-size: 18px; letter-spacing: -0.3px; }
-.topbar-date { font-size: 11px; color: var(--text-muted); }
-.topbar-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
-.topbar-btn { padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; border: 1px solid var(--border2); background: transparent; color: var(--text); cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
-.topbar-btn:hover { background: rgba(255,255,255,0.05); }
-.topbar-btn.primary { background: var(--accent); border-color: var(--accent); color: white; }
-.topbar-btn.primary:hover { opacity: 0.88; }
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:52px;display:flex;align-items:center;gap:16px;flex-shrink:0;}
+.topbar-title{font-family:'Instrument Serif',serif;font-size:18px;letter-spacing:-0.3px;}
+.topbar-date{font-size:11px;color:var(--text-muted);}
+.topbar-right{margin-left:auto;display:flex;gap:8px;align-items:center;}
+.topbar-btn{padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;border:1px solid var(--border2);background:transparent;color:var(--text);cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;}
+.topbar-btn:hover{background:rgba(255,255,255,0.05);}
+.topbar-btn.primary{background:var(--accent);border-color:var(--accent);color:white;}
+.topbar-btn.primary:hover{opacity:0.88;}
 
-.content { flex: 1; overflow-y: auto; padding: 20px 24px; display: flex; flex-direction: column; gap: 20px; }
-.content::-webkit-scrollbar { width: 3px; }
-.content::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+.content{flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:20px;}
+.content::-webkit-scrollbar{width:3px;}
+.content::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
 
 /* STATS */
-.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.stat-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; position: relative; overflow: hidden; }
-.stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; border-radius: 10px 10px 0 0; }
-.stat-card.green::before { background: var(--accent-bright); }
-.stat-card.red::before { background: var(--red); }
-.stat-card.amber::before { background: var(--amber); }
-.stat-card.blue::before { background: var(--blue); }
-.stat-label { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
-.stat-value { font-family: 'Instrument Serif', serif; font-size: 30px; letter-spacing: -1px; line-height: 1; margin-bottom: 4px; }
-.stat-delta { font-size: 10px; color: var(--text-muted); }
-.stat-delta.up { color: var(--accent-bright); }
-.stat-delta.warn { color: var(--red); }
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.stat-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px 18px;position:relative;overflow:hidden;}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:10px 10px 0 0;}
+.stat-card.green::before{background:var(--accent-bright);}
+.stat-card.red::before{background:var(--red);}
+.stat-card.amber::before{background:var(--amber);}
+.stat-card.blue::before{background:var(--blue);}
+.stat-label{font-size:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;}
+.stat-value{font-family:'Instrument Serif',serif;font-size:30px;letter-spacing:-1px;line-height:1;margin-bottom:4px;}
+.stat-delta{font-size:10px;color:var(--text-muted);}
+.stat-delta.up{color:var(--accent-bright);}
+.stat-delta.warn{color:var(--red);}
 
 /* CONF LEGEND */
-.conf-legend { display: flex; gap: 14px; align-items: center; padding: 8px 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 7px; flex-wrap: wrap; }
-.conf-legend-label { font-size: 10px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; color: var(--text-dim); margin-right: 4px; }
-.conf-legend-item { display: flex; align-items: center; gap: 5px; font-size: 10.5px; color: var(--text-muted); }
-.conf-dot { width: 7px; height: 7px; border-radius: 50%; }
-.conf-dot.high { background: var(--accent-bright); }
-.conf-dot.medium { background: var(--amber); }
-.conf-dot.low { background: var(--red); }
+.conf-legend{display:flex;gap:14px;align-items:center;padding:8px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:7px;flex-wrap:wrap;}
+.conf-legend-label{font-size:10px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase;color:var(--text-dim);margin-right:4px;}
+.conf-legend-item{display:flex;align-items:center;gap:5px;font-size:10.5px;color:var(--text-muted);}
+.conf-dot{width:7px;height:7px;border-radius:50%;}
+.conf-dot.high{background:var(--accent-bright);}
+.conf-dot.medium{background:var(--amber);}
+.conf-dot.low{background:var(--red);}
 
 /* SECTIONS */
-.section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.section-title { font-size: 12px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-muted); }
-.section-count { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 100px; }
-.count-red { background: var(--red-glow); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
-.count-amber { background: var(--amber-glow); color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
-.count-green { background: var(--accent-glow); color: var(--accent-bright); border: 1px solid rgba(34,197,94,0.2); }
+.section-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.section-title{font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--text-muted);}
+.section-count{font-size:11px;font-weight:700;padding:2px 8px;border-radius:100px;}
+.count-red{background:var(--red-glow);color:var(--red);border:1px solid rgba(239,68,68,0.2);}
+.count-amber{background:var(--amber-glow);color:var(--amber);border:1px solid rgba(245,158,11,0.2);}
+.count-green{background:var(--accent-glow);color:var(--accent-bright);border:1px solid rgba(34,197,94,0.2);}
 
 /* TASK CARDS */
-.tasks-list { display: flex; flex-direction: column; gap: 8px; }
-.task-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: start; cursor: pointer; transition: all 0.15s; animation: slideIn 0.3s ease both; }
-@keyframes slideIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
-.task-card:hover { border-color: var(--border2); background: var(--surface3); }
-.task-card.urgent-card { border-left: 3px solid var(--red); background: rgba(239,68,68,0.03); }
-.task-card.urgent-card:hover { background: rgba(239,68,68,0.06); }
-.task-card.needs-card { border-left: 3px solid var(--amber); }
-.task-card.low-conf-card { border-left: 3px solid var(--amber); box-shadow: 0 0 0 1px rgba(245,158,11,0.15); }
-.task-card.reviewed-card { border-left: 3px solid var(--accent); opacity: 0.65; cursor: default; }
-.task-avatar { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
-.av-red { background: var(--red-glow); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
-.av-amber { background: var(--amber-glow); color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
-.av-green { background: var(--accent-glow); color: var(--accent-bright); border: 1px solid rgba(34,197,94,0.2); }
-.av-blue { background: var(--blue-glow); color: var(--blue); border: 1px solid rgba(59,130,246,0.2); }
-.av-purple { background: var(--purple-glow); color: var(--purple); border: 1px solid rgba(168,85,247,0.2); }
+.tasks-list{display:flex;flex-direction:column;gap:8px;}
+.task-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;cursor:pointer;transition:all 0.15s;animation:slideIn 0.3s ease both;}
+@keyframes slideIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.task-card:hover{border-color:var(--border2);background:var(--surface3);}
+.task-card.urgent-card{border-left:3px solid var(--red);background:rgba(239,68,68,0.03);}
+.task-card.urgent-card:hover{background:rgba(239,68,68,0.06);}
+.task-card.needs-card{border-left:3px solid var(--amber);}
+.task-card.low-conf-card{border-left:3px solid var(--amber);box-shadow:0 0 0 1px rgba(245,158,11,0.15);}
+.task-card.reviewed-card{border-left:3px solid var(--accent);opacity:0.65;cursor:default;}
+.task-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
+.av-red{background:var(--red-glow);color:var(--red);border:1px solid rgba(239,68,68,0.2);}
+.av-amber{background:var(--amber-glow);color:var(--amber);border:1px solid rgba(245,158,11,0.2);}
+.av-green{background:var(--accent-glow);color:var(--accent-bright);border:1px solid rgba(34,197,94,0.2);}
+.av-blue{background:var(--blue-glow);color:var(--blue);border:1px solid rgba(59,130,246,0.2);}
+.av-purple{background:var(--purple-glow);color:var(--purple);border:1px solid rgba(168,85,247,0.2);}
+.task-body{min-width:0;}
+.task-top{display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap;}
+.task-name{font-size:13px;font-weight:600;color:var(--text);}
+.status-pill-sm{font-size:9px;font-weight:800;letter-spacing:0.4px;text-transform:uppercase;padding:2px 7px;border-radius:100px;}
+.sp-urgent{background:var(--red-glow);color:var(--red);border:1px solid rgba(239,68,68,0.25);}
+.sp-needs{background:var(--amber-glow);color:var(--amber);border:1px solid rgba(245,158,11,0.25);}
+.sp-callback{background:var(--blue-glow);color:var(--blue);border:1px solid rgba(59,130,246,0.25);}
+.sp-reviewed{background:var(--accent-glow);color:var(--accent-bright);border:1px solid rgba(34,197,94,0.25);}
+.sp-collection{background:var(--purple-glow);color:var(--purple);border:1px solid rgba(168,85,247,0.25);}
+.req-type{font-size:9px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase;padding:2px 7px;border-radius:4px;}
+.rt-repeat{background:var(--blue-glow);color:var(--blue);}
+.rt-urgent{background:var(--red-glow);color:var(--red);}
+.rt-query{background:var(--purple-glow);color:var(--purple);}
+.rt-collection{background:var(--accent-glow);color:var(--accent-bright);}
+.task-summary{font-size:12.5px;color:var(--text-muted);margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.task-concern{font-size:11.5px;color:rgba(239,68,68,0.8);background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.12);border-radius:4px;padding:4px 9px;margin-bottom:5px;display:inline-block;}
+.task-check-pill{font-size:9px;font-weight:800;letter-spacing:0.3px;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:var(--amber-glow);color:var(--amber);border:1px solid rgba(245,158,11,0.3);display:inline-block;margin-bottom:5px;}
+.task-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.task-meta-item{display:flex;align-items:center;gap:3px;font-size:10.5px;color:var(--text-dim);}
+.confidence-bar{width:36px;height:3px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;display:inline-block;vertical-align:middle;}
+.conf-fill{height:100%;border-radius:2px;background:var(--accent-bright);}
+.conf-fill.medium{background:var(--amber);}
+.conf-fill.low{background:var(--red);}
+.next-step{margin-top:5px;font-size:11px;color:rgba(255,255,255,0.35);font-style:italic;}
+.task-actions{display:flex;flex-direction:column;gap:5px;flex-shrink:0;}
+.task-btn{padding:5px 11px;border-radius:5px;font-size:11px;font-weight:700;border:none;cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+.task-btn:hover{transform:translateY(-1px);}
+.btn-review{background:var(--accent);color:white;}
+.btn-edit{background:rgba(255,255,255,0.06);color:var(--text-muted);border:1px solid var(--border2);}
+.btn-alert{background:var(--red-glow);color:var(--red);border:1px solid rgba(239,68,68,0.2);}
+.btn-callback{background:var(--blue-glow);color:var(--blue);border:1px solid rgba(59,130,246,0.2);}
+.btn-slot{background:var(--purple-glow);color:var(--purple);border:1px solid rgba(168,85,247,0.2);}
 
-.task-body { min-width: 0; }
-.task-top { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; flex-wrap: wrap; }
-.task-name { font-size: 13px; font-weight: 600; color: var(--text); }
-
-.status-pill-sm { font-size: 9px; font-weight: 800; letter-spacing: 0.4px; text-transform: uppercase; padding: 2px 7px; border-radius: 100px; }
-.sp-urgent { background: var(--red-glow); color: var(--red); border: 1px solid rgba(239,68,68,0.25); }
-.sp-needs { background: var(--amber-glow); color: var(--amber); border: 1px solid rgba(245,158,11,0.25); }
-.sp-callback { background: var(--blue-glow); color: var(--blue); border: 1px solid rgba(59,130,246,0.25); }
-.sp-reviewed { background: var(--accent-glow); color: var(--accent-bright); border: 1px solid rgba(34,197,94,0.25); }
-.sp-collection { background: var(--purple-glow); color: var(--purple); border: 1px solid rgba(168,85,247,0.25); }
-
-.req-type { font-size: 9px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; }
-.rt-repeat { background: var(--blue-glow); color: var(--blue); }
-.rt-urgent { background: var(--red-glow); color: var(--red); }
-.rt-query { background: var(--purple-glow); color: var(--purple); }
-.rt-collection { background: var(--accent-glow); color: var(--accent-bright); }
-
-.task-summary { font-size: 12.5px; color: var(--text-muted); margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.task-concern { font-size: 11.5px; color: rgba(239,68,68,0.8); background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.12); border-radius: 4px; padding: 4px 9px; margin-bottom: 5px; display: inline-block; }
-.task-check-pill { font-size: 9px; font-weight: 800; letter-spacing: 0.3px; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; background: var(--amber-glow); color: var(--amber); border: 1px solid rgba(245,158,11,0.3); display: inline-block; margin-bottom: 5px; }
-.task-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-.task-meta-item { display: flex; align-items: center; gap: 3px; font-size: 10.5px; color: var(--text-dim); }
-.confidence-bar { width: 36px; height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; display: inline-block; vertical-align: middle; }
-.conf-fill { height: 100%; border-radius: 2px; background: var(--accent-bright); }
-.conf-fill.medium { background: var(--amber); }
-.conf-fill.low { background: var(--red); }
-.next-step { margin-top: 5px; font-size: 11px; color: rgba(255,255,255,0.35); font-style: italic; }
-
-.task-actions { display: flex; flex-direction: column; gap: 5px; flex-shrink: 0; }
-.task-btn { padding: 5px 11px; border-radius: 5px; font-size: 11px; font-weight: 700; border: none; cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; white-space: nowrap; }
-.task-btn:hover { transform: translateY(-1px); }
-.btn-review { background: var(--accent); color: white; }
-.btn-edit { background: rgba(255,255,255,0.06); color: var(--text-muted); border: 1px solid var(--border2); }
-.btn-alert { background: var(--red-glow); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
-.btn-callback { background: var(--blue-glow); color: var(--blue); border: 1px solid rgba(59,130,246,0.2); }
-.btn-slot { background: var(--purple-glow); color: var(--purple); border: 1px solid rgba(168,85,247,0.2); }
-.btn-done { background: rgba(255,255,255,0.04); color: var(--text-dim); border: 1px solid var(--border); font-size: 10px; cursor: default; }
+/* reviewed btn label — contextual */
+.btn-done-repeat{background:rgba(34,197,94,0.06);color:var(--accent-bright);border:1px solid rgba(34,197,94,0.15);font-size:10px;cursor:default;}
+.btn-done-callback{background:var(--blue-glow);color:var(--blue);border:1px solid rgba(59,130,246,0.15);font-size:10px;cursor:default;}
+.btn-done-collection{background:var(--purple-glow);color:var(--purple);border:1px solid rgba(168,85,247,0.15);font-size:10px;cursor:default;}
+.btn-done-urgent{background:var(--red-glow);color:var(--red);border:1px solid rgba(239,68,68,0.15);font-size:10px;cursor:default;}
 
 /* LIVE BANNER */
-.live-banner { background: linear-gradient(135deg,rgba(26,107,74,0.2),rgba(26,107,74,0.05)); border: 1px solid rgba(34,197,94,0.2); border-radius: 10px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; }
-.live-pulse { width: 8px; height: 8px; background: var(--accent-bright); border-radius: 50%; animation: pulse 1s infinite; box-shadow: 0 0 8px var(--accent-bright); flex-shrink: 0; }
-.live-text { flex: 1; }
-.live-title { font-size: 12px; font-weight: 700; color: var(--accent-bright); margin-bottom: 1px; }
-.live-sub { font-size: 10.5px; color: rgba(34,197,94,0.55); }
-.live-timer { font-size: 18px; font-weight: 700; color: var(--accent-bright); font-variant-numeric: tabular-nums; }
+.live-banner{background:linear-gradient(135deg,rgba(26,107,74,0.2),rgba(26,107,74,0.05));border:1px solid rgba(34,197,94,0.2);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;}
+.live-pulse{width:8px;height:8px;background:var(--accent-bright);border-radius:50%;animation:pulse 1s infinite;box-shadow:0 0 8px var(--accent-bright);flex-shrink:0;}
+.live-text{flex:1;}
+.live-title{font-size:12px;font-weight:700;color:var(--accent-bright);margin-bottom:1px;}
+.live-sub{font-size:10.5px;color:rgba(34,197,94,0.55);}
+.live-timer{font-size:18px;font-weight:700;color:var(--accent-bright);font-variant-numeric:tabular-nums;}
 
 /* MODALS */
-.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); z-index: 100; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
-.modal-overlay.open { opacity: 1; pointer-events: all; }
-.modal { background: var(--surface2); border: 1px solid var(--border2); border-radius: 14px; width: 520px; max-width: 95vw; overflow: hidden; transform: translateY(16px); transition: transform 0.2s; }
-.modal-overlay.open .modal { transform: translateY(0); }
-.modal-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
-.modal-title { font-size: 15px; font-weight: 700; flex: 1; }
-.modal-status { font-size: 10px; font-weight: 800; letter-spacing: 0.3px; text-transform: uppercase; padding: 3px 9px; border-radius: 100px; }
-.modal-close { background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; line-height: 1; }
-.modal-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; max-height: 68vh; overflow-y: auto; }
-.modal-body::-webkit-scrollbar { width: 3px; }
-.modal-body::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
-.modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.modal-field { display: flex; flex-direction: column; gap: 4px; }
-.modal-label { font-size: 10px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; color: var(--text-muted); }
-.modal-value { font-size: 13px; color: var(--text); background: var(--surface3); border: 1px solid var(--border); border-radius: 6px; padding: 9px 12px; }
-.modal-input { background: var(--surface3); border: 1px solid var(--border2); border-radius: 6px; padding: 9px 12px; font-size: 13px; color: var(--text); font-family: 'DM Sans', sans-serif; width: 100%; transition: border-color 0.15s; }
-.modal-input:focus { outline: none; border-color: var(--accent); }
-.modal-textarea { background: var(--surface3); border: 1px solid var(--border2); border-radius: 6px; padding: 9px 12px; font-size: 13px; color: var(--text); font-family: 'DM Sans', sans-serif; resize: none; width: 100%; min-height: 56px; transition: border-color 0.15s; }
-.modal-textarea:focus { outline: none; border-color: var(--accent); }
-.modal-input::placeholder, .modal-textarea::placeholder { color: var(--text-dim); }
-.modal-concern { background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.15); border-radius: 7px; padding: 10px 14px; font-size: 12px; color: rgba(239,68,68,0.8); line-height: 1.5; }
-.modal-concern-label { font-size: 10px; font-weight: 800; letter-spacing: 0.4px; text-transform: uppercase; color: var(--red); margin-bottom: 5px; }
-.modal-conf-row { display: flex; align-items: center; gap: 8px; }
-.modal-conf-bar { flex: 1; height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
-.modal-conf-fill { height: 100%; border-radius: 3px; }
-.modal-transcript { background: var(--surface3); border: 1px solid var(--border); border-radius: 7px; padding: 12px; font-size: 12px; color: var(--text-muted); line-height: 1.6; max-height: 100px; overflow-y: auto; }
-.modal-next { background: var(--accent-glow); border: 1px solid rgba(34,197,94,0.15); border-radius: 7px; padding: 10px 14px; }
-.modal-next-label { font-size: 10px; font-weight: 800; letter-spacing: 0.4px; text-transform: uppercase; color: var(--accent-bright); margin-bottom: 4px; }
-.modal-next-text { font-size: 12.5px; color: rgba(255,255,255,0.65); }
-.modal-footer { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 8px; justify-content: flex-end; }
-.modal-btn { padding: 8px 16px; border-radius: 7px; font-size: 12px; font-weight: 700; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: opacity 0.15s; }
-.modal-btn:hover { opacity: 0.85; }
-.modal-btn:disabled { opacity: 0.4; cursor: default; }
-.mbtn-primary { background: var(--accent); color: white; }
-.mbtn-alert { background: var(--red-glow); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
-.mbtn-close { background: rgba(255,255,255,0.06); color: var(--text-muted); border: 1px solid var(--border2); }
-.mbtn-save { background: var(--accent); color: white; }
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.2s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:var(--surface2);border:1px solid var(--border2);border-radius:14px;width:520px;max-width:95vw;overflow:hidden;transform:translateY(16px);transition:transform 0.2s;}
+.modal-overlay.open .modal{transform:translateY(0);}
+.modal-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.modal-title{font-size:15px;font-weight:700;flex:1;}
+.modal-status{font-size:10px;font-weight:800;letter-spacing:0.3px;text-transform:uppercase;padding:3px 9px;border-radius:100px;}
+.modal-close{background:none;border:none;color:var(--text-muted);font-size:20px;cursor:pointer;line-height:1;}
+.modal-body{padding:20px;display:flex;flex-direction:column;gap:12px;max-height:68vh;overflow-y:auto;}
+.modal-body::-webkit-scrollbar{width:3px;}
+.modal-body::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.modal-field{display:flex;flex-direction:column;gap:4px;}
+.modal-label{font-size:10px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase;color:var(--text-muted);}
+.modal-value{font-size:13px;color:var(--text);background:var(--surface3);border:1px solid var(--border);border-radius:6px;padding:9px 12px;}
+.modal-input{background:var(--surface3);border:1px solid var(--border2);border-radius:6px;padding:9px 12px;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;width:100%;transition:border-color 0.15s;}
+.modal-input:focus{outline:none;border-color:var(--accent);}
+.modal-textarea{background:var(--surface3);border:1px solid var(--border2);border-radius:6px;padding:9px 12px;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;resize:none;width:100%;min-height:56px;transition:border-color 0.15s;}
+.modal-textarea:focus{outline:none;border-color:var(--accent);}
+.modal-input::placeholder,.modal-textarea::placeholder{color:var(--text-dim);}
+.modal-concern{background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.15);border-radius:7px;padding:10px 14px;font-size:12px;color:rgba(239,68,68,0.8);line-height:1.5;}
+.modal-concern-label{font-size:10px;font-weight:800;letter-spacing:0.4px;text-transform:uppercase;color:var(--red);margin-bottom:5px;}
+.modal-conf-row{display:flex;align-items:center;gap:8px;}
+.modal-conf-bar{flex:1;height:5px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;}
+.modal-conf-fill{height:100%;border-radius:3px;}
+.modal-transcript{background:var(--surface3);border:1px solid var(--border);border-radius:7px;padding:12px;font-size:12px;color:var(--text-muted);line-height:1.6;max-height:100px;overflow-y:auto;}
+.modal-next{background:var(--accent-glow);border:1px solid rgba(34,197,94,0.15);border-radius:7px;padding:10px 14px;}
+.modal-next-label{font-size:10px;font-weight:800;letter-spacing:0.4px;text-transform:uppercase;color:var(--accent-bright);margin-bottom:4px;}
+.modal-next-text{font-size:12.5px;color:rgba(255,255,255,0.65);}
+.modal-footer{padding:14px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;}
+.modal-btn{padding:8px 16px;border-radius:7px;font-size:12px;font-weight:700;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity 0.15s;}
+.modal-btn:hover{opacity:0.85;}
+.modal-btn:disabled{opacity:0.4;cursor:default;}
+.mbtn-primary{background:var(--accent);color:white;}
+.mbtn-alert{background:var(--red-glow);color:var(--red);border:1px solid rgba(239,68,68,0.2);}
+.mbtn-close{background:rgba(255,255,255,0.06);color:var(--text-muted);border:1px solid var(--border2);}
+.mbtn-save{background:var(--accent);color:white;}
 
-.toast { position: fixed; bottom: 20px; right: 20px; background: var(--surface2); border: 1px solid var(--border2); border-radius: 9px; padding: 11px 16px; font-size: 12.5px; font-weight: 500; display: flex; align-items: center; gap: 8px; z-index: 200; transform: translateY(60px); opacity: 0; transition: all 0.3s; box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
-.toast.show { transform: translateY(0); opacity: 1; }
+.toast{position:fixed;bottom:20px;right:20px;background:var(--surface2);border:1px solid var(--border2);border-radius:9px;padding:11px 16px;font-size:12.5px;font-weight:500;display:flex;align-items:center;gap:8px;z-index:200;transform:translateY(60px);opacity:0;transition:all 0.3s;box-shadow:0 8px 32px rgba(0,0,0,0.3);}
+.toast.show{transform:translateY(0);opacity:1;}
 </style>
 
 </head>
@@ -259,10 +257,11 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
     </div>
 
 ```
+<!-- FIX 1: stat-open now = urgent + needs + callback -->
 <div class="stats-row">
   <div class="stat-card green"><div class="stat-label">Calls Today</div><div class="stat-value" id="stat-calls">12</div><div class="stat-delta up">↑ 4 vs yesterday</div></div>
   <div class="stat-card red"><div class="stat-label">Urgent Review</div><div class="stat-value" id="stat-urgent">2</div><div class="stat-delta warn">Pharmacist attention needed</div></div>
-  <div class="stat-card amber"><div class="stat-label">Open Tasks</div><div class="stat-value" id="stat-open">5</div><div class="stat-delta">Needs review + callbacks</div></div>
+  <div class="stat-card amber"><div class="stat-label">Open Tasks</div><div class="stat-value" id="stat-open">7</div><div class="stat-delta">Urgent + review + callbacks</div></div>
   <div class="stat-card blue"><div class="stat-label">Reviewed Today</div><div class="stat-value" id="stat-reviewed">1</div><div class="stat-delta up">↑ Good progress</div></div>
 </div>
 
@@ -273,36 +272,20 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <span class="conf-legend-item"><div class="conf-dot low"></div> Below 75% Manual verification recommended</span>
 </div>
 
-<!-- RENDERED FROM DATA -->
 <div id="section-urgent">
-  <div class="section-header">
-    <span class="section-title">⚑ Needs Urgent Review</span>
-    <span class="section-count count-red" id="urgent-count">2</span>
-  </div>
+  <div class="section-header"><span class="section-title">⚑ Needs Urgent Review</span><span class="section-count count-red" id="urgent-count">2</span></div>
   <div class="tasks-list" id="urgent-list"></div>
 </div>
-
 <div id="section-needs">
-  <div class="section-header">
-    <span class="section-title">🆕 Needs Review</span>
-    <span class="section-count count-amber" id="needs-count">4</span>
-  </div>
+  <div class="section-header"><span class="section-title">🆕 Needs Review</span><span class="section-count count-amber" id="needs-count">4</span></div>
   <div class="tasks-list" id="needs-list"></div>
 </div>
-
 <div id="section-callback">
-  <div class="section-header">
-    <span class="section-title">↩ Callback Needed</span>
-    <span class="section-count count-amber" id="callback-count">1</span>
-  </div>
+  <div class="section-header"><span class="section-title">↩ Callback Needed</span><span class="section-count count-amber" id="callback-count">1</span></div>
   <div class="tasks-list" id="callback-list"></div>
 </div>
-
 <div id="section-reviewed">
-  <div class="section-header">
-    <span class="section-title">✅ Reviewed</span>
-    <span class="section-count count-green" id="reviewed-count">1</span>
-  </div>
+  <div class="section-header"><span class="section-title">✅ Reviewed</span><span class="section-count count-green" id="reviewed-count">1</span></div>
   <div class="tasks-list" id="reviewed-list"></div>
 </div>
 ```
@@ -380,49 +363,62 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 <div class="toast" id="toast"><span id="toast-msg">Done</span></div>
 
 <script>
-// ── COMPLETE TASK DATA MODEL ──
+// ── HELPERS ──
+
+// FIX 2: clean reviewed summary — no regex stripping, use dedicated field
+function getReviewedSummary(t) {
+  if (t.reviewedSummary) return t.reviewedSummary;
+  if (t.category === 'collection') return t.meds + ' · slot updated';
+  if (t.category === 'query') return t.meds + ' readiness check';
+  if (t.category === 'urgent') return t.meds + ' — concern reviewed';
+  return t.meds;
+}
+
+// FIX 3: recalculate displaySummary from category + meds
+function buildDisplaySummary(t) {
+  if (t.category === 'urgent') return t.displaySummary || t.summary;
+  if (t.category === 'collection') return '📅 ' + t.meds + (t.collectionSlot ? ' · Changed to ' + t.collectionSlot : '');
+  if (t.category === 'query') return '❓ Checking if ' + t.meds + ' prescription is ready';
+  return '💊 ' + t.meds + (t.collectionSlot ? ' · Collection ' + t.collectionSlot : '');
+}
+
+// FIX 4: contextual reviewed button label
+function getReviewedBtnClass(category) {
+  if (category === 'callback_needed' || category === 'query') return 'task-btn btn-done-callback';
+  if (category === 'collection') return 'task-btn btn-done-collection';
+  if (category === 'urgent') return 'task-btn btn-done-urgent';
+  return 'task-btn btn-done-repeat';
+}
+
+function getReviewedBtnLabel(category) {
+  if (category === 'callback_needed' || category === 'query') return 'Callback assigned';
+  if (category === 'collection') return 'Slot updated';
+  if (category === 'urgent') return 'Action taken';
+  return 'Ready for processing';
+}
+
+function getConfClass(conf) { return conf >= 90 ? '' : conf >= 75 ? ' medium' : ' low'; }
+function getStatusPillClass(s) { return s==='urgent_review'?'sp-urgent':s==='callback_needed'?'sp-callback':s==='reviewed'?'sp-reviewed':'sp-needs'; }
+function getStatusPillLabel(s) { return s==='urgent_review'?'Urgent Review':s==='callback_needed'?'Callback Needed':s==='reviewed'?'Reviewed':'Needs Review'; }
+function getReqTypeClass(c) { return c==='urgent'?'rt-urgent':c==='collection'?'rt-collection':c==='query'?'rt-query':'rt-repeat'; }
+
+// ── TASK DATA MODEL ──
 const tasks = {
-  '1': { id:'1', status:'urgent_review', name:'James Whitfield', initials:'JW', avatarClass:'av-red', meds:'Warfarin 5mg', category:'urgent', requestTypeLabel:'Safety Concern', confidence:92, phone:'07700 900234', dob:'12/04/1948', displaySummary:'Safety concern captured — pharmacist callback required', summary:'Safety concern captured — pharmacist callback required. Do not queue for dispensing until reviewed.', transcript:'Patient called reporting unusual bruising on arms and legs, and dizziness when standing. States they may have taken an extra Warfarin dose last week. Clara flagged as urgent.', nextStep:'Urgent pharmacist callback required before any dispensing action.', reviewedCopy:'Reviewed by pharmacist · action taken', notes:'' },
-  '2': { id:'2', status:'urgent_review', name:'Susan Clarke', initials:'SC', avatarClass:'av-red', meds:'Insulin', category:'urgent', requestTypeLabel:'Out of Medication', confidence:88, phone:'07700 900567', dob:'03/09/1955', displaySummary:'Safety concern captured — patient out of insulin, no GP until next week', summary:'Safety concern captured — patient out of insulin with no GP appointment until next week.', transcript:'Patient called in distress stating she has run out of insulin and cannot get a GP appointment until next week. Clara flagged as urgent.', nextStep:'Pharmacist to call patient back immediately. Consider emergency supply options.', reviewedCopy:'Reviewed by pharmacist · action taken', notes:'' },
-  '3': { id:'3', status:'needs_review', name:'Margaret Thompson', initials:'MT', avatarClass:'av-amber', meds:'Metformin 500mg · Amlodipine 5mg', category:'repeat', requestTypeLabel:'Repeat Request', confidence:96, phone:'07700 900142', dob:'15/06/1952', displaySummary:'💊 Metformin 500mg · Amlodipine 5mg · Collection Thu 2pm', summary:'Repeat prescription request captured. Collection Thursday at 2pm.', transcript:'Patient called to order repeat prescriptions for Metformin 500mg and Amlodipine 5mg. Requested collection Thursday at 2pm. Clara confirmed details.', nextStep:'Review medication and dosage, then queue for dispensing team.', reviewedCopy:'Reviewed by pharmacist · queued for dispensing', notes:'' },
-  '4': { id:'4', status:'needs_review', name:'Priya Mehta', initials:'PM', avatarClass:'av-blue', meds:'Sertraline 50mg · Atorvastatin 20mg', category:'repeat', requestTypeLabel:'Repeat Request', confidence:94, phone:'07700 900891', dob:'22/11/1978', displaySummary:'💊 Sertraline 50mg · Atorvastatin 20mg · Collection Mon 10am', summary:'Repeat prescription request captured. Collection Monday at 10am.', transcript:'Patient called to order repeat prescriptions for Sertraline 50mg and Atorvastatin 20mg. Collection Monday at 10am confirmed.', nextStep:'Review and queue for dispensing team.', reviewedCopy:'Reviewed by pharmacist · queued for dispensing', notes:'' },
-  '5': { id:'5', status:'needs_review', name:'Robert Barnes', initials:'RB', avatarClass:'av-amber', meds:'Ramipril 10mg · Bisoprolol 2.5mg', category:'repeat', requestTypeLabel:'Repeat Request', confidence:74, phone:'07700 900445', dob:'08/03/1965', displaySummary:'💊 Ramipril 10mg · Bisoprolol 2.5mg · Collection Fri 11am', summary:'Medication name was partially unclear on call. Manual verification recommended before processing.', transcript:'Patient called for repeat prescription. Medication name was partially unclear. AI captured Ramipril and Bisoprolol but confidence is below threshold.', nextStep:'Confirm medication name and dosage with patient before queuing for dispensing.', reviewedCopy:'Reviewed by pharmacist · verification noted · queued for dispensing', notes:'' },
-  '6': { id:'6', status:'callback_needed', name:'David Okafor', initials:'DO', avatarClass:'av-blue', meds:'Lisinopril', category:'query', requestTypeLabel:'Ready-Check Query', confidence:99, phone:'07700 900773', dob:'14/07/1970', displaySummary:'❓ Checking if Lisinopril prescription is ready for collection', summary:'Patient called to check if Lisinopril prescription is ready. Callback required from dispensary.', transcript:'Patient called to check if his Lisinopril prescription is ready for collection. Clara informed patient that dispensary will call back to confirm.', nextStep:'Dispensary to call patient back to confirm prescription readiness.', reviewedCopy:'Reviewed by dispensary team · callback assigned', notes:'' },
-  '7': { id:'7', status:'needs_review', name:'Eleanor Hughes', initials:'EH', avatarClass:'av-purple', meds:'Levothyroxine 50mcg', category:'collection', requestTypeLabel:'Collection Change', confidence:91, phone:'07700 900112', dob:'29/01/1960', displaySummary:'📅 Levothyroxine 50mcg · Changed to Wed 3pm (was Mon 11am)', summary:'Collection slot change captured. Changed from Monday 11am to Wednesday 3pm.', transcript:'Patient called to change collection time from Monday 11am to Wednesday 3pm. Clara confirmed the change with patient.', nextStep:'Update collection slot in dispensary system to Wednesday at 3pm.', reviewedCopy:'Reviewed by team · slot updated to Wed 3pm', notes:'' },
-  '8': { id:'8', status:'reviewed', name:'Alan Foster', initials:'AF', avatarClass:'av-green', meds:'Atenolol 50mg', category:'repeat', requestTypeLabel:'Repeat Request', confidence:95, phone:'07700 900321', dob:'05/11/1958', displaySummary:'💊 Atenolol 50mg · Collection today 4pm', summary:'Repeat prescription request — reviewed and queued.', transcript:'Patient called for repeat Atenolol prescription. Collection today at 4pm confirmed.', nextStep:'Ready for processing.', reviewedCopy:'Reviewed by pharmacist · queued for dispensing', notes:'' }
+  '1':{ id:'1', status:'urgent_review', name:'James Whitfield', initials:'JW', avatarClass:'av-red', meds:'Warfarin 5mg', category:'urgent', requestTypeLabel:'Safety Concern', confidence:92, phone:'07700 900234', dob:'12/04/1948', callTime:'14:32', collectionSlot:'', displaySummary:'Safety concern captured — pharmacist callback required', summary:'Safety concern captured — pharmacist callback required. Do not queue for dispensing until reviewed.', transcript:'Patient called reporting unusual bruising on arms and legs, and dizziness when standing. States they may have taken an extra Warfarin dose last week. Clara flagged as urgent.', nextStep:'Urgent pharmacist callback required before any dispensing action.', reviewedCopy:'Reviewed by pharmacist · action taken', notes:'' },
+  '2':{ id:'2', status:'urgent_review', name:'Susan Clarke', initials:'SC', avatarClass:'av-red', meds:'Insulin', category:'urgent', requestTypeLabel:'Out of Medication', confidence:88, phone:'07700 900567', dob:'03/09/1955', callTime:'13:45', collectionSlot:'', displaySummary:'Safety concern captured — patient out of insulin, no GP until next week', summary:'Safety concern captured — patient out of insulin with no GP appointment until next week.', transcript:'Patient called in distress stating she has run out of insulin and cannot get a GP appointment until next week. Clara flagged as urgent.', nextStep:'Pharmacist to call patient back immediately. Consider emergency supply options.', reviewedCopy:'Reviewed by pharmacist · action taken', notes:'' },
+  '3':{ id:'3', status:'needs_review', name:'Margaret Thompson', initials:'MT', avatarClass:'av-amber', meds:'Metformin 500mg · Amlodipine 5mg', category:'repeat', requestTypeLabel:'Repeat Request', confidence:96, phone:'07700 900142', dob:'15/06/1952', callTime:'14:18', collectionSlot:'Thu 2pm', displaySummary:'', summary:'Repeat prescription request captured. Collection Thursday at 2pm.', transcript:'Patient called to order repeat prescriptions for Metformin 500mg and Amlodipine 5mg. Requested collection Thursday at 2pm. Clara confirmed details.', nextStep:'Review medication and dosage, then queue for dispensing team.', reviewedCopy:'Reviewed by pharmacist · queued for dispensing', notes:'' },
+  '4':{ id:'4', status:'needs_review', name:'Priya Mehta', initials:'PM', avatarClass:'av-blue', meds:'Sertraline 50mg · Atorvastatin 20mg', category:'repeat', requestTypeLabel:'Repeat Request', confidence:94, phone:'07700 900891', dob:'22/11/1978', callTime:'13:55', collectionSlot:'Mon 10am', displaySummary:'', summary:'Repeat prescription request captured. Collection Monday at 10am.', transcript:'Patient called to order repeat prescriptions. Collection Monday at 10am confirmed.', nextStep:'Review and queue for dispensing team.', reviewedCopy:'Reviewed by pharmacist · queued for dispensing', notes:'' },
+  '5':{ id:'5', status:'needs_review', name:'Robert Barnes', initials:'RB', avatarClass:'av-amber', meds:'Ramipril 10mg · Bisoprolol 2.5mg', category:'repeat', requestTypeLabel:'Repeat Request', confidence:74, phone:'07700 900445', dob:'08/03/1965', callTime:'11:20', collectionSlot:'Fri 11am', displaySummary:'', summary:'Medication name was partially unclear on call. Manual verification recommended before processing.', transcript:'Patient called for repeat prescription. Medication name was partially unclear. AI captured Ramipril and Bisoprolol but confidence is below threshold.', nextStep:'Confirm medication name and dosage with patient before queuing for dispensing.', reviewedCopy:'Reviewed by pharmacist · verification noted · queued for dispensing', notes:'' },
+  '6':{ id:'6', status:'callback_needed', name:'David Okafor', initials:'DO', avatarClass:'av-blue', meds:'Lisinopril', category:'query', requestTypeLabel:'Ready-Check Query', confidence:99, phone:'07700 900773', dob:'14/07/1970', callTime:'10:44', collectionSlot:'', displaySummary:'', summary:'Patient called to check if Lisinopril prescription is ready. Callback required from dispensary.', transcript:'Patient called to check if his Lisinopril prescription is ready. Clara informed patient dispensary will call back.', nextStep:'Dispensary to call patient back to confirm prescription readiness.', reviewedCopy:'Reviewed by dispensary team · callback assigned', notes:'' },
+  '7':{ id:'7', status:'needs_review', name:'Eleanor Hughes', initials:'EH', avatarClass:'av-purple', meds:'Levothyroxine 50mcg', category:'collection', requestTypeLabel:'Collection Change', confidence:91, phone:'07700 900112', dob:'29/01/1960', callTime:'09:30', collectionSlot:'Wed 3pm', displaySummary:'', summary:'Collection slot change captured. Changed from Monday 11am to Wednesday 3pm.', transcript:'Patient called to change collection time from Monday 11am to Wednesday 3pm. Clara confirmed the change.', nextStep:'Update collection slot in dispensary system to Wednesday at 3pm.', reviewedCopy:'Reviewed by team · slot updated to Wed 3pm', notes:'' },
+  '8':{ id:'8', status:'reviewed', name:'Alan Foster', initials:'AF', avatarClass:'av-green', meds:'Atenolol 50mg', category:'repeat', requestTypeLabel:'Repeat Request', confidence:95, phone:'07700 900321', dob:'05/11/1958', callTime:'09:15', collectionSlot:'Today 4pm', displaySummary:'', summary:'Repeat prescription request — reviewed and queued.', transcript:'Patient called for repeat Atenolol prescription. Collection today at 4pm confirmed.', nextStep:'Ready for processing.', reviewedCopy:'Reviewed by pharmacist · queued for dispensing', reviewedTime:'09:22', notes:'' }
 };
 
 let currentModalId = null;
 let editModalId = null;
 let currentFilter = 'open';
 
-// ── RENDER FUNCTIONS ──
-
-function getConfClass(conf) {
-  return conf >= 90 ? '' : conf >= 75 ? ' medium' : ' low';
-}
-
-function getStatusPillClass(status) {
-  if (status === 'urgent_review') return 'sp-urgent';
-  if (status === 'callback_needed') return 'sp-callback';
-  if (status === 'reviewed') return 'sp-reviewed';
-  return 'sp-needs';
-}
-
-function getStatusPillLabel(status) {
-  if (status === 'urgent_review') return 'Urgent Review';
-  if (status === 'callback_needed') return 'Callback Needed';
-  if (status === 'reviewed') return 'Reviewed';
-  return 'Needs Review';
-}
-
-function getReqTypeClass(category) {
-  if (category === 'urgent') return 'rt-urgent';
-  if (category === 'collection') return 'rt-collection';
-  if (category === 'query') return 'rt-query';
-  return 'rt-repeat';
-}
-
+// ── RENDER ──
 function renderTaskCard(t) {
   const card = document.createElement('div');
   const isLowConf = t.confidence < 75;
@@ -432,7 +428,10 @@ function renderTaskCard(t) {
   card.dataset.id = t.id;
   card.onclick = () => openReviewModal(t.id);
 
-  const primaryBtnHtml = t.status === 'urgent_review'
+  // Build display summary from data
+  const displaySummary = buildDisplaySummary(t);
+
+  const primaryBtn = t.status === 'urgent_review'
     ? `<button class="task-btn btn-alert" onclick="event.stopPropagation();openReviewModal('${t.id}')">⚑ Alert pharmacist</button>`
     : t.status === 'callback_needed'
     ? `<button class="task-btn btn-callback" onclick="event.stopPropagation();openReviewModal('${t.id}')">Assign callback</button>`
@@ -440,11 +439,11 @@ function renderTaskCard(t) {
     ? `<button class="task-btn btn-slot" onclick="event.stopPropagation();openReviewModal('${t.id}')">Update slot</button>`
     : `<button class="task-btn btn-review" onclick="event.stopPropagation();openReviewModal('${t.id}')">Review</button>`;
 
-  const concernHtml = t.status === 'urgent_review'
-    ? `<div class="task-concern">${t.displaySummary}</div>`
+  const bodyContent = t.status === 'urgent_review'
+    ? `<div class="task-concern">${displaySummary}</div>`
     : isLowConf
-    ? `<div class="task-check-pill">⚠ Manual verification recommended</div><div class="task-summary">${t.displaySummary}</div>`
-    : `<div class="task-summary">${t.displaySummary}</div>`;
+    ? `<div class="task-check-pill">⚠ Manual verification recommended</div><div class="task-summary">${displaySummary}</div>`
+    : `<div class="task-summary">${displaySummary}</div>`;
 
   card.innerHTML = `
     <div class="task-avatar ${t.avatarClass}">${t.initials}</div>
@@ -454,7 +453,7 @@ function renderTaskCard(t) {
         <span class="status-pill-sm ${getStatusPillClass(t.status)}">${getStatusPillLabel(t.status)}</span>
         <span class="req-type ${getReqTypeClass(t.category)}">${t.requestTypeLabel}</span>
       </div>
-      ${concernHtml}
+      ${bodyContent}
       <div class="task-meta">
         <span class="task-meta-item">🕐 ${t.callTime || 'Just now'}</span>
         <span class="task-meta-item">DOB: ${t.dob}</span>
@@ -464,10 +463,9 @@ function renderTaskCard(t) {
       <div class="next-step">→ ${t.nextStep}</div>
     </div>
     <div class="task-actions" onclick="event.stopPropagation()">
-      ${primaryBtnHtml}
+      ${primaryBtn}
       <button class="task-btn btn-edit" onclick="event.stopPropagation();openEditModal('${t.id}')">Edit details</button>
     </div>`;
-
   return card;
 }
 
@@ -477,6 +475,15 @@ function renderReviewedCard(t) {
   card.dataset.status = 'reviewed';
   card.dataset.id = t.id;
 
+  // FIX 2: use clean reviewed summary — no regex
+  const cleanSummary = getReviewedSummary(t);
+
+  // FIX 4: contextual reviewed button label
+  const reviewedCategory = t.originalStatus === 'callback_needed' || t.category === 'query' ? 'callback_needed'
+    : t.category === 'collection' ? 'collection'
+    : t.category === 'urgent' ? 'urgent'
+    : 'repeat';
+
   card.innerHTML = `
     <div class="task-avatar av-green">${t.initials}</div>
     <div class="task-body">
@@ -485,48 +492,51 @@ function renderReviewedCard(t) {
         <span class="status-pill-sm sp-reviewed">Reviewed</span>
         <span class="req-type ${getReqTypeClass(t.category)}">${t.requestTypeLabel}</span>
       </div>
-      <div class="task-summary">${t.displaySummary.replace(/^[💊📅❓]/, '').trim() || t.meds} · Ready for processing</div>
+      <div class="task-summary">${cleanSummary}</div>
       <div class="task-meta">
         <span class="task-meta-item">🕐 ${t.reviewedTime || t.callTime || 'Just now'}</span>
         <span class="task-meta-item">${t.reviewedCopy}</span>
-        ${t.notes ? `<span class="task-meta-item">📝 Note saved</span>` : ''}
+        ${t.notes ? '<span class="task-meta-item">📝 Note saved</span>' : ''}
       </div>
     </div>
     <div class="task-actions">
-      <button class="task-btn btn-done">Ready for processing</button>
+      <button class="${getReviewedBtnClass(reviewedCategory)}" style="cursor:default;">${getReviewedBtnLabel(reviewedCategory)}</button>
     </div>`;
-
   return card;
 }
 
 function renderAllSections() {
-  const lists = { urgent: document.getElementById('urgent-list'), needs: document.getElementById('needs-list'), callback: document.getElementById('callback-list'), reviewed: document.getElementById('reviewed-list') };
-  Object.values(lists).forEach(l => l.innerHTML = '');
-
+  ['urgent-list','needs-list','callback-list','reviewed-list'].forEach(id => {
+    document.getElementById(id).innerHTML = '';
+  });
   Object.values(tasks).forEach(t => {
-    if (t.status === 'urgent_review') lists.urgent.appendChild(renderTaskCard(t));
-    else if (t.status === 'needs_review') lists.needs.appendChild(renderTaskCard(t));
-    else if (t.status === 'callback_needed') lists.callback.appendChild(renderTaskCard(t));
-    else if (t.status === 'reviewed') lists.reviewed.appendChild(renderReviewedCard(t));
+    if (t.status === 'urgent_review') document.getElementById('urgent-list').appendChild(renderTaskCard(t));
+    else if (t.status === 'needs_review') document.getElementById('needs-list').appendChild(renderTaskCard(t));
+    else if (t.status === 'callback_needed') document.getElementById('callback-list').appendChild(renderTaskCard(t));
+    else if (t.status === 'reviewed') document.getElementById('reviewed-list').appendChild(renderReviewedCard(t));
   });
 }
 
+// FIX 1: stat-open = urgent + needs + callback (aligned with sidebar badge)
 function recomputeCounts() {
-  const counts = { urgent_review: 0, needs_review: 0, callback_needed: 0, reviewed: 0 };
-  Object.values(tasks).forEach(t => { if (counts[t.status] !== undefined) counts[t.status]++; });
+  const c = { urgent_review:0, needs_review:0, callback_needed:0, reviewed:0 };
+  Object.values(tasks).forEach(t => { if (c[t.status] !== undefined) c[t.status]++; });
 
-  document.getElementById('badge-urgent').textContent = counts.urgent_review;
-  document.getElementById('badge-needs').textContent = counts.needs_review;
-  document.getElementById('badge-callback').textContent = counts.callback_needed;
-  document.getElementById('badge-reviewed').textContent = counts.reviewed;
-  document.getElementById('badge-all').textContent = counts.urgent_review + counts.needs_review + counts.callback_needed;
-  document.getElementById('urgent-count').textContent = counts.urgent_review;
-  document.getElementById('needs-count').textContent = counts.needs_review;
-  document.getElementById('callback-count').textContent = counts.callback_needed;
-  document.getElementById('reviewed-count').textContent = counts.reviewed;
-  document.getElementById('stat-urgent').textContent = counts.urgent_review;
-  document.getElementById('stat-open').textContent = counts.needs_review + counts.callback_needed;
-  document.getElementById('stat-reviewed').textContent = counts.reviewed;
+  document.getElementById('badge-urgent').textContent = c.urgent_review;
+  document.getElementById('badge-needs').textContent = c.needs_review;
+  document.getElementById('badge-callback').textContent = c.callback_needed;
+  document.getElementById('badge-reviewed').textContent = c.reviewed;
+  document.getElementById('urgent-count').textContent = c.urgent_review;
+  document.getElementById('needs-count').textContent = c.needs_review;
+  document.getElementById('callback-count').textContent = c.callback_needed;
+  document.getElementById('reviewed-count').textContent = c.reviewed;
+  document.getElementById('stat-urgent').textContent = c.urgent_review;
+  document.getElementById('stat-reviewed').textContent = c.reviewed;
+
+  // FIX 1: Open Tasks = urgent + needs + callback (matches sidebar)
+  const openTotal = c.urgent_review + c.needs_review + c.callback_needed;
+  document.getElementById('stat-open').textContent = openTotal;
+  document.getElementById('badge-all').textContent = openTotal;
 }
 
 // ── FILTER ──
@@ -534,15 +544,16 @@ function filterTasks(filter, el) {
   currentFilter = filter;
   document.querySelectorAll('.nav-item:not(.disabled)').forEach(n => n.classList.remove('active'));
   el.classList.add('active');
-
   document.querySelectorAll('.task-card').forEach(card => {
     const s = card.dataset.status;
-    let show = false;
-    if (filter === 'open') show = s !== 'reviewed';
-    else if (filter === 'reviewed') show = s === 'reviewed';
-    else show = s === filter;
+    let show = filter === 'open' ? s !== 'reviewed' : filter === 'reviewed' ? s === 'reviewed' : s === filter;
     card.style.display = show ? 'grid' : 'none';
   });
+}
+
+function applyCurrentFilter() {
+  const el = document.querySelector('.nav-item.active');
+  if (el) filterTasks(currentFilter, el);
 }
 
 // ── REVIEW MODAL ──
@@ -562,9 +573,9 @@ function openReviewModal(id) {
   document.getElementById('rm-next').textContent = t.nextStep;
   document.getElementById('rm-notes').value = t.notes || '';
 
-  const confFill = document.getElementById('rm-conf-fill');
-  confFill.style.width = t.confidence + '%';
-  confFill.className = 'modal-conf-fill conf-fill' + getConfClass(t.confidence);
+  const fill = document.getElementById('rm-conf-fill');
+  fill.style.width = t.confidence + '%';
+  fill.className = 'modal-conf-fill conf-fill' + getConfClass(t.confidence);
   document.getElementById('rm-conf-text').textContent = t.confidence + '% — ' + (t.confidence < 75 ? 'manual verification recommended' : t.confidence < 90 ? 'review carefully' : 'high confidence');
 
   const pill = document.getElementById('rm-pill');
@@ -572,19 +583,8 @@ function openReviewModal(id) {
   pill.textContent = getStatusPillLabel(t.status);
 
   const btn = document.getElementById('rm-primary-btn');
-  if (t.status === 'reviewed') {
-    btn.textContent = 'Already reviewed';
-    btn.disabled = true;
-  } else if (t.status === 'callback_needed') {
-    btn.textContent = 'Assign callback';
-    btn.disabled = false;
-  } else if (t.status === 'urgent_review') {
-    btn.textContent = 'Mark reviewed';
-    btn.disabled = false;
-  } else {
-    btn.textContent = 'Mark reviewed';
-    btn.disabled = false;
-  }
+  btn.disabled = t.status === 'reviewed';
+  btn.textContent = t.status === 'reviewed' ? 'Already reviewed' : t.status === 'callback_needed' ? 'Assign callback' : 'Mark reviewed';
 
   document.getElementById('review-modal').classList.add('open');
 }
@@ -593,20 +593,19 @@ function modalPrimaryAction() {
   if (!currentModalId) return;
   const t = tasks[currentModalId];
   if (!t || t.status === 'reviewed') return;
-  // Save note
   t.notes = document.getElementById('rm-notes').value;
-  t.reviewedTime = new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+  t.originalStatus = t.status;
   t.status = 'reviewed';
+  t.reviewedTime = new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
   closeReviewModal();
   renderAllSections();
   recomputeCounts();
   applyCurrentFilter();
-  showToast('✅ ' + t.name + ' — marked as reviewed · ' + t.reviewedCopy);
+  showToast('✅ ' + t.name + ' — ' + t.reviewedCopy);
 }
 
 function modalAlertPharmacist() {
-  if (!currentModalId) return;
-  const t = tasks[currentModalId];
+  const t = currentModalId ? tasks[currentModalId] : null;
   closeReviewModal();
   showToast('🚨 Pharmacist alerted — ' + (t ? t.name : 'Patient') + ' requires immediate attention');
 }
@@ -639,8 +638,11 @@ function saveEdit() {
   t.phone = document.getElementById('em-phone').value || t.phone;
   t.nextStep = document.getElementById('em-next').value || t.nextStep;
   t.notes = document.getElementById('em-notes').value;
-  // Update initials if name changed
   t.initials = t.name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase();
+
+  // FIX 3: recalculate displaySummary after edit
+  t.displaySummary = buildDisplaySummary(t);
+
   closeEditModal();
   renderAllSections();
   recomputeCounts();
@@ -651,24 +653,18 @@ function saveEdit() {
 function closeEditModal() { document.getElementById('edit-modal').classList.remove('open'); editModalId = null; }
 function closeEditOutside(e) { if (e.target === document.getElementById('edit-modal')) closeEditModal(); }
 
-function applyCurrentFilter() {
-  const activeNav = document.querySelector('.nav-item.active');
-  if (activeNav) filterTasks(currentFilter, activeNav);
-}
-
 // ── SIMULATE CALL ──
 const simScenarios = [
-  { name:'Patricia Green', initials:'PG', avatarClass:'av-amber', meds:'Omeprazole 20mg · Lansoprazole 15mg', status:'needs_review', category:'repeat', requestTypeLabel:'Repeat Request', confidence:93, slot:'Mon 9am', summary:'Repeat prescription request captured. Collection Monday at 9am.', transcript:'Patient called to order repeat prescriptions. Collection Monday at 9am confirmed.', nextStep:'Review and queue for dispensing team.', reviewedCopy:'Reviewed by pharmacist · queued for dispensing' },
-  { name:'Mohammed Ahmed', initials:'MA', avatarClass:'av-blue', meds:'Lisinopril 5mg · Aspirin 75mg', status:'needs_review', category:'repeat', requestTypeLabel:'Repeat Request', confidence:89, slot:'Tue 2pm', summary:'Repeat prescription request captured. Collection Tuesday at 2pm.', transcript:'Patient called for repeat prescription. Collection Tuesday at 2pm confirmed.', nextStep:'Review and queue for dispensing team.', reviewedCopy:'Reviewed by pharmacist · queued for dispensing' },
-  { name:'Linda Watson', initials:'LW', avatarClass:'av-blue', meds:'Amoxicillin 500mg', status:'callback_needed', category:'query', requestTypeLabel:'Ready-Check Query', confidence:97, slot:'', summary:'Patient checking prescription readiness. Callback required from dispensary.', transcript:'Patient called to check if Amoxicillin prescription is ready. Clara informed patient dispensary will call back.', nextStep:'Dispensary to call patient back to confirm readiness.', reviewedCopy:'Reviewed by dispensary team · callback assigned' },
-  { name:'Thomas Hill', initials:'TH', avatarClass:'av-amber', meds:'Codeine Phosphate 30mg', status:'needs_review', category:'repeat', requestTypeLabel:'Repeat Request', confidence:71, slot:'Wed 11am', summary:'Medication dosage was partially unclear on call. Manual verification recommended.', transcript:'Patient called for repeat prescription. Medication name was unclear. AI captured Codeine Phosphate but confidence is low.', nextStep:'Confirm medication name and dosage with patient before processing.', reviewedCopy:'Reviewed by pharmacist · verification noted · queued for dispensing' }
+  { name:'Patricia Green', initials:'PG', avatarClass:'av-amber', meds:'Omeprazole 20mg · Lansoprazole 15mg', status:'needs_review', category:'repeat', requestTypeLabel:'Repeat Request', confidence:93, collectionSlot:'Mon 9am', summary:'Repeat prescription request captured. Collection Monday at 9am.', transcript:'Patient called to order repeat prescriptions. Collection Monday at 9am confirmed.', nextStep:'Review and queue for dispensing team.', reviewedCopy:'Reviewed by pharmacist · queued for dispensing' },
+  { name:'Mohammed Ahmed', initials:'MA', avatarClass:'av-blue', meds:'Lisinopril 5mg · Aspirin 75mg', status:'needs_review', category:'repeat', requestTypeLabel:'Repeat Request', confidence:89, collectionSlot:'Tue 2pm', summary:'Repeat prescription request captured. Collection Tuesday at 2pm.', transcript:'Patient called for repeat prescription. Collection Tuesday at 2pm confirmed.', nextStep:'Review and queue for dispensing team.', reviewedCopy:'Reviewed by pharmacist · queued for dispensing' },
+  { name:'Linda Watson', initials:'LW', avatarClass:'av-blue', meds:'Amoxicillin 500mg', status:'callback_needed', category:'query', requestTypeLabel:'Ready-Check Query', confidence:97, collectionSlot:'', summary:'Patient checking prescription readiness. Callback required from dispensary.', transcript:'Patient called to check if Amoxicillin prescription is ready. Clara informed patient dispensary will call back.', nextStep:'Dispensary to call patient back to confirm readiness.', reviewedCopy:'Reviewed by dispensary team · callback assigned' },
+  { name:'Thomas Hill', initials:'TH', avatarClass:'av-amber', meds:'Codeine Phosphate 30mg', status:'needs_review', category:'repeat', requestTypeLabel:'Repeat Request', confidence:71, collectionSlot:'Wed 11am', summary:'Medication dosage was partially unclear on call. Manual verification recommended.', transcript:'Patient called for repeat prescription. Medication name was unclear. AI captured Codeine Phosphate but confidence is low.', nextStep:'Confirm medication name and dosage with patient before processing.', reviewedCopy:'Reviewed by pharmacist · verification noted · queued for dispensing' }
 ];
 let simIdx = 0;
 
 function simulateCall() {
   const s = simScenarios[simIdx % simScenarios.length]; simIdx++;
   const id = 'sim-' + Date.now();
-
   const banner = document.getElementById('live-banner');
   document.getElementById('live-caller').textContent = s.name + ' · Clara capturing details...';
   banner.style.display = 'flex';
@@ -683,15 +679,19 @@ function simulateCall() {
     clearInterval(timer);
     banner.style.display = 'none';
     const time = new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+
     tasks[id] = {
       id, status: s.status, name: s.name, initials: s.initials, avatarClass: s.avatarClass,
       meds: s.meds, category: s.category, requestTypeLabel: s.requestTypeLabel,
-      confidence: s.confidence, phone: '07700 9' + Math.floor(Math.random()*99999+10000),
+      confidence: s.confidence, collectionSlot: s.collectionSlot,
+      phone: '07700 9' + Math.floor(Math.random()*89999+10000),
       dob: String(Math.floor(Math.random()*28+1)).padStart(2,'0') + '/0' + Math.floor(Math.random()*9+1) + '/19' + Math.floor(Math.random()*40+55),
-      callTime: time,
-      displaySummary: s.slot ? '💊 ' + s.meds + ' · Collection ' + s.slot : '❓ ' + s.meds,
-      summary: s.summary, transcript: s.transcript, nextStep: s.nextStep, reviewedCopy: s.reviewedCopy, notes: ''
+      callTime: time, displaySummary: '',
+      summary: s.summary, transcript: s.transcript, nextStep: s.nextStep,
+      reviewedCopy: s.reviewedCopy, notes: ''
     };
+    // Use buildDisplaySummary for consistent display
+    tasks[id].displaySummary = buildDisplaySummary(tasks[id]);
 
     document.getElementById('stat-calls').textContent = parseInt(document.getElementById('stat-calls').textContent) + 1;
     renderAllSections();
