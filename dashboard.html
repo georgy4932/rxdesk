@@ -13,26 +13,14 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #080c10;
-  --surface: #0d1117;
-  --surface2: #161b22;
-  --surface3: #1c2330;
-  --border: rgba(255,255,255,0.07);
-  --border2: rgba(255,255,255,0.12);
-  --text: #e6edf3;
-  --text-muted: rgba(255,255,255,0.4);
-  --text-dim: rgba(255,255,255,0.2);
-  --accent: #1a6b4a;
-  --accent-glow: rgba(26,107,74,0.15);
-  --accent-bright: #22c55e;
-  --red: #ef4444;
-  --red-glow: rgba(239,68,68,0.1);
-  --amber: #f59e0b;
-  --amber-glow: rgba(245,158,11,0.1);
-  --blue: #3b82f6;
-  --blue-glow: rgba(59,130,246,0.1);
-  --purple: #a855f7;
-  --purple-glow: rgba(168,85,247,0.1);
+  --bg: #080c10; --surface: #0d1117; --surface2: #161b22; --surface3: #1c2330;
+  --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.12);
+  --text: #e6edf3; --text-muted: rgba(255,255,255,0.4); --text-dim: rgba(255,255,255,0.2);
+  --accent: #1a6b4a; --accent-glow: rgba(26,107,74,0.15); --accent-bright: #22c55e;
+  --red: #ef4444; --red-glow: rgba(239,68,68,0.1);
+  --amber: #f59e0b; --amber-glow: rgba(245,158,11,0.1);
+  --blue: #3b82f6; --blue-glow: rgba(59,130,246,0.1);
+  --purple: #a855f7; --purple-glow: rgba(168,85,247,0.1);
 }
 
 html, body { height: 100%; overflow: hidden; }
@@ -49,22 +37,19 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 .clara-live { display: flex; align-items: center; gap: 4px; margin-top: 3px; font-size: 10px; color: var(--accent-bright); font-weight: 600; }
 .live-dot { width: 5px; height: 5px; background: var(--accent-bright); border-radius: 50%; animation: pulse 1.5s infinite; }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
 .sidebar-nav { flex: 1; padding: 8px; display: flex; flex-direction: column; gap: 1px; }
 .nav-item { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 6px; font-size: 13px; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: all 0.15s; border: 1px solid transparent; }
 .nav-item:hover { background: rgba(255,255,255,0.04); color: var(--text); }
 .nav-item.active { background: var(--accent-glow); color: var(--accent-bright); border-color: rgba(26,107,74,0.2); }
-.nav-item.disabled { opacity: 0.4; cursor: default; }
-.nav-item.disabled:hover { background: transparent; color: var(--text-muted); }
+.nav-item.disabled { opacity: 0.35; cursor: default; pointer-events: none; }
 .nav-icon { font-size: 14px; width: 16px; text-align: center; }
 .nav-badge { margin-left: auto; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 100px; min-width: 18px; text-align: center; }
 .badge-red { background: var(--red); color: white; }
 .badge-amber { background: var(--amber); color: var(--bg); }
 .badge-green { background: var(--accent); color: white; }
 .nav-soon { margin-left: auto; font-size: 9px; font-weight: 700; color: var(--text-dim); letter-spacing: 0.3px; text-transform: uppercase; }
-
 .sidebar-bottom { padding: 10px 8px; border-top: 1px solid var(--border); }
-.user-row { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 6px; cursor: pointer; transition: background 0.15s; }
+.user-row { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 6px; cursor: pointer; }
 .user-row:hover { background: rgba(255,255,255,0.04); }
 .user-avatar { width: 24px; height: 24px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; }
 .user-name { font-size: 12px; font-weight: 500; }
@@ -87,8 +72,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 
 /* STATS */
 .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.stat-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; position: relative; overflow: hidden; transition: border-color 0.2s; }
-.stat-card:hover { border-color: var(--border2); }
+.stat-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; position: relative; overflow: hidden; }
 .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; border-radius: 10px 10px 0 0; }
 .stat-card.green::before { background: var(--accent-bright); }
 .stat-card.red::before { background: var(--red); }
@@ -99,6 +83,15 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 .stat-delta { font-size: 10px; color: var(--text-muted); }
 .stat-delta.up { color: var(--accent-bright); }
 .stat-delta.warn { color: var(--red); }
+
+/* CONF LEGEND */
+.conf-legend { display: flex; gap: 14px; align-items: center; padding: 8px 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 7px; flex-wrap: wrap; }
+.conf-legend-label { font-size: 10px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; color: var(--text-dim); margin-right: 4px; }
+.conf-legend-item { display: flex; align-items: center; gap: 5px; font-size: 10.5px; color: var(--text-muted); }
+.conf-dot { width: 7px; height: 7px; border-radius: 50%; }
+.conf-dot.high { background: var(--accent-bright); }
+.conf-dot.medium { background: var(--amber); }
+.conf-dot.low { background: var(--red); }
 
 /* SECTIONS */
 .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
@@ -115,10 +108,9 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 .task-card:hover { border-color: var(--border2); background: var(--surface3); }
 .task-card.urgent-card { border-left: 3px solid var(--red); background: rgba(239,68,68,0.03); }
 .task-card.urgent-card:hover { background: rgba(239,68,68,0.06); }
-.task-card.needs-review { border-left: 3px solid var(--amber); }
-.task-card.low-conf { border-left: 3px solid var(--amber); box-shadow: 0 0 0 1px rgba(245,158,11,0.15); }
-.task-card.reviewed-card { border-left: 3px solid var(--accent); opacity: 0.65; }
-
+.task-card.needs-card { border-left: 3px solid var(--amber); }
+.task-card.low-conf-card { border-left: 3px solid var(--amber); box-shadow: 0 0 0 1px rgba(245,158,11,0.15); }
+.task-card.reviewed-card { border-left: 3px solid var(--accent); opacity: 0.65; cursor: default; }
 .task-avatar { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
 .av-red { background: var(--red-glow); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
 .av-amber { background: var(--amber-glow); color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
@@ -143,17 +135,16 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 .rt-query { background: var(--purple-glow); color: var(--purple); }
 .rt-collection { background: var(--accent-glow); color: var(--accent-bright); }
 
-.task-summary { font-size: 12.5px; color: var(--text-muted); margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.task-concern { font-size: 11.5px; color: rgba(239,68,68,0.8); background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.12); border-radius: 4px; padding: 4px 9px; margin-bottom: 6px; display: inline-block; }
+.task-summary { font-size: 12.5px; color: var(--text-muted); margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.task-concern { font-size: 11.5px; color: rgba(239,68,68,0.8); background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.12); border-radius: 4px; padding: 4px 9px; margin-bottom: 5px; display: inline-block; }
 .task-check-pill { font-size: 9px; font-weight: 800; letter-spacing: 0.3px; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; background: var(--amber-glow); color: var(--amber); border: 1px solid rgba(245,158,11,0.3); display: inline-block; margin-bottom: 5px; }
-
 .task-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .task-meta-item { display: flex; align-items: center; gap: 3px; font-size: 10.5px; color: var(--text-dim); }
 .confidence-bar { width: 36px; height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; display: inline-block; vertical-align: middle; }
 .conf-fill { height: 100%; border-radius: 2px; background: var(--accent-bright); }
 .conf-fill.medium { background: var(--amber); }
 .conf-fill.low { background: var(--red); }
-.next-step { margin-top: 6px; font-size: 11px; color: rgba(255,255,255,0.35); font-style: italic; }
+.next-step { margin-top: 5px; font-size: 11px; color: rgba(255,255,255,0.35); font-style: italic; }
 
 .task-actions { display: flex; flex-direction: column; gap: 5px; flex-shrink: 0; }
 .task-btn { padding: 5px 11px; border-radius: 5px; font-size: 11px; font-weight: 700; border: none; cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; white-space: nowrap; }
@@ -163,24 +154,15 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 .btn-alert { background: var(--red-glow); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
 .btn-callback { background: var(--blue-glow); color: var(--blue); border: 1px solid rgba(59,130,246,0.2); }
 .btn-slot { background: var(--purple-glow); color: var(--purple); border: 1px solid rgba(168,85,247,0.2); }
-.btn-mark { background: rgba(255,255,255,0.06); color: var(--text-muted); border: 1px solid var(--border2); font-size: 10px; }
+.btn-done { background: rgba(255,255,255,0.04); color: var(--text-dim); border: 1px solid var(--border); font-size: 10px; cursor: default; }
 
 /* LIVE BANNER */
-.live-banner { background: linear-gradient(135deg, rgba(26,107,74,0.2), rgba(26,107,74,0.05)); border: 1px solid rgba(34,197,94,0.2); border-radius: 10px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; }
+.live-banner { background: linear-gradient(135deg,rgba(26,107,74,0.2),rgba(26,107,74,0.05)); border: 1px solid rgba(34,197,94,0.2); border-radius: 10px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; }
 .live-pulse { width: 8px; height: 8px; background: var(--accent-bright); border-radius: 50%; animation: pulse 1s infinite; box-shadow: 0 0 8px var(--accent-bright); flex-shrink: 0; }
 .live-text { flex: 1; }
 .live-title { font-size: 12px; font-weight: 700; color: var(--accent-bright); margin-bottom: 1px; }
 .live-sub { font-size: 10.5px; color: rgba(34,197,94,0.55); }
 .live-timer { font-size: 18px; font-weight: 700; color: var(--accent-bright); font-variant-numeric: tabular-nums; }
-
-/* CONFIDENCE THRESHOLD LEGEND */
-.conf-legend { display: flex; gap: 14px; align-items: center; padding: 8px 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 7px; }
-.conf-legend-label { font-size: 10px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; color: var(--text-dim); margin-right: 4px; }
-.conf-legend-item { display: flex; align-items: center; gap: 5px; font-size: 10.5px; color: var(--text-muted); }
-.conf-dot { width: 7px; height: 7px; border-radius: 50%; }
-.conf-dot.high { background: var(--accent-bright); }
-.conf-dot.medium { background: var(--amber); }
-.conf-dot.low { background: var(--red); }
 
 /* MODALS */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); z-index: 100; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
@@ -191,30 +173,31 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 .modal-title { font-size: 15px; font-weight: 700; flex: 1; }
 .modal-status { font-size: 10px; font-weight: 800; letter-spacing: 0.3px; text-transform: uppercase; padding: 3px 9px; border-radius: 100px; }
 .modal-close { background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; line-height: 1; }
-.modal-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; max-height: 70vh; overflow-y: auto; }
+.modal-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; max-height: 68vh; overflow-y: auto; }
+.modal-body::-webkit-scrollbar { width: 3px; }
+.modal-body::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
 .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .modal-field { display: flex; flex-direction: column; gap: 4px; }
 .modal-label { font-size: 10px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; color: var(--text-muted); }
 .modal-value { font-size: 13px; color: var(--text); background: var(--surface3); border: 1px solid var(--border); border-radius: 6px; padding: 9px 12px; }
-.modal-value.editable { border-color: var(--border2); transition: border-color 0.15s; }
-.modal-value.editable:focus { outline: none; border-color: var(--accent); }
+.modal-input { background: var(--surface3); border: 1px solid var(--border2); border-radius: 6px; padding: 9px 12px; font-size: 13px; color: var(--text); font-family: 'DM Sans', sans-serif; width: 100%; transition: border-color 0.15s; }
+.modal-input:focus { outline: none; border-color: var(--accent); }
+.modal-textarea { background: var(--surface3); border: 1px solid var(--border2); border-radius: 6px; padding: 9px 12px; font-size: 13px; color: var(--text); font-family: 'DM Sans', sans-serif; resize: none; width: 100%; min-height: 56px; transition: border-color 0.15s; }
+.modal-textarea:focus { outline: none; border-color: var(--accent); }
+.modal-input::placeholder, .modal-textarea::placeholder { color: var(--text-dim); }
 .modal-concern { background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.15); border-radius: 7px; padding: 10px 14px; font-size: 12px; color: rgba(239,68,68,0.8); line-height: 1.5; }
 .modal-concern-label { font-size: 10px; font-weight: 800; letter-spacing: 0.4px; text-transform: uppercase; color: var(--red); margin-bottom: 5px; }
 .modal-conf-row { display: flex; align-items: center; gap: 8px; }
 .modal-conf-bar { flex: 1; height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
 .modal-conf-fill { height: 100%; border-radius: 3px; }
-.modal-transcript { background: var(--surface3); border: 1px solid var(--border); border-radius: 7px; padding: 12px; font-size: 12px; color: var(--text-muted); line-height: 1.6; max-height: 110px; overflow-y: auto; }
-.modal-next-step { background: var(--accent-glow); border: 1px solid rgba(34,197,94,0.15); border-radius: 7px; padding: 10px 14px; }
+.modal-transcript { background: var(--surface3); border: 1px solid var(--border); border-radius: 7px; padding: 12px; font-size: 12px; color: var(--text-muted); line-height: 1.6; max-height: 100px; overflow-y: auto; }
+.modal-next { background: var(--accent-glow); border: 1px solid rgba(34,197,94,0.15); border-radius: 7px; padding: 10px 14px; }
 .modal-next-label { font-size: 10px; font-weight: 800; letter-spacing: 0.4px; text-transform: uppercase; color: var(--accent-bright); margin-bottom: 4px; }
 .modal-next-text { font-size: 12.5px; color: rgba(255,255,255,0.65); }
-.modal-input { background: var(--surface3); border: 1px solid var(--border2); border-radius: 6px; padding: 9px 12px; font-size: 13px; color: var(--text); font-family: 'DM Sans', sans-serif; width: 100%; transition: border-color 0.15s; }
-.modal-input:focus { outline: none; border-color: var(--accent); }
-.modal-textarea { background: var(--surface3); border: 1px solid var(--border2); border-radius: 6px; padding: 9px 12px; font-size: 13px; color: var(--text); font-family: 'DM Sans', sans-serif; resize: none; width: 100%; min-height: 56px; transition: border-color 0.15s; }
-.modal-textarea:focus { outline: none; border-color: var(--accent); }
-.modal-textarea::placeholder, .modal-input::placeholder { color: var(--text-dim); }
 .modal-footer { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 8px; justify-content: flex-end; }
 .modal-btn { padding: 8px 16px; border-radius: 7px; font-size: 12px; font-weight: 700; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: opacity 0.15s; }
 .modal-btn:hover { opacity: 0.85; }
+.modal-btn:disabled { opacity: 0.4; cursor: default; }
 .mbtn-primary { background: var(--accent); color: white; }
 .mbtn-alert { background: var(--red-glow); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
 .mbtn-close { background: rgba(255,255,255,0.06); color: var(--text-muted); border: 1px solid var(--border2); }
@@ -237,7 +220,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
     <div class="clara-live"><div class="live-dot"></div> Clara is live</div>
   </div>
   <nav class="sidebar-nav">
-    <div class="nav-item active" onclick="filterTasks('all',this)"><span class="nav-icon">📋</span> All Tasks <span class="nav-badge badge-amber" id="badge-all">7</span></div>
+    <div class="nav-item active" onclick="filterTasks('open',this)"><span class="nav-icon">📋</span> Open Tasks <span class="nav-badge badge-amber" id="badge-all">7</span></div>
     <div class="nav-item" onclick="filterTasks('urgent_review',this)"><span class="nav-icon">⚑</span> Urgent Review <span class="nav-badge badge-red" id="badge-urgent">2</span></div>
     <div class="nav-item" onclick="filterTasks('needs_review',this)"><span class="nav-icon">🆕</span> Needs Review <span class="nav-badge badge-amber" id="badge-needs">4</span></div>
     <div class="nav-item" onclick="filterTasks('callback_needed',this)"><span class="nav-icon">↩</span> Callback Needed <span class="nav-badge badge-amber" id="badge-callback">1</span></div>
@@ -266,42 +249,23 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   </div>
 
   <div class="content">
+    <div class="live-banner" id="live-banner" style="display:none;">
+      <div class="live-pulse"></div>
+      <div class="live-text">
+        <div class="live-title">Clara is on a call — capturing details</div>
+        <div class="live-sub" id="live-caller">Listening...</div>
+      </div>
+      <div class="live-timer" id="live-timer">00:00</div>
+    </div>
 
 ```
-<div class="live-banner" id="live-banner" style="display:none;">
-  <div class="live-pulse"></div>
-  <div class="live-text">
-    <div class="live-title">Clara is on a call — capturing details</div>
-    <div class="live-sub" id="live-caller">Listening...</div>
-  </div>
-  <div class="live-timer" id="live-timer">00:00</div>
-</div>
-
-<!-- STATS — Open Tasks / Urgent Review / Needs Review / Reviewed Today -->
 <div class="stats-row">
-  <div class="stat-card green">
-    <div class="stat-label">Calls Today</div>
-    <div class="stat-value" id="stat-calls">12</div>
-    <div class="stat-delta up">↑ 4 vs yesterday</div>
-  </div>
-  <div class="stat-card red">
-    <div class="stat-label">Urgent Review</div>
-    <div class="stat-value" id="stat-urgent">2</div>
-    <div class="stat-delta warn">Pharmacist attention needed</div>
-  </div>
-  <div class="stat-card amber">
-    <div class="stat-label">Open Tasks</div>
-    <div class="stat-value" id="stat-open">5</div>
-    <div class="stat-delta">Needs review + callbacks</div>
-  </div>
-  <div class="stat-card blue">
-    <div class="stat-label">Reviewed Today</div>
-    <div class="stat-value" id="stat-reviewed">1</div>
-    <div class="stat-delta up">↑ Good progress</div>
-  </div>
+  <div class="stat-card green"><div class="stat-label">Calls Today</div><div class="stat-value" id="stat-calls">12</div><div class="stat-delta up">↑ 4 vs yesterday</div></div>
+  <div class="stat-card red"><div class="stat-label">Urgent Review</div><div class="stat-value" id="stat-urgent">2</div><div class="stat-delta warn">Pharmacist attention needed</div></div>
+  <div class="stat-card amber"><div class="stat-label">Open Tasks</div><div class="stat-value" id="stat-open">5</div><div class="stat-delta">Needs review + callbacks</div></div>
+  <div class="stat-card blue"><div class="stat-label">Reviewed Today</div><div class="stat-value" id="stat-reviewed">1</div><div class="stat-delta up">↑ Good progress</div></div>
 </div>
 
-<!-- CONFIDENCE LEGEND -->
 <div class="conf-legend">
   <span class="conf-legend-label">AI Confidence</span>
   <span class="conf-legend-item"><div class="conf-dot high"></div> 90%+ Standard review</span>
@@ -309,226 +273,37 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <span class="conf-legend-item"><div class="conf-dot low"></div> Below 75% Manual verification recommended</span>
 </div>
 
-<!-- URGENT REVIEW -->
+<!-- RENDERED FROM DATA -->
 <div id="section-urgent">
   <div class="section-header">
     <span class="section-title">⚑ Needs Urgent Review</span>
     <span class="section-count count-red" id="urgent-count">2</span>
   </div>
-  <div class="tasks-list" id="urgent-list">
-
-    <div class="task-card urgent-card" data-status="urgent_review" data-id="1" onclick="openReviewModal('1')">
-      <div class="task-avatar av-red">JW</div>
-      <div class="task-body">
-        <div class="task-top">
-          <span class="task-name">James Whitfield</span>
-          <span class="status-pill-sm sp-urgent">Urgent Review</span>
-          <span class="req-type rt-urgent">Safety Concern</span>
-        </div>
-        <div class="task-concern">Safety concern captured — pharmacist callback required</div>
-        <div class="task-meta">
-          <span class="task-meta-item">🕐 14:32</span>
-          <span class="task-meta-item">DOB: 12/04/1948</span>
-          <span class="task-meta-item">📞 07700 900234</span>
-          <span class="task-meta-item">AI: <div class="confidence-bar"><div class="conf-fill" style="width:92%"></div></div> 92%</span>
-        </div>
-        <div class="next-step">→ Urgent pharmacist callback required before any dispensing action</div>
-      </div>
-      <div class="task-actions" onclick="event.stopPropagation()">
-        <button class="task-btn btn-alert" onclick="alertPharmacist('James Whitfield')">⚑ Alert pharmacist</button>
-        <button class="task-btn btn-edit" onclick="openEditModal('1')">Edit details</button>
-      </div>
-    </div>
-
-    <div class="task-card urgent-card" data-status="urgent_review" data-id="2" onclick="openReviewModal('2')">
-      <div class="task-avatar av-red">SC</div>
-      <div class="task-body">
-        <div class="task-top">
-          <span class="task-name">Susan Clarke</span>
-          <span class="status-pill-sm sp-urgent">Urgent Review</span>
-          <span class="req-type rt-urgent">Out of Medication</span>
-        </div>
-        <div class="task-concern">Safety concern captured — patient out of insulin, no GP until next week</div>
-        <div class="task-meta">
-          <span class="task-meta-item">🕐 13:45</span>
-          <span class="task-meta-item">DOB: 03/09/1955</span>
-          <span class="task-meta-item">📞 07700 900567</span>
-          <span class="task-meta-item">AI: <div class="confidence-bar"><div class="conf-fill medium" style="width:88%"></div></div> 88%</span>
-        </div>
-        <div class="next-step">→ Pharmacist to call back immediately — consider emergency supply</div>
-      </div>
-      <div class="task-actions" onclick="event.stopPropagation()">
-        <button class="task-btn btn-alert" onclick="alertPharmacist('Susan Clarke')">⚑ Alert pharmacist</button>
-        <button class="task-btn btn-edit" onclick="openEditModal('2')">Edit details</button>
-      </div>
-    </div>
-
-  </div>
+  <div class="tasks-list" id="urgent-list"></div>
 </div>
 
-<!-- NEEDS REVIEW -->
 <div id="section-needs">
   <div class="section-header">
     <span class="section-title">🆕 Needs Review</span>
     <span class="section-count count-amber" id="needs-count">4</span>
   </div>
-  <div class="tasks-list" id="needs-list">
-
-    <div class="task-card needs-review" data-status="needs_review" data-id="3" onclick="openReviewModal('3')">
-      <div class="task-avatar av-amber">MT</div>
-      <div class="task-body">
-        <div class="task-top">
-          <span class="task-name">Margaret Thompson</span>
-          <span class="status-pill-sm sp-needs">Needs Review</span>
-          <span class="req-type rt-repeat">Repeat Request</span>
-        </div>
-        <div class="task-summary">💊 Metformin 500mg · Amlodipine 5mg · Collection Thu 2pm</div>
-        <div class="task-meta">
-          <span class="task-meta-item">🕐 14:18</span>
-          <span class="task-meta-item">DOB: 15/06/1952</span>
-          <span class="task-meta-item">📞 07700 900142</span>
-          <span class="task-meta-item">AI: <div class="confidence-bar"><div class="conf-fill" style="width:96%"></div></div> 96%</span>
-        </div>
-        <div class="next-step">→ Review and queue for dispensing team</div>
-      </div>
-      <div class="task-actions" onclick="event.stopPropagation()">
-        <button class="task-btn btn-review" onclick="performMarkReviewed('3','needs_review')">Review</button>
-        <button class="task-btn btn-edit" onclick="openEditModal('3')">Edit details</button>
-      </div>
-    </div>
-
-    <div class="task-card needs-review" data-status="needs_review" data-id="4" onclick="openReviewModal('4')">
-      <div class="task-avatar av-blue">PM</div>
-      <div class="task-body">
-        <div class="task-top">
-          <span class="task-name">Priya Mehta</span>
-          <span class="status-pill-sm sp-needs">Needs Review</span>
-          <span class="req-type rt-repeat">Repeat Request</span>
-        </div>
-        <div class="task-summary">💊 Sertraline 50mg · Atorvastatin 20mg · Collection Mon 10am</div>
-        <div class="task-meta">
-          <span class="task-meta-item">🕐 13:55</span>
-          <span class="task-meta-item">DOB: 22/11/1978</span>
-          <span class="task-meta-item">📞 07700 900891</span>
-          <span class="task-meta-item">AI: <div class="confidence-bar"><div class="conf-fill" style="width:94%"></div></div> 94%</span>
-        </div>
-        <div class="next-step">→ Review and queue for dispensing team</div>
-      </div>
-      <div class="task-actions" onclick="event.stopPropagation()">
-        <button class="task-btn btn-review" onclick="performMarkReviewed('4','needs_review')">Review</button>
-        <button class="task-btn btn-edit" onclick="openEditModal('4')">Edit details</button>
-      </div>
-    </div>
-
-    <!-- Low confidence card — stronger visual treatment -->
-    <div class="task-card low-conf" data-status="needs_review" data-id="5" onclick="openReviewModal('5')">
-      <div class="task-avatar av-amber">RB</div>
-      <div class="task-body">
-        <div class="task-top">
-          <span class="task-name">Robert Barnes</span>
-          <span class="status-pill-sm sp-needs">Needs Review</span>
-          <span class="req-type rt-repeat">Repeat Request</span>
-        </div>
-        <div class="task-check-pill">⚠ Manual verification recommended</div>
-        <div class="task-summary">💊 Ramipril 10mg · Bisoprolol 2.5mg · Collection Fri 11am</div>
-        <div class="task-meta">
-          <span class="task-meta-item">🕐 11:20</span>
-          <span class="task-meta-item">DOB: 08/03/1965</span>
-          <span class="task-meta-item">📞 07700 900445</span>
-          <span class="task-meta-item">AI: <div class="confidence-bar"><div class="conf-fill low" style="width:74%"></div></div> <span style="color:var(--red)">74%</span></span>
-        </div>
-        <div class="next-step">→ Confirm medication and dosage with patient before processing</div>
-      </div>
-      <div class="task-actions" onclick="event.stopPropagation()">
-        <button class="task-btn btn-review" onclick="performMarkReviewed('5','needs_review')">Review</button>
-        <button class="task-btn btn-edit" onclick="openEditModal('5')">Edit details</button>
-      </div>
-    </div>
-
-    <div class="task-card needs-review" data-status="needs_review" data-id="7" onclick="openReviewModal('7')">
-      <div class="task-avatar av-purple">EH</div>
-      <div class="task-body">
-        <div class="task-top">
-          <span class="task-name">Eleanor Hughes</span>
-          <span class="status-pill-sm sp-collection">Collection Change</span>
-          <span class="req-type rt-collection">Slot Change</span>
-        </div>
-        <div class="task-summary">📅 Levothyroxine 50mcg · Changed to Wed 3pm (was Mon 11am)</div>
-        <div class="task-meta">
-          <span class="task-meta-item">🕐 09:30</span>
-          <span class="task-meta-item">DOB: 29/01/1960</span>
-          <span class="task-meta-item">📞 07700 900112</span>
-          <span class="task-meta-item">AI: <div class="confidence-bar"><div class="conf-fill" style="width:91%"></div></div> 91%</span>
-        </div>
-        <div class="next-step">→ Update collection slot in dispensary system</div>
-      </div>
-      <div class="task-actions" onclick="event.stopPropagation()">
-        <button class="task-btn btn-slot" onclick="performMarkReviewed('7','needs_review')">Update slot</button>
-        <button class="task-btn btn-edit" onclick="openEditModal('7')">Edit details</button>
-      </div>
-    </div>
-
-  </div>
+  <div class="tasks-list" id="needs-list"></div>
 </div>
 
-<!-- CALLBACK NEEDED -->
 <div id="section-callback">
   <div class="section-header">
     <span class="section-title">↩ Callback Needed</span>
     <span class="section-count count-amber" id="callback-count">1</span>
   </div>
-  <div class="tasks-list" id="callback-list">
-    <div class="task-card needs-review" data-status="callback_needed" data-id="6" onclick="openReviewModal('6')">
-      <div class="task-avatar av-blue">DO</div>
-      <div class="task-body">
-        <div class="task-top">
-          <span class="task-name">David Okafor</span>
-          <span class="status-pill-sm sp-callback">Callback Needed</span>
-          <span class="req-type rt-query">Ready-Check Query</span>
-        </div>
-        <div class="task-summary">❓ Checking if Lisinopril prescription is ready for collection</div>
-        <div class="task-meta">
-          <span class="task-meta-item">🕐 10:44</span>
-          <span class="task-meta-item">DOB: 14/07/1970</span>
-          <span class="task-meta-item">📞 07700 900773</span>
-          <span class="task-meta-item">AI: <div class="confidence-bar"><div class="conf-fill" style="width:99%"></div></div> 99%</span>
-        </div>
-        <div class="next-step">→ Dispensary to call patient back to confirm readiness</div>
-      </div>
-      <div class="task-actions" onclick="event.stopPropagation()">
-        <button class="task-btn btn-callback" onclick="performMarkReviewed('6','callback_needed')">Assign callback</button>
-        <button class="task-btn btn-edit" onclick="openEditModal('6')">Edit details</button>
-      </div>
-    </div>
-  </div>
+  <div class="tasks-list" id="callback-list"></div>
 </div>
 
-<!-- REVIEWED -->
 <div id="section-reviewed">
   <div class="section-header">
     <span class="section-title">✅ Reviewed</span>
     <span class="section-count count-green" id="reviewed-count">1</span>
   </div>
-  <div class="tasks-list" id="reviewed-list">
-    <div class="task-card reviewed-card" data-status="reviewed" data-id="8">
-      <div class="task-avatar av-green">AF</div>
-      <div class="task-body">
-        <div class="task-top">
-          <span class="task-name">Alan Foster</span>
-          <span class="status-pill-sm sp-reviewed">Reviewed</span>
-          <span class="req-type rt-repeat">Repeat Request</span>
-        </div>
-        <div class="task-summary">💊 Atenolol 50mg · Ready for processing</div>
-        <div class="task-meta">
-          <span class="task-meta-item">🕐 09:15</span>
-          <span class="task-meta-item">Reviewed by pharmacist · queued for dispensing</span>
-        </div>
-      </div>
-      <div class="task-actions">
-        <button class="task-btn btn-mark" style="opacity:0.5;cursor:default;">Ready for processing</button>
-      </div>
-    </div>
-  </div>
+  <div class="tasks-list" id="reviewed-list"></div>
 </div>
 ```
 
@@ -541,7 +316,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="modal">
     <div class="modal-header">
       <span class="modal-title" id="rm-title">Task Detail</span>
-      <span class="modal-status" id="rm-status-pill">Needs Review</span>
+      <span class="modal-status" id="rm-pill">Needs Review</span>
       <button class="modal-close" onclick="closeReviewModal()">×</button>
     </div>
     <div class="modal-body">
@@ -555,29 +330,23 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
           <div class="modal-label">AI Confidence</div>
           <div class="modal-value">
             <div class="modal-conf-row">
-              <div class="modal-conf-bar"><div class="modal-conf-fill conf-fill" id="rm-conf-fill" style="width:0%"></div></div>
-              <span id="rm-conf-text" style="font-size:12px;">—</span>
+              <div class="modal-conf-bar"><div class="modal-conf-fill conf-fill" id="rm-conf-fill"></div></div>
+              <span id="rm-conf-text" style="font-size:11px;"></span>
             </div>
           </div>
         </div>
       </div>
-      <div class="modal-concern">
-        <div class="modal-concern-label">AI Captured Summary</div>
-        <div id="rm-concern">—</div>
-      </div>
+      <div class="modal-concern"><div class="modal-concern-label">AI Captured Summary</div><div id="rm-concern">—</div></div>
       <div class="modal-field"><div class="modal-label">Call Transcript Summary</div><div class="modal-transcript" id="rm-transcript">—</div></div>
-      <div class="modal-next-step">
-        <div class="modal-next-label">Suggested Next Step</div>
-        <div class="modal-next-text" id="rm-next">—</div>
-      </div>
+      <div class="modal-next"><div class="modal-next-label">Suggested Next Step</div><div class="modal-next-text" id="rm-next">—</div></div>
       <div class="modal-field">
-        <div class="modal-label">Internal Note (optional)</div>
+        <div class="modal-label">Internal Note</div>
         <textarea class="modal-textarea" id="rm-notes" placeholder="Add a note for the dispensary team..."></textarea>
       </div>
     </div>
     <div class="modal-footer">
       <button class="modal-btn mbtn-close" onclick="closeReviewModal()">Close</button>
-      <button class="modal-btn mbtn-alert" onclick="closeReviewModal();alertPharmacist(currentTask ? currentTask.name : 'Patient')">⚑ Alert pharmacist</button>
+      <button class="modal-btn mbtn-alert" onclick="modalAlertPharmacist()">⚑ Alert pharmacist</button>
       <button class="modal-btn mbtn-primary" id="rm-primary-btn" onclick="modalPrimaryAction()">Mark reviewed</button>
     </div>
   </div>
@@ -593,31 +362,13 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
     </div>
     <div class="modal-body">
       <div class="modal-grid">
-        <div class="modal-field">
-          <div class="modal-label">Patient Name</div>
-          <input class="modal-input" id="em-name" type="text" placeholder="Patient name">
-        </div>
-        <div class="modal-field">
-          <div class="modal-label">Date of Birth</div>
-          <input class="modal-input" id="em-dob" type="text" placeholder="DD/MM/YYYY">
-        </div>
+        <div class="modal-field"><div class="modal-label">Patient Name</div><input class="modal-input" id="em-name" type="text"></div>
+        <div class="modal-field"><div class="modal-label">Date of Birth</div><input class="modal-input" id="em-dob" type="text"></div>
       </div>
-      <div class="modal-field">
-        <div class="modal-label">Medication(s)</div>
-        <input class="modal-input" id="em-meds" type="text" placeholder="Medication name and dosage">
-      </div>
-      <div class="modal-field">
-        <div class="modal-label">Contact Number</div>
-        <input class="modal-input" id="em-phone" type="text" placeholder="Phone number">
-      </div>
-      <div class="modal-field">
-        <div class="modal-label">Suggested Next Step</div>
-        <input class="modal-input" id="em-next" type="text" placeholder="Next action for this task">
-      </div>
-      <div class="modal-field">
-        <div class="modal-label">Internal Note</div>
-        <textarea class="modal-textarea" id="em-notes" placeholder="Notes for the dispensary team..."></textarea>
-      </div>
+      <div class="modal-field"><div class="modal-label">Medication(s)</div><input class="modal-input" id="em-meds" type="text"></div>
+      <div class="modal-field"><div class="modal-label">Contact Number</div><input class="modal-input" id="em-phone" type="text"></div>
+      <div class="modal-field"><div class="modal-label">Suggested Next Step</div><input class="modal-input" id="em-next" type="text"></div>
+      <div class="modal-field"><div class="modal-label">Internal Note</div><textarea class="modal-textarea" id="em-notes" placeholder="Notes for the dispensary team..."></textarea></div>
     </div>
     <div class="modal-footer">
       <button class="modal-btn mbtn-close" onclick="closeEditModal()">Cancel</button>
@@ -629,30 +380,168 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 <div class="toast" id="toast"><span id="toast-msg">Done</span></div>
 
 <script>
-// ── FULL TASK DATA MODEL ──
+// ── COMPLETE TASK DATA MODEL ──
 const tasks = {
-  '1': { id:'1', status:'urgent_review', name:'James Whitfield', initials:'JW', meds:'Warfarin 5mg', category:'urgent', requestTypeLabel:'Safety Concern', confidence:92, phone:'07700 900234', dob:'12/04/1948', summary:'Safety concern captured — pharmacist callback required. Do not queue for dispensing until reviewed.', transcript:'Patient called reporting unusual bruising on arms and legs, and dizziness when standing. States they may have taken an extra Warfarin dose last week. Clara flagged as urgent and informed patient that the pharmacist will call back.', nextStep:'Urgent pharmacist callback required before any dispensing action.', avatarClass:'av-red' },
-  '2': { id:'2', status:'urgent_review', name:'Susan Clarke', initials:'SC', meds:'Insulin', category:'urgent', requestTypeLabel:'Out of Medication', confidence:88, phone:'07700 900567', dob:'03/09/1955', summary:'Safety concern captured — patient out of insulin with no GP appointment until next week.', transcript:'Patient called in distress stating she has run out of insulin and cannot get a GP appointment until next week. Clara flagged as urgent and reassured patient that pharmacist will call back urgently.', nextStep:'Pharmacist to call patient back immediately. Consider emergency supply options.', avatarClass:'av-red' },
-  '3': { id:'3', status:'needs_review', name:'Margaret Thompson', initials:'MT', meds:'Metformin 500mg · Amlodipine 5mg', category:'repeat', requestTypeLabel:'Repeat Request', confidence:96, phone:'07700 900142', dob:'15/06/1952', summary:'Repeat prescription request captured. Collection Thursday at 2pm.', transcript:'Patient called to order repeat prescriptions for Metformin 500mg and Amlodipine 5mg. Requested collection on Thursday at 2pm. Clara confirmed details back to patient.', nextStep:'Review medication and dosage, then queue for dispensing team.', avatarClass:'av-amber' },
-  '4': { id:'4', status:'needs_review', name:'Priya Mehta', initials:'PM', meds:'Sertraline 50mg · Atorvastatin 20mg', category:'repeat', requestTypeLabel:'Repeat Request', confidence:94, phone:'07700 900891', dob:'22/11/1978', summary:'Repeat prescription request captured. Collection Monday at 10am.', transcript:'Patient called to order repeat prescriptions for Sertraline 50mg and Atorvastatin 20mg. Collection Monday at 10am confirmed.', nextStep:'Review and queue for dispensing team.', avatarClass:'av-blue' },
-  '5': { id:'5', status:'needs_review', name:'Robert Barnes', initials:'RB', meds:'Ramipril 10mg · Bisoprolol 2.5mg', category:'repeat', requestTypeLabel:'Repeat Request', confidence:74, phone:'07700 900445', dob:'08/03/1965', summary:'Medication name was partially unclear on call. Manual verification recommended.', transcript:'Patient called for repeat prescription. Medication name was partially unclear during the call. AI captured Ramipril and Bisoprolol but confidence is below threshold. Recommend confirming dosage.', nextStep:'Confirm medication name and dosage with patient before queuing for dispensing.', avatarClass:'av-amber' },
-  '6': { id:'6', status:'callback_needed', name:'David Okafor', initials:'DO', meds:'Lisinopril', category:'query', requestTypeLabel:'Ready-Check Query', confidence:99, phone:'07700 900773', dob:'14/07/1970', summary:'Patient called to check if Lisinopril prescription is ready. Callback required from dispensary.', transcript:'Patient called to check if his Lisinopril prescription is ready for collection. Clara informed patient dispensary team will call back to confirm.', nextStep:'Dispensary to call patient back to confirm prescription readiness.', avatarClass:'av-blue' },
-  '7': { id:'7', status:'needs_review', name:'Eleanor Hughes', initials:'EH', meds:'Levothyroxine 50mcg', category:'collection', requestTypeLabel:'Collection Change', confidence:91, phone:'07700 900112', dob:'29/01/1960', summary:'Collection slot change captured. Changed from Monday 11am to Wednesday 3pm.', transcript:'Patient called to change collection time from Monday 11am to Wednesday 3pm. Clara confirmed the change with patient.', nextStep:'Update collection slot in dispensary system to Wednesday at 3pm.', avatarClass:'av-purple' },
-  '8': { id:'8', status:'reviewed', name:'Alan Foster', initials:'AF', meds:'Atenolol 50mg', category:'repeat', requestTypeLabel:'Repeat Request', confidence:95, phone:'07700 900321', dob:'05/11/1958', summary:'Repeat prescription request — reviewed and queued.', transcript:'Patient called for repeat Atenolol prescription. Collection today at 4pm confirmed.', nextStep:'Ready for processing.', avatarClass:'av-green' }
+  '1': { id:'1', status:'urgent_review', name:'James Whitfield', initials:'JW', avatarClass:'av-red', meds:'Warfarin 5mg', category:'urgent', requestTypeLabel:'Safety Concern', confidence:92, phone:'07700 900234', dob:'12/04/1948', displaySummary:'Safety concern captured — pharmacist callback required', summary:'Safety concern captured — pharmacist callback required. Do not queue for dispensing until reviewed.', transcript:'Patient called reporting unusual bruising on arms and legs, and dizziness when standing. States they may have taken an extra Warfarin dose last week. Clara flagged as urgent.', nextStep:'Urgent pharmacist callback required before any dispensing action.', reviewedCopy:'Reviewed by pharmacist · action taken', notes:'' },
+  '2': { id:'2', status:'urgent_review', name:'Susan Clarke', initials:'SC', avatarClass:'av-red', meds:'Insulin', category:'urgent', requestTypeLabel:'Out of Medication', confidence:88, phone:'07700 900567', dob:'03/09/1955', displaySummary:'Safety concern captured — patient out of insulin, no GP until next week', summary:'Safety concern captured — patient out of insulin with no GP appointment until next week.', transcript:'Patient called in distress stating she has run out of insulin and cannot get a GP appointment until next week. Clara flagged as urgent.', nextStep:'Pharmacist to call patient back immediately. Consider emergency supply options.', reviewedCopy:'Reviewed by pharmacist · action taken', notes:'' },
+  '3': { id:'3', status:'needs_review', name:'Margaret Thompson', initials:'MT', avatarClass:'av-amber', meds:'Metformin 500mg · Amlodipine 5mg', category:'repeat', requestTypeLabel:'Repeat Request', confidence:96, phone:'07700 900142', dob:'15/06/1952', displaySummary:'💊 Metformin 500mg · Amlodipine 5mg · Collection Thu 2pm', summary:'Repeat prescription request captured. Collection Thursday at 2pm.', transcript:'Patient called to order repeat prescriptions for Metformin 500mg and Amlodipine 5mg. Requested collection Thursday at 2pm. Clara confirmed details.', nextStep:'Review medication and dosage, then queue for dispensing team.', reviewedCopy:'Reviewed by pharmacist · queued for dispensing', notes:'' },
+  '4': { id:'4', status:'needs_review', name:'Priya Mehta', initials:'PM', avatarClass:'av-blue', meds:'Sertraline 50mg · Atorvastatin 20mg', category:'repeat', requestTypeLabel:'Repeat Request', confidence:94, phone:'07700 900891', dob:'22/11/1978', displaySummary:'💊 Sertraline 50mg · Atorvastatin 20mg · Collection Mon 10am', summary:'Repeat prescription request captured. Collection Monday at 10am.', transcript:'Patient called to order repeat prescriptions for Sertraline 50mg and Atorvastatin 20mg. Collection Monday at 10am confirmed.', nextStep:'Review and queue for dispensing team.', reviewedCopy:'Reviewed by pharmacist · queued for dispensing', notes:'' },
+  '5': { id:'5', status:'needs_review', name:'Robert Barnes', initials:'RB', avatarClass:'av-amber', meds:'Ramipril 10mg · Bisoprolol 2.5mg', category:'repeat', requestTypeLabel:'Repeat Request', confidence:74, phone:'07700 900445', dob:'08/03/1965', displaySummary:'💊 Ramipril 10mg · Bisoprolol 2.5mg · Collection Fri 11am', summary:'Medication name was partially unclear on call. Manual verification recommended before processing.', transcript:'Patient called for repeat prescription. Medication name was partially unclear. AI captured Ramipril and Bisoprolol but confidence is below threshold.', nextStep:'Confirm medication name and dosage with patient before queuing for dispensing.', reviewedCopy:'Reviewed by pharmacist · verification noted · queued for dispensing', notes:'' },
+  '6': { id:'6', status:'callback_needed', name:'David Okafor', initials:'DO', avatarClass:'av-blue', meds:'Lisinopril', category:'query', requestTypeLabel:'Ready-Check Query', confidence:99, phone:'07700 900773', dob:'14/07/1970', displaySummary:'❓ Checking if Lisinopril prescription is ready for collection', summary:'Patient called to check if Lisinopril prescription is ready. Callback required from dispensary.', transcript:'Patient called to check if his Lisinopril prescription is ready for collection. Clara informed patient that dispensary will call back to confirm.', nextStep:'Dispensary to call patient back to confirm prescription readiness.', reviewedCopy:'Reviewed by dispensary team · callback assigned', notes:'' },
+  '7': { id:'7', status:'needs_review', name:'Eleanor Hughes', initials:'EH', avatarClass:'av-purple', meds:'Levothyroxine 50mcg', category:'collection', requestTypeLabel:'Collection Change', confidence:91, phone:'07700 900112', dob:'29/01/1960', displaySummary:'📅 Levothyroxine 50mcg · Changed to Wed 3pm (was Mon 11am)', summary:'Collection slot change captured. Changed from Monday 11am to Wednesday 3pm.', transcript:'Patient called to change collection time from Monday 11am to Wednesday 3pm. Clara confirmed the change with patient.', nextStep:'Update collection slot in dispensary system to Wednesday at 3pm.', reviewedCopy:'Reviewed by team · slot updated to Wed 3pm', notes:'' },
+  '8': { id:'8', status:'reviewed', name:'Alan Foster', initials:'AF', avatarClass:'av-green', meds:'Atenolol 50mg', category:'repeat', requestTypeLabel:'Repeat Request', confidence:95, phone:'07700 900321', dob:'05/11/1958', displaySummary:'💊 Atenolol 50mg · Collection today 4pm', summary:'Repeat prescription request — reviewed and queued.', transcript:'Patient called for repeat Atenolol prescription. Collection today at 4pm confirmed.', nextStep:'Ready for processing.', reviewedCopy:'Reviewed by pharmacist · queued for dispensing', notes:'' }
 };
 
-let currentTaskId = null;
-let editTaskId = null;
+let currentModalId = null;
+let editModalId = null;
+let currentFilter = 'open';
 
-// Date
-document.getElementById('live-date').textContent = ' · ' + new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
+// ── RENDER FUNCTIONS ──
 
-// ── SIDEBAR FILTERING ──
-function filterTasks(status, el) {
+function getConfClass(conf) {
+  return conf >= 90 ? '' : conf >= 75 ? ' medium' : ' low';
+}
+
+function getStatusPillClass(status) {
+  if (status === 'urgent_review') return 'sp-urgent';
+  if (status === 'callback_needed') return 'sp-callback';
+  if (status === 'reviewed') return 'sp-reviewed';
+  return 'sp-needs';
+}
+
+function getStatusPillLabel(status) {
+  if (status === 'urgent_review') return 'Urgent Review';
+  if (status === 'callback_needed') return 'Callback Needed';
+  if (status === 'reviewed') return 'Reviewed';
+  return 'Needs Review';
+}
+
+function getReqTypeClass(category) {
+  if (category === 'urgent') return 'rt-urgent';
+  if (category === 'collection') return 'rt-collection';
+  if (category === 'query') return 'rt-query';
+  return 'rt-repeat';
+}
+
+function renderTaskCard(t) {
+  const card = document.createElement('div');
+  const isLowConf = t.confidence < 75;
+  const cardClass = t.status === 'urgent_review' ? 'urgent-card' : isLowConf ? 'low-conf-card' : 'needs-card';
+  card.className = `task-card ${cardClass}`;
+  card.dataset.status = t.status;
+  card.dataset.id = t.id;
+  card.onclick = () => openReviewModal(t.id);
+
+  const primaryBtnHtml = t.status === 'urgent_review'
+    ? `<button class="task-btn btn-alert" onclick="event.stopPropagation();openReviewModal('${t.id}')">⚑ Alert pharmacist</button>`
+    : t.status === 'callback_needed'
+    ? `<button class="task-btn btn-callback" onclick="event.stopPropagation();openReviewModal('${t.id}')">Assign callback</button>`
+    : t.category === 'collection'
+    ? `<button class="task-btn btn-slot" onclick="event.stopPropagation();openReviewModal('${t.id}')">Update slot</button>`
+    : `<button class="task-btn btn-review" onclick="event.stopPropagation();openReviewModal('${t.id}')">Review</button>`;
+
+  const concernHtml = t.status === 'urgent_review'
+    ? `<div class="task-concern">${t.displaySummary}</div>`
+    : isLowConf
+    ? `<div class="task-check-pill">⚠ Manual verification recommended</div><div class="task-summary">${t.displaySummary}</div>`
+    : `<div class="task-summary">${t.displaySummary}</div>`;
+
+  card.innerHTML = `
+    <div class="task-avatar ${t.avatarClass}">${t.initials}</div>
+    <div class="task-body">
+      <div class="task-top">
+        <span class="task-name">${t.name}</span>
+        <span class="status-pill-sm ${getStatusPillClass(t.status)}">${getStatusPillLabel(t.status)}</span>
+        <span class="req-type ${getReqTypeClass(t.category)}">${t.requestTypeLabel}</span>
+      </div>
+      ${concernHtml}
+      <div class="task-meta">
+        <span class="task-meta-item">🕐 ${t.callTime || 'Just now'}</span>
+        <span class="task-meta-item">DOB: ${t.dob}</span>
+        <span class="task-meta-item">📞 ${t.phone}</span>
+        <span class="task-meta-item">AI: <div class="confidence-bar"><div class="conf-fill${getConfClass(t.confidence)}" style="width:${t.confidence}%"></div></div> ${t.confidence}%${t.confidence < 75 ? ' — check details' : ''}</span>
+      </div>
+      <div class="next-step">→ ${t.nextStep}</div>
+    </div>
+    <div class="task-actions" onclick="event.stopPropagation()">
+      ${primaryBtnHtml}
+      <button class="task-btn btn-edit" onclick="event.stopPropagation();openEditModal('${t.id}')">Edit details</button>
+    </div>`;
+
+  return card;
+}
+
+function renderReviewedCard(t) {
+  const card = document.createElement('div');
+  card.className = 'task-card reviewed-card';
+  card.dataset.status = 'reviewed';
+  card.dataset.id = t.id;
+
+  card.innerHTML = `
+    <div class="task-avatar av-green">${t.initials}</div>
+    <div class="task-body">
+      <div class="task-top">
+        <span class="task-name">${t.name}</span>
+        <span class="status-pill-sm sp-reviewed">Reviewed</span>
+        <span class="req-type ${getReqTypeClass(t.category)}">${t.requestTypeLabel}</span>
+      </div>
+      <div class="task-summary">${t.displaySummary.replace(/^[💊📅❓]/, '').trim() || t.meds} · Ready for processing</div>
+      <div class="task-meta">
+        <span class="task-meta-item">🕐 ${t.reviewedTime || t.callTime || 'Just now'}</span>
+        <span class="task-meta-item">${t.reviewedCopy}</span>
+        ${t.notes ? `<span class="task-meta-item">📝 Note saved</span>` : ''}
+      </div>
+    </div>
+    <div class="task-actions">
+      <button class="task-btn btn-done">Ready for processing</button>
+    </div>`;
+
+  return card;
+}
+
+function renderAllSections() {
+  const lists = { urgent: document.getElementById('urgent-list'), needs: document.getElementById('needs-list'), callback: document.getElementById('callback-list'), reviewed: document.getElementById('reviewed-list') };
+  Object.values(lists).forEach(l => l.innerHTML = '');
+
+  Object.values(tasks).forEach(t => {
+    if (t.status === 'urgent_review') lists.urgent.appendChild(renderTaskCard(t));
+    else if (t.status === 'needs_review') lists.needs.appendChild(renderTaskCard(t));
+    else if (t.status === 'callback_needed') lists.callback.appendChild(renderTaskCard(t));
+    else if (t.status === 'reviewed') lists.reviewed.appendChild(renderReviewedCard(t));
+  });
+}
+
+function recomputeCounts() {
+  const counts = { urgent_review: 0, needs_review: 0, callback_needed: 0, reviewed: 0 };
+  Object.values(tasks).forEach(t => { if (counts[t.status] !== undefined) counts[t.status]++; });
+
+  document.getElementById('badge-urgent').textContent = counts.urgent_review;
+  document.getElementById('badge-needs').textContent = counts.needs_review;
+  document.getElementById('badge-callback').textContent = counts.callback_needed;
+  document.getElementById('badge-reviewed').textContent = counts.reviewed;
+  document.getElementById('badge-all').textContent = counts.urgent_review + counts.needs_review + counts.callback_needed;
+  document.getElementById('urgent-count').textContent = counts.urgent_review;
+  document.getElementById('needs-count').textContent = counts.needs_review;
+  document.getElementById('callback-count').textContent = counts.callback_needed;
+  document.getElementById('reviewed-count').textContent = counts.reviewed;
+  document.getElementById('stat-urgent').textContent = counts.urgent_review;
+  document.getElementById('stat-open').textContent = counts.needs_review + counts.callback_needed;
+  document.getElementById('stat-reviewed').textContent = counts.reviewed;
+}
+
+// ── FILTER ──
+function filterTasks(filter, el) {
+  currentFilter = filter;
   document.querySelectorAll('.nav-item:not(.disabled)').forEach(n => n.classList.remove('active'));
   el.classList.add('active');
+
   document.querySelectorAll('.task-card').forEach(card => {
-    card.style.display = (status === 'all' || card.dataset.status === status) ? 'grid' : 'none';
+    const s = card.dataset.status;
+    let show = false;
+    if (filter === 'open') show = s !== 'reviewed';
+    else if (filter === 'reviewed') show = s === 'reviewed';
+    else show = s === filter;
+    card.style.display = show ? 'grid' : 'none';
   });
 }
 
@@ -660,7 +549,7 @@ function filterTasks(status, el) {
 function openReviewModal(id) {
   const t = tasks[id];
   if (!t) return;
-  currentTaskId = id;
+  currentModalId = id;
 
   document.getElementById('rm-title').textContent = t.name;
   document.getElementById('rm-name').textContent = t.name;
@@ -671,30 +560,28 @@ function openReviewModal(id) {
   document.getElementById('rm-concern').textContent = t.summary;
   document.getElementById('rm-transcript').textContent = t.transcript;
   document.getElementById('rm-next').textContent = t.nextStep;
-  document.getElementById('rm-notes').value = '';
+  document.getElementById('rm-notes').value = t.notes || '';
 
-  // Confidence bar
   const confFill = document.getElementById('rm-conf-fill');
-  const confText = document.getElementById('rm-conf-text');
   confFill.style.width = t.confidence + '%';
-  confFill.className = 'modal-conf-fill conf-fill' + (t.confidence >= 90 ? '' : t.confidence >= 75 ? ' medium' : ' low');
-  confText.textContent = t.confidence + '%' + (t.confidence < 75 ? ' — manual verification recommended' : t.confidence < 90 ? ' — review carefully' : ' — high confidence');
+  confFill.className = 'modal-conf-fill conf-fill' + getConfClass(t.confidence);
+  document.getElementById('rm-conf-text').textContent = t.confidence + '% — ' + (t.confidence < 75 ? 'manual verification recommended' : t.confidence < 90 ? 'review carefully' : 'high confidence');
 
-  // Status pill
-  const pill = document.getElementById('rm-status-pill');
+  const pill = document.getElementById('rm-pill');
+  pill.className = 'modal-status ' + getStatusPillClass(t.status);
+  pill.textContent = getStatusPillLabel(t.status);
+
   const btn = document.getElementById('rm-primary-btn');
-  if (t.status === 'urgent_review') {
-    pill.className = 'modal-status sp-urgent'; pill.textContent = 'Urgent Review';
-    btn.textContent = 'Mark reviewed';
-  } else if (t.status === 'callback_needed') {
-    pill.className = 'modal-status sp-callback'; pill.textContent = 'Callback Needed';
-    btn.textContent = 'Assign callback';
-  } else if (t.status === 'reviewed') {
-    pill.className = 'modal-status sp-reviewed'; pill.textContent = 'Reviewed';
+  if (t.status === 'reviewed') {
     btn.textContent = 'Already reviewed';
     btn.disabled = true;
+  } else if (t.status === 'callback_needed') {
+    btn.textContent = 'Assign callback';
+    btn.disabled = false;
+  } else if (t.status === 'urgent_review') {
+    btn.textContent = 'Mark reviewed';
+    btn.disabled = false;
   } else {
-    pill.className = 'modal-status sp-needs'; pill.textContent = 'Needs Review';
     btn.textContent = 'Mark reviewed';
     btn.disabled = false;
   }
@@ -703,167 +590,84 @@ function openReviewModal(id) {
 }
 
 function modalPrimaryAction() {
-  if (!currentTaskId) return;
-  const t = tasks[currentTaskId];
+  if (!currentModalId) return;
+  const t = tasks[currentModalId];
   if (!t || t.status === 'reviewed') return;
-  const fromStatus = t.status;
+  // Save note
+  t.notes = document.getElementById('rm-notes').value;
+  t.reviewedTime = new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+  t.status = 'reviewed';
   closeReviewModal();
-  performMarkReviewed(currentTaskId, fromStatus);
+  renderAllSections();
+  recomputeCounts();
+  applyCurrentFilter();
+  showToast('✅ ' + t.name + ' — marked as reviewed · ' + t.reviewedCopy);
 }
 
-function closeReviewModal() { document.getElementById('review-modal').classList.remove('open'); currentTaskId = null; }
+function modalAlertPharmacist() {
+  if (!currentModalId) return;
+  const t = tasks[currentModalId];
+  closeReviewModal();
+  showToast('🚨 Pharmacist alerted — ' + (t ? t.name : 'Patient') + ' requires immediate attention');
+}
+
+function closeReviewModal() { document.getElementById('review-modal').classList.remove('open'); currentModalId = null; }
 function closeReviewOutside(e) { if (e.target === document.getElementById('review-modal')) closeReviewModal(); }
 
 // ── EDIT MODAL ──
 function openEditModal(id) {
   const t = tasks[id];
   if (!t) return;
-  editTaskId = id;
-
+  editModalId = id;
   document.getElementById('em-title').textContent = 'Edit — ' + t.name;
   document.getElementById('em-name').value = t.name;
   document.getElementById('em-dob').value = t.dob;
   document.getElementById('em-meds').value = t.meds;
   document.getElementById('em-phone').value = t.phone;
   document.getElementById('em-next').value = t.nextStep;
-  document.getElementById('em-notes').value = '';
+  document.getElementById('em-notes').value = t.notes || '';
   document.getElementById('edit-modal').classList.add('open');
 }
 
 function saveEdit() {
-  if (!editTaskId) return;
-  const t = tasks[editTaskId];
+  if (!editModalId) return;
+  const t = tasks[editModalId];
   if (!t) return;
-
-  // Update task data
   t.name = document.getElementById('em-name').value || t.name;
   t.dob = document.getElementById('em-dob').value || t.dob;
   t.meds = document.getElementById('em-meds').value || t.meds;
   t.phone = document.getElementById('em-phone').value || t.phone;
   t.nextStep = document.getElementById('em-next').value || t.nextStep;
-
-  // Update visible card
-  const card = document.querySelector(`[data-id="${editTaskId}"]`);
-  if (card) {
-    const nameEl = card.querySelector('.task-name');
-    const summaryEl = card.querySelector('.task-summary');
-    const nextEl = card.querySelector('.next-step');
-    if (nameEl) nameEl.textContent = t.name;
-    if (summaryEl && summaryEl.textContent.includes('💊')) summaryEl.textContent = '💊 ' + t.meds;
-    if (nextEl) nextEl.textContent = '→ ' + t.nextStep;
-  }
-
+  t.notes = document.getElementById('em-notes').value;
+  // Update initials if name changed
+  t.initials = t.name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase();
   closeEditModal();
+  renderAllSections();
+  recomputeCounts();
+  applyCurrentFilter();
   showToast('✅ Details updated — ' + t.name);
 }
 
-function closeEditModal() { document.getElementById('edit-modal').classList.remove('open'); editTaskId = null; }
+function closeEditModal() { document.getElementById('edit-modal').classList.remove('open'); editModalId = null; }
 function closeEditOutside(e) { if (e.target === document.getElementById('edit-modal')) closeEditModal(); }
 
-// ── MARK REVIEWED ──
-function performMarkReviewed(id, fromStatus) {
-  const card = document.querySelector(`[data-id="${id}"]`);
-  const t = tasks[id];
-  if (!card || !t) return;
-
-  t.status = 'reviewed';
-  card.style.transition = 'opacity 0.3s, transform 0.3s';
-  card.style.opacity = '0';
-  card.style.transform = 'translateX(16px)';
-
-  setTimeout(() => {
-    card.remove();
-    addReviewedCard(t);
-    updateCounts(fromStatus);
-    showToast('✅ ' + t.name + ' — marked as reviewed · ready for processing');
-  }, 300);
+function applyCurrentFilter() {
+  const activeNav = document.querySelector('.nav-item.active');
+  if (activeNav) filterTasks(currentFilter, activeNav);
 }
 
-function addReviewedCard(t) {
-  const list = document.getElementById('reviewed-list');
-  const time = new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
-
-  // Determine request type pill class
-  const rtClass = t.category === 'urgent' ? 'rt-urgent' : t.category === 'collection' ? 'rt-collection' : t.category === 'query' ? 'rt-query' : 'rt-repeat';
-
-  const card = document.createElement('div');
-  card.className = 'task-card reviewed-card';
-  card.dataset.status = 'reviewed';
-  card.dataset.id = t.id;
-  card.innerHTML = `
-    <div class="task-avatar av-green">${t.initials}</div>
-    <div class="task-body">
-      <div class="task-top">
-        <span class="task-name">${t.name}</span>
-        <span class="status-pill-sm sp-reviewed">Reviewed</span>
-        <span class="req-type ${rtClass}">${t.requestTypeLabel}</span>
-      </div>
-      <div class="task-summary">💊 ${t.meds} · Ready for processing</div>
-      <div class="task-meta">
-        <span class="task-meta-item">🕐 ${time}</span>
-        <span class="task-meta-item">Reviewed by pharmacist · queued for dispensing</span>
-      </div>
-    </div>
-    <div class="task-actions">
-      <button class="task-btn btn-mark" style="opacity:0.5;cursor:default;">Ready for processing</button>
-    </div>`;
-  list.insertBefore(card, list.firstChild);
-}
-
-function updateCounts(fromStatus) {
-  // Increment reviewed
-  ['stat-reviewed','badge-reviewed','reviewed-count'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = parseInt(el.textContent) + 1;
-  });
-
-  // Decrement source
-  if (fromStatus === 'urgent_review') {
-    ['stat-urgent','badge-urgent','urgent-count'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.textContent = Math.max(0, parseInt(el.textContent) - 1);
-    });
-  } else if (fromStatus === 'needs_review') {
-    ['badge-needs','needs-count'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.textContent = Math.max(0, parseInt(el.textContent) - 1);
-    });
-  } else if (fromStatus === 'callback_needed') {
-    ['badge-callback','callback-count'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.textContent = Math.max(0, parseInt(el.textContent) - 1);
-    });
-  }
-
-  // Open tasks = needs_review + callback_needed
-  const needs = parseInt(document.getElementById('badge-needs').textContent) || 0;
-  const callbacks = parseInt(document.getElementById('badge-callback').textContent) || 0;
-  document.getElementById('stat-open').textContent = needs + callbacks;
-
-  // All tasks badge
-  const allBadge = document.getElementById('badge-all');
-  if (allBadge) allBadge.textContent = Math.max(0, parseInt(allBadge.textContent) - 1);
-}
-
-// ── ALERT PHARMACIST ──
-function alertPharmacist(name) {
-  showToast('🚨 Pharmacist alerted — ' + name + ' requires immediate attention');
-}
-
-// ── SIMULATE CALL — varied scenarios with correct counter updates ──
+// ── SIMULATE CALL ──
 const simScenarios = [
-  { name:'Patricia Green', initials:'PG', meds:'Omeprazole 20mg · Lansoprazole 15mg', status:'needs_review', category:'repeat', requestTypeLabel:'Repeat Request', slot:'Mon 9am', confidence:93, summary:'Repeat prescription request captured.', transcript:'Patient called to order repeat prescriptions. Collection Monday at 9am confirmed.', nextStep:'Review and queue for dispensing team.', avatarClass:'av-amber' },
-  { name:'Mohammed Ahmed', initials:'MA', meds:'Lisinopril 5mg · Aspirin 75mg', status:'needs_review', category:'repeat', requestTypeLabel:'Repeat Request', slot:'Tue 2pm', confidence:89, summary:'Repeat prescription request captured.', transcript:'Patient called for repeat prescription. Collection Tuesday at 2pm confirmed.', nextStep:'Review and queue for dispensing team.', avatarClass:'av-blue' },
-  { name:'Linda Watson', initials:'LW', meds:'Amoxicillin 500mg', status:'callback_needed', category:'query', requestTypeLabel:'Ready-Check Query', slot:'', confidence:97, summary:'Patient checking prescription readiness. Callback required from dispensary.', transcript:'Patient called to check if Amoxicillin prescription is ready. Clara informed patient dispensary will call back.', nextStep:'Dispensary to call patient back to confirm readiness.', avatarClass:'av-blue' },
-  { name:'Thomas Hill', initials:'TH', meds:'Codeine Phosphate 30mg', status:'needs_review', category:'repeat', requestTypeLabel:'Repeat Request', slot:'Wed 11am', confidence:71, summary:'Medication dosage was partially unclear on call. Manual verification recommended.', transcript:'Patient called for repeat prescription. Medication name was unclear. AI captured Codeine Phosphate but confidence is low.', nextStep:'Confirm medication name and dosage with patient before processing.', avatarClass:'av-amber' }
+  { name:'Patricia Green', initials:'PG', avatarClass:'av-amber', meds:'Omeprazole 20mg · Lansoprazole 15mg', status:'needs_review', category:'repeat', requestTypeLabel:'Repeat Request', confidence:93, slot:'Mon 9am', summary:'Repeat prescription request captured. Collection Monday at 9am.', transcript:'Patient called to order repeat prescriptions. Collection Monday at 9am confirmed.', nextStep:'Review and queue for dispensing team.', reviewedCopy:'Reviewed by pharmacist · queued for dispensing' },
+  { name:'Mohammed Ahmed', initials:'MA', avatarClass:'av-blue', meds:'Lisinopril 5mg · Aspirin 75mg', status:'needs_review', category:'repeat', requestTypeLabel:'Repeat Request', confidence:89, slot:'Tue 2pm', summary:'Repeat prescription request captured. Collection Tuesday at 2pm.', transcript:'Patient called for repeat prescription. Collection Tuesday at 2pm confirmed.', nextStep:'Review and queue for dispensing team.', reviewedCopy:'Reviewed by pharmacist · queued for dispensing' },
+  { name:'Linda Watson', initials:'LW', avatarClass:'av-blue', meds:'Amoxicillin 500mg', status:'callback_needed', category:'query', requestTypeLabel:'Ready-Check Query', confidence:97, slot:'', summary:'Patient checking prescription readiness. Callback required from dispensary.', transcript:'Patient called to check if Amoxicillin prescription is ready. Clara informed patient dispensary will call back.', nextStep:'Dispensary to call patient back to confirm readiness.', reviewedCopy:'Reviewed by dispensary team · callback assigned' },
+  { name:'Thomas Hill', initials:'TH', avatarClass:'av-amber', meds:'Codeine Phosphate 30mg', status:'needs_review', category:'repeat', requestTypeLabel:'Repeat Request', confidence:71, slot:'Wed 11am', summary:'Medication dosage was partially unclear on call. Manual verification recommended.', transcript:'Patient called for repeat prescription. Medication name was unclear. AI captured Codeine Phosphate but confidence is low.', nextStep:'Confirm medication name and dosage with patient before processing.', reviewedCopy:'Reviewed by pharmacist · verification noted · queued for dispensing' }
 ];
-
 let simIdx = 0;
 
 function simulateCall() {
   const s = simScenarios[simIdx % simScenarios.length]; simIdx++;
-  const id = 'sim-' + simIdx;
-  tasks[id] = { id, status: s.status, name: s.name, initials: s.initials, meds: s.meds, category: s.category, requestTypeLabel: s.requestTypeLabel, confidence: s.confidence, phone: '07700 9' + Math.floor(Math.random()*100000).toString().padStart(5,'0'), dob: '01/0' + Math.floor(Math.random()*9+1) + '/19' + Math.floor(Math.random()*40+55), summary: s.summary, transcript: s.transcript, nextStep: s.nextStep, avatarClass: s.avatarClass };
+  const id = 'sim-' + Date.now();
 
   const banner = document.getElementById('live-banner');
   document.getElementById('live-caller').textContent = s.name + ' · Clara capturing details...';
@@ -878,69 +682,21 @@ function simulateCall() {
   setTimeout(() => {
     clearInterval(timer);
     banner.style.display = 'none';
-
-    const confClass = s.confidence >= 90 ? '' : s.confidence >= 75 ? 'medium' : 'low';
-    const spClass = s.status === 'callback_needed' ? 'sp-callback' : 'sp-needs';
-    const spLabel = s.status === 'callback_needed' ? 'Callback Needed' : 'Needs Review';
     const time = new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
-    const rtClass = s.category === 'query' ? 'rt-query' : 'rt-repeat';
+    tasks[id] = {
+      id, status: s.status, name: s.name, initials: s.initials, avatarClass: s.avatarClass,
+      meds: s.meds, category: s.category, requestTypeLabel: s.requestTypeLabel,
+      confidence: s.confidence, phone: '07700 9' + Math.floor(Math.random()*99999+10000),
+      dob: String(Math.floor(Math.random()*28+1)).padStart(2,'0') + '/0' + Math.floor(Math.random()*9+1) + '/19' + Math.floor(Math.random()*40+55),
+      callTime: time,
+      displaySummary: s.slot ? '💊 ' + s.meds + ' · Collection ' + s.slot : '❓ ' + s.meds,
+      summary: s.summary, transcript: s.transcript, nextStep: s.nextStep, reviewedCopy: s.reviewedCopy, notes: ''
+    };
 
-    const primaryBtn = s.status === 'callback_needed'
-      ? `<button class="task-btn btn-callback" onclick="performMarkReviewed('${id}','callback_needed')">Assign callback</button>`
-      : `<button class="task-btn btn-review" onclick="performMarkReviewed('${id}','needs_review')">Review</button>`;
-
-    const list = s.status === 'callback_needed' ? document.getElementById('callback-list') : document.getElementById('needs-list');
-
-    const card = document.createElement('div');
-    card.className = s.confidence < 75 ? 'task-card low-conf' : 'task-card needs-review';
-    card.dataset.status = s.status;
-    card.dataset.id = id;
-    card.onclick = () => openReviewModal(id);
-    card.innerHTML = `
-      <div class="task-avatar ${s.avatarClass}">${s.initials}</div>
-      <div class="task-body">
-        <div class="task-top">
-          <span class="task-name">${s.name}</span>
-          <span class="status-pill-sm ${spClass}">${spLabel}</span>
-          <span class="req-type ${rtClass}">${s.requestTypeLabel}</span>
-        </div>
-        ${s.confidence < 75 ? '<div class="task-check-pill">⚠ Manual verification recommended</div>' : ''}
-        <div class="task-summary">💊 ${s.meds}${s.slot ? ' · Collection ' + s.slot : ''}</div>
-        <div class="task-meta">
-          <span class="task-meta-item">🕐 ${time}</span>
-          <span class="task-meta-item">AI: <div class="confidence-bar"><div class="conf-fill ${confClass}" style="width:${s.confidence}%"></div></div> ${s.confidence}%${s.confidence < 75 ? ' — check details' : ''}</span>
-        </div>
-        <div class="next-step">→ ${s.nextStep}</div>
-      </div>
-      <div class="task-actions" onclick="event.stopPropagation()">
-        ${primaryBtn}
-        <button class="task-btn btn-edit" onclick="openEditModal('${id}')">Edit details</button>
-      </div>`;
-    list.insertBefore(card, list.firstChild);
-
-    // ── CORRECT COUNTER UPDATES ──
     document.getElementById('stat-calls').textContent = parseInt(document.getElementById('stat-calls').textContent) + 1;
-    document.getElementById('badge-all').textContent = parseInt(document.getElementById('badge-all').textContent) + 1;
-
-    if (s.status === 'callback_needed') {
-      // Only increment callback counters
-      ['badge-callback','callback-count'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = parseInt(el.textContent) + 1;
-      });
-    } else {
-      // Only increment needs-review counters
-      ['badge-needs','needs-count'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = parseInt(el.textContent) + 1;
-      });
-    }
-
-    // Recalculate open tasks
-    const needs = parseInt(document.getElementById('badge-needs').textContent) || 0;
-    const callbacks = parseInt(document.getElementById('badge-callback').textContent) || 0;
-    document.getElementById('stat-open').textContent = needs + callbacks;
-
+    renderAllSections();
+    recomputeCounts();
+    applyCurrentFilter();
     showToast('📞 New task from ' + s.name);
   }, 4000);
 }
@@ -952,6 +708,11 @@ function showToast(msg) {
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 3200);
 }
+
+// ── INIT ──
+document.getElementById('live-date').textContent = ' · ' + new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
+renderAllSections();
+recomputeCounts();
 </script>
 
 </body>
