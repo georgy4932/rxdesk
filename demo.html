@@ -1,787 +1,846 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Book a Demo — RxDesk</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
-
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --ink: #0d1117;
-  --surface: #f5f2ec;
-  --accent: #1a6b4a;
-  --accent-light: #e8f5ef;
-  --accent-bright: #22c55e;
-  --gold: #c9a84c;
-  --muted: #6b7280;
-  --border: #e2ddd6;
-  --white: #ffffff;
-  --red: #ef4444;
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--surface);
-  color: var(--ink);
-  min-height: 100vh;
-}
-
-/* ── NAV ── */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 48px;
-  background: rgba(245,242,236,0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-
-.logo-mark {
-  width: 32px; height: 32px;
-  background: var(--accent);
-  border-radius: 7px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 14px;
-  font-family: 'Instrument Serif', serif;
-  font-style: italic;
-}
-
-.logo-text { font-size: 16px; font-weight: 700; letter-spacing: -0.3px; color: var(--ink); }
-.logo-text span { color: var(--accent); }
-
-.nav-back {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--muted);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: color 0.2s;
-}
-
-.nav-back:hover { color: var(--ink); }
-
-/* ── PAGE ── */
-.page {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding-top: 70px;
-}
-
-/* ── LEFT PANEL ── */
-.left-panel {
-  background: var(--ink);
-  padding: 80px 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.left-panel::before {
-  content: '';
-  position: absolute;
-  top: -200px; right: -200px;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(26,107,74,0.15) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.left-panel::after {
-  content: '';
-  position: absolute;
-  bottom: -100px; left: -100px;
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.panel-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  background: rgba(34,197,94,0.1);
-  border: 1px solid rgba(34,197,94,0.2);
-  color: var(--accent-bright);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  padding: 6px 14px;
-  border-radius: 100px;
-  margin-bottom: 32px;
-  width: fit-content;
-}
-
-.badge-dot {
-  width: 5px; height: 5px;
-  background: var(--accent-bright);
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-.panel-title {
-  font-family: 'Instrument Serif', serif;
-  font-size: 48px;
-  line-height: 1.08;
-  letter-spacing: -1.5px;
-  color: white;
-  margin-bottom: 20px;
-}
-
-.panel-title em { font-style: italic; color: var(--accent-bright); }
-
-.panel-sub {
-  font-size: 16px;
-  line-height: 1.65;
-  color: rgba(255,255,255,0.5);
-  font-weight: 300;
-  margin-bottom: 52px;
-  max-width: 400px;
-}
-
-.benefits {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.benefit {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-}
-
-.benefit-icon {
-  width: 36px; height: 36px;
-  background: rgba(26,107,74,0.2);
-  border: 1px solid rgba(34,197,94,0.2);
-  border-radius: 9px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  flex-shrink: 0;
-}
-
-.benefit-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: white;
-  margin-bottom: 3px;
-}
-
-.benefit-desc {
-  font-size: 13px;
-  color: rgba(255,255,255,0.45);
-  line-height: 1.5;
-}
-
-.panel-footer {
-  margin-top: 52px;
-  padding-top: 28px;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.panel-footer-text {
-  font-size: 13px;
-  color: rgba(255,255,255,0.35);
-  line-height: 1.5;
-}
-
-.panel-footer-text a {
-  color: rgba(255,255,255,0.6);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.panel-footer-text a:hover { color: white; }
-
-/* ── RIGHT PANEL ── */
-.right-panel {
-  padding: 80px 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: var(--surface);
-}
-
-.form-header {
-  margin-bottom: 40px;
-}
-
-.form-title {
-  font-family: 'Instrument Serif', serif;
-  font-size: 32px;
-  letter-spacing: -0.8px;
-  margin-bottom: 8px;
-}
-
-.form-sub {
-  font-size: 14px;
-  color: var(--muted);
-  font-weight: 300;
-  line-height: 1.6;
-}
-
-/* ── FORM ── */
-.demo-form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.form-label {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-  color: var(--ink);
-}
-
-.form-label span { color: var(--accent); }
-
-.form-input, .form-select {
-  background: white;
-  border: 1.5px solid var(--border);
-  border-radius: 9px;
-  padding: 12px 16px;
-  font-size: 14px;
-  color: var(--ink);
-  font-family: 'DM Sans', sans-serif;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  width: 100%;
-  appearance: none;
-}
-
-.form-input:focus, .form-select:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(26,107,74,0.08);
-}
-
-.form-input::placeholder { color: #c4bdb5; }
-
-.select-wrapper {
-  position: relative;
-}
-
-.select-wrapper::after {
-  content: '▾';
-  position: absolute;
-  right: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--muted);
-  pointer-events: none;
-  font-size: 12px;
-}
-
-.form-select { cursor: pointer; padding-right: 36px; }
-
-/* ── RADIO GROUP ── */
-.radio-group {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-}
-
-.radio-option {
-  position: relative;
-}
-
-.radio-option input {
-  position: absolute;
-  opacity: 0;
-  width: 0; height: 0;
-}
-
-.radio-label {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 14px;
-  background: white;
-  border: 1.5px solid var(--border);
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--muted);
-  cursor: pointer;
-  transition: all 0.15s;
-  text-align: center;
-}
-
-.radio-option input:checked + .radio-label {
-  background: var(--accent-light);
-  border-color: var(--accent);
-  color: var(--accent);
-  font-weight: 700;
-}
-
-.radio-label:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-/* ── SUBMIT ── */
-.submit-btn {
-  background: var(--accent);
-  color: white;
-  padding: 15px 32px;
-  border-radius: 10px;
-  font-size: 15px;
-  font-weight: 700;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
-  width: 100%;
-  margin-top: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-family: 'DM Sans', sans-serif;
-}
-
-.submit-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(26,107,74,0.28);
-}
-
-.submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-
-.form-note {
-  font-size: 12px;
-  color: var(--muted);
-  text-align: center;
-  margin-top: 4px;
-  line-height: 1.5;
-}
-
-/* ── SUCCESS STATE ── */
-.success-state {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 40px 0;
-  gap: 20px;
-}
-
-.success-state.show { display: flex; }
-.demo-form.hide { display: none; }
-.form-header.hide { display: none; }
-
-.success-icon {
-  width: 72px; height: 72px;
-  background: var(--accent-light);
-  border: 2px solid rgba(26,107,74,0.2);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 32px;
-  animation: scaleIn 0.4s ease both;
-}
-
-@keyframes scaleIn {
-  from { transform: scale(0.5); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-.success-title {
-  font-family: 'Instrument Serif', serif;
-  font-size: 30px;
-  letter-spacing: -0.5px;
-  color: var(--ink);
-}
-
-.success-sub {
-  font-size: 15px;
-  color: var(--muted);
-  font-weight: 300;
-  line-height: 1.65;
-  max-width: 340px;
-}
-
-.success-detail {
-  background: var(--accent-light);
-  border: 1px solid rgba(26,107,74,0.15);
-  border-radius: 10px;
-  padding: 16px 24px;
-  font-size: 14px;
-  color: var(--accent);
-  font-weight: 500;
-}
-
-.back-home {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--accent);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
-  margin-top: 8px;
-  transition: gap 0.2s;
-}
-
-.back-home:hover { gap: 12px; }
-
-/* ── TRUST BAR ── */
-.trust-bar {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-top: 24px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
-  flex-wrap: wrap;
-}
-
-.trust-item {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 11px;
-  color: var(--muted);
-  font-weight: 500;
-}
-
-/* ── ERROR ── */
-.field-error {
-  font-size: 11px;
-  color: var(--red);
-  margin-top: 2px;
-  display: none;
-}
-
-.form-input.error { border-color: var(--red); }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 900px) {
-  nav { padding: 16px 20px; }
-  .page { grid-template-columns: 1fr; }
-  .left-panel { padding: 60px 28px; }
-  .panel-title { font-size: 36px; }
-  .right-panel { padding: 48px 28px; }
-  .form-row { grid-template-columns: 1fr; }
-  .radio-group { grid-template-columns: repeat(2, 1fr); }
-}
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request a Demo — RxDesk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0d1117;
+      --surface: #f5f2ec;
+      --accent: #1a6b4a;
+      --accent-light: #e8f5ef;
+      --accent-bright: #22c55e;
+      --gold: #c9a84c;
+      --muted: #6b7280;
+      --border: #e2ddd6;
+      --white: #ffffff;
+      --red: #ef4444;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--surface);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(245,242,236,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 32px; height: 32px;
+      background: var(--accent);
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+    }
+
+    .logo-text {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--ink);
+    }
+
+    .logo-text span { color: var(--accent); }
+
+    .nav-back {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover { color: var(--ink); }
+
+    /* PAGE */
+    .page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 70px;
+    }
+
+    /* LEFT PANEL */
+    .left-panel {
+      background: var(--ink);
+      padding: 80px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .left-panel::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(26,107,74,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .left-panel::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .panel-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.2);
+      color: var(--accent-bright);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+      width: fit-content;
+    }
+
+    .badge-dot {
+      width: 5px; height: 5px;
+      background: var(--accent-bright);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    .panel-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 48px;
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .panel-title em { font-style: italic; color: var(--accent-bright); }
+
+    .panel-sub {
+      font-size: 16px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.5);
+      font-weight: 300;
+      margin-bottom: 52px;
+      max-width: 420px;
+    }
+
+    .benefits {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .benefit {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .benefit-icon {
+      width: 36px; height: 36px;
+      background: rgba(26,107,74,0.2);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .benefit-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 3px;
+    }
+
+    .benefit-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.5;
+    }
+
+    .panel-footer {
+      margin-top: 52px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .panel-footer-text {
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.5;
+    }
+
+    .panel-footer-text a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .panel-footer-text a:hover { color: white; }
+
+    /* RIGHT PANEL */
+    .right-panel {
+      padding: 80px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--surface);
+    }
+
+    .form-header {
+      margin-bottom: 40px;
+    }
+
+    .form-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 32px;
+      letter-spacing: -0.8px;
+      margin-bottom: 8px;
+    }
+
+    .form-sub {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    /* FORM */
+    .demo-form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      color: var(--ink);
+    }
+
+    .form-label span { color: var(--accent); }
+
+    .form-input, .form-select {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 9px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%;
+      appearance: none;
+    }
+
+    .form-input:focus, .form-select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(26,107,74,0.08);
+    }
+
+    .form-input::placeholder { color: #c4bdb5; }
+
+    .select-wrapper {
+      position: relative;
+    }
+
+    .select-wrapper::after {
+      content: '▾';
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+      font-size: 12px;
+    }
+
+    .form-select {
+      cursor: pointer;
+      padding-right: 36px;
+    }
+
+    .field-hint {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+      line-height: 1.5;
+    }
+
+    /* RADIO GROUP */
+    .radio-group {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .radio-option {
+      position: relative;
+    }
+
+    .radio-option input {
+      position: absolute;
+      opacity: 0;
+      width: 0; height: 0;
+    }
+
+    .radio-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      text-align: center;
+    }
+
+    .radio-option input:checked + .radio-label {
+      background: var(--accent-light);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .radio-label:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* SUBMIT */
+    .submit-btn {
+      background: var(--accent);
+      color: white;
+      padding: 15px 32px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+      width: 100%;
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(26,107,74,0.28);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .form-note {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    /* SUCCESS STATE */
+    .success-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 40px 0;
+      gap: 20px;
+    }
+
+    .success-state.show { display: flex; }
+    .demo-form.hide { display: none; }
+    .form-header.hide { display: none; }
+
+    .success-icon {
+      width: 72px; height: 72px;
+      background: var(--accent-light);
+      border: 2px solid rgba(26,107,74,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      animation: scaleIn 0.4s ease both;
+    }
+
+    @keyframes scaleIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .success-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 30px;
+      letter-spacing: -0.5px;
+      color: var(--ink);
+    }
+
+    .success-sub {
+      font-size: 15px;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.65;
+      max-width: 340px;
+    }
+
+    .success-detail {
+      background: var(--accent-light);
+      border: 1px solid rgba(26,107,74,0.15);
+      border-radius: 10px;
+      padding: 16px 24px;
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 8px;
+      transition: gap 0.2s;
+    }
+
+    .back-home:hover { gap: 12px; }
+
+    /* TRUST BAR */
+    .trust-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* ERROR */
+    .field-error {
+      font-size: 11px;
+      color: var(--red);
+      margin-top: 2px;
+      display: none;
+    }
+
+    .form-input.error,
+    .form-select.error {
+      border-color: var(--red);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 16px 20px; }
+      .page { grid-template-columns: 1fr; }
+      .left-panel { padding: 60px 28px; }
+      .panel-title { font-size: 36px; }
+      .right-panel { padding: 48px 28px; }
+      .form-row { grid-template-columns: 1fr; }
+      .radio-group { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
 </head>
 <body>
 
-<!-- NAV -->
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="logo">
+      <div class="logo-mark">Rx</div>
+      <span class="logo-text">Rx<span>Desk</span></span>
+    </a>
+    <a href="index.html" class="nav-back">← Back to site</a>
+  </nav>
 
-<nav>
-  <a href="index.html" class="logo">
-    <div class="logo-mark">Rx</div>
-    <span class="logo-text">Rx<span>Desk</span></span>
-  </a>
-  <a href="index.html" class="nav-back">← Back to site</a>
-</nav>
+  <!-- PAGE -->
+  <div class="page">
 
-<!-- PAGE -->
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+      <div class="panel-badge">
+        <div class="badge-dot"></div>
+        Free 30-minute walkthrough
+      </div>
 
-<div class="page">
+      <h1 class="panel-title">See how RxDesk<br>turns pharmacy calls<br>into <em>structured work</em>.</h1>
 
-  <!-- LEFT PANEL -->
+      <p class="panel-sub">In 30 minutes, we’ll show you how RxDesk captures pharmacy calls, structures requests instantly, flags urgent issues, and prepares work for your team to review.</p>
 
-  <div class="left-panel">
-    <div class="panel-badge">
-      <div class="badge-dot"></div>
-      Free 30-minute demo
+      <div class="benefits">
+        <div class="benefit">
+          <div class="benefit-icon">📞</div>
+          <div>
+            <div class="benefit-title">Live workflow walkthrough</div>
+            <div class="benefit-desc">See how a real pharmacy call becomes a structured task your team can review and action.</div>
+          </div>
+        </div>
+
+        <div class="benefit">
+          <div class="benefit-icon">📋</div>
+          <div>
+            <div class="benefit-title">Built for pharmacy operations</div>
+            <div class="benefit-desc">We’ll show how RxDesk handles repeat requests, collection changes, ready-check queries, and urgent flags.</div>
+          </div>
+        </div>
+
+        <div class="benefit">
+          <div class="benefit-icon">📊</div>
+          <div>
+            <div class="benefit-title">Month-end support preview</div>
+            <div class="benefit-desc">See how RxDesk helps surface claim-related work and prepares summaries for staff review.</div>
+          </div>
+        </div>
+
+        <div class="benefit">
+          <div class="benefit-icon">✓</div>
+          <div>
+            <div class="benefit-title">No pressure, no commitment</div>
+            <div class="benefit-desc">The walkthrough is completely free. Ask questions, explore the workflow, and decide if it fits your pharmacy.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-footer">
+        <div class="panel-footer-text">
+          Questions before booking?<br>
+          Email us at <a href="mailto:hello@rxdesk.co.uk">hello@rxdesk.co.uk</a>
+        </div>
+      </div>
     </div>
 
-```
-<h1 class="panel-title">See Clara<br>answer a <em>real</em><br>call live.</h1>
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
 
-<p class="panel-sub">In 30 minutes we'll show you exactly how RxDesk handles your pharmacy's calls, logs prescriptions, and prepares your NHS claims — all automatically.</p>
+      <!-- SUCCESS STATE -->
+      <div class="success-state" id="success-state">
+        <div class="success-icon">✅</div>
+        <div class="success-title">Demo request received.</div>
+        <p class="success-sub">Thanks for your interest in RxDesk. We’ll be in touch within 24 hours to confirm your live walkthrough.</p>
+        <div class="success-detail" id="success-detail">📧 A confirmation will be sent to your email address</div>
+        <a href="index.html" class="back-home">← Back to RxDesk</a>
+      </div>
 
-<div class="benefits">
-  <div class="benefit">
-    <div class="benefit-icon">📞</div>
-    <div>
-      <div class="benefit-title">Live call demonstration</div>
-      <div class="benefit-desc">Watch Clara handle a real prescription call in real time — no scripts, no staging.</div>
-    </div>
-  </div>
-  <div class="benefit">
-    <div class="benefit-icon">📋</div>
-    <div>
-      <div class="benefit-title">Your questions answered</div>
-      <div class="benefit-desc">We'll walk through how RxDesk fits into your specific pharmacy workflow.</div>
-    </div>
-  </div>
-  <div class="benefit">
-    <div class="benefit-icon">📊</div>
-    <div>
-      <div class="benefit-title">FP34C claims preview</div>
-      <div class="benefit-desc">See how your end-of-month NHS claim compiles automatically throughout the month.</div>
-    </div>
-  </div>
-  <div class="benefit">
-    <div class="benefit-icon">✓</div>
-    <div>
-      <div class="benefit-title">No commitment required</div>
-      <div class="benefit-desc">The demo is completely free. No contracts, no pressure, no hidden agenda.</div>
-    </div>
-  </div>
-</div>
+      <!-- FORM HEADER -->
+      <div class="form-header" id="form-header">
+        <div class="form-title">Request your free demo</div>
+        <p class="form-sub">Share a few details and we’ll be in touch within 24 hours to confirm a time that works for you.</p>
+      </div>
 
-<div class="panel-footer">
-  <div class="panel-footer-text">
-    Questions before booking?<br>
-    Email us at <a href="mailto:hello@rxdesk.co.uk">hello@rxdesk.co.uk</a>
-  </div>
-</div>
-```
+      <!-- FORM -->
+      <form class="demo-form" id="demo-form" action="https://formspree.io/f/mjgjwqov" method="POST" novalidate>
 
-  </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="pharmacy-name">Pharmacy Name <span>*</span></label>
+            <input class="form-input" type="text" id="pharmacy-name" name="pharmacy_name" placeholder="e.g. CarePoint Pharmacy" required>
+            <div class="field-error" id="err-pharmacy">Please enter your pharmacy name</div>
+          </div>
 
-  <!-- RIGHT PANEL -->
+          <div class="form-group">
+            <label class="form-label" for="your-name">Your Name <span>*</span></label>
+            <input class="form-input" type="text" id="your-name" name="your_name" placeholder="e.g. James Wilson" required>
+            <div class="field-error" id="err-name">Please enter your name</div>
+          </div>
+        </div>
 
-  <div class="right-panel">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address <span>*</span></label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="e.g. james@carepointpharmacy.co.uk" required>
+            <div class="field-error" id="err-email">Please enter a valid email address</div>
+          </div>
 
-```
-<!-- SUCCESS STATE -->
-<div class="success-state" id="success-state">
-  <div class="success-icon">✅</div>
-  <div class="success-title">You're booked in.</div>
-  <p class="success-sub">Thank you for your interest in RxDesk. We'll be in touch within 24 hours to confirm your demo time.</p>
-  <div class="success-detail">📧 A confirmation will be sent to hello@rxdesk.co.uk</div>
-  <a href="index.html" class="back-home">← Back to RxDesk →</a>
-</div>
+          <div class="form-group">
+            <label class="form-label" for="phone">Phone Number <span>*</span></label>
+            <input class="form-input" type="tel" id="phone" name="phone" placeholder="e.g. 07700 900142" required>
+            <div class="field-error" id="err-phone">Please enter your phone number</div>
+          </div>
+        </div>
 
-<!-- FORM HEADER -->
-<div class="form-header" id="form-header">
-  <div class="form-title">Book your free demo</div>
-  <p class="form-sub">Fill in your details and we'll be in touch within 24 hours to confirm a time that works for you.</p>
-</div>
+        <div class="form-group">
+          <label class="form-label">How many calls do you miss or put on hold daily? <span>*</span></label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="missed_calls" value="5-10" required>
+              <span class="radio-label">5–10 calls</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="missed_calls" value="10-20">
+              <span class="radio-label">10–20 calls</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="missed_calls" value="20+">
+              <span class="radio-label">20+ calls</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="missed_calls" value="Not sure">
+              <span class="radio-label">Not sure</span>
+            </label>
+          </div>
+          <div class="field-error" id="err-missed-calls">Please select an option</div>
+        </div>
 
-<!-- FORM -->
-<form class="demo-form" id="demo-form" action="https://formspree.io/f/mjgjwqov" method="POST" novalidate>
+        <div class="form-group">
+          <label class="form-label">Number of branches <span>*</span></label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="branches" value="1" required>
+              <span class="radio-label">1 branch</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="branches" value="2-5">
+              <span class="radio-label">2–5 branches</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="branches" value="5+">
+              <span class="radio-label">5+ branches</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="branches" value="Group">
+              <span class="radio-label">Group / Chain</span>
+            </label>
+          </div>
+          <div class="field-error" id="err-branches">Please select an option</div>
+        </div>
 
-  <div class="form-row">
-    <div class="form-group">
-      <label class="form-label" for="pharmacy-name">Pharmacy Name <span>*</span></label>
-      <input class="form-input" type="text" id="pharmacy-name" name="pharmacy_name" placeholder="e.g. CarePoint Pharmacy" required>
-      <div class="field-error" id="err-pharmacy">Please enter your pharmacy name</div>
-    </div>
-    <div class="form-group">
-      <label class="form-label" for="your-name">Your Name <span>*</span></label>
-      <input class="form-input" type="text" id="your-name" name="your_name" placeholder="e.g. James Wilson" required>
-      <div class="field-error" id="err-name">Please enter your name</div>
-    </div>
-  </div>
+        <div class="form-group">
+          <label class="form-label" for="preferred-time">Preferred demo time</label>
+          <div class="select-wrapper">
+            <select class="form-select" id="preferred-time" name="preferred_time">
+              <option value="">Select a time slot</option>
+              <option>Monday morning (9am–12pm)</option>
+              <option>Monday afternoon (1pm–5pm)</option>
+              <option>Tuesday morning (9am–12pm)</option>
+              <option>Tuesday afternoon (1pm–5pm)</option>
+              <option>Wednesday morning (9am–12pm)</option>
+              <option>Wednesday afternoon (1pm–5pm)</option>
+              <option>Thursday morning (9am–12pm)</option>
+              <option>Thursday afternoon (1pm–5pm)</option>
+              <option>Friday morning (9am–12pm)</option>
+              <option>Flexible — any time works</option>
+            </select>
+          </div>
+          <div class="field-hint">Optional — helps us suggest a suitable time.</div>
+        </div>
 
-  <div class="form-row">
-    <div class="form-group">
-      <label class="form-label" for="email">Email Address <span>*</span></label>
-      <input class="form-input" type="email" id="email" name="email" placeholder="e.g. james@carepointpharmacy.co.uk" required>
-      <div class="field-error" id="err-email">Please enter a valid email address</div>
-    </div>
-    <div class="form-group">
-      <label class="form-label" for="phone">Phone Number <span>*</span></label>
-      <input class="form-input" type="tel" id="phone" name="phone" placeholder="e.g. 07700 900142" required>
-      <div class="field-error" id="err-phone">Please enter your phone number</div>
-    </div>
-  </div>
+        <button type="submit" class="submit-btn" id="submit-btn">
+          <span id="btn-text">Request My Free Demo →</span>
+        </button>
 
-  <div class="form-group">
-    <label class="form-label">How many calls do you miss or put on hold daily? <span>*</span></label>
-    <div class="radio-group">
-      <label class="radio-option">
-        <input type="radio" name="missed_calls" value="5-10" required>
-        <span class="radio-label">5–10 calls</span>
-      </label>
-      <label class="radio-option">
-        <input type="radio" name="missed_calls" value="10-20">
-        <span class="radio-label">10–20 calls</span>
-      </label>
-      <label class="radio-option">
-        <input type="radio" name="missed_calls" value="20+">
-        <span class="radio-label">20+ calls</span>
-      </label>
-      <label class="radio-option">
-        <input type="radio" name="missed_calls" value="Not sure">
-        <span class="radio-label">Not sure</span>
-      </label>
-    </div>
-  </div>
+        <p class="form-note">🔒 Your details are kept private and only used to arrange your RxDesk demo.</p>
 
-  <div class="form-group">
-    <label class="form-label">Number of branches <span>*</span></label>
-    <div class="radio-group">
-      <label class="radio-option">
-        <input type="radio" name="branches" value="1" required>
-        <span class="radio-label">1 branch</span>
-      </label>
-      <label class="radio-option">
-        <input type="radio" name="branches" value="2-5">
-        <span class="radio-label">2–5 branches</span>
-      </label>
-      <label class="radio-option">
-        <input type="radio" name="branches" value="5+">
-        <span class="radio-label">5+ branches</span>
-      </label>
-      <label class="radio-option">
-        <input type="radio" name="branches" value="Group">
-        <span class="radio-label">Group / Chain</span>
-      </label>
+        <div class="trust-bar">
+          <div class="trust-item">🔒 Secure demo booking</div>
+          <div class="trust-item">✅ No commitment</div>
+          <div class="trust-item">⚡ Reply within 24hrs</div>
+          <div class="trust-item">🏥 Built for pharmacy workflows</div>
+        </div>
+      </form>
     </div>
   </div>
 
-  <div class="form-group">
-    <label class="form-label" for="preferred-time">Preferred demo time</label>
-    <div class="select-wrapper">
-      <select class="form-select" id="preferred-time" name="preferred_time">
-        <option value="">Select a time slot</option>
-        <option>Monday morning (9am–12pm)</option>
-        <option>Monday afternoon (1pm–5pm)</option>
-        <option>Tuesday morning (9am–12pm)</option>
-        <option>Tuesday afternoon (1pm–5pm)</option>
-        <option>Wednesday morning (9am–12pm)</option>
-        <option>Wednesday afternoon (1pm–5pm)</option>
-        <option>Thursday morning (9am–12pm)</option>
-        <option>Thursday afternoon (1pm–5pm)</option>
-        <option>Friday morning (9am–12pm)</option>
-        <option>Flexible — any time works</option>
-      </select>
-    </div>
-  </div>
+  <script>
+    const form = document.getElementById('demo-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
 
-  <button type="submit" class="submit-btn" id="submit-btn">
-    <span id="btn-text">Book My Free Demo →</span>
-  </button>
+    function validateField(input, errorId) {
+      const error = document.getElementById(errorId);
 
-  <p class="form-note">🔒 Your details are kept private and never shared. We'll only contact you about your demo.</p>
+      if (!input.value.trim()) {
+        input.classList.add('error');
+        if (error) error.style.display = 'block';
+        return false;
+      }
 
-  <div class="trust-bar">
-    <div class="trust-item">🔒 GDPR Compliant</div>
-    <div class="trust-item">✅ No commitment</div>
-    <div class="trust-item">⚡ Reply within 24hrs</div>
-    <div class="trust-item">🏥 Built for NHS pharmacies</div>
-  </div>
+      if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
+        input.classList.add('error');
+        if (error) error.style.display = 'block';
+        return false;
+      }
 
-</form>
-```
-
-  </div>
-</div>
-
-<script>
-  const form = document.getElementById('demo-form');
-  const submitBtn = document.getElementById('submit-btn');
-  const btnText = document.getElementById('btn-text');
-
-  // Validate individual field
-  function validateField(input, errorId) {
-    const error = document.getElementById(errorId);
-    if (!input.value.trim()) {
-      input.classList.add('error');
-      if (error) error.style.display = 'block';
-      return false;
+      input.classList.remove('error');
+      if (error) error.style.display = 'none';
+      return true;
     }
-    if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
-      input.classList.add('error');
-      if (error) error.style.display = 'block';
-      return false;
+
+    function validateRadioGroup(name, errorId) {
+      const selected = document.querySelector(`input[name="${name}"]:checked`);
+      const error = document.getElementById(errorId);
+
+      if (!selected) {
+        if (error) error.style.display = 'block';
+        return false;
+      }
+
+      if (error) error.style.display = 'none';
+      return true;
     }
-    input.classList.remove('error');
-    if (error) error.style.display = 'none';
-    return true;
-  }
 
-  // Live validation
-  document.getElementById('pharmacy-name').addEventListener('blur', function() { validateField(this, 'err-pharmacy'); });
-  document.getElementById('your-name').addEventListener('blur', function() { validateField(this, 'err-name'); });
-  document.getElementById('email').addEventListener('blur', function() { validateField(this, 'err-email'); });
-  document.getElementById('phone').addEventListener('blur', function() { validateField(this, 'err-phone'); });
+    // Live validation
+    document.getElementById('pharmacy-name').addEventListener('blur', function() {
+      validateField(this, 'err-pharmacy');
+    });
 
-  // Submit
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
+    document.getElementById('your-name').addEventListener('blur', function() {
+      validateField(this, 'err-name');
+    });
 
-    // Validate
-    let valid = true;
-    valid = validateField(document.getElementById('pharmacy-name'), 'err-pharmacy') && valid;
-    valid = validateField(document.getElementById('your-name'), 'err-name') && valid;
-    valid = validateField(document.getElementById('email'), 'err-email') && valid;
-    valid = validateField(document.getElementById('phone'), 'err-phone') && valid;
+    document.getElementById('email').addEventListener('blur', function() {
+      validateField(this, 'err-email');
+    });
 
-    if (!valid) return;
+    document.getElementById('phone').addEventListener('blur', function() {
+      validateField(this, 'err-phone');
+    });
 
-    // Loading state
-    submitBtn.disabled = true;
-    btnText.textContent = 'Sending...';
+    document.querySelectorAll('input[name="missed_calls"]').forEach(input => {
+      input.addEventListener('change', () => validateRadioGroup('missed_calls', 'err-missed-calls'));
+    });
 
-    try {
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      });
+    document.querySelectorAll('input[name="branches"]').forEach(input => {
+      input.addEventListener('change', () => validateRadioGroup('branches', 'err-branches'));
+    });
 
-      if (response.ok) {
-        // Show success
-        document.getElementById('form-header').classList.add('hide');
-        form.classList.add('hide');
-        document.getElementById('success-state').classList.add('show');
-      } else {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      let valid = true;
+      valid = validateField(document.getElementById('pharmacy-name'), 'err-pharmacy') && valid;
+      valid = validateField(document.getElementById('your-name'), 'err-name') && valid;
+      valid = validateField(document.getElementById('email'), 'err-email') && valid;
+      valid = validateField(document.getElementById('phone'), 'err-phone') && valid;
+      valid = validateRadioGroup('missed_calls', 'err-missed-calls') && valid;
+      valid = validateRadioGroup('branches', 'err-branches') && valid;
+
+      if (!valid) return;
+
+      submitBtn.disabled = true;
+      btnText.textContent = 'Sending...';
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          const emailValue = document.getElementById('email').value;
+          document.getElementById('success-detail').textContent =
+            '📧 A confirmation will be sent to ' + emailValue;
+
+          document.getElementById('form-header').classList.add('hide');
+          form.classList.add('hide');
+          document.getElementById('success-state').classList.add('show');
+        } else {
+          btnText.textContent = 'Something went wrong — try again';
+          submitBtn.disabled = false;
+          setTimeout(() => {
+            btnText.textContent = 'Request My Free Demo →';
+          }, 2500);
+        }
+      } catch (err) {
         btnText.textContent = 'Something went wrong — try again';
         submitBtn.disabled = false;
+        setTimeout(() => {
+          btnText.textContent = 'Request My Free Demo →';
+        }, 2500);
       }
-    } catch (err) {
-      btnText.textContent = 'Something went wrong — try again';
-      submitBtn.disabled = false;
-    }
-  });
-</script>
-
+    });
+  </script>
 </body>
 </html>
