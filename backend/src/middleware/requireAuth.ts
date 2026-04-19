@@ -19,6 +19,17 @@ function getKey(header: jwt.JwtHeader, callback: jwt.SigningKeyCallback) {
 }
 
 export function requireAuth(req: Request, res: Response, next: NextFunction) {
+  // Dev bypass - skip all JWT verification when enabled
+  if (process.env.DEV_AUTH_BYPASS === 'true') {
+    req.user = {
+      id: 'dev-user',
+      email: 'admin@carepointpharmacy.co.uk',
+      role: 'staff',
+      pharmacyId: null
+    };
+    return next();
+  }
+
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -30,21 +41,17 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
   jwt.verify(
     token,
     getKey,
-    {
-      algorithms: ['RS256']
-    },
+    { algorithms: ['RS256'] },
     (err, decoded: any) => {
       if (err || !decoded) {
         return res.status(401).json({ error: 'Invalid token' });
       }
-
       req.user = {
         id: decoded.sub,
         email: decoded.email,
         role: decoded.role || 'staff',
         pharmacyId: decoded.pharmacy_id || null
       };
-
       next();
     }
   );
