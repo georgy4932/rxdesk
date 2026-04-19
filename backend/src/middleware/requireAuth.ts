@@ -31,8 +31,7 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
     token,
     getKey,
     {
-      audience: 'authenticated',
-      issuer: `${process.env.SUPABASE_URL}/auth/v1`
+      algorithms: ['RS256']
     },
     (err, decoded: any) => {
       if (err || !decoded) {
