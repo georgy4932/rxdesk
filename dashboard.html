@@ -24,14 +24,8 @@ html,body{height:100%;overflow:hidden;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;height:100vh;}
 
 /* LOGIN SCREEN */
-#login-screen{
-display:flex;width:100%;height:100%;align-items:center;justify-content:center;
-background:var(–bg);flex-direction:column;gap:0;
-}
-.login-box{
-background:var(–surface2);border:1px solid var(–border2);border-radius:14px;
-padding:40px 36px;width:360px;max-width:95vw;display:flex;flex-direction:column;gap:20px;
-}
+#login-screen{display:flex;width:100%;height:100%;align-items:center;justify-content:center;background:var(–bg);flex-direction:column;}
+.login-box{background:var(–surface2);border:1px solid var(–border2);border-radius:14px;padding:40px 36px;width:360px;max-width:95vw;display:flex;flex-direction:column;gap:20px;}
 .login-logo{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
 .login-logo-mark{width:32px;height:32px;background:var(–accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:‘Instrument Serif’,serif;font-style:italic;font-size:14px;color:white;}
 .login-logo-text{font-size:16px;font-weight:700;letter-spacing:-0.3px;}
@@ -77,7 +71,6 @@ padding:40px 36px;width:360px;max-width:95vw;display:flex;flex-direction:column;
 .user-row:hover{background:rgba(255,255,255,0.04);}
 .user-avatar{width:24px;height:24px;background:var(–accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;}
 .user-name{font-size:12px;font-weight:500;}
-.user-role{font-size:10px;color:var(–text-muted);}
 .signout-btn{font-size:10px;color:var(–text-dim);cursor:pointer;margin-top:2px;}
 .signout-btn:hover{color:var(–text-muted);}
 
@@ -93,6 +86,7 @@ padding:40px 36px;width:360px;max-width:95vw;display:flex;flex-direction:column;
 .content{flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:20px;}
 .content::-webkit-scrollbar{width:3px;}
 .content::-webkit-scrollbar-thumb{background:var(–border2);border-radius:2px;}
+
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
 .stat-card{background:var(–surface2);border:1px solid var(–border);border-radius:10px;padding:16px 18px;position:relative;overflow:hidden;}
 .stat-card::before{content:’’;position:absolute;top:0;left:0;right:0;height:2px;border-radius:10px 10px 0 0;}
@@ -105,6 +99,7 @@ padding:40px 36px;width:360px;max-width:95vw;display:flex;flex-direction:column;
 .stat-delta{font-size:10px;color:var(–text-muted);}
 .stat-delta.up{color:var(–accent-bright);}
 .stat-delta.warn{color:var(–red);}
+
 .conf-legend{display:flex;gap:14px;align-items:center;padding:8px 12px;background:var(–surface2);border:1px solid var(–border);border-radius:7px;flex-wrap:wrap;}
 .conf-legend-label{font-size:10px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase;color:var(–text-dim);margin-right:4px;}
 .conf-legend-item{display:flex;align-items:center;gap:5px;font-size:10.5px;color:var(–text-muted);}
@@ -112,12 +107,14 @@ padding:40px 36px;width:360px;max-width:95vw;display:flex;flex-direction:column;
 .conf-dot.high{background:var(–accent-bright);}
 .conf-dot.medium{background:var(–amber);}
 .conf-dot.low{background:var(–red);}
+
 .section-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
 .section-title{font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(–text-muted);}
 .section-count{font-size:11px;font-weight:700;padding:2px 8px;border-radius:100px;}
 .count-red{background:var(–red-glow);color:var(–red);border:1px solid rgba(239,68,68,0.2);}
 .count-amber{background:var(–amber-glow);color:var(–amber);border:1px solid rgba(245,158,11,0.2);}
 .count-green{background:var(–accent-glow);color:var(–accent-bright);border:1px solid rgba(34,197,94,0.2);}
+
 .tasks-list{display:flex;flex-direction:column;gap:8px;}
 .task-card{background:var(–surface2);border:1px solid var(–border);border-radius:10px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;cursor:pointer;transition:all 0.15s;animation:slideIn 0.3s ease both;}
 @keyframes slideIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
@@ -169,12 +166,14 @@ padding:40px 36px;width:360px;max-width:95vw;display:flex;flex-direction:column;
 .btn-done-callback{background:var(–blue-glow);color:var(–blue);border:1px solid rgba(59,130,246,0.15);font-size:10px;cursor:default;}
 .btn-done-collection{background:var(–purple-glow);color:var(–purple);border:1px solid rgba(168,85,247,0.15);font-size:10px;cursor:default;}
 .btn-done-urgent{background:var(–red-glow);color:var(–red);border:1px solid rgba(239,68,68,0.15);font-size:10px;cursor:default;}
+
 .live-banner{background:linear-gradient(135deg,rgba(26,107,74,0.2),rgba(26,107,74,0.05));border:1px solid rgba(34,197,94,0.2);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;}
 .live-pulse{width:8px;height:8px;background:var(–accent-bright);border-radius:50%;animation:pulse 1s infinite;box-shadow:0 0 8px var(–accent-bright);flex-shrink:0;}
 .live-text{flex:1;}
 .live-title{font-size:12px;font-weight:700;color:var(–accent-bright);margin-bottom:1px;}
 .live-sub{font-size:10.5px;color:rgba(34,197,94,0.55);}
 .live-timer{font-size:18px;font-weight:700;color:var(–accent-bright);font-variant-numeric:tabular-nums;}
+
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.2s;}
 .modal-overlay.open{opacity:1;pointer-events:all;}
 .modal{background:var(–surface2);border:1px solid var(–border2);border-radius:14px;width:520px;max-width:95vw;overflow:hidden;transform:translateY(16px);transition:transform 0.2s;}
@@ -212,6 +211,7 @@ padding:40px 36px;width:360px;max-width:95vw;display:flex;flex-direction:column;
 .mbtn-alert{background:var(–red-glow);color:var(–red);border:1px solid rgba(239,68,68,0.2);}
 .mbtn-close{background:rgba(255,255,255,0.06);color:var(–text-muted);border:1px solid var(–border2);}
 .mbtn-save{background:var(–accent);color:white;}
+
 .toast{position:fixed;bottom:20px;right:20px;background:var(–surface2);border:1px solid var(–border2);border-radius:9px;padding:11px 16px;font-size:12.5px;font-weight:500;display:flex;align-items:center;gap:8px;z-index:200;transform:translateY(60px);opacity:0;transition:all 0.3s;box-shadow:0 8px 32px rgba(0,0,0,0.3);}
 .toast.show{transform:translateY(0);opacity:1;}
 </style>
@@ -305,7 +305,7 @@ padding:40px 36px;width:360px;max-width:95vw;display:flex;flex-direction:column;
       <div class="conf-legend">
         <span class="conf-legend-label">AI Confidence</span>
         <span class="conf-legend-item"><div class="conf-dot high"></div> 90%+ Standard review</span>
-        <span class="conf-legend-item"><div class="conf-dot medium"></div> 75-89% Review carefully</span>
+        <span class="conf-legend-item"><div class="conf-dot medium"></div> 75–89% Review carefully</span>
         <span class="conf-legend-item"><div class="conf-dot low"></div> Below 75% Manual verification recommended</span>
       </div>
       <div id="section-urgent">
@@ -335,15 +335,15 @@ padding:40px 36px;width:360px;max-width:95vw;display:flex;flex-direction:column;
     <div class="modal-header">
       <span class="modal-title" id="rm-title">Task Detail</span>
       <span class="modal-status" id="rm-pill">Needs Review</span>
-      <button class="modal-close" onclick="closeReviewModal()">x</button>
+      <button class="modal-close" onclick="closeReviewModal()">&#x2715;</button>
     </div>
     <div class="modal-body">
       <div class="modal-grid">
-        <div class="modal-field"><div class="modal-label">Patient Name</div><div class="modal-value" id="rm-name">-</div></div>
-        <div class="modal-field"><div class="modal-label">Date of Birth</div><div class="modal-value" id="rm-dob">-</div></div>
-        <div class="modal-field"><div class="modal-label">Medication</div><div class="modal-value" id="rm-meds">-</div></div>
-        <div class="modal-field"><div class="modal-label">Request Type</div><div class="modal-value" id="rm-type">-</div></div>
-        <div class="modal-field"><div class="modal-label">Contact Number</div><div class="modal-value" id="rm-phone">-</div></div>
+        <div class="modal-field"><div class="modal-label">Patient Name</div><div class="modal-value" id="rm-name">—</div></div>
+        <div class="modal-field"><div class="modal-label">Date of Birth</div><div class="modal-value" id="rm-dob">—</div></div>
+        <div class="modal-field"><div class="modal-label">Medication</div><div class="modal-value" id="rm-meds">—</div></div>
+        <div class="modal-field"><div class="modal-label">Request Type</div><div class="modal-value" id="rm-type">—</div></div>
+        <div class="modal-field"><div class="modal-label">Contact Number</div><div class="modal-value" id="rm-phone">—</div></div>
         <div class="modal-field">
           <div class="modal-label">AI Confidence</div>
           <div class="modal-value">
@@ -354,9 +354,9 @@ padding:40px 36px;width:360px;max-width:95vw;display:flex;flex-direction:column;
           </div>
         </div>
       </div>
-      <div class="modal-concern"><div class="modal-concern-label">AI Captured Summary</div><div id="rm-concern">-</div></div>
-      <div class="modal-field"><div class="modal-label">Call Transcript Summary</div><div class="modal-transcript" id="rm-transcript">-</div></div>
-      <div class="modal-next"><div class="modal-next-label">Suggested Next Step</div><div class="modal-next-text" id="rm-next">-</div></div>
+      <div class="modal-concern"><div class="modal-concern-label">AI Captured Summary</div><div id="rm-concern">—</div></div>
+      <div class="modal-field"><div class="modal-label">Call Transcript Summary</div><div class="modal-transcript" id="rm-transcript">—</div></div>
+      <div class="modal-next"><div class="modal-next-label">Suggested Next Step</div><div class="modal-next-text" id="rm-next">—</div></div>
       <div class="modal-field">
         <div class="modal-label">Internal Note</div>
         <textarea class="modal-textarea" id="rm-notes" placeholder="Add a note for the dispensary team..."></textarea>
@@ -364,7 +364,7 @@ padding:40px 36px;width:360px;max-width:95vw;display:flex;flex-direction:column;
     </div>
     <div class="modal-footer">
       <button class="modal-btn mbtn-close" onclick="closeReviewModal()">Close</button>
-      <button class="modal-btn mbtn-alert" onclick="modalAlertPharmacist()">Alert pharmacist</button>
+      <button class="modal-btn mbtn-alert" onclick="modalAlertPharmacist()">⚑ Alert pharmacist</button>
       <button class="modal-btn mbtn-primary" id="rm-primary-btn" onclick="modalPrimaryAction()">Mark reviewed</button>
     </div>
   </div>
@@ -376,7 +376,7 @@ padding:40px 36px;width:360px;max-width:95vw;display:flex;flex-direction:column;
   <div class="modal">
     <div class="modal-header">
       <span class="modal-title" id="em-title">Edit Details</span>
-      <button class="modal-close" onclick="closeEditModal()">x</button>
+      <button class="modal-close" onclick="closeEditModal()">&#x2715;</button>
     </div>
     <div class="modal-body">
       <div class="modal-grid">
@@ -411,13 +411,9 @@ var state = {
   session: null
 };
 
-// -- AUTH ---------------------------------------------------------------------
-
 function getStoredSession() {
-  try {
-    var s = localStorage.getItem('rxdesk_session');
-    return s ? JSON.parse(s) : null;
-  } catch(e) { return null; }
+  try { var s = localStorage.getItem('rxdesk_session'); return s ? JSON.parse(s) : null; }
+  catch(e) { return null; }
 }
 
 function getAuthToken() {
@@ -428,16 +424,11 @@ function getAuthToken() {
 async function signIn(email, password) {
   var response = await fetch(SUPABASE_URL + '/auth/v1/token?grant_type=password', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'apikey': SUPABASE_ANON_KEY
-    },
+    headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY },
     body: JSON.stringify({ email: email, password: password })
   });
   var data = await response.json();
-  if (!response.ok) {
-    throw new Error(data.error_description || data.msg || data.error || 'Sign in failed');
-  }
+  if (!response.ok) throw new Error(data.error_description || data.msg || data.error || 'Sign in failed');
   state.session = data;
   localStorage.setItem('rxdesk_session', JSON.stringify(data));
   return data;
@@ -455,23 +446,16 @@ async function handleLogin() {
   var btn = document.getElementById('login-btn');
   var errEl = document.getElementById('login-error');
   errEl.textContent = '';
-
-  if (!email || !password) {
-    errEl.textContent = 'Please enter your email and password.';
-    return;
-  }
-
+  if (!email || !password) { errEl.textContent = 'Please enter your email and password.'; return; }
   btn.textContent = 'Signing in...';
   btn.disabled = true;
-
   try {
     var session = await signIn(email, password);
-    var userEmail = (session.user && session.user.email) || email;
-    document.getElementById('user-name-display').textContent = userEmail;
+    document.getElementById('user-name-display').textContent = (session.user && session.user.email) || email;
     showAppScreen();
     loadTasks();
   } catch(err) {
-    errEl.textContent = err.message || 'Sign in failed. Check your credentials.';
+    errEl.textContent = err.message || 'Sign in failed.';
     btn.textContent = 'Sign in';
     btn.disabled = false;
   }
@@ -487,8 +471,6 @@ function showAppScreen() {
   document.getElementById('app-screen').style.display = 'flex';
 }
 
-// -- API ----------------------------------------------------------------------
-
 function safeJson(response) {
   return response.text().then(function(text) {
     try { return text ? JSON.parse(text) : {}; } catch(e) { return {}; }
@@ -498,21 +480,11 @@ function safeJson(response) {
 async function apiFetch(path, opts) {
   opts = opts || {};
   var token = getAuthToken();
-  if (!token) {
-    showLoginScreen();
-    throw new Error('Not authenticated');
-  }
-  var headers = Object.assign(
-    { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
-    opts.headers || {}
-  );
-  var fetchOpts = Object.assign({}, opts, { headers: headers });
-  var response = await fetch(API_BASE + path, fetchOpts);
+  if (!token) { showLoginScreen(); throw new Error('Not authenticated'); }
+  var headers = Object.assign({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }, opts.headers || {});
+  var response = await fetch(API_BASE + path, Object.assign({}, opts, { headers: headers }));
   var payload = await safeJson(response);
-  if (response.status === 401) {
-    signOut();
-    throw new Error('Session expired. Please sign in again.');
-  }
+  if (response.status === 401) { signOut(); throw new Error('Session expired. Please sign in again.'); }
   if (!response.ok) {
     var err = new Error((payload && payload.error) || 'Request failed');
     err.status = response.status;
@@ -520,8 +492,6 @@ async function apiFetch(path, opts) {
   }
   return payload;
 }
-
-// -- HELPERS ------------------------------------------------------------------
 
 function getReviewedSummary(t) {
   if (t.reviewedSummary) return t.reviewedSummary;
@@ -533,9 +503,9 @@ function getReviewedSummary(t) {
 
 function buildDisplaySummary(t) {
   if (t.category === 'urgent') return t.displaySummary || t.summary || t.meds || 'Urgent task';
-  if (t.category === 'collection') return 'Collection: ' + (t.meds || 'change') + (t.collectionSlot ? ' - ' + t.collectionSlot : '');
-  if (t.category === 'query') return 'Checking: ' + (t.meds || 'prescription');
-  return (t.meds || 'Medication') + (t.collectionSlot ? ' - Collection ' + t.collectionSlot : '');
+  if (t.category === 'collection') return '\uD83D\uDCC5 ' + (t.meds || 'Collection change') + (t.collectionSlot ? ' - Changed to ' + t.collectionSlot : '');
+  if (t.category === 'query') return '\u2753 Checking if ' + (t.meds || 'prescription') + ' is ready';
+  return '\uD83D\uDC8A ' + (t.meds || 'Medication') + (t.collectionSlot ? ' - Collection ' + t.collectionSlot : '');
 }
 
 function getReviewedBtnClass(cat) {
@@ -552,9 +522,7 @@ function getReviewedBtnLabel(cat) {
   return 'Ready for processing';
 }
 
-function getConfClass(conf) {
-  return conf >= 90 ? '' : conf >= 75 ? ' medium' : ' low';
-}
+function getConfClass(conf) { return conf >= 90 ? '' : conf >= 75 ? ' medium' : ' low'; }
 
 function getStatusPillClass(s) {
   if (s === 'urgent_review') return 'sp-urgent';
@@ -597,10 +565,7 @@ function formatTime(iso) {
 
 function isoDobToDisplay(v) {
   if (!v || typeof v !== 'string') return '-';
-  if (/^\d{4}-\d{2}-\d{2}$/.test(v)) {
-    var p = v.split('-');
-    return p[2] + '/' + p[1] + '/' + p[0];
-  }
+  if (/^\d{4}-\d{2}-\d{2}$/.test(v)) { var p = v.split('-'); return p[2] + '/' + p[1] + '/' + p[0]; }
   return v;
 }
 
@@ -608,10 +573,7 @@ function displayDobToIso(v) {
   if (!v) return null;
   var t = String(v).trim();
   if (/^\d{4}-\d{2}-\d{2}$/.test(t)) return t;
-  if (/^\d{2}\/\d{2}\/\d{4}$/.test(t)) {
-    var p = t.split('/');
-    return p[2] + '-' + p[1] + '-' + p[0];
-  }
+  if (/^\d{2}\/\d{2}\/\d{4}$/.test(t)) { var p = t.split('/'); return p[2] + '-' + p[1] + '-' + p[0]; }
   return t;
 }
 
@@ -619,8 +581,6 @@ function latestNote(notes) {
   if (!Array.isArray(notes) || !notes.length) return '';
   return (notes[notes.length-1] && notes[notes.length-1].content) || '';
 }
-
-// -- NORMALIZE ----------------------------------------------------------------
 
 function normalizeTask(a) {
   var category = a.category || 'repeat';
@@ -647,16 +607,12 @@ function normalizeTask(a) {
     reviewedCopy: a.reviewed_copy || 'Reviewed by team',
     reviewedTime: a.reviewed_at ? formatTime(a.reviewed_at) : null,
     reviewedSummary: a.reviewed_summary || '',
-    notes: '',
-    updatedAt: a.updated_at,
-    createdAt: a.created_at
+    notes: '', updatedAt: a.updated_at, createdAt: a.created_at
   };
   task.avatarClass = getAvatarClass(task);
   if (!task.displaySummary) task.displaySummary = buildDisplaySummary(task);
   return task;
 }
-
-// -- RENDER -------------------------------------------------------------------
 
 function renderTaskCard(t) {
   var card = document.createElement('div');
@@ -668,7 +624,7 @@ function renderTaskCard(t) {
   card.onclick = function() { openReviewModal(t.id); };
   var summary = buildDisplaySummary(t);
   var primaryBtn = t.status === 'urgent_review'
-    ? '<button class="task-btn btn-alert" onclick="event.stopPropagation();openReviewModal(\'' + t.id + '\')">Alert pharmacist</button>'
+    ? '<button class="task-btn btn-alert" onclick="event.stopPropagation();openReviewModal(\'' + t.id + '\')">&#9873; Alert pharmacist</button>'
     : t.status === 'callback_needed'
     ? '<button class="task-btn btn-callback" onclick="event.stopPropagation();openReviewModal(\'' + t.id + '\')">Assign callback</button>'
     : t.category === 'collection'
@@ -677,7 +633,7 @@ function renderTaskCard(t) {
   var body = t.status === 'urgent_review'
     ? '<div class="task-concern">' + summary + '</div>'
     : isLow
-    ? '<div class="task-check-pill">Manual verification recommended</div><div class="task-summary">' + summary + '</div>'
+    ? '<div class="task-check-pill">&#9888; Manual verification recommended</div><div class="task-summary">' + summary + '</div>'
     : '<div class="task-summary">' + summary + '</div>';
   card.innerHTML =
     '<div class="task-avatar ' + t.avatarClass + '">' + t.initials + '</div>' +
@@ -688,12 +644,12 @@ function renderTaskCard(t) {
         '<span class="req-type ' + getReqTypeClass(t.category) + '">' + t.requestTypeLabel + '</span>' +
       '</div>' + body +
       '<div class="task-meta">' +
-        '<span class="task-meta-item">🕐 ' + (t.callTime||'Just now') + '</span>' +
+        '<span class="task-meta-item">&#128336; ' + (t.callTime||'Just now') + '</span>' +
         '<span class="task-meta-item">DOB: ' + t.dob + '</span>' +
-        '<span class="task-meta-item">📞 ' + t.phone + '</span>' +
-        '<span class="task-meta-item">AI: <div class="confidence-bar"><div class="conf-fill' + getConfClass(t.confidence) + '" style="width:' + t.confidence + '%"></div></div> ' + t.confidence + '%</span>' +
+        '<span class="task-meta-item">&#128222; ' + t.phone + '</span>' +
+        '<span class="task-meta-item">AI: <div class="confidence-bar"><div class="conf-fill' + getConfClass(t.confidence) + '" style="width:' + t.confidence + '%"></div></div> ' + t.confidence + '%' + (t.confidence < 75 ? ' — check details' : '') + '</span>' +
       '</div>' +
-      '<div class="next-step">→ ' + t.nextStep + '</div>' +
+      '<div class="next-step">&#8594; ' + t.nextStep + '</div>' +
     '</div>' +
     '<div class="task-actions" onclick="event.stopPropagation()">' +
       primaryBtn +
@@ -721,9 +677,9 @@ function renderReviewedCard(t) {
       '</div>' +
       '<div class="task-summary">' + summary + '</div>' +
       '<div class="task-meta">' +
-        '<span class="task-meta-item">🕐 ' + (t.reviewedTime||t.callTime||'Just now') + '</span>' +
+        '<span class="task-meta-item">&#128336; ' + (t.reviewedTime||t.callTime||'Just now') + '</span>' +
         '<span class="task-meta-item">' + t.reviewedCopy + '</span>' +
-        (t.notes ? '<span class="task-meta-item">Note saved</span>' : '') +
+        (t.notes ? '<span class="task-meta-item">&#128221; Note saved</span>' : '') +
       '</div>' +
     '</div>' +
     '<div class="task-actions"><button class="' + getReviewedBtnClass(rc) + '" style="cursor:default;">' + getReviewedBtnLabel(rc) + '</button></div>';
@@ -766,12 +722,8 @@ async function loadTasks() {
     var data = await apiFetch('/tasks');
     var next = {};
     (data.tasks || []).forEach(function(a) {
-      try {
-        var n = normalizeTask(a);
-        next[n.id] = n;
-      } catch(e) {
-        console.error('normalizeTask failed', a && a.id, e);
-      }
+      try { var n = normalizeTask(a); next[n.id] = n; }
+      catch(e) { console.error('normalizeTask failed', a && a.id, e); }
     });
     state.tasks = next;
     state.callsToday = Object.keys(next).length;
@@ -780,9 +732,7 @@ async function loadTasks() {
     applyCurrentFilter();
   } catch(err) {
     console.error(err);
-    if (err.message !== 'Not authenticated') {
-      showToast('Failed to load tasks: ' + (err.message || 'Unknown error'));
-    }
+    if (err.message !== 'Not authenticated') showToast('Failed to load tasks: ' + (err.message || 'Unknown error'));
   }
 }
 
@@ -829,7 +779,7 @@ async function openReviewModal(id) {
     var fill = document.getElementById('rm-conf-fill');
     fill.style.width = t.confidence + '%';
     fill.className = 'modal-conf-fill conf-fill' + getConfClass(t.confidence);
-    document.getElementById('rm-conf-text').textContent = t.confidence + '% - ' +
+    document.getElementById('rm-conf-text').textContent = t.confidence + '% — ' +
       (t.confidence < 75 ? 'manual verification recommended' : t.confidence < 90 ? 'review carefully' : 'high confidence');
     var pill = document.getElementById('rm-pill');
     pill.className = 'modal-status ' + getStatusPillClass(t.status);
@@ -858,7 +808,7 @@ async function modalPrimaryAction() {
     renderAllSections();
     recomputeCounts();
     applyCurrentFilter();
-    showToast('Reviewed: ' + updated.name);
+    showToast('&#10003; ' + updated.name + ' — ' + updated.reviewedCopy);
   } catch(err) {
     console.error(err);
     showToast('Failed to update: ' + (err.message || 'Unknown error'));
@@ -878,7 +828,7 @@ async function openEditModal(id) {
   try {
     var t = (state.tasks[id] && state.tasks[id].updatedAt) ? state.tasks[id] : await loadTaskDetail(id);
     state.editModalId = id;
-    document.getElementById('em-title').textContent = 'Edit - ' + t.name;
+    document.getElementById('em-title').textContent = 'Edit — ' + t.name;
     document.getElementById('em-name').value = t.name;
     document.getElementById('em-dob').value = t.dob === '-' ? '' : t.dob;
     document.getElementById('em-meds').value = t.meds;
@@ -924,10 +874,10 @@ function closeEditModal() { document.getElementById('edit-modal').classList.remo
 function closeEditOutside(e) { if (e.target === document.getElementById('edit-modal')) closeEditModal(); }
 
 var simScenarios = [
-  { name:'Patricia Green', meds:'Omeprazole 20mg', category:'repeat', requestType:'repeat_request', confidence:93, collectionSlot:'Mon 9am', summary:'Repeat prescription captured.', transcript:'Patient called for repeat. Collection Monday 9am.', nextStep:'Review and queue.', reviewedCopy:'Reviewed - queued for dispensing', status:'needs_review' },
-  { name:'Mohammed Ahmed', meds:'Lisinopril 5mg', category:'repeat', requestType:'repeat_request', confidence:89, collectionSlot:'Tue 2pm', summary:'Repeat prescription captured.', transcript:'Patient called for repeat. Collection Tuesday 2pm.', nextStep:'Review and queue.', reviewedCopy:'Reviewed - queued for dispensing', status:'needs_review' },
-  { name:'Linda Watson', meds:'Amoxicillin 500mg', category:'query', requestType:'ready_check_query', confidence:97, collectionSlot:'', summary:'Checking prescription readiness.', transcript:'Patient checking if prescription ready.', nextStep:'Call patient back.', reviewedCopy:'Callback assigned', status:'callback_needed' },
-  { name:'Thomas Hill', meds:'Codeine Phosphate 30mg', category:'repeat', requestType:'repeat_request', confidence:71, collectionSlot:'Wed 11am', summary:'Low confidence - verify medication.', transcript:'Medication unclear on call.', nextStep:'Confirm medication with patient.', reviewedCopy:'Verified and queued', status:'needs_review' }
+  { name:'Patricia Green', meds:'Omeprazole 20mg', category:'repeat', requestType:'repeat_request', confidence:93, collectionSlot:'Mon 9am', summary:'Repeat prescription captured. Collection Monday at 9am.', transcript:'Patient called to order repeat prescriptions. Collection Monday at 9am confirmed.', nextStep:'Review and queue for dispensing team.', reviewedCopy:'Reviewed by pharmacist — queued for dispensing', status:'needs_review' },
+  { name:'Mohammed Ahmed', meds:'Lisinopril 5mg — Aspirin 75mg', category:'repeat', requestType:'repeat_request', confidence:89, collectionSlot:'Tue 2pm', summary:'Repeat prescription captured. Collection Tuesday at 2pm.', transcript:'Patient called for repeat prescription. Collection Tuesday at 2pm confirmed.', nextStep:'Review and queue for dispensing team.', reviewedCopy:'Reviewed by pharmacist — queued for dispensing', status:'needs_review' },
+  { name:'Linda Watson', meds:'Amoxicillin 500mg', category:'query', requestType:'ready_check_query', confidence:97, collectionSlot:'', summary:'Patient checking prescription readiness. Callback required.', transcript:'Patient called to check if Amoxicillin prescription is ready. Clara informed patient dispensary will call back.', nextStep:'Dispensary to call patient back to confirm readiness.', reviewedCopy:'Reviewed by dispensary team — callback assigned', status:'callback_needed' },
+  { name:'Thomas Hill', meds:'Codeine Phosphate 30mg', category:'repeat', requestType:'repeat_request', confidence:71, collectionSlot:'Wed 11am', summary:'Medication dosage was partially unclear. Manual verification recommended.', transcript:'Patient called for repeat prescription. Medication name was unclear. AI captured Codeine Phosphate but confidence is low.', nextStep:'Confirm medication name and dosage with patient before processing.', reviewedCopy:'Reviewed by pharmacist — verification noted — queued', status:'needs_review' }
 ];
 var simIdx = 0;
 
@@ -935,7 +885,7 @@ async function simulateCall() {
   var s = simScenarios[simIdx % simScenarios.length];
   simIdx++;
   var banner = document.getElementById('live-banner');
-  document.getElementById('live-caller').textContent = s.name + ' - capturing...';
+  document.getElementById('live-caller').textContent = s.name + ' — Clara capturing details...';
   banner.style.display = 'flex';
   var secs = 0;
   var timer = setInterval(function() {
@@ -948,7 +898,9 @@ async function simulateCall() {
     banner.style.display = 'none';
     try {
       var yr = new Date().getFullYear() - 55;
-      var dob = yr + '-0' + (Math.floor(Math.random()*9)+1) + '-' + String(Math.floor(Math.random()*28)+1).padStart(2,'0');
+      var mo = String(Math.floor(Math.random()*9)+1).padStart(2,'0');
+      var dy = String(Math.floor(Math.random()*28)+1).padStart(2,'0');
+      var dob = yr + '-' + mo + '-' + dy;
       await apiFetch('/calls/ingest', {
         method: 'POST',
         body: JSON.stringify({
@@ -969,7 +921,7 @@ async function simulateCall() {
       });
       state.callsToday += 1;
       await loadTasks();
-      showToast('New task from ' + s.name);
+      showToast('&#128222; New task from ' + s.name);
     } catch(err) {
       console.error(err);
       showToast('Simulated call failed: ' + (err.message || 'Unknown error'));
@@ -984,24 +936,19 @@ function showToast(msg) {
   setTimeout(function() { t.classList.remove('show'); }, 3200);
 }
 
-// -- INIT ---------------------------------------------------------------------
-
-document.getElementById('live-date').textContent = ' - ' +
+document.getElementById('live-date').textContent = ' — ' +
   new Date().toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long' });
 
-// Check for existing session on load
 var existingSession = getStoredSession();
 if (existingSession && existingSession.access_token) {
   state.session = existingSession;
-  var userEmail = (existingSession.user && existingSession.user.email) || 'Admin';
-  document.getElementById('user-name-display').textContent = userEmail;
+  document.getElementById('user-name-display').textContent = (existingSession.user && existingSession.user.email) || 'Admin';
   showAppScreen();
   loadTasks();
 } else {
   showLoginScreen();
 }
 
-// Enter key on login form
 document.getElementById('login-password').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') handleLogin();
 });
