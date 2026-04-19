@@ -92,10 +92,11 @@ function parseOrFail<T>(
 ): T | null {
   const parsed = schema.safeParse(input);
   if (!parsed.success) {
-    return res.status(400).json({
+    res.status(400).json({
       error: 'Validation failed',
       details: parsed.error.flatten()
-    }) as null;
+    });
+    return null;
   }
   return parsed.data;
 }
@@ -163,89 +164,95 @@ callsRouter.post(
   taskMutationRateLimiter,
   requireRole(['admin', 'pharmacist', 'staff']),
   async (req: Request, res: Response) => {
-    const body = parseOrFail(ingestSchema, req.body, res);
-    if (!body) return;
+    try {
+      const body = parseOrFail(ingestSchema, req.body, res);
+      if (!body) return;
 
-    const { actorId, actorType, pharmacyId } = getActor(req);
-    const requestMeta = {
-      ...extractRequestMeta(req, 'ingestion'),
-      pharmacy_id: pharmacyId
-    };
+      const { actorId, actorType, pharmacyId } = getActor(req);
+      const requestMeta = {
+        ...extractRequestMeta(req, 'ingestion'),
+        pharmacy_id: pharmacyId
+      };
 
-    const callPayload = buildCallCreatePayload(body, pharmacyId);
+      const callPayload = buildCallCreatePayload(body, pharmacyId);
 
-    const { data: call, error: callError } = await supabaseAdmin
-      .from('calls')
-      .insert(callPayload)
-      .select('*')
-      .single();
-
-    if (callError || !call) {
-      return res.status(400).json({ error: callError?.message ?? 'Call creation failed' });
-    }
-
-    await logCallIngested(
-      call.id,
-      actorId,
-      actorType,
-      {
-        ...requestMeta,
-        call_source: callPayload.source,
-        caller_name: callPayload.caller_name
-      }
-    );
-
-    const taskPayload = buildTaskPayloadFromExtraction(call.id, pharmacyId, body);
-
-    const { data: task, error: taskError } = await supabaseAdmin
-      .from('tasks')
-      .insert(taskPayload)
-      .select('*')
-      .single();
-
-    if (taskError || !task) {
-      // rollback call to reduce orphaned records in pilot phase
-      await supabaseAdmin
+      const { data: call, error: callError } = await supabaseAdmin
         .from('calls')
-        .delete()
-        .eq('id', call.id)
-        .eq('pharmacy_id', pharmacyId);
+        .insert(callPayload)
+        .select('*')
+        .single();
 
-      return res.status(400).json({
-        error: taskError?.message ?? 'Task creation failed',
-        note: 'Call creation was rolled back because linked task creation failed.'
-      });
-    }
+      if (callError || !call) {
+        return res.status(400).json({
+          error: callError?.message ?? 'Call creation failed'
+        });
+      }
 
-    await logTaskCreated(
-      task.id,
-      task,
-      actorId,
-      actorType,
-      {
-        ...requestMeta,
+      await logCallIngested(
+        call.id,
+        actorId,
+        actorType,
+        {
+          ...requestMeta,
+          call_source: callPayload.source,
+          caller_name: callPayload.caller_name
+        }
+      );
+
+      const taskPayload = buildTaskPayloadFromExtraction(call.id, pharmacyId, body);
+
+      const { data: task, error: taskError } = await supabaseAdmin
+        .from('tasks')
+        .insert(taskPayload)
+        .select('*')
+        .single();
+
+      if (taskError || !task) {
+        await supabaseAdmin
+          .from('calls')
+          .delete()
+          .eq('id', call.id)
+          .eq('pharmacy_id', pharmacyId);
+
+        return res.status(400).json({
+          error: taskError?.message ?? 'Task creation failed',
+          note: 'Call creation was rolled back because linked task creation failed.'
+        });
+      }
+
+      await logTaskCreated(
+        task.id,
+        task,
+        actorId,
+        actorType,
+        {
+          ...requestMeta,
+          call_id: call.id,
+          call_source: callPayload.source
+        }
+      );
+
+      await logTaskGeneratedFromCall(
+        task.id,
+        call.id,
+        task,
+        actorId,
+        actorType,
+        {
+          ...requestMeta,
+          confidence_score: body.ai_extraction.confidence_score ?? null
+        }
+      );
+
+      return res.status(201).json({
         call_id: call.id,
-        call_source: callPayload.source
-      }
-    );
-
-    await logTaskGeneratedFromCall(
-      task.id,
-      call.id,
-      task,
-      actorId,
-      actorType,
-      {
-        ...requestMeta,
-        confidence_score: body.ai_extraction.confidence_score ?? null
-      }
-    );
-
-    return res.status(201).json({
-      call_id: call.id,
-      task_id: task.id,
-      status: 'created'
-    });
+        task_id: task.id,
+        status: 'created'
+      });
+    } catch (error) {
+      console.error('POST /calls/ingest failed', error);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
   }
 );
 
@@ -253,22 +260,27 @@ callsRouter.get(
   '/:id',
   requireRole(['admin', 'pharmacist', 'staff']),
   async (req: Request, res: Response) => {
-    const id = parseOrFail(uuidSchema, req.params.id, res);
-    if (!id) return;
+    try {
+      const id = parseOrFail(uuidSchema, req.params.id, res);
+      if (!id) return;
 
-    const { pharmacyId } = getActor(req);
+      const { pharmacyId } = getActor(req);
 
-    const { data, error } = await supabaseAdmin
-      .from('calls')
-      .select('*')
-      .eq('id', id)
-      .eq('pharmacy_id', pharmacyId)
-      .single();
+      const { data, error } = await supabaseAdmin
+        .from('calls')
+        .select('*')
+        .eq('id', id)
+        .eq('pharmacy_id', pharmacyId)
+        .single();
 
-    if (error || !data) {
-      return res.status(404).json({ error: 'Call not found' });
+      if (error || !data) {
+        return res.status(404).json({ error: 'Call not found' });
+      }
+
+      return res.json({ call: data });
+    } catch (error) {
+      console.error('GET /calls/:id failed', error);
+      return res.status(500).json({ error: 'Internal server error' });
     }
-
-    return res.json({ call: data });
   }
 );
