@@ -62,6 +62,7 @@ app.get('/health', (_req: Request, res: Response) => {
 
 app.use('/api/tasks', tasksRouter);
 app.use('/api/calls', callsRouter);
+app.use('/api/month-end', monthEndRouter);
 
 app.use((_req: Request, res: Response) => {
   return res.status(404).json({ error: 'Route not found' });
