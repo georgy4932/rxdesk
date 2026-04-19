@@ -492,13 +492,13 @@ function safeJsonParse(response) {
 }
 
 async function apiFetch(path, options = {}) {
-  const token = window.RXDESK_DEMO_TOKEN || '';
-
   const response = await fetch(`${API_BASE}${path}`, {
     headers: {
       'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      'Authorization': 'Bearer demo-token',
       ...(options.headers || {})
+    },
+
     },
     ...options
   });
