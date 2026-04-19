@@ -26,11 +26,16 @@ const STATUS_ENUM = z.enum([
 
 const CATEGORY_ENUM = z.enum(['repeat', 'query', 'collection', 'urgent']);
 const URGENCY_ENUM = z.enum(['routine', 'urgent']);
+const SOURCE_ENUM = z.enum([
+  'demo_ingestion',
+  'phone_call',
+  'manual_entry',
+  'import'
+]);
 
 const uuidSchema = z.string().uuid();
 
-const safeText = (max: number) =>
-  z.string().trim().min(1).max(max);
+const safeText = (max: number) => z.string().trim().min(1).max(max);
 
 const optionalSafeText = (max: number) =>
   z.string().trim().max(max).optional().nullable();
@@ -65,8 +70,8 @@ const extractionSchema = z.object({
   category: CATEGORY_ENUM,
   medications: optionalSafeText(500),
   collection_slot: optionalSafeText(100),
-  urgency_level: URGENCY_ENUM.default('routine'),
-  status: STATUS_ENUM.default('needs_review'),
+  urgency_level: URGENCY_ENUM.optional().default('routine'),
+  status: STATUS_ENUM.optional().default('needs_review'),
   confidence_score: confidenceSchema,
   display_summary: optionalSafeText(300),
   ai_summary: optionalSafeText(1000),
@@ -75,9 +80,7 @@ const extractionSchema = z.object({
 });
 
 const ingestSchema = z.object({
-  source: z
-    .enum(['demo_ingestion', 'phone_call', 'manual_entry', 'import'])
-    .default('demo_ingestion'),
+  source: SOURCE_ENUM.optional().default('demo_ingestion'),
   caller_name: optionalSafeText(150),
   caller_phone: phoneSchema,
   raw_transcript: optionalSafeText(10000),
@@ -85,12 +88,16 @@ const ingestSchema = z.object({
   ai_extraction: extractionSchema
 });
 
-function parseOrFail<T>(
-  schema: z.ZodSchema<T>,
+type IngestPayload = z.infer<typeof ingestSchema>;
+type ExtractionPayload = z.infer<typeof extractionSchema>;
+
+function parseOrFail<T extends z.ZodTypeAny>(
+  schema: T,
   input: unknown,
   res: Response
-): T | null {
+): z.infer<T> | null {
   const parsed = schema.safeParse(input);
+
   if (!parsed.success) {
     res.status(400).json({
       error: 'Validation failed',
@@ -98,12 +105,17 @@ function parseOrFail<T>(
     });
     return null;
   }
+
   return parsed.data;
 }
 
 function getActor(req: Request) {
   if (!req.user) {
     throw new Error('Authenticated user required');
+  }
+
+  if (!req.user.pharmacyId) {
+    throw new Error('Authenticated user is missing pharmacy scope');
   }
 
   return {
@@ -115,7 +127,7 @@ function getActor(req: Request) {
 }
 
 function buildCallCreatePayload(
-  body: z.infer<typeof ingestSchema>,
+  body: IngestPayload,
   pharmacyId: string
 ) {
   const extraction = body.ai_extraction;
@@ -134,9 +146,9 @@ function buildCallCreatePayload(
 function buildTaskPayloadFromExtraction(
   callId: string,
   pharmacyId: string,
-  body: z.infer<typeof ingestSchema>
+  body: IngestPayload
 ) {
-  const extraction = body.ai_extraction;
+  const extraction: ExtractionPayload = body.ai_extraction;
 
   return {
     pharmacy_id: pharmacyId,
