@@ -4,6 +4,7 @@ import cors from 'cors';
 import type { Request, Response, NextFunction } from 'express';
 import { tasksRouter } from './routes/tasks.js';
 import { callsRouter } from './routes/calls.js';
+import { monthEndRouter } from './routes/monthEnd.js';
 
 const app = express();
 
