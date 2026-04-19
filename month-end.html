@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RxDesk - Month-end Support</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+```
+:root {
+  --bg: #080c10;
+  --surface: #0d1117;
+  --surface2: #161b22;
+  --surface3: #1c2330;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #e6edf3;
+  --text-muted: rgba(255,255,255,0.4);
+  --text-dim: rgba(255,255,255,0.2);
+  --accent: #1a6b4a;
+  --accent-glow: rgba(26,107,74,0.15);
+  --accent-bright: #22c55e;
+  --red: #ef4444;
+  --red-glow: rgba(239,68,68,0.1);
+  --amber: #f59e0b;
+  --amber-glow: rgba(245,158,11,0.1);
+  --blue: #3b82f6;
+  --blue-glow: rgba(59,130,246,0.1);
+  --purple: #a855f7;
+  --purple-glow: rgba(168,85,247,0.1);
+  --orange: #f97316;
+  --orange-glow: rgba(249,115,22,0.1);
+}
+
+html, body { height: 100%; overflow: hidden; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  height: 100vh;
+}
+
+#login-screen {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+}
+
+.login-box {
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  padding: 40px 36px;
+  width: 360px;
+  max-width: 95vw;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-logo { display: flex; align-items: center; gap: 10px; }
+
+.login-logo-mark {
+  width: 32px; height: 32px; background: var(--accent); border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Instrument Serif', serif; font-style: italic; font-size: 14px; color: white;
+}
+
+.login-logo-text { font-size: 16px; font-weight: 700; letter-spacing: -0.3px; }
+.login-logo-text span { color: var(--accent-bright); }
+.login-title { font-family: 'Instrument Serif', serif; font-size: 22px; letter-spacing: -0.3px; }
+.login-subtitle { font-size: 13px; color: var(--text-muted); margin-top: -12px; }
+.login-field { display: flex; flex-direction: column; gap: 6px; }
+.login-label { font-size: 11px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; color: var(--text-muted); }
+
+.login-input {
+  background: var(--surface3); border: 1px solid var(--border2); border-radius: 7px;
+  padding: 10px 14px; font-size: 14px; color: var(--text); font-family: 'DM Sans', sans-serif;
+  width: 100%; transition: border-color 0.15s; -webkit-appearance: none; appearance: none;
+}
+.login-input:focus { outline: none; border-color: var(--accent); }
+.login-input::placeholder { color: var(--text-dim); }
+
+.login-btn {
+  background: var(--accent) !important; color: white !important; border: none;
+  border-radius: 7px; padding: 12px; font-size: 14px; font-weight: 700;
+  font-family: 'DM Sans', sans-serif; cursor: pointer; width: 100%;
+  -webkit-appearance: none; appearance: none;
+}
+.login-btn:disabled { opacity: 0.5; cursor: default; }
+.login-error { font-size: 12px; color: var(--red); min-height: 16px; }
+
+#app-screen { display: none; width: 100%; height: 100%; }
+
+.sidebar {
+  width: 210px; background: var(--surface); border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; flex-shrink: 0;
+}
+.sidebar-logo {
+  padding: 18px 16px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 8px;
+}
+.logo-mark {
+  width: 28px; height: 28px; background: var(--accent); border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Instrument Serif', serif; font-style: italic; font-size: 13px; color: white;
+}
+.logo-text { font-size: 14px; font-weight: 700; letter-spacing: -0.3px; }
+.logo-text span { color: var(--accent-bright); }
+.pharmacy-info { padding: 10px 16px; border-bottom: 1px solid var(--border); }
+.pharmacy-name { font-size: 12px; font-weight: 600; }
+.sidebar-nav { flex: 1; padding: 8px; display: flex; flex-direction: column; gap: 1px; }
+
+.nav-item {
+  display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 6px;
+  font-size: 13px; font-weight: 500; color: var(--text-muted); cursor: pointer;
+  transition: all 0.15s; border: 1px solid transparent; text-decoration: none;
+}
+.nav-item:hover { background: rgba(255,255,255,0.04); color: var(--text); }
+.nav-item.active { background: var(--accent-glow); color: var(--accent-bright); border-color: rgba(26,107,74,0.2); }
+.nav-item.disabled { opacity: 0.35; cursor: default; pointer-events: none; }
+.nav-icon { font-size: 14px; width: 16px; text-align: center; }
+.nav-badge { margin-left: auto; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 100px; min-width: 18px; text-align: center; }
+.badge-red { background: var(--red); color: white; }
+.badge-amber { background: var(--amber); color: var(--bg); }
+.badge-green { background: var(--accent); color: white; }
+.badge-blue { background: var(--blue); color: white; }
+.nav-soon { margin-left: auto; font-size: 9px; font-weight: 700; color: var(--text-dim); letter-spacing: 0.3px; text-transform: uppercase; }
+
+.sidebar-bottom { padding: 10px 8px; border-top: 1px solid var(--border); }
+.user-row { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 6px; cursor: pointer; }
+.user-row:hover { background: rgba(255,255,255,0.04); }
+.user-avatar { width: 24px; height: 24px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; }
+.user-name { font-size: 12px; font-weight: 500; }
+.signout-btn { font-size: 10px; color: var(--text-dim); cursor: pointer; margin-top: 2px; }
+.signout-btn:hover { color: var(--text-muted); }
+
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+.topbar {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 0 24px; height: 52px; display: flex; align-items: center; gap: 16px; flex-shrink: 0;
+}
+.topbar-title { font-family: 'Instrument Serif', serif; font-size: 18px; letter-spacing: -0.3px; }
+.topbar-date { font-size: 11px; color: var(--text-muted); }
+.topbar-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+
+.topbar-btn {
+  padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 600;
+  border: 1px solid var(--border2); background: transparent; color: var(--text);
+  cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif;
+  -webkit-appearance: none; appearance: none;
+}
+.topbar-btn:hover { background: rgba(255,255,255,0.05); }
+.topbar-btn.primary { background: var(--accent) !important; border-color: var(--accent); color: white !important; }
+.topbar-btn.active-filter { background: var(--accent-glow); color: var(--accent-bright); border-color: rgba(26,107,74,0.3); }
+
+.content { flex: 1; overflow-y: auto; padding: 20px 24px; display: flex; flex-direction: column; gap: 20px; }
+.content::-webkit-scrollbar { width: 3px; }
+.content::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+.summary-row { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; }
+.stat-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; position: relative; overflow: hidden; }
+.stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; border-radius: 10px 10px 0 0; }
+.stat-card.green::before { background: var(--accent-bright); }
+.stat-card.red::before { background: var(--red); }
+.stat-card.amber::before { background: var(--amber); }
+.stat-card.blue::before { background: var(--blue); }
+.stat-card.purple::before { background: var(--purple); }
+.stat-label { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+.stat-value { font-family: 'Instrument Serif', serif; font-size: 28px; letter-spacing: -1px; line-height: 1; margin-bottom: 3px; }
+.stat-delta { font-size: 10px; color: var(--text-muted); }
+.stat-delta.up { color: var(--accent-bright); }
+.stat-delta.warn { color: var(--red); }
+
+.progress-bar-wrap { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; display: flex; align-items: center; gap: 16px; }
+.progress-label { font-size: 11px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+.progress-track { flex: 1; height: 6px; background: rgba(255,255,255,0.07); border-radius: 4px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 4px; background: var(--accent-bright); transition: width 0.4s ease; }
+.progress-pct { font-size: 13px; font-weight: 700; color: var(--accent-bright); white-space: nowrap; min-width: 36px; text-align: right; }
+
+.filter-bar { display: flex; gap: 6px; flex-wrap: wrap; }
+.filter-btn {
+  padding: 4px 12px; border-radius: 100px; font-size: 11px; font-weight: 600;
+  border: 1px solid var(--border2); background: transparent; color: var(--text-muted);
+  cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif;
+  -webkit-appearance: none; appearance: none;
+}
+.filter-btn:hover { color: var(--text); }
+.filter-btn.active { background: var(--accent-glow); color: var(--accent-bright); border-color: rgba(26,107,74,0.3); }
+
+.section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.section-title { font-size: 12px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-muted); }
+.section-count { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 100px; }
+.count-red { background: var(--red-glow); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
+.count-amber { background: var(--amber-glow); color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
+.count-green { background: var(--accent-glow); color: var(--accent-bright); border: 1px solid rgba(34,197,94,0.2); }
+.count-blue { background: var(--blue-glow); color: var(--blue); border: 1px solid rgba(59,130,246,0.2); }
+.count-purple { background: var(--purple-glow); color: var(--purple); border: 1px solid rgba(168,85,247,0.2); }
+
+.items-list { display: flex; flex-direction: column; gap: 8px; }
+.item-card {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px 16px; display: grid; grid-template-columns: auto 1fr auto;
+  gap: 12px; align-items: start; cursor: pointer; transition: all 0.15s; animation: slideIn 0.25s ease both;
+}
+@keyframes slideIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+.item-card:hover { border-color: var(--border2); background: var(--surface3); }
+.item-card.priority-high { border-left: 3px solid var(--red); }
+.item-card.priority-medium { border-left: 3px solid var(--amber); }
+.item-card.priority-low { border-left: 3px solid var(--blue); }
+.item-card.status-completed { opacity: 0.55; cursor: default; }
+
+.item-avatar { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+.av-red { background: var(--red-glow); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
+.av-amber { background: var(--amber-glow); color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
+.av-green { background: var(--accent-glow); color: var(--accent-bright); border: 1px solid rgba(34,197,94,0.2); }
+.av-blue { background: var(--blue-glow); color: var(--blue); border: 1px solid rgba(59,130,246,0.2); }
+.av-purple { background: var(--purple-glow); color: var(--purple); border: 1px solid rgba(168,85,247,0.2); }
+
+.item-body { min-width: 0; }
+.item-top { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; flex-wrap: wrap; }
+.item-name { font-size: 13px; font-weight: 600; color: var(--text); }
+
+.pill { font-size: 9px; font-weight: 800; letter-spacing: 0.4px; text-transform: uppercase; padding: 2px 7px; border-radius: 100px; }
+.pill-red { background: var(--red-glow); color: var(--red); border: 1px solid rgba(239,68,68,0.25); }
+.pill-amber { background: var(--amber-glow); color: var(--amber); border: 1px solid rgba(245,158,11,0.25); }
+.pill-green { background: var(--accent-glow); color: var(--accent-bright); border: 1px solid rgba(34,197,94,0.25); }
+.pill-blue { background: var(--blue-glow); color: var(--blue); border: 1px solid rgba(59,130,246,0.25); }
+.pill-purple { background: var(--purple-glow); color: var(--purple); border: 1px solid rgba(168,85,247,0.25); }
+.pill-gray { background: rgba(255,255,255,0.06); color: var(--text-muted); border: 1px solid var(--border2); }
+
+.tag { font-size: 9px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; }
+.tag-red { background: var(--red-glow); color: var(--red); }
+.tag-amber { background: var(--amber-glow); color: var(--amber); }
+.tag-blue { background: var(--blue-glow); color: var(--blue); }
+.tag-purple { background: var(--purple-glow); color: var(--purple); }
+.tag-green { background: var(--accent-glow); color: var(--accent-bright); }
+.tag-gray { background: rgba(255,255,255,0.06); color: var(--text-muted); }
+
+.item-summary { font-size: 12.5px; color: var(--text-muted); margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.item-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.item-meta-item { display: flex; align-items: center; gap: 3px; font-size: 10.5px; color: var(--text-dim); }
+.item-next { margin-top: 5px; font-size: 11px; color: rgba(255,255,255,0.35); font-style: italic; }
+.item-actions { display: flex; flex-direction: column; gap: 5px; flex-shrink: 0; }
+
+.item-btn {
+  padding: 5px 11px; border-radius: 5px; font-size: 11px; font-weight: 700; border: none;
+  cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; white-space: nowrap;
+  -webkit-appearance: none; appearance: none;
+}
+.item-btn:hover { transform: translateY(-1px); }
+.btn-review { background: #1a6b4a !important; color: white !important; }
+.btn-resolve { background: var(--accent-glow); color: var(--accent-bright) !important; border: 1px solid rgba(34,197,94,0.2); }
+.btn-edit { background: rgba(255,255,255,0.06); color: var(--text-muted) !important; border: 1px solid var(--border2); }
+.btn-done { background: rgba(34,197,94,0.06); color: var(--accent-bright) !important; border: 1px solid rgba(34,197,94,0.15); font-size: 10px; cursor: default; }
+
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px);
+  z-index: 100; display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.2s;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal { background: var(--surface2); border: 1px solid var(--border2); border-radius: 14px; width: 560px; max-width: 95vw; overflow: hidden; transform: translateY(16px); transition: transform 0.2s; }
+.modal-overlay.open .modal { transform: translateY(0); }
+.modal-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+.modal-title { font-size: 15px; font-weight: 700; flex: 1; }
+.modal-status { font-size: 10px; font-weight: 800; letter-spacing: 0.3px; text-transform: uppercase; padding: 3px 9px; border-radius: 100px; }
+.modal-close { background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; line-height: 1; }
+.modal-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; max-height: 70vh; overflow-y: auto; }
+.modal-body::-webkit-scrollbar { width: 3px; }
+.modal-body::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+.modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.modal-field { display: flex; flex-direction: column; gap: 4px; }
+.modal-label { font-size: 10px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; color: var(--text-muted); }
+.modal-value { font-size: 13px; color: var(--text); background: var(--surface3); border: 1px solid var(--border); border-radius: 6px; padding: 9px 12px; }
+
+.modal-input, .modal-select {
+  background: var(--surface3); border: 1px solid var(--border2); border-radius: 6px;
+  padding: 9px 12px; font-size: 13px; color: var(--text); font-family: 'DM Sans', sans-serif;
+  width: 100%; -webkit-appearance: none; appearance: none;
+}
+.modal-input:focus, .modal-select:focus, .modal-textarea:focus { outline: none; border-color: var(--accent); }
+
+.modal-textarea {
+  background: var(--surface3); border: 1px solid var(--border2); border-radius: 6px;
+  padding: 9px 12px; font-size: 13px; color: var(--text); font-family: 'DM Sans', sans-serif;
+  resize: none; width: 100%; min-height: 64px; transition: border-color 0.15s;
+}
+.modal-input::placeholder, .modal-textarea::placeholder { color: var(--text-dim); }
+
+.modal-summary { background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.15); border-radius: 7px; padding: 10px 14px; font-size: 12px; color: rgba(239,68,68,0.85); line-height: 1.5; }
+.modal-summary-label { font-size: 10px; font-weight: 800; letter-spacing: 0.4px; text-transform: uppercase; color: var(--red); margin-bottom: 5px; }
+.modal-next { background: var(--accent-glow); border: 1px solid rgba(34,197,94,0.15); border-radius: 7px; padding: 10px 14px; }
+.modal-next-label { font-size: 10px; font-weight: 800; letter-spacing: 0.4px; text-transform: uppercase; color: var(--accent-bright); margin-bottom: 4px; }
+.modal-next-text { font-size: 12.5px; color: rgba(255,255,255,0.65); }
+.modal-footer { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
+
+.modal-btn {
+  padding: 8px 16px; border-radius: 7px; font-size: 12px; font-weight: 700; border: none;
+  cursor: pointer; font-family: 'DM Sans', sans-serif; transition: opacity 0.15s;
+  -webkit-appearance: none; appearance: none;
+}
+.modal-btn:hover { opacity: 0.85; }
+.modal-btn:disabled { opacity: 0.4; cursor: default; }
+.mbtn-primary { background: #1a6b4a !important; color: white !important; }
+.mbtn-resolve { background: var(--blue) !important; color: white !important; }
+.mbtn-escalate { background: var(--red-glow); color: var(--red) !important; border: 1px solid rgba(239,68,68,0.2); }
+.mbtn-close { background: rgba(255,255,255,0.06); color: var(--text-muted) !important; border: 1px solid var(--border2); }
+.mbtn-save { background: #1a6b4a !important; color: white !important; }
+
+.toast {
+  position: fixed; bottom: 20px; right: 20px; background: var(--surface2);
+  border: 1px solid var(--border2); border-radius: 9px; padding: 11px 16px;
+  font-size: 12.5px; font-weight: 500; display: flex; align-items: center; gap: 8px;
+  z-index: 200; transform: translateY(60px); opacity: 0; transition: all 0.3s;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.empty-state { text-align: center; padding: 32px; color: var(--text-dim); font-size: 13px; }
+```
+
+  </style>
+</head>
+<body>
+  <div id="login-screen">
+    <div class="login-box">
+      <div class="login-logo">
+        <div class="login-logo-mark">Rx</div>
+        <span class="login-logo-text">Rx<span>Desk</span></span>
+      </div>
+      <div>
+        <div class="login-title">Sign in</div>
+        <div class="login-subtitle">CarePoint Pharmacy</div>
+      </div>
+      <div class="login-field">
+        <div class="login-label">Email</div>
+        <input class="login-input" id="login-email" type="email" placeholder="your@email.com" autocomplete="email" />
+      </div>
+      <div class="login-field">
+        <div class="login-label">Password</div>
+        <input class="login-input" id="login-password" type="password" placeholder="Password" autocomplete="current-password" />
+      </div>
+      <div class="login-error" id="login-error"></div>
+      <button class="login-btn" id="login-btn" onclick="handleLogin()">Sign in</button>
+    </div>
+  </div>
+
+  <div id="app-screen">
+    <div class="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-mark">Rx</div>
+        <span class="logo-text">Rx<span>Desk</span></span>
+      </div>
+      <div class="pharmacy-info">
+        <div class="pharmacy-name">CarePoint Pharmacy</div>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="nav-item" href="dashboard.html"><span class="nav-icon">&#128203;</span> Task Queue</a>
+        <div class="nav-item active"><span class="nav-icon">&#128197;</span> Month-end <span class="nav-badge badge-amber" id="badge-open">0</span></div>
+        <div class="nav-item disabled"><span class="nav-icon">&#128222;</span> Call Log <span class="nav-soon">Soon</span></div>
+        <div class="nav-item disabled"><span class="nav-icon">&#9881;</span> Settings <span class="nav-soon">Soon</span></div>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="user-row">
+          <div class="user-avatar">CP</div>
+          <div>
+            <div class="user-name" id="user-name-display">CarePoint Admin</div>
+            <div class="signout-btn" onclick="signOut()">Sign out</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+```
+<div class="main">
+  <div class="topbar">
+    <div>
+      <span class="topbar-title">Month-end Support</span>
+      <span class="topbar-date" id="live-date"></span>
+    </div>
+    <div class="topbar-right">
+      <button class="topbar-btn" id="btn-final-review" onclick="toggleFinalReview()">Final Review</button>
+      <button class="topbar-btn primary" onclick="openAddModal()">+ Add Item</button>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="summary-row">
+      <div class="stat-card green"><div class="stat-label">Total Items</div><div class="stat-value" id="stat-total">0</div><div class="stat-delta">This month</div></div>
+      <div class="stat-card red"><div class="stat-label">Exceptions</div><div class="stat-value" id="stat-exceptions">0</div><div class="stat-delta warn">Needs attention</div></div>
+      <div class="stat-card amber"><div class="stat-label">Missing Endorsements</div><div class="stat-value" id="stat-endorsements">0</div><div class="stat-delta">To resolve</div></div>
+      <div class="stat-card blue"><div class="stat-label">Ready for Submission</div><div class="stat-value" id="stat-ready">0</div><div class="stat-delta up">Good progress</div></div>
+      <div class="stat-card purple"><div class="stat-label">Completion</div><div class="stat-value" id="stat-pct">0%</div><div class="stat-delta up">Month progress</div></div>
+    </div>
+
+    <div class="progress-bar-wrap">
+      <span class="progress-label">Month-end Progress</span>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+      <span class="progress-pct" id="progress-pct-label">0%</span>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+      <button class="filter-btn" onclick="setFilter('new',this)">New</button>
+      <button class="filter-btn" onclick="setFilter('needs_review',this)">Needs Review</button>
+      <button class="filter-btn" onclick="setFilter('in_progress',this)">In Progress</button>
+      <button class="filter-btn" onclick="setFilter('ready_for_submission',this)">Ready</button>
+      <button class="filter-btn" onclick="setFilter('completed',this)">Completed</button>
+    </div>
+
+    <div id="section-exceptions">
+      <div class="section-header"><span class="section-title">&#9888; Exceptions</span><span class="section-count count-red" id="count-exceptions">0</span></div>
+      <div class="items-list" id="list-exceptions"></div>
+    </div>
+    <div id="section-endorsements">
+      <div class="section-header"><span class="section-title">&#128203; Missing Endorsements</span><span class="section-count count-amber" id="count-endorsements">0</span></div>
+      <div class="items-list" id="list-endorsements"></div>
+    </div>
+    <div id="section-paper">
+      <div class="section-header"><span class="section-title">&#128196; Paper Prescriptions</span><span class="section-count count-blue" id="count-paper">0</span></div>
+      <div class="items-list" id="list-paper"></div>
+    </div>
+    <div id="section-other">
+      <div class="section-header"><span class="section-title">&#128736; Other Items</span><span class="section-count count-purple" id="count-other">0</span></div>
+      <div class="items-list" id="list-other"></div>
+    </div>
+    <div id="section-ready">
+      <div class="section-header"><span class="section-title">&#10003; Ready for Submission</span><span class="section-count count-green" id="count-ready">0</span></div>
+      <div class="items-list" id="list-ready"></div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+
+  <div class="modal-overlay" id="review-modal" onclick="closeReviewOutside(event)">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title" id="rm-title">Item Detail</span>
+        <span class="modal-status pill" id="rm-pill">New</span>
+        <button class="modal-close" onclick="closeReviewModal()">&#x2715;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-grid">
+          <div class="modal-field"><div class="modal-label">Patient Name</div><div class="modal-value" id="rm-patient">-</div></div>
+          <div class="modal-field"><div class="modal-label">Prescription Ref</div><div class="modal-value" id="rm-ref">-</div></div>
+          <div class="modal-field"><div class="modal-label">Medication</div><div class="modal-value" id="rm-med">-</div></div>
+          <div class="modal-field"><div class="modal-label">Issue Type</div><div class="modal-value" id="rm-type">-</div></div>
+          <div class="modal-field"><div class="modal-label">Priority</div><div class="modal-value" id="rm-priority">-</div></div>
+          <div class="modal-field"><div class="modal-label">Status</div><div class="modal-value" id="rm-status">-</div></div>
+        </div>
+        <div class="modal-summary"><div class="modal-summary-label">Issue Summary</div><div id="rm-summary">-</div></div>
+        <div class="modal-next"><div class="modal-next-label">Suggested Next Step</div><div class="modal-next-text" id="rm-next">-</div></div>
+        <div class="modal-field">
+          <div class="modal-label">Update Status</div>
+          <select class="modal-select" id="rm-status-select">
+            <option value="new">New</option>
+            <option value="needs_review">Needs Review</option>
+            <option value="in_progress">In Progress</option>
+            <option value="ready_for_submission">Ready for Submission</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+        <div class="modal-field">
+          <div class="modal-label">Internal Note</div>
+          <textarea class="modal-textarea" id="rm-note" placeholder="Add a note..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn mbtn-close" onclick="closeReviewModal()">Close</button>
+        <button class="modal-btn mbtn-escalate" onclick="escalateItem()">Escalate</button>
+        <button class="modal-btn mbtn-resolve" onclick="resolveItem()">Mark Resolved</button>
+        <button class="modal-btn mbtn-primary" id="rm-save-btn" onclick="saveReview()">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="edit-modal" onclick="closeEditOutside(event)">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title" id="em-title">Add Item</span>
+        <button class="modal-close" onclick="closeEditModal()">&#x2715;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-grid">
+          <div class="modal-field"><div class="modal-label">Patient Name</div><input class="modal-input" id="em-patient" type="text" placeholder="Patient full name" /></div>
+          <div class="modal-field"><div class="modal-label">Prescription Ref</div><input class="modal-input" id="em-ref" type="text" placeholder="e.g. FP10-2024-001" /></div>
+        </div>
+        <div class="modal-field"><div class="modal-label">Medication Name</div><input class="modal-input" id="em-med" type="text" placeholder="e.g. Metformin 500mg" /></div>
+        <div class="modal-grid">
+          <div class="modal-field">
+            <div class="modal-label">Issue Type</div>
+            <select class="modal-select" id="em-issue-type">
+              <option value="missing_endorsement">Missing Endorsement</option>
+              <option value="exception">Exception</option>
+              <option value="paper_rx">Paper Prescription</option>
+              <option value="pricing_issue">Pricing Issue</option>
+              <option value="invalid_quantity">Invalid Quantity</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="modal-field">
+            <div class="modal-label">Priority</div>
+            <select class="modal-select" id="em-priority">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-field"><div class="modal-label">Issue Summary</div><textarea class="modal-textarea" id="em-summary" placeholder="Brief description of the issue..."></textarea></div>
+        <div class="modal-field"><div class="modal-label">Suggested Next Step</div><input class="modal-input" id="em-next" type="text" placeholder="What should the team do?" /></div>
+        <div class="modal-field"><div class="modal-label">Internal Note</div><textarea class="modal-textarea" id="em-note" placeholder="Optional note..."></textarea></div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn mbtn-close" onclick="closeEditModal()">Cancel</button>
+        <button class="modal-btn mbtn-save" onclick="saveItem()">Save Item</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"><span id="toast-msg">Done</span></div>
+
+  <script>
+    var API_BASE = 'https://rxdesk-production.up.railway.app/api';
+    var SUPABASE_URL = 'https://zymynzcffxjplzuqkkno.supabase.co';
+    var SUPABASE_ANON = 'sb_publishable_2cmHeSc98YTC5iOKbxHCIg_R-W13_OK';
+
+    var state = {
+      items: {},
+      currentReviewId: null,
+      editItemId: null,
+      currentFilter: 'all',
+      finalReview: false,
+      session: null
+    };
+
+    function getStoredSession() {
+      try { var s = localStorage.getItem('rxdesk_session'); return s ? JSON.parse(s) : null; }
+      catch (e) { return null; }
+    }
+
+    function getAuthToken() {
+      var s = state.session || getStoredSession();
+      return (s && s.access_token) ? s.access_token : null;
+    }
+
+    async function signIn(email, password) {
+      var r = await fetch(SUPABASE_URL + '/auth/v1/token?grant_type=password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON },
+        body: JSON.stringify({ email: email, password: password })
+      });
+      var d = await r.json();
+      if (!r.ok) throw new Error(d.error_description || d.msg || d.error || 'Sign in failed');
+      state.session = d;
+      localStorage.setItem('rxdesk_session', JSON.stringify(d));
+      return d;
+    }
+
+    function signOut() { state.session = null; localStorage.removeItem('rxdesk_session'); showLogin(); }
+
+    async function handleLogin() {
+      var email = document.getElementById('login-email').value.trim();
+      var password = document.getElementById('login-password').value;
+      var btn = document.getElementById('login-btn');
+      var errEl = document.getElementById('login-error');
+      errEl.textContent = '';
+      if (!email || !password) { errEl.textContent = 'Please enter email and password.'; return; }
+      btn.textContent = 'Signing in...'; btn.disabled = true;
+      try {
+        var s = await signIn(email, password);
+        document.getElementById('user-name-display').textContent = (s.user && s.user.email) || email;
+        showApp(); loadAll();
+      } catch (err) {
+        errEl.textContent = err.message || 'Sign in failed.';
+        btn.textContent = 'Sign in'; btn.disabled = false;
+      }
+    }
+
+    function showLogin() { document.getElementById('login-screen').style.display = 'flex'; document.getElementById('app-screen').style.display = 'none'; }
+    function showApp() { document.getElementById('login-screen').style.display = 'none'; document.getElementById('app-screen').style.display = 'flex'; }
+
+    function safeJson(r) {
+      return r.text().then(function (t) { try { return t ? JSON.parse(t) : {}; } catch (e) { return {}; } });
+    }
+
+    async function apiFetch(path, opts) {
+      opts = opts || {};
+      var token = getAuthToken();
+      if (!token) { showLogin(); throw new Error('Not authenticated'); }
+      var headers = Object.assign({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }, opts.headers || {});
+      var r = await fetch(API_BASE + path, Object.assign({}, opts, { headers: headers }));
+      var p = await safeJson(r);
+      if (r.status === 401) { signOut(); throw new Error('Session expired.'); }
+      if (!r.ok) { var e = new Error((p && p.error) || 'Request failed'); e.status = r.status; throw e; }
+      return p;
+    }
+
+    function initialsFromName(name) {
+      return (name || 'P').split(' ').filter(Boolean).map(function (p) { return p[0]; }).join('').substring(0, 2).toUpperCase();
+    }
+
+    function formatTime(iso) {
+      if (!iso) return 'Just now';
+      var d = new Date(iso);
+      if (isNaN(d.getTime())) return 'Just now';
+      return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    }
+
+    function issueTypeLabel(t) {
+      var map = { missing_endorsement: 'Missing Endorsement', exception: 'Exception', paper_rx: 'Paper Rx', pricing_issue: 'Pricing Issue', invalid_quantity: 'Invalid Quantity', other: 'Other' };
+      return map[t] || t;
+    }
+
+    function statusLabel(s) {
+      var map = { new: 'New', needs_review: 'Needs Review', in_progress: 'In Progress', ready_for_submission: 'Ready', completed: 'Completed' };
+      return map[s] || s;
+    }
+
+    function priorityPillClass(p) { if (p === 'high') return 'pill pill-red'; if (p === 'medium') return 'pill pill-amber'; return 'pill pill-blue'; }
+    function statusPillClass(s) {
+      if (s === 'new') return 'pill pill-gray';
+      if (s === 'needs_review') return 'pill pill-amber';
+      if (s === 'in_progress') return 'pill pill-blue';
+      if (s === 'ready_for_submission') return 'pill pill-green';
+      if (s === 'completed') return 'pill pill-green';
+      return 'pill pill-gray';
+    }
+    function issueTagClass(t) {
+      if (t === 'exception') return 'tag tag-red';
+      if (t === 'missing_endorsement') return 'tag tag-amber';
+      if (t === 'paper_rx') return 'tag tag-blue';
+      if (t === 'pricing_issue') return 'tag tag-purple';
+      if (t === 'invalid_quantity') return 'tag tag-amber';
+      return 'tag tag-gray';
+    }
+    function avatarClass(item) {
+      if (item.priority === 'high' || item.issue_type === 'exception') return 'av-red';
+      if (item.issue_type === 'missing_endorsement') return 'av-amber';
+      if (item.status === 'ready_for_submission' || item.status === 'completed') return 'av-green';
+      if (item.issue_type === 'paper_rx') return 'av-blue';
+      return 'av-purple';
+    }
+    function cardPriorityClass(item) {
+      if (item.status === 'completed') return 'priority-low status-completed';
+      if (item.priority === 'high') return 'priority-high';
+      if (item.priority === 'medium') return 'priority-medium';
+      return 'priority-low';
+    }
+
+    function renderItemCard(item) {
+      var card = document.createElement('div');
+      card.className = 'item-card ' + cardPriorityClass(item);
+      card.dataset.id = item.id; card.dataset.issue = item.issue_type; card.dataset.status = item.status;
+      card.onclick = function () { openReviewModal(item.id); };
+      var summary = item.display_summary || item.ai_summary || 'No summary captured.';
+      var av = avatarClass(item);
+      var primaryBtn = item.status === 'completed'
+        ? '<button class="item-btn btn-done">Resolved</button>'
+        : item.status === 'ready_for_submission'
+          ? '<button class="item-btn btn-resolve" onclick="event.stopPropagation();quickResolve(\'' + item.id + '\')">Mark Resolved</button>'
+          : '<button class="item-btn btn-review" onclick="event.stopPropagation();openReviewModal(\'' + item.id + '\')">Review</button>';
+      card.innerHTML =
+        '<div class="item-avatar ' + av + '">' + initialsFromName(item.patient_name) + '</div>' +
+        '<div class="item-body">' +
+          '<div class="item-top">' +
+            '<span class="item-name">' + item.patient_name + '</span>' +
+            '<span class="' + priorityPillClass(item.priority) + '">' + item.priority.toUpperCase() + '</span>' +
+            '<span class="' + issueTagClass(item.issue_type) + '">' + issueTypeLabel(item.issue_type) + '</span>' +
+            '<span class="' + statusPillClass(item.status) + '">' + statusLabel(item.status) + '</span>' +
+          '</div>' +
+          '<div class="item-summary">' + summary + '</div>' +
+          '<div class="item-meta">' +
+            (item.medication_name ? '<span class="item-meta-item">&#128138; ' + item.medication_name + '</span>' : '') +
+            (item.prescription_reference ? '<span class="item-meta-item">Ref: ' + item.prescription_reference + '</span>' : '') +
+            '<span class="item-meta-item">&#128197; ' + formatTime(item.created_at) + '</span>' +
+          '</div>' +
+          (item.next_step ? '<div class="item-next">&#8594; ' + item.next_step + '</div>' : '') +
+        '</div>' +
+        '<div class="item-actions" onclick="event.stopPropagation()">' + primaryBtn +
+          '<button class="item-btn btn-edit" onclick="event.stopPropagation();openEditModal(\'' + item.id + '\')">Edit</button>' +
+        '</div>';
+      return card;
+    }
+
+    function renderAllSections() {
+      var listIds = ['exceptions', 'endorsements', 'paper', 'other', 'ready'];
+      listIds.forEach(function (k) { document.getElementById('list-' + k).innerHTML = ''; });
+      var counts = { exceptions: 0, endorsements: 0, paper: 0, other: 0, ready: 0 };
+      var totalOpen = 0;
+      Object.values(state.items).forEach(function (item) {
+        if (!passesFilter(item)) return;
+        var card = renderItemCard(item);
+        if (item.status === 'ready_for_submission' || item.status === 'completed') {
+          document.getElementById('list-ready').appendChild(card); counts.ready++;
+        } else if (item.issue_type === 'exception') {
+          document.getElementById('list-exceptions').appendChild(card); counts.exceptions++; totalOpen++;
+        } else if (item.issue_type === 'missing_endorsement') {
+          document.getElementById('list-endorsements').appendChild(card); counts.endorsements++; totalOpen++;
+        } else if (item.issue_type === 'paper_rx') {
+          document.getElementById('list-paper').appendChild(card); counts.paper++; totalOpen++;
+        } else {
+          document.getElementById('list-other').appendChild(card); counts.other++; totalOpen++;
+        }
+      });
+      document.getElementById('count-exceptions').textContent = counts.exceptions;
+      document.getElementById('count-endorsements').textContent = counts.endorsements;
+      document.getElementById('count-paper').textContent = counts.paper;
+      document.getElementById('count-other').textContent = counts.other;
+      document.getElementById('count-ready').textContent = counts.ready;
+      document.getElementById('badge-open').textContent = totalOpen;
+      listIds.forEach(function (k) {
+        var el = document.getElementById('list-' + k);
+        if (el && el.children.length === 0) el.innerHTML = '<div class="empty-state">No items in this section</div>';
+      });
+    }
+
+    function passesFilter(item) {
+      if (state.finalReview) return ['new', 'needs_review', 'in_progress'].includes(item.status);
+      if (state.currentFilter === 'all') return true;
+      return item.status === state.currentFilter;
+    }
+
+    function setFilter(filter, el) {
+      state.currentFilter = filter; state.finalReview = false;
+      document.getElementById('btn-final-review').classList.remove('active-filter');
+      document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
+      el.classList.add('active'); renderAllSections();
+    }
+
+    function toggleFinalReview() {
+      state.finalReview = !state.finalReview;
+      document.getElementById('btn-final-review').classList.toggle('active-filter', state.finalReview);
+      document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
+      renderAllSections();
+    }
+
+    function updateSummaryCards(summary) {
+      document.getElementById('stat-total').textContent = summary.total;
+      document.getElementById('stat-exceptions').textContent = summary.by_issue_type.exception;
+      document.getElementById('stat-endorsements').textContent = summary.by_issue_type.missing_endorsement;
+      document.getElementById('stat-ready').textContent = summary.by_status.ready_for_submission;
+      document.getElementById('stat-pct').textContent = summary.completion_pct + '%';
+      document.getElementById('progress-fill').style.width = summary.completion_pct + '%';
+      document.getElementById('progress-pct-label').textContent = summary.completion_pct + '%';
+    }
+
+    async function loadAll() {
+      try {
+        var itemsData = await apiFetch('/month-end');
+        var summaryData = await apiFetch('/month-end/summary');
+        var next = {};
+        (itemsData.items || []).forEach(function (item) { next[item.id] = item; });
+        state.items = next; renderAllSections();
+        if (summaryData.summary) updateSummaryCards(summaryData.summary);
+      } catch (err) {
+        console.error(err);
+        if (err.message !== 'Not authenticated') showToast('Failed to load items: ' + (err.message || 'Unknown error'));
+      }
+    }
+
+    async function openReviewModal(id) {
+      try {
+        var data = await apiFetch('/month-end/' + id);
+        var item = data.item;
+        state.currentReviewId = id;
+        document.getElementById('rm-title').textContent = item.patient_name;
+        document.getElementById('rm-patient').textContent = item.patient_name;
+        document.getElementById('rm-ref').textContent = item.prescription_reference || '-';
+        document.getElementById('rm-med').textContent = item.medication_name || '-';
+        document.getElementById('rm-type').textContent = issueTypeLabel(item.issue_type);
+        document.getElementById('rm-priority').textContent = item.priority.charAt(0).toUpperCase() + item.priority.slice(1);
+        document.getElementById('rm-status').textContent = statusLabel(item.status);
+        document.getElementById('rm-summary').textContent = item.ai_summary || item.display_summary || '-';
+        document.getElementById('rm-next').textContent = item.next_step || '-';
+        document.getElementById('rm-note').value = '';
+        document.getElementById('rm-status-select').value = item.status;
+        var pill = document.getElementById('rm-pill');
+        pill.className = statusPillClass(item.status); pill.textContent = statusLabel(item.status);
+        document.getElementById('rm-save-btn').disabled = item.status === 'completed';
+        state.items[id] = item;
+        document.getElementById('review-modal').classList.add('open');
+      } catch (err) { console.error(err); showToast('Failed to open item: ' + (err.message || 'Unknown error')); }
+    }
+
+    async function saveReview() {
+      if (!state.currentReviewId) return;
+      var toStatus = document.getElementById('rm-status-select').value;
+      var note = document.getElementById('rm-note').value.trim();
+      try {
+        var data = await apiFetch('/month-end/' + state.currentReviewId + '/status', { method: 'POST', body: JSON.stringify({ to_status: toStatus, note: note || null }) });
+        state.items[state.currentReviewId] = data.item; closeReviewModal(); renderAllSections();
+        showToast('Item updated: ' + data.item.patient_name); loadAll();
+      } catch (err) { showToast('Failed to save: ' + (err.message || 'Unknown error')); }
+    }
+
+    async function resolveItem() {
+      if (!state.currentReviewId) return;
+      var note = document.getElementById('rm-note').value.trim();
+      try {
+        var data = await apiFetch('/month-end/' + state.currentReviewId + '/status', { method: 'POST', body: JSON.stringify({ to_status: 'completed', note: note || 'Marked resolved.' }) });
+        state.items[state.currentReviewId] = data.item; closeReviewModal(); renderAllSections();
+        showToast('Resolved: ' + data.item.patient_name); loadAll();
+      } catch (err) { showToast('Failed to resolve: ' + (err.message || 'Unknown error')); }
+    }
+
+    async function escalateItem() {
+      if (!state.currentReviewId) return;
+      try {
+        await apiFetch('/month-end/' + state.currentReviewId + '/status', { method: 'POST', body: JSON.stringify({ to_status: 'needs_review', note: 'Escalated for urgent pharmacist review.' }) });
+        await apiFetch('/month-end/' + state.currentReviewId, { method: 'PATCH', body: JSON.stringify({ priority: 'high' }) });
+        closeReviewModal(); showToast('Escalated to urgent review.'); loadAll();
+      } catch (err) { showToast('Failed to escalate: ' + (err.message || 'Unknown error')); }
+    }
+
+    async function quickResolve(id) {
+      try {
+        var data = await apiFetch('/month-end/' + id + '/status', { method: 'POST', body: JSON.stringify({ to_status: 'completed', note: 'Marked resolved.' }) });
+        state.items[id] = data.item; renderAllSections(); showToast('Resolved: ' + data.item.patient_name); loadAll();
+      } catch (err) { showToast('Failed: ' + (err.message || 'Unknown error')); }
+    }
+
+    function closeReviewModal() { document.getElementById('review-modal').classList.remove('open'); state.currentReviewId = null; }
+    function closeReviewOutside(e) { if (e.target === document.getElementById('review-modal')) closeReviewModal(); }
+
+    function openAddModal() {
+      state.editItemId = null;
+      document.getElementById('em-title').textContent = 'Add Month-end Item';
+      ['em-patient', 'em-ref', 'em-med', 'em-summary', 'em-next', 'em-note'].forEach(function (id) { document.getElementById(id).value = ''; });
+      document.getElementById('em-issue-type').value = 'missing_endorsement';
+      document.getElementById('em-priority').value = 'medium';
+      document.getElementById('edit-modal').classList.add('open');
+    }
+
+    async function openEditModal(id) {
+      var item = state.items[id]; if (!item) return;
+      state.editItemId = id;
+      document.getElementById('em-title').textContent = 'Edit - ' + item.patient_name;
+      document.getElementById('em-patient').value = item.patient_name || '';
+      document.getElementById('em-ref').value = item.prescription_reference || '';
+      document.getElementById('em-med').value = item.medication_name || '';
+      document.getElementById('em-issue-type').value = item.issue_type || 'other';
+      document.getElementById('em-priority').value = item.priority || 'medium';
+      document.getElementById('em-summary').value = item.display_summary || item.ai_summary || '';
+      document.getElementById('em-next').value = item.next_step || '';
+      document.getElementById('em-note').value = item.internal_note || '';
+      document.getElementById('edit-modal').classList.add('open');
+    }
+
+    async function saveItem() {
+      var patient = document.getElementById('em-patient').value.trim();
+      if (!patient) { showToast('Patient name is required.'); return; }
+      var payload = {
+        patient_name: patient,
+        prescription_reference: document.getElementById('em-ref').value.trim() || null,
+        medication_name: document.getElementById('em-med').value.trim() || null,
+        issue_type: document.getElementById('em-issue-type').value,
+        priority: document.getElementById('em-priority').value,
+        display_summary: document.getElementById('em-summary').value.trim() || null,
+        next_step: document.getElementById('em-next').value.trim() || null,
+        internal_note: document.getElementById('em-note').value.trim() || null
+      };
+      try {
+        if (state.editItemId) {
+          var updateData = await apiFetch('/month-end/' + state.editItemId, { method: 'PATCH', body: JSON.stringify(payload) });
+          state.items[state.editItemId] = updateData.item; showToast('Updated: ' + updateData.item.patient_name);
+        } else {
+          var createData = await apiFetch('/month-end', { method: 'POST', body: JSON.stringify(payload) });
+          state.items[createData.item.id] = createData.item; showToast('Item added: ' + createData.item.patient_name);
+        }
+        closeEditModal(); renderAllSections(); loadAll();
+      } catch (err) { showToast('Failed to save: ' + (err.message || 'Unknown error')); }
+    }
+
+    function closeEditModal() { document.getElementById('edit-modal').classList.remove('open'); state.editItemId = null; }
+    function closeEditOutside(e) { if (e.target === document.getElementById('edit-modal')) closeEditModal(); }
+
+    function showToast(msg) {
+      var t = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = msg;
+      t.classList.add('show');
+      setTimeout(function () { t.classList.remove('show'); }, 3200);
+    }
+
+    document.getElementById('live-date').textContent =
+      ' - ' + new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+
+    document.getElementById('login-password').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') handleLogin();
+    });
+
+    var existingSession = getStoredSession();
+    if (existingSession && existingSession.access_token) {
+      state.session = existingSession;
+      document.getElementById('user-name-display').textContent = (existingSession.user && existingSession.user.email) || 'Admin';
+      showApp(); loadAll();
+    } else {
+      showLogin();
+    }
+  </script>
+
+</body>
+</html>
