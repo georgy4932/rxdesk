@@ -358,11 +358,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
 <div class="toast" id="toast"><span id="toast-msg">Done</span></div>
 
 <script>
-const API_BASE =
-  window.RXDESK_API_BASE ||
-  ((window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-    ? 'http://localhost:3000/api'
-    : '/api');
+const API_BASE = 'https://rxdesk-production.up.railway.app/api';
 
 const state = {
   tasks: {},
