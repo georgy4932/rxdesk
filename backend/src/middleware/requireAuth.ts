@@ -19,13 +19,12 @@ function getKey(header: jwt.JwtHeader, callback: jwt.SigningKeyCallback) {
 }
 
 export function requireAuth(req: Request, res: Response, next: NextFunction) {
-  // Dev bypass - skip all JWT verification when enabled
   if (process.env.DEV_AUTH_BYPASS === 'true') {
     req.user = {
       id: 'dev-user',
       email: 'admin@carepointpharmacy.co.uk',
       role: 'staff',
-      pharmacyId: null
+      pharmacyId: null as any
     };
     return next();
   }
@@ -50,7 +49,7 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
         id: decoded.sub,
         email: decoded.email,
         role: decoded.role || 'staff',
-        pharmacyId: decoded.pharmacy_id || null
+        pharmacyId: decoded.pharmacy_id || null as any
       };
       next();
     }
