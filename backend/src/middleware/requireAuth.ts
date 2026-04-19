@@ -21,13 +21,14 @@ function getKey(header: jwt.JwtHeader, callback: jwt.SigningKeyCallback) {
 export function requireAuth(req: Request, res: Response, next: NextFunction) {
   if (process.env.DEV_AUTH_BYPASS === 'true') {
     req.user = {
-      id: 'dev-user',
+      id: 'dbfbd4e2-416d-40b1-b326-fd6df9cf48da',
       email: 'admin@carepointpharmacy.co.uk',
-      role: 'staff',
-      pharmacyId: null as any
+      role: 'admin',
+      pharmacyId: 'dbfbd4e2-416d-40b1-b326-fd6df9cf48da' as any
     };
     return next();
   }
+
 
   const authHeader = req.headers.authorization;
 
