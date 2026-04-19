@@ -22,245 +22,314 @@
 }
 html,body{height:100%;overflow:hidden;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;height:100vh;}
-.sidebar{width:210px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;}
-.sidebar-logo{padding:18px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
-.logo-mark{width:28px;height:28px;background:var(--accent);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',serif;font-style:italic;font-size:13px;color:white;}
+
+/* LOGIN SCREEN */
+#login-screen{
+display:flex;width:100%;height:100%;align-items:center;justify-content:center;
+background:var(–bg);flex-direction:column;gap:0;
+}
+.login-box{
+background:var(–surface2);border:1px solid var(–border2);border-radius:14px;
+padding:40px 36px;width:360px;max-width:95vw;display:flex;flex-direction:column;gap:20px;
+}
+.login-logo{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+.login-logo-mark{width:32px;height:32px;background:var(–accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:‘Instrument Serif’,serif;font-style:italic;font-size:14px;color:white;}
+.login-logo-text{font-size:16px;font-weight:700;letter-spacing:-0.3px;}
+.login-logo-text span{color:var(–accent-bright);}
+.login-title{font-family:‘Instrument Serif’,serif;font-size:22px;letter-spacing:-0.3px;}
+.login-subtitle{font-size:13px;color:var(–text-muted);margin-top:-12px;}
+.login-field{display:flex;flex-direction:column;gap:6px;}
+.login-label{font-size:11px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase;color:var(–text-muted);}
+.login-input{background:var(–surface3);border:1px solid var(–border2);border-radius:7px;padding:10px 14px;font-size:14px;color:var(–text);font-family:‘DM Sans’,sans-serif;width:100%;transition:border-color 0.15s;}
+.login-input:focus{outline:none;border-color:var(–accent);}
+.login-input::placeholder{color:var(–text-dim);}
+.login-btn{background:var(–accent);color:white;border:none;border-radius:7px;padding:12px;font-size:14px;font-weight:700;font-family:‘DM Sans’,sans-serif;cursor:pointer;transition:opacity 0.15s;width:100%;}
+.login-btn:hover{opacity:0.88;}
+.login-btn:disabled{opacity:0.5;cursor:default;}
+.login-error{font-size:12px;color:var(–red);min-height:16px;}
+
+/* APP SCREEN */
+#app-screen{display:none;width:100%;height:100%;}
+
+.sidebar{width:210px;background:var(–surface);border-right:1px solid var(–border);display:flex;flex-direction:column;flex-shrink:0;}
+.sidebar-logo{padding:18px 16px;border-bottom:1px solid var(–border);display:flex;align-items:center;gap:8px;}
+.logo-mark{width:28px;height:28px;background:var(–accent);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:‘Instrument Serif’,serif;font-style:italic;font-size:13px;color:white;}
 .logo-text{font-size:14px;font-weight:700;letter-spacing:-0.3px;}
-.logo-text span{color:var(--accent-bright);}
-.pharmacy-info{padding:10px 16px;border-bottom:1px solid var(--border);}
+.logo-text span{color:var(–accent-bright);}
+.pharmacy-info{padding:10px 16px;border-bottom:1px solid var(–border);}
 .pharmacy-name{font-size:12px;font-weight:600;}
-.clara-live{display:flex;align-items:center;gap:4px;margin-top:3px;font-size:10px;color:var(--accent-bright);font-weight:600;}
-.live-dot{width:5px;height:5px;background:var(--accent-bright);border-radius:50%;animation:pulse 1.5s infinite;}
+.clara-live{display:flex;align-items:center;gap:4px;margin-top:3px;font-size:10px;color:var(–accent-bright);font-weight:600;}
+.live-dot{width:5px;height:5px;background:var(–accent-bright);border-radius:50%;animation:pulse 1.5s infinite;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
 .sidebar-nav{flex:1;padding:8px;display:flex;flex-direction:column;gap:1px;}
-.nav-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:6px;font-size:13px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:all 0.15s;border:1px solid transparent;}
-.nav-item:hover{background:rgba(255,255,255,0.04);color:var(--text);}
-.nav-item.active{background:var(--accent-glow);color:var(--accent-bright);border-color:rgba(26,107,74,0.2);}
+.nav-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:6px;font-size:13px;font-weight:500;color:var(–text-muted);cursor:pointer;transition:all 0.15s;border:1px solid transparent;}
+.nav-item:hover{background:rgba(255,255,255,0.04);color:var(–text);}
+.nav-item.active{background:var(–accent-glow);color:var(–accent-bright);border-color:rgba(26,107,74,0.2);}
 .nav-item.disabled{opacity:0.35;cursor:default;pointer-events:none;}
 .nav-icon{font-size:14px;width:16px;text-align:center;}
 .nav-badge{margin-left:auto;font-size:10px;font-weight:700;padding:1px 6px;border-radius:100px;min-width:18px;text-align:center;}
-.badge-red{background:var(--red);color:white;}
-.badge-amber{background:var(--amber);color:var(--bg);}
-.badge-green{background:var(--accent);color:white;}
-.nav-soon{margin-left:auto;font-size:9px;font-weight:700;color:var(--text-dim);letter-spacing:0.3px;text-transform:uppercase;}
-.sidebar-bottom{padding:10px 8px;border-top:1px solid var(--border);}
+.badge-red{background:var(–red);color:white;}
+.badge-amber{background:var(–amber);color:var(–bg);}
+.badge-green{background:var(–accent);color:white;}
+.nav-soon{margin-left:auto;font-size:9px;font-weight:700;color:var(–text-dim);letter-spacing:0.3px;text-transform:uppercase;}
+.sidebar-bottom{padding:10px 8px;border-top:1px solid var(–border);}
 .user-row{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:6px;cursor:pointer;}
 .user-row:hover{background:rgba(255,255,255,0.04);}
-.user-avatar{width:24px;height:24px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;}
+.user-avatar{width:24px;height:24px;background:var(–accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;}
 .user-name{font-size:12px;font-weight:500;}
-.user-role{font-size:10px;color:var(--text-muted);}
+.user-role{font-size:10px;color:var(–text-muted);}
+.signout-btn{font-size:10px;color:var(–text-dim);cursor:pointer;margin-top:2px;}
+.signout-btn:hover{color:var(–text-muted);}
+
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
-.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:52px;display:flex;align-items:center;gap:16px;flex-shrink:0;}
-.topbar-title{font-family:'Instrument Serif',serif;font-size:18px;letter-spacing:-0.3px;}
-.topbar-date{font-size:11px;color:var(--text-muted);}
+.topbar{background:var(–surface);border-bottom:1px solid var(–border);padding:0 24px;height:52px;display:flex;align-items:center;gap:16px;flex-shrink:0;}
+.topbar-title{font-family:‘Instrument Serif’,serif;font-size:18px;letter-spacing:-0.3px;}
+.topbar-date{font-size:11px;color:var(–text-muted);}
 .topbar-right{margin-left:auto;display:flex;gap:8px;align-items:center;}
-.topbar-btn{padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;border:1px solid var(--border2);background:transparent;color:var(--text);cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;}
+.topbar-btn{padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;border:1px solid var(–border2);background:transparent;color:var(–text);cursor:pointer;transition:all 0.15s;font-family:‘DM Sans’,sans-serif;}
 .topbar-btn:hover{background:rgba(255,255,255,0.05);}
-.topbar-btn.primary{background:var(--accent);border-color:var(--accent);color:white;}
+.topbar-btn.primary{background:var(–accent);border-color:var(–accent);color:white;}
 .topbar-btn.primary:hover{opacity:0.88;}
 .content{flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:20px;}
 .content::-webkit-scrollbar{width:3px;}
-.content::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+.content::-webkit-scrollbar-thumb{background:var(–border2);border-radius:2px;}
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
-.stat-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px 18px;position:relative;overflow:hidden;}
-.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:10px 10px 0 0;}
-.stat-card.green::before{background:var(--accent-bright);}
-.stat-card.red::before{background:var(--red);}
-.stat-card.amber::before{background:var(--amber);}
-.stat-card.blue::before{background:var(--blue);}
-.stat-label{font-size:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;}
-.stat-value{font-family:'Instrument Serif',serif;font-size:30px;letter-spacing:-1px;line-height:1;margin-bottom:4px;}
-.stat-delta{font-size:10px;color:var(--text-muted);}
-.stat-delta.up{color:var(--accent-bright);}
-.stat-delta.warn{color:var(--red);}
-.conf-legend{display:flex;gap:14px;align-items:center;padding:8px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:7px;flex-wrap:wrap;}
-.conf-legend-label{font-size:10px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase;color:var(--text-dim);margin-right:4px;}
-.conf-legend-item{display:flex;align-items:center;gap:5px;font-size:10.5px;color:var(--text-muted);}
+.stat-card{background:var(–surface2);border:1px solid var(–border);border-radius:10px;padding:16px 18px;position:relative;overflow:hidden;}
+.stat-card::before{content:’’;position:absolute;top:0;left:0;right:0;height:2px;border-radius:10px 10px 0 0;}
+.stat-card.green::before{background:var(–accent-bright);}
+.stat-card.red::before{background:var(–red);}
+.stat-card.amber::before{background:var(–amber);}
+.stat-card.blue::before{background:var(–blue);}
+.stat-label{font-size:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(–text-muted);margin-bottom:8px;}
+.stat-value{font-family:‘Instrument Serif’,serif;font-size:30px;letter-spacing:-1px;line-height:1;margin-bottom:4px;}
+.stat-delta{font-size:10px;color:var(–text-muted);}
+.stat-delta.up{color:var(–accent-bright);}
+.stat-delta.warn{color:var(–red);}
+.conf-legend{display:flex;gap:14px;align-items:center;padding:8px 12px;background:var(–surface2);border:1px solid var(–border);border-radius:7px;flex-wrap:wrap;}
+.conf-legend-label{font-size:10px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase;color:var(–text-dim);margin-right:4px;}
+.conf-legend-item{display:flex;align-items:center;gap:5px;font-size:10.5px;color:var(–text-muted);}
 .conf-dot{width:7px;height:7px;border-radius:50%;}
-.conf-dot.high{background:var(--accent-bright);}
-.conf-dot.medium{background:var(--amber);}
-.conf-dot.low{background:var(--red);}
+.conf-dot.high{background:var(–accent-bright);}
+.conf-dot.medium{background:var(–amber);}
+.conf-dot.low{background:var(–red);}
 .section-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
-.section-title{font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--text-muted);}
+.section-title{font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(–text-muted);}
 .section-count{font-size:11px;font-weight:700;padding:2px 8px;border-radius:100px;}
-.count-red{background:var(--red-glow);color:var(--red);border:1px solid rgba(239,68,68,0.2);}
-.count-amber{background:var(--amber-glow);color:var(--amber);border:1px solid rgba(245,158,11,0.2);}
-.count-green{background:var(--accent-glow);color:var(--accent-bright);border:1px solid rgba(34,197,94,0.2);}
+.count-red{background:var(–red-glow);color:var(–red);border:1px solid rgba(239,68,68,0.2);}
+.count-amber{background:var(–amber-glow);color:var(–amber);border:1px solid rgba(245,158,11,0.2);}
+.count-green{background:var(–accent-glow);color:var(–accent-bright);border:1px solid rgba(34,197,94,0.2);}
 .tasks-list{display:flex;flex-direction:column;gap:8px;}
-.task-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;cursor:pointer;transition:all 0.15s;animation:slideIn 0.3s ease both;}
+.task-card{background:var(–surface2);border:1px solid var(–border);border-radius:10px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;cursor:pointer;transition:all 0.15s;animation:slideIn 0.3s ease both;}
 @keyframes slideIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.task-card:hover{border-color:var(--border2);background:var(--surface3);}
-.task-card.urgent-card{border-left:3px solid var(--red);background:rgba(239,68,68,0.03);}
+.task-card:hover{border-color:var(–border2);background:var(–surface3);}
+.task-card.urgent-card{border-left:3px solid var(–red);background:rgba(239,68,68,0.03);}
 .task-card.urgent-card:hover{background:rgba(239,68,68,0.06);}
-.task-card.needs-card{border-left:3px solid var(--amber);}
-.task-card.low-conf-card{border-left:3px solid var(--amber);box-shadow:0 0 0 1px rgba(245,158,11,0.15);}
-.task-card.reviewed-card{border-left:3px solid var(--accent);opacity:0.65;cursor:default;}
+.task-card.needs-card{border-left:3px solid var(–amber);}
+.task-card.low-conf-card{border-left:3px solid var(–amber);box-shadow:0 0 0 1px rgba(245,158,11,0.15);}
+.task-card.reviewed-card{border-left:3px solid var(–accent);opacity:0.65;cursor:default;}
 .task-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
-.av-red{background:var(--red-glow);color:var(--red);border:1px solid rgba(239,68,68,0.2);}
-.av-amber{background:var(--amber-glow);color:var(--amber);border:1px solid rgba(245,158,11,0.2);}
-.av-green{background:var(--accent-glow);color:var(--accent-bright);border:1px solid rgba(34,197,94,0.2);}
-.av-blue{background:var(--blue-glow);color:var(--blue);border:1px solid rgba(59,130,246,0.2);}
-.av-purple{background:var(--purple-glow);color:var(--purple);border:1px solid rgba(168,85,247,0.2);}
+.av-red{background:var(–red-glow);color:var(–red);border:1px solid rgba(239,68,68,0.2);}
+.av-amber{background:var(–amber-glow);color:var(–amber);border:1px solid rgba(245,158,11,0.2);}
+.av-green{background:var(–accent-glow);color:var(–accent-bright);border:1px solid rgba(34,197,94,0.2);}
+.av-blue{background:var(–blue-glow);color:var(–blue);border:1px solid rgba(59,130,246,0.2);}
+.av-purple{background:var(–purple-glow);color:var(–purple);border:1px solid rgba(168,85,247,0.2);}
 .task-body{min-width:0;}
 .task-top{display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap;}
-.task-name{font-size:13px;font-weight:600;color:var(--text);}
+.task-name{font-size:13px;font-weight:600;color:var(–text);}
 .status-pill-sm{font-size:9px;font-weight:800;letter-spacing:0.4px;text-transform:uppercase;padding:2px 7px;border-radius:100px;}
-.sp-urgent{background:var(--red-glow);color:var(--red);border:1px solid rgba(239,68,68,0.25);}
-.sp-needs{background:var(--amber-glow);color:var(--amber);border:1px solid rgba(245,158,11,0.25);}
-.sp-callback{background:var(--blue-glow);color:var(--blue);border:1px solid rgba(59,130,246,0.25);}
-.sp-reviewed{background:var(--accent-glow);color:var(--accent-bright);border:1px solid rgba(34,197,94,0.25);}
-.sp-collection{background:var(--purple-glow);color:var(--purple);border:1px solid rgba(168,85,247,0.25);}
+.sp-urgent{background:var(–red-glow);color:var(–red);border:1px solid rgba(239,68,68,0.25);}
+.sp-needs{background:var(–amber-glow);color:var(–amber);border:1px solid rgba(245,158,11,0.25);}
+.sp-callback{background:var(–blue-glow);color:var(–blue);border:1px solid rgba(59,130,246,0.25);}
+.sp-reviewed{background:var(–accent-glow);color:var(–accent-bright);border:1px solid rgba(34,197,94,0.25);}
+.sp-collection{background:var(–purple-glow);color:var(–purple);border:1px solid rgba(168,85,247,0.25);}
 .req-type{font-size:9px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase;padding:2px 7px;border-radius:4px;}
-.rt-repeat{background:var(--blue-glow);color:var(--blue);}
-.rt-urgent{background:var(--red-glow);color:var(--red);}
-.rt-query{background:var(--purple-glow);color:var(--purple);}
-.rt-collection{background:var(--accent-glow);color:var(--accent-bright);}
-.task-summary{font-size:12.5px;color:var(--text-muted);margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.rt-repeat{background:var(–blue-glow);color:var(–blue);}
+.rt-urgent{background:var(–red-glow);color:var(–red);}
+.rt-query{background:var(–purple-glow);color:var(–purple);}
+.rt-collection{background:var(–accent-glow);color:var(–accent-bright);}
+.task-summary{font-size:12.5px;color:var(–text-muted);margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .task-concern{font-size:11.5px;color:rgba(239,68,68,0.8);background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.12);border-radius:4px;padding:4px 9px;margin-bottom:5px;display:inline-block;}
-.task-check-pill{font-size:9px;font-weight:800;letter-spacing:0.3px;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:var(--amber-glow);color:var(--amber);border:1px solid rgba(245,158,11,0.3);display:inline-block;margin-bottom:5px;}
+.task-check-pill{font-size:9px;font-weight:800;letter-spacing:0.3px;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:var(–amber-glow);color:var(–amber);border:1px solid rgba(245,158,11,0.3);display:inline-block;margin-bottom:5px;}
 .task-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
-.task-meta-item{display:flex;align-items:center;gap:3px;font-size:10.5px;color:var(--text-dim);}
+.task-meta-item{display:flex;align-items:center;gap:3px;font-size:10.5px;color:var(–text-dim);}
 .confidence-bar{width:36px;height:3px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;display:inline-block;vertical-align:middle;}
-.conf-fill{height:100%;border-radius:2px;background:var(--accent-bright);}
-.conf-fill.medium{background:var(--amber);}
-.conf-fill.low{background:var(--red);}
+.conf-fill{height:100%;border-radius:2px;background:var(–accent-bright);}
+.conf-fill.medium{background:var(–amber);}
+.conf-fill.low{background:var(–red);}
 .next-step{margin-top:5px;font-size:11px;color:rgba(255,255,255,0.35);font-style:italic;}
 .task-actions{display:flex;flex-direction:column;gap:5px;flex-shrink:0;}
-.task-btn{padding:5px 11px;border-radius:5px;font-size:11px;font-weight:700;border:none;cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+.task-btn{padding:5px 11px;border-radius:5px;font-size:11px;font-weight:700;border:none;cursor:pointer;transition:all 0.15s;font-family:‘DM Sans’,sans-serif;white-space:nowrap;}
 .task-btn:hover{transform:translateY(-1px);}
-.btn-review{background:var(--accent);color:white;}
-.btn-edit{background:rgba(255,255,255,0.06);color:var(--text-muted);border:1px solid var(--border2);}
-.btn-alert{background:var(--red-glow);color:var(--red);border:1px solid rgba(239,68,68,0.2);}
-.btn-callback{background:var(--blue-glow);color:var(--blue);border:1px solid rgba(59,130,246,0.2);}
-.btn-slot{background:var(--purple-glow);color:var(--purple);border:1px solid rgba(168,85,247,0.2);}
-.btn-done-repeat{background:rgba(34,197,94,0.06);color:var(--accent-bright);border:1px solid rgba(34,197,94,0.15);font-size:10px;cursor:default;}
-.btn-done-callback{background:var(--blue-glow);color:var(--blue);border:1px solid rgba(59,130,246,0.15);font-size:10px;cursor:default;}
-.btn-done-collection{background:var(--purple-glow);color:var(--purple);border:1px solid rgba(168,85,247,0.15);font-size:10px;cursor:default;}
-.btn-done-urgent{background:var(--red-glow);color:var(--red);border:1px solid rgba(239,68,68,0.15);font-size:10px;cursor:default;}
+.btn-review{background:var(–accent);color:white;}
+.btn-edit{background:rgba(255,255,255,0.06);color:var(–text-muted);border:1px solid var(–border2);}
+.btn-alert{background:var(–red-glow);color:var(–red);border:1px solid rgba(239,68,68,0.2);}
+.btn-callback{background:var(–blue-glow);color:var(–blue);border:1px solid rgba(59,130,246,0.2);}
+.btn-slot{background:var(–purple-glow);color:var(–purple);border:1px solid rgba(168,85,247,0.2);}
+.btn-done-repeat{background:rgba(34,197,94,0.06);color:var(–accent-bright);border:1px solid rgba(34,197,94,0.15);font-size:10px;cursor:default;}
+.btn-done-callback{background:var(–blue-glow);color:var(–blue);border:1px solid rgba(59,130,246,0.15);font-size:10px;cursor:default;}
+.btn-done-collection{background:var(–purple-glow);color:var(–purple);border:1px solid rgba(168,85,247,0.15);font-size:10px;cursor:default;}
+.btn-done-urgent{background:var(–red-glow);color:var(–red);border:1px solid rgba(239,68,68,0.15);font-size:10px;cursor:default;}
 .live-banner{background:linear-gradient(135deg,rgba(26,107,74,0.2),rgba(26,107,74,0.05));border:1px solid rgba(34,197,94,0.2);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;}
-.live-pulse{width:8px;height:8px;background:var(--accent-bright);border-radius:50%;animation:pulse 1s infinite;box-shadow:0 0 8px var(--accent-bright);flex-shrink:0;}
+.live-pulse{width:8px;height:8px;background:var(–accent-bright);border-radius:50%;animation:pulse 1s infinite;box-shadow:0 0 8px var(–accent-bright);flex-shrink:0;}
 .live-text{flex:1;}
-.live-title{font-size:12px;font-weight:700;color:var(--accent-bright);margin-bottom:1px;}
+.live-title{font-size:12px;font-weight:700;color:var(–accent-bright);margin-bottom:1px;}
 .live-sub{font-size:10.5px;color:rgba(34,197,94,0.55);}
-.live-timer{font-size:18px;font-weight:700;color:var(--accent-bright);font-variant-numeric:tabular-nums;}
+.live-timer{font-size:18px;font-weight:700;color:var(–accent-bright);font-variant-numeric:tabular-nums;}
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.2s;}
 .modal-overlay.open{opacity:1;pointer-events:all;}
-.modal{background:var(--surface2);border:1px solid var(--border2);border-radius:14px;width:520px;max-width:95vw;overflow:hidden;transform:translateY(16px);transition:transform 0.2s;}
+.modal{background:var(–surface2);border:1px solid var(–border2);border-radius:14px;width:520px;max-width:95vw;overflow:hidden;transform:translateY(16px);transition:transform 0.2s;}
 .modal-overlay.open .modal{transform:translateY(0);}
-.modal-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.modal-header{padding:16px 20px;border-bottom:1px solid var(–border);display:flex;align-items:center;gap:10px;}
 .modal-title{font-size:15px;font-weight:700;flex:1;}
 .modal-status{font-size:10px;font-weight:800;letter-spacing:0.3px;text-transform:uppercase;padding:3px 9px;border-radius:100px;}
-.modal-close{background:none;border:none;color:var(--text-muted);font-size:20px;cursor:pointer;line-height:1;}
+.modal-close{background:none;border:none;color:var(–text-muted);font-size:20px;cursor:pointer;line-height:1;}
 .modal-body{padding:20px;display:flex;flex-direction:column;gap:12px;max-height:68vh;overflow-y:auto;}
 .modal-body::-webkit-scrollbar{width:3px;}
-.modal-body::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+.modal-body::-webkit-scrollbar-thumb{background:var(–border2);border-radius:2px;}
 .modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .modal-field{display:flex;flex-direction:column;gap:4px;}
-.modal-label{font-size:10px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase;color:var(--text-muted);}
-.modal-value{font-size:13px;color:var(--text);background:var(--surface3);border:1px solid var(--border);border-radius:6px;padding:9px 12px;}
-.modal-input{background:var(--surface3);border:1px solid var(--border2);border-radius:6px;padding:9px 12px;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;width:100%;transition:border-color 0.15s;}
-.modal-input:focus{outline:none;border-color:var(--accent);}
-.modal-textarea{background:var(--surface3);border:1px solid var(--border2);border-radius:6px;padding:9px 12px;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;resize:none;width:100%;min-height:56px;transition:border-color 0.15s;}
-.modal-textarea:focus{outline:none;border-color:var(--accent);}
-.modal-input::placeholder,.modal-textarea::placeholder{color:var(--text-dim);}
+.modal-label{font-size:10px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase;color:var(–text-muted);}
+.modal-value{font-size:13px;color:var(–text);background:var(–surface3);border:1px solid var(–border);border-radius:6px;padding:9px 12px;}
+.modal-input{background:var(–surface3);border:1px solid var(–border2);border-radius:6px;padding:9px 12px;font-size:13px;color:var(–text);font-family:‘DM Sans’,sans-serif;width:100%;transition:border-color 0.15s;}
+.modal-input:focus{outline:none;border-color:var(–accent);}
+.modal-textarea{background:var(–surface3);border:1px solid var(–border2);border-radius:6px;padding:9px 12px;font-size:13px;color:var(–text);font-family:‘DM Sans’,sans-serif;resize:none;width:100%;min-height:56px;transition:border-color 0.15s;}
+.modal-textarea:focus{outline:none;border-color:var(–accent);}
+.modal-input::placeholder,.modal-textarea::placeholder{color:var(–text-dim);}
 .modal-concern{background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.15);border-radius:7px;padding:10px 14px;font-size:12px;color:rgba(239,68,68,0.8);line-height:1.5;}
-.modal-concern-label{font-size:10px;font-weight:800;letter-spacing:0.4px;text-transform:uppercase;color:var(--red);margin-bottom:5px;}
+.modal-concern-label{font-size:10px;font-weight:800;letter-spacing:0.4px;text-transform:uppercase;color:var(–red);margin-bottom:5px;}
 .modal-conf-row{display:flex;align-items:center;gap:8px;}
 .modal-conf-bar{flex:1;height:5px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;}
 .modal-conf-fill{height:100%;border-radius:3px;}
-.modal-transcript{background:var(--surface3);border:1px solid var(--border);border-radius:7px;padding:12px;font-size:12px;color:var(--text-muted);line-height:1.6;max-height:100px;overflow-y:auto;}
-.modal-next{background:var(--accent-glow);border:1px solid rgba(34,197,94,0.15);border-radius:7px;padding:10px 14px;}
-.modal-next-label{font-size:10px;font-weight:800;letter-spacing:0.4px;text-transform:uppercase;color:var(--accent-bright);margin-bottom:4px;}
+.modal-transcript{background:var(–surface3);border:1px solid var(–border);border-radius:7px;padding:12px;font-size:12px;color:var(–text-muted);line-height:1.6;max-height:100px;overflow-y:auto;}
+.modal-next{background:var(–accent-glow);border:1px solid rgba(34,197,94,0.15);border-radius:7px;padding:10px 14px;}
+.modal-next-label{font-size:10px;font-weight:800;letter-spacing:0.4px;text-transform:uppercase;color:var(–accent-bright);margin-bottom:4px;}
 .modal-next-text{font-size:12.5px;color:rgba(255,255,255,0.65);}
-.modal-footer{padding:14px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;}
-.modal-btn{padding:8px 16px;border-radius:7px;font-size:12px;font-weight:700;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity 0.15s;}
+.modal-footer{padding:14px 20px;border-top:1px solid var(–border);display:flex;gap:8px;justify-content:flex-end;}
+.modal-btn{padding:8px 16px;border-radius:7px;font-size:12px;font-weight:700;border:none;cursor:pointer;font-family:‘DM Sans’,sans-serif;transition:opacity 0.15s;}
 .modal-btn:hover{opacity:0.85;}
 .modal-btn:disabled{opacity:0.4;cursor:default;}
-.mbtn-primary{background:var(--accent);color:white;}
-.mbtn-alert{background:var(--red-glow);color:var(--red);border:1px solid rgba(239,68,68,0.2);}
-.mbtn-close{background:rgba(255,255,255,0.06);color:var(--text-muted);border:1px solid var(--border2);}
-.mbtn-save{background:var(--accent);color:white;}
-.toast{position:fixed;bottom:20px;right:20px;background:var(--surface2);border:1px solid var(--border2);border-radius:9px;padding:11px 16px;font-size:12.5px;font-weight:500;display:flex;align-items:center;gap:8px;z-index:200;transform:translateY(60px);opacity:0;transition:all 0.3s;box-shadow:0 8px 32px rgba(0,0,0,0.3);}
+.mbtn-primary{background:var(–accent);color:white;}
+.mbtn-alert{background:var(–red-glow);color:var(–red);border:1px solid rgba(239,68,68,0.2);}
+.mbtn-close{background:rgba(255,255,255,0.06);color:var(–text-muted);border:1px solid var(–border2);}
+.mbtn-save{background:var(–accent);color:white;}
+.toast{position:fixed;bottom:20px;right:20px;background:var(–surface2);border:1px solid var(–border2);border-radius:9px;padding:11px 16px;font-size:12.5px;font-weight:500;display:flex;align-items:center;gap:8px;z-index:200;transform:translateY(60px);opacity:0;transition:all 0.3s;box-shadow:0 8px 32px rgba(0,0,0,0.3);}
 .toast.show{transform:translateY(0);opacity:1;}
 </style>
+
 </head>
 <body>
-<div class="sidebar">
-  <div class="sidebar-logo">
-    <div class="logo-mark">Rx</div>
-    <span class="logo-text">Rx<span>Desk</span></span>
-  </div>
-  <div class="pharmacy-info">
-    <div class="pharmacy-name">CarePoint Pharmacy</div>
-    <div class="clara-live"><div class="live-dot"></div> Clara is live</div>
-  </div>
-  <nav class="sidebar-nav">
-    <div class="nav-item active" onclick="filterTasks('open',this)"><span class="nav-icon">📋</span> Open Tasks <span class="nav-badge badge-amber" id="badge-all">0</span></div>
-    <div class="nav-item" onclick="filterTasks('urgent_review',this)"><span class="nav-icon">⚑</span> Urgent Review <span class="nav-badge badge-red" id="badge-urgent">0</span></div>
-    <div class="nav-item" onclick="filterTasks('needs_review',this)"><span class="nav-icon">🆕</span> Needs Review <span class="nav-badge badge-amber" id="badge-needs">0</span></div>
-    <div class="nav-item" onclick="filterTasks('callback_needed',this)"><span class="nav-icon">↩</span> Callback Needed <span class="nav-badge badge-amber" id="badge-callback">0</span></div>
-    <div class="nav-item" onclick="filterTasks('reviewed',this)"><span class="nav-icon">✅</span> Reviewed <span class="nav-badge badge-green" id="badge-reviewed">0</span></div>
-    <div class="nav-item disabled"><span class="nav-icon">📞</span> Call Log <span class="nav-soon">Soon</span></div>
-    <div class="nav-item disabled"><span class="nav-icon">⚙</span> Settings <span class="nav-soon">Soon</span></div>
-  </nav>
-  <div class="sidebar-bottom">
-    <div class="user-row">
-      <div class="user-avatar">CP</div>
-      <div><div class="user-name">CarePoint Admin</div><div class="user-role">Pharmacist</div></div>
+
+<!-- LOGIN SCREEN -->
+
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-logo-mark">Rx</div>
+      <span class="login-logo-text">Rx<span>Desk</span></span>
     </div>
-  </div>
-</div>
-<div class="main">
-  <div class="topbar">
     <div>
-      <span class="topbar-title">Task Queue</span>
-      <span class="topbar-date" id="live-date"></span>
+      <div class="login-title">Sign in</div>
+      <div class="login-subtitle">CarePoint Pharmacy</div>
     </div>
-    <div class="topbar-right">
-      <button class="topbar-btn" onclick="simulateCall()">+ Simulate Call</button>
-      <button class="topbar-btn primary">📤 Export</button>
+    <div class="login-field">
+      <div class="login-label">Email</div>
+      <input class="login-input" id="login-email" type="email" placeholder="your@email.com" autocomplete="email">
+    </div>
+    <div class="login-field">
+      <div class="login-label">Password</div>
+      <input class="login-input" id="login-password" type="password" placeholder="Password" autocomplete="current-password">
+    </div>
+    <div class="login-error" id="login-error"></div>
+    <button class="login-btn" id="login-btn" onclick="handleLogin()">Sign in</button>
+  </div>
+</div>
+
+<!-- APP SCREEN -->
+
+<div id="app-screen">
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-mark">Rx</div>
+      <span class="logo-text">Rx<span>Desk</span></span>
+    </div>
+    <div class="pharmacy-info">
+      <div class="pharmacy-name">CarePoint Pharmacy</div>
+      <div class="clara-live"><div class="live-dot"></div> Clara is live</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-item active" onclick="filterTasks('open',this)"><span class="nav-icon">📋</span> Open Tasks <span class="nav-badge badge-amber" id="badge-all">0</span></div>
+      <div class="nav-item" onclick="filterTasks('urgent_review',this)"><span class="nav-icon">⚑</span> Urgent Review <span class="nav-badge badge-red" id="badge-urgent">0</span></div>
+      <div class="nav-item" onclick="filterTasks('needs_review',this)"><span class="nav-icon">🆕</span> Needs Review <span class="nav-badge badge-amber" id="badge-needs">0</span></div>
+      <div class="nav-item" onclick="filterTasks('callback_needed',this)"><span class="nav-icon">↩</span> Callback Needed <span class="nav-badge badge-amber" id="badge-callback">0</span></div>
+      <div class="nav-item" onclick="filterTasks('reviewed',this)"><span class="nav-icon">✅</span> Reviewed <span class="nav-badge badge-green" id="badge-reviewed">0</span></div>
+      <div class="nav-item disabled"><span class="nav-icon">📞</span> Call Log <span class="nav-soon">Soon</span></div>
+      <div class="nav-item disabled"><span class="nav-icon">⚙</span> Settings <span class="nav-soon">Soon</span></div>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="user-row">
+        <div class="user-avatar">CP</div>
+        <div>
+          <div class="user-name" id="user-name-display">CarePoint Admin</div>
+          <div class="signout-btn" onclick="signOut()">Sign out</div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="content">
-    <div class="live-banner" id="live-banner" style="display:none;">
-      <div class="live-pulse"></div>
-      <div class="live-text">
-        <div class="live-title">Clara is on a call — capturing details</div>
-        <div class="live-sub" id="live-caller">Listening...</div>
+
+  <div class="main">
+    <div class="topbar">
+      <div>
+        <span class="topbar-title">Task Queue</span>
+        <span class="topbar-date" id="live-date"></span>
       </div>
-      <div class="live-timer" id="live-timer">00:00</div>
+      <div class="topbar-right">
+        <button class="topbar-btn" onclick="simulateCall()">+ Simulate Call</button>
+        <button class="topbar-btn primary">📤 Export</button>
+      </div>
     </div>
-    <div class="stats-row">
-      <div class="stat-card green"><div class="stat-label">Calls Today</div><div class="stat-value" id="stat-calls">0</div><div class="stat-delta up">Live from API</div></div>
-      <div class="stat-card red"><div class="stat-label">Urgent Review</div><div class="stat-value" id="stat-urgent">0</div><div class="stat-delta warn">Pharmacist attention needed</div></div>
-      <div class="stat-card amber"><div class="stat-label">Open Tasks</div><div class="stat-value" id="stat-open">0</div><div class="stat-delta">Urgent + review + callbacks</div></div>
-      <div class="stat-card blue"><div class="stat-label">Reviewed Today</div><div class="stat-value" id="stat-reviewed">0</div><div class="stat-delta up">Good progress</div></div>
-    </div>
-    <div class="conf-legend">
-      <span class="conf-legend-label">AI Confidence</span>
-      <span class="conf-legend-item"><div class="conf-dot high"></div> 90%+ Standard review</span>
-      <span class="conf-legend-item"><div class="conf-dot medium"></div> 75-89% Review carefully</span>
-      <span class="conf-legend-item"><div class="conf-dot low"></div> Below 75% Manual verification recommended</span>
-    </div>
-    <div id="section-urgent">
-      <div class="section-header"><span class="section-title">⚑ Needs Urgent Review</span><span class="section-count count-red" id="urgent-count">0</span></div>
-      <div class="tasks-list" id="urgent-list"></div>
-    </div>
-    <div id="section-needs">
-      <div class="section-header"><span class="section-title">🆕 Needs Review</span><span class="section-count count-amber" id="needs-count">0</span></div>
-      <div class="tasks-list" id="needs-list"></div>
-    </div>
-    <div id="section-callback">
-      <div class="section-header"><span class="section-title">↩ Callback Needed</span><span class="section-count count-amber" id="callback-count">0</span></div>
-      <div class="tasks-list" id="callback-list"></div>
-    </div>
-    <div id="section-reviewed">
-      <div class="section-header"><span class="section-title">✅ Reviewed</span><span class="section-count count-green" id="reviewed-count">0</span></div>
-      <div class="tasks-list" id="reviewed-list"></div>
+    <div class="content">
+      <div class="live-banner" id="live-banner" style="display:none;">
+        <div class="live-pulse"></div>
+        <div class="live-text">
+          <div class="live-title">Clara is on a call — capturing details</div>
+          <div class="live-sub" id="live-caller">Listening...</div>
+        </div>
+        <div class="live-timer" id="live-timer">00:00</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card green"><div class="stat-label">Calls Today</div><div class="stat-value" id="stat-calls">0</div><div class="stat-delta up">Live from API</div></div>
+        <div class="stat-card red"><div class="stat-label">Urgent Review</div><div class="stat-value" id="stat-urgent">0</div><div class="stat-delta warn">Pharmacist attention needed</div></div>
+        <div class="stat-card amber"><div class="stat-label">Open Tasks</div><div class="stat-value" id="stat-open">0</div><div class="stat-delta">Urgent + review + callbacks</div></div>
+        <div class="stat-card blue"><div class="stat-label">Reviewed Today</div><div class="stat-value" id="stat-reviewed">0</div><div class="stat-delta up">Good progress</div></div>
+      </div>
+      <div class="conf-legend">
+        <span class="conf-legend-label">AI Confidence</span>
+        <span class="conf-legend-item"><div class="conf-dot high"></div> 90%+ Standard review</span>
+        <span class="conf-legend-item"><div class="conf-dot medium"></div> 75-89% Review carefully</span>
+        <span class="conf-legend-item"><div class="conf-dot low"></div> Below 75% Manual verification recommended</span>
+      </div>
+      <div id="section-urgent">
+        <div class="section-header"><span class="section-title">⚑ Needs Urgent Review</span><span class="section-count count-red" id="urgent-count">0</span></div>
+        <div class="tasks-list" id="urgent-list"></div>
+      </div>
+      <div id="section-needs">
+        <div class="section-header"><span class="section-title">🆕 Needs Review</span><span class="section-count count-amber" id="needs-count">0</span></div>
+        <div class="tasks-list" id="needs-list"></div>
+      </div>
+      <div id="section-callback">
+        <div class="section-header"><span class="section-title">↩ Callback Needed</span><span class="section-count count-amber" id="callback-count">0</span></div>
+        <div class="tasks-list" id="callback-list"></div>
+      </div>
+      <div id="section-reviewed">
+        <div class="section-header"><span class="section-title">✅ Reviewed</span><span class="section-count count-green" id="reviewed-count">0</span></div>
+        <div class="tasks-list" id="reviewed-list"></div>
+      </div>
     </div>
   </div>
 </div>
+
 <!-- REVIEW MODAL -->
+
 <div class="modal-overlay" id="review-modal" onclick="closeReviewOutside(event)">
   <div class="modal">
     <div class="modal-header">
@@ -300,7 +369,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
     </div>
   </div>
 </div>
+
 <!-- EDIT MODAL -->
+
 <div class="modal-overlay" id="edit-modal" onclick="closeEditOutside(event)">
   <div class="modal">
     <div class="modal-header">
@@ -323,500 +394,617 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
     </div>
   </div>
 </div>
+
 <div class="toast" id="toast"><span id="toast-msg">Done</span></div>
+
 <script>
 var API_BASE = 'https://rxdesk-production.up.railway.app/api';
+var SUPABASE_URL = 'https://zymynzcffxjplzuqkkno.supabase.co';
+var SUPABASE_ANON_KEY = 'sb_publishable_2cmHeSc98YTC5iOKbxHCIg_R-W13_OK';
 
 var state = {
-tasks: {},
-currentModalId: null,
-editModalId: null,
-currentFilter: ‘open’,
-callsToday: 0
+  tasks: {},
+  currentModalId: null,
+  editModalId: null,
+  currentFilter: 'open',
+  callsToday: 0,
+  session: null
 };
 
-function getReviewedSummary(t) {
-if (t.reviewedSummary) return t.reviewedSummary;
-if (t.category === ‘collection’) return t.meds + ’ - slot updated’;
-if (t.category === ‘query’) return t.meds + ’ readiness check’;
-if (t.category === ‘urgent’) return t.meds + ’ - concern reviewed’;
-return t.meds || ‘Task reviewed’;
+// -- AUTH ---------------------------------------------------------------------
+
+function getStoredSession() {
+  try {
+    var s = localStorage.getItem('rxdesk_session');
+    return s ? JSON.parse(s) : null;
+  } catch(e) { return null; }
 }
 
-function buildDisplaySummary(t) {
-if (t.category === ‘urgent’) return t.displaySummary || t.summary || t.meds || ‘Urgent task’;
-if (t.category === ‘collection’) return ’Collection: ’ + (t.meds || ‘change’) + (t.collectionSlot ? ’ - ’ + t.collectionSlot : ‘’);
-if (t.category === ‘query’) return ’Checking: ’ + (t.meds || ‘prescription’);
-return (t.meds || ‘Medication’) + (t.collectionSlot ? ’ - Collection ’ + t.collectionSlot : ‘’);
+function getAuthToken() {
+  var session = state.session || getStoredSession();
+  return (session && session.access_token) ? session.access_token : null;
 }
 
-function getReviewedBtnClass(category) {
-if (category === ‘callback_needed’ || category === ‘query’) return ‘task-btn btn-done-callback’;
-if (category === ‘collection’) return ‘task-btn btn-done-collection’;
-if (category === ‘urgent’) return ‘task-btn btn-done-urgent’;
-return ‘task-btn btn-done-repeat’;
+async function signIn(email, password) {
+  var response = await fetch(SUPABASE_URL + '/auth/v1/token?grant_type=password', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SUPABASE_ANON_KEY
+    },
+    body: JSON.stringify({ email: email, password: password })
+  });
+  var data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.error_description || data.msg || data.error || 'Sign in failed');
+  }
+  state.session = data;
+  localStorage.setItem('rxdesk_session', JSON.stringify(data));
+  return data;
 }
 
-function getReviewedBtnLabel(category) {
-if (category === ‘callback_needed’ || category === ‘query’) return ‘Callback assigned’;
-if (category === ‘collection’) return ‘Slot updated’;
-if (category === ‘urgent’) return ‘Action taken’;
-return ‘Ready for processing’;
+function signOut() {
+  state.session = null;
+  localStorage.removeItem('rxdesk_session');
+  showLoginScreen();
 }
 
-function getConfClass(conf) {
-return conf >= 90 ? ‘’ : conf >= 75 ? ’ medium’ : ’ low’;
+async function handleLogin() {
+  var email = document.getElementById('login-email').value.trim();
+  var password = document.getElementById('login-password').value;
+  var btn = document.getElementById('login-btn');
+  var errEl = document.getElementById('login-error');
+  errEl.textContent = '';
+
+  if (!email || !password) {
+    errEl.textContent = 'Please enter your email and password.';
+    return;
+  }
+
+  btn.textContent = 'Signing in...';
+  btn.disabled = true;
+
+  try {
+    var session = await signIn(email, password);
+    var userEmail = (session.user && session.user.email) || email;
+    document.getElementById('user-name-display').textContent = userEmail;
+    showAppScreen();
+    loadTasks();
+  } catch(err) {
+    errEl.textContent = err.message || 'Sign in failed. Check your credentials.';
+    btn.textContent = 'Sign in';
+    btn.disabled = false;
+  }
 }
 
-function getStatusPillClass(s) {
-if (s === ‘urgent_review’) return ‘sp-urgent’;
-if (s === ‘callback_needed’) return ‘sp-callback’;
-if (s === ‘reviewed’) return ‘sp-reviewed’;
-return ‘sp-needs’;
+function showLoginScreen() {
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('app-screen').style.display = 'none';
 }
 
-function getStatusPillLabel(s) {
-if (s === ‘urgent_review’) return ‘Urgent Review’;
-if (s === ‘callback_needed’) return ‘Callback Needed’;
-if (s === ‘reviewed’) return ‘Reviewed’;
-return ‘Needs Review’;
+function showAppScreen() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app-screen').style.display = 'flex';
 }
 
-function getReqTypeClass(c) {
-if (c === ‘urgent’) return ‘rt-urgent’;
-if (c === ‘collection’) return ‘rt-collection’;
-if (c === ‘query’) return ‘rt-query’;
-return ‘rt-repeat’;
-}
-
-function getAvatarClass(task) {
-if (task.status === ‘urgent_review’ || task.category === ‘urgent’) return ‘av-red’;
-if (task.category === ‘collection’) return ‘av-purple’;
-if (task.category === ‘query’ || task.status === ‘callback_needed’) return ‘av-blue’;
-return ‘av-amber’;
-}
-
-function initialsFromName(name) {
-return (name || ‘P’).split(’ ‘).filter(Boolean).map(function(p) { return p[0]; }).join(’’).substring(0,2).toUpperCase();
-}
-
-function formatTime(iso) {
-if (!iso) return ‘Just now’;
-var d = new Date(iso);
-if (isNaN(d.getTime())) return ‘Just now’;
-return d.toLocaleTimeString(‘en-GB’, {hour:‘2-digit’,minute:‘2-digit’});
-}
-
-function isoDobToDisplay(v) {
-if (!v || typeof v !== ‘string’) return ‘-’;
-if (/^\d{4}-\d{2}-\d{2}$/.test(v)) {
-var p = v.split(’-’);
-return p[2] + ‘/’ + p[1] + ‘/’ + p[0];
-}
-return v;
-}
-
-function displayDobToIso(v) {
-if (!v) return null;
-var t = String(v).trim();
-if (/^\d{4}-\d{2}-\d{2}$/.test(t)) return t;
-if (/^\d{2}/\d{2}/\d{4}$/.test(t)) {
-var p = t.split(’/’);
-return p[2] + ‘-’ + p[1] + ‘-’ + p[0];
-}
-return t;
-}
-
-function latestNote(notes) {
-if (!Array.isArray(notes) || !notes.length) return ‘’;
-return (notes[notes.length-1] && notes[notes.length-1].content) || ‘’;
-}
+// -- API ----------------------------------------------------------------------
 
 function safeJson(response) {
-return response.text().then(function(text) {
-try { return text ? JSON.parse(text) : {}; } catch(e) { return {}; }
-});
+  return response.text().then(function(text) {
+    try { return text ? JSON.parse(text) : {}; } catch(e) { return {}; }
+  });
 }
 
 async function apiFetch(path, opts) {
-opts = opts || {};
-var headers = Object.assign({‘Content-Type’:‘application/json’,‘Authorization’:‘Bearer demo-token’}, opts.headers || {});
-var fetchOpts = Object.assign({}, opts, {headers: headers});
-var response = await fetch(API_BASE + path, fetchOpts);
-var payload = await safeJson(response);
-if (!response.ok) {
-var err = new Error((payload && payload.error) || ‘Request failed’);
-err.status = response.status;
-throw err;
+  opts = opts || {};
+  var token = getAuthToken();
+  if (!token) {
+    showLoginScreen();
+    throw new Error('Not authenticated');
+  }
+  var headers = Object.assign(
+    { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+    opts.headers || {}
+  );
+  var fetchOpts = Object.assign({}, opts, { headers: headers });
+  var response = await fetch(API_BASE + path, fetchOpts);
+  var payload = await safeJson(response);
+  if (response.status === 401) {
+    signOut();
+    throw new Error('Session expired. Please sign in again.');
+  }
+  if (!response.ok) {
+    var err = new Error((payload && payload.error) || 'Request failed');
+    err.status = response.status;
+    throw err;
+  }
+  return payload;
 }
-return payload;
+
+// -- HELPERS ------------------------------------------------------------------
+
+function getReviewedSummary(t) {
+  if (t.reviewedSummary) return t.reviewedSummary;
+  if (t.category === 'collection') return t.meds + ' - slot updated';
+  if (t.category === 'query') return t.meds + ' readiness check';
+  if (t.category === 'urgent') return t.meds + ' - concern reviewed';
+  return t.meds || 'Task reviewed';
 }
+
+function buildDisplaySummary(t) {
+  if (t.category === 'urgent') return t.displaySummary || t.summary || t.meds || 'Urgent task';
+  if (t.category === 'collection') return 'Collection: ' + (t.meds || 'change') + (t.collectionSlot ? ' - ' + t.collectionSlot : '');
+  if (t.category === 'query') return 'Checking: ' + (t.meds || 'prescription');
+  return (t.meds || 'Medication') + (t.collectionSlot ? ' - Collection ' + t.collectionSlot : '');
+}
+
+function getReviewedBtnClass(cat) {
+  if (cat === 'callback_needed' || cat === 'query') return 'task-btn btn-done-callback';
+  if (cat === 'collection') return 'task-btn btn-done-collection';
+  if (cat === 'urgent') return 'task-btn btn-done-urgent';
+  return 'task-btn btn-done-repeat';
+}
+
+function getReviewedBtnLabel(cat) {
+  if (cat === 'callback_needed' || cat === 'query') return 'Callback assigned';
+  if (cat === 'collection') return 'Slot updated';
+  if (cat === 'urgent') return 'Action taken';
+  return 'Ready for processing';
+}
+
+function getConfClass(conf) {
+  return conf >= 90 ? '' : conf >= 75 ? ' medium' : ' low';
+}
+
+function getStatusPillClass(s) {
+  if (s === 'urgent_review') return 'sp-urgent';
+  if (s === 'callback_needed') return 'sp-callback';
+  if (s === 'reviewed') return 'sp-reviewed';
+  return 'sp-needs';
+}
+
+function getStatusPillLabel(s) {
+  if (s === 'urgent_review') return 'Urgent Review';
+  if (s === 'callback_needed') return 'Callback Needed';
+  if (s === 'reviewed') return 'Reviewed';
+  return 'Needs Review';
+}
+
+function getReqTypeClass(c) {
+  if (c === 'urgent') return 'rt-urgent';
+  if (c === 'collection') return 'rt-collection';
+  if (c === 'query') return 'rt-query';
+  return 'rt-repeat';
+}
+
+function getAvatarClass(task) {
+  if (task.status === 'urgent_review' || task.category === 'urgent') return 'av-red';
+  if (task.category === 'collection') return 'av-purple';
+  if (task.category === 'query' || task.status === 'callback_needed') return 'av-blue';
+  return 'av-amber';
+}
+
+function initialsFromName(name) {
+  return (name || 'P').split(' ').filter(Boolean).map(function(p) { return p[0]; }).join('').substring(0,2).toUpperCase();
+}
+
+function formatTime(iso) {
+  if (!iso) return 'Just now';
+  var d = new Date(iso);
+  if (isNaN(d.getTime())) return 'Just now';
+  return d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+}
+
+function isoDobToDisplay(v) {
+  if (!v || typeof v !== 'string') return '-';
+  if (/^\d{4}-\d{2}-\d{2}$/.test(v)) {
+    var p = v.split('-');
+    return p[2] + '/' + p[1] + '/' + p[0];
+  }
+  return v;
+}
+
+function displayDobToIso(v) {
+  if (!v) return null;
+  var t = String(v).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(t)) return t;
+  if (/^\d{2}\/\d{2}\/\d{4}$/.test(t)) {
+    var p = t.split('/');
+    return p[2] + '-' + p[1] + '-' + p[0];
+  }
+  return t;
+}
+
+function latestNote(notes) {
+  if (!Array.isArray(notes) || !notes.length) return '';
+  return (notes[notes.length-1] && notes[notes.length-1].content) || '';
+}
+
+// -- NORMALIZE ----------------------------------------------------------------
 
 function normalizeTask(a) {
-var category = a.category || ‘repeat’;
-var status = a.status || ‘needs_review’;
-var confidence = typeof a.confidence_score === ‘number’ ? a.confidence_score : 0;
-var task = {
-id: a.id, status: status, originalStatus: a.original_status || null,
-name: a.patient_name || ‘Unknown Patient’,
-initials: initialsFromName(a.patient_name),
-avatarClass: ‘’,
-meds: a.medications || ‘Medication not captured’,
-category: category,
-requestTypeLabel: a.request_type || ‘Request’,
-confidence: confidence,
-phone: a.patient_phone || ‘-’,
-dob: isoDobToDisplay(a.patient_dob),
-dobIso: a.patient_dob || null,
-callTime: formatTime(a.created_at),
-collectionSlot: a.collection_slot || ‘’,
-displaySummary: a.display_summary || ‘’,
-summary: a.ai_summary || a.display_summary || ‘No summary captured.’,
-transcript: a.transcript_summary || ‘No transcript available.’,
-nextStep: a.next_step || ‘Review required.’,
-reviewedCopy: a.reviewed_copy || ‘Reviewed by team’,
-reviewedTime: a.reviewed_at ? formatTime(a.reviewed_at) : null,
-reviewedSummary: a.reviewed_summary || ‘’,
-notes: ‘’,
-updatedAt: a.updated_at,
-createdAt: a.created_at
-};
-task.avatarClass = getAvatarClass(task);
-if (!task.displaySummary) task.displaySummary = buildDisplaySummary(task);
-return task;
+  var category = a.category || 'repeat';
+  var status = a.status || 'needs_review';
+  var confidence = typeof a.confidence_score === 'number' ? a.confidence_score : 0;
+  var task = {
+    id: a.id, status: status, originalStatus: a.original_status || null,
+    name: a.patient_name || 'Unknown Patient',
+    initials: initialsFromName(a.patient_name),
+    avatarClass: '',
+    meds: a.medications || 'Medication not captured',
+    category: category,
+    requestTypeLabel: a.request_type || 'Request',
+    confidence: confidence,
+    phone: a.patient_phone || '-',
+    dob: isoDobToDisplay(a.patient_dob),
+    dobIso: a.patient_dob || null,
+    callTime: formatTime(a.created_at),
+    collectionSlot: a.collection_slot || '',
+    displaySummary: a.display_summary || '',
+    summary: a.ai_summary || a.display_summary || 'No summary captured.',
+    transcript: a.transcript_summary || 'No transcript available.',
+    nextStep: a.next_step || 'Review required.',
+    reviewedCopy: a.reviewed_copy || 'Reviewed by team',
+    reviewedTime: a.reviewed_at ? formatTime(a.reviewed_at) : null,
+    reviewedSummary: a.reviewed_summary || '',
+    notes: '',
+    updatedAt: a.updated_at,
+    createdAt: a.created_at
+  };
+  task.avatarClass = getAvatarClass(task);
+  if (!task.displaySummary) task.displaySummary = buildDisplaySummary(task);
+  return task;
 }
 
+// -- RENDER -------------------------------------------------------------------
+
 function renderTaskCard(t) {
-var card = document.createElement(‘div’);
-var isLow = t.confidence < 75;
-var cls = t.status === ‘urgent_review’ ? ‘urgent-card’ : isLow ? ‘low-conf-card’ : ‘needs-card’;
-card.className = ’task-card ’ + cls;
-card.dataset.status = t.status;
-card.dataset.id = t.id;
-card.onclick = function() { openReviewModal(t.id); };
-
-var summary = buildDisplaySummary(t);
-var primaryBtn = t.status === ‘urgent_review’
-? ‘<button class="task-btn btn-alert" onclick="event.stopPropagation();openReviewModal(\'' + t.id + '\')">Alert pharmacist</button>’
-: t.status === ‘callback_needed’
-? ‘<button class="task-btn btn-callback" onclick="event.stopPropagation();openReviewModal(\'' + t.id + '\')">Assign callback</button>’
-: t.category === ‘collection’
-? ‘<button class="task-btn btn-slot" onclick="event.stopPropagation();openReviewModal(\'' + t.id + '\')">Update slot</button>’
-: ‘<button class="task-btn btn-review" onclick="event.stopPropagation();openReviewModal(\'' + t.id + '\')">Review</button>’;
-
-var body = t.status === ‘urgent_review’
-? ‘<div class="task-concern">’ + summary + ‘</div>’
-: isLow
-? ‘<div class="task-check-pill">Manual verification recommended</div><div class="task-summary">’ + summary + ‘</div>’
-: ‘<div class="task-summary">’ + summary + ‘</div>’;
-
-card.innerHTML =
-‘<div class="task-avatar ' + t.avatarClass + '">’ + t.initials + ‘</div>’ +
-‘<div class="task-body">’ +
-‘<div class="task-top">’ +
-‘<span class="task-name">’ + t.name + ‘</span>’ +
-‘<span class="status-pill-sm ' + getStatusPillClass(t.status) + '">’ + getStatusPillLabel(t.status) + ‘</span>’ +
-‘<span class="req-type ' + getReqTypeClass(t.category) + '">’ + t.requestTypeLabel + ‘</span>’ +
-‘</div>’ + body +
-‘<div class="task-meta">’ +
-’<span class="task-meta-item">🕐 ’ + (t.callTime||‘Just now’) + ‘</span>’ +
-’<span class="task-meta-item">DOB: ’ + t.dob + ‘</span>’ +
-’<span class="task-meta-item">📞 ’ + t.phone + ‘</span>’ +
-’<span class="task-meta-item">AI: <div class="confidence-bar"><div class="conf-fill' + getConfClass(t.confidence) + '" style="width:' + t.confidence + '%"></div></div> ’ + t.confidence + ‘%</span>’ +
-‘</div>’ +
-’<div class="next-step">→ ’ + t.nextStep + ‘</div>’ +
-‘</div>’ +
-‘<div class="task-actions" onclick="event.stopPropagation()">’ +
-primaryBtn +
-‘<button class="task-btn btn-edit" onclick="event.stopPropagation();openEditModal(\'' + t.id + '\')">Edit details</button>’ +
-‘</div>’;
-return card;
+  var card = document.createElement('div');
+  var isLow = t.confidence < 75;
+  var cls = t.status === 'urgent_review' ? 'urgent-card' : isLow ? 'low-conf-card' : 'needs-card';
+  card.className = 'task-card ' + cls;
+  card.dataset.status = t.status;
+  card.dataset.id = t.id;
+  card.onclick = function() { openReviewModal(t.id); };
+  var summary = buildDisplaySummary(t);
+  var primaryBtn = t.status === 'urgent_review'
+    ? '<button class="task-btn btn-alert" onclick="event.stopPropagation();openReviewModal(\'' + t.id + '\')">Alert pharmacist</button>'
+    : t.status === 'callback_needed'
+    ? '<button class="task-btn btn-callback" onclick="event.stopPropagation();openReviewModal(\'' + t.id + '\')">Assign callback</button>'
+    : t.category === 'collection'
+    ? '<button class="task-btn btn-slot" onclick="event.stopPropagation();openReviewModal(\'' + t.id + '\')">Update slot</button>'
+    : '<button class="task-btn btn-review" onclick="event.stopPropagation();openReviewModal(\'' + t.id + '\')">Review</button>';
+  var body = t.status === 'urgent_review'
+    ? '<div class="task-concern">' + summary + '</div>'
+    : isLow
+    ? '<div class="task-check-pill">Manual verification recommended</div><div class="task-summary">' + summary + '</div>'
+    : '<div class="task-summary">' + summary + '</div>';
+  card.innerHTML =
+    '<div class="task-avatar ' + t.avatarClass + '">' + t.initials + '</div>' +
+    '<div class="task-body">' +
+      '<div class="task-top">' +
+        '<span class="task-name">' + t.name + '</span>' +
+        '<span class="status-pill-sm ' + getStatusPillClass(t.status) + '">' + getStatusPillLabel(t.status) + '</span>' +
+        '<span class="req-type ' + getReqTypeClass(t.category) + '">' + t.requestTypeLabel + '</span>' +
+      '</div>' + body +
+      '<div class="task-meta">' +
+        '<span class="task-meta-item">🕐 ' + (t.callTime||'Just now') + '</span>' +
+        '<span class="task-meta-item">DOB: ' + t.dob + '</span>' +
+        '<span class="task-meta-item">📞 ' + t.phone + '</span>' +
+        '<span class="task-meta-item">AI: <div class="confidence-bar"><div class="conf-fill' + getConfClass(t.confidence) + '" style="width:' + t.confidence + '%"></div></div> ' + t.confidence + '%</span>' +
+      '</div>' +
+      '<div class="next-step">→ ' + t.nextStep + '</div>' +
+    '</div>' +
+    '<div class="task-actions" onclick="event.stopPropagation()">' +
+      primaryBtn +
+      '<button class="task-btn btn-edit" onclick="event.stopPropagation();openEditModal(\'' + t.id + '\')">Edit details</button>' +
+    '</div>';
+  return card;
 }
 
 function renderReviewedCard(t) {
-var card = document.createElement(‘div’);
-card.className = ‘task-card reviewed-card’;
-card.dataset.status = ‘reviewed’;
-card.dataset.id = t.id;
-var summary = getReviewedSummary(t);
-var rc = t.originalStatus === ‘callback_needed’ || t.category === ‘query’ ? ‘callback_needed’
-: t.category === ‘collection’ ? ‘collection’
-: t.category === ‘urgent’ ? ‘urgent’ : ‘repeat’;
-card.innerHTML =
-‘<div class="task-avatar av-green">’ + t.initials + ‘</div>’ +
-‘<div class="task-body">’ +
-‘<div class="task-top">’ +
-‘<span class="task-name">’ + t.name + ‘</span>’ +
-‘<span class="status-pill-sm sp-reviewed">Reviewed</span>’ +
-‘<span class="req-type ' + getReqTypeClass(t.category) + '">’ + t.requestTypeLabel + ‘</span>’ +
-‘</div>’ +
-‘<div class="task-summary">’ + summary + ‘</div>’ +
-‘<div class="task-meta">’ +
-’<span class="task-meta-item">🕐 ’ + (t.reviewedTime||t.callTime||‘Just now’) + ‘</span>’ +
-‘<span class="task-meta-item">’ + t.reviewedCopy + ‘</span>’ +
-(t.notes ? ‘<span class="task-meta-item">Note saved</span>’ : ‘’) +
-‘</div>’ +
-‘</div>’ +
-‘<div class="task-actions"><button class="' + getReviewedBtnClass(rc) + '" style="cursor:default;">’ + getReviewedBtnLabel(rc) + ‘</button></div>’;
-return card;
+  var card = document.createElement('div');
+  card.className = 'task-card reviewed-card';
+  card.dataset.status = 'reviewed';
+  card.dataset.id = t.id;
+  var summary = getReviewedSummary(t);
+  var rc = t.originalStatus === 'callback_needed' || t.category === 'query' ? 'callback_needed'
+    : t.category === 'collection' ? 'collection'
+    : t.category === 'urgent' ? 'urgent' : 'repeat';
+  card.innerHTML =
+    '<div class="task-avatar av-green">' + t.initials + '</div>' +
+    '<div class="task-body">' +
+      '<div class="task-top">' +
+        '<span class="task-name">' + t.name + '</span>' +
+        '<span class="status-pill-sm sp-reviewed">Reviewed</span>' +
+        '<span class="req-type ' + getReqTypeClass(t.category) + '">' + t.requestTypeLabel + '</span>' +
+      '</div>' +
+      '<div class="task-summary">' + summary + '</div>' +
+      '<div class="task-meta">' +
+        '<span class="task-meta-item">🕐 ' + (t.reviewedTime||t.callTime||'Just now') + '</span>' +
+        '<span class="task-meta-item">' + t.reviewedCopy + '</span>' +
+        (t.notes ? '<span class="task-meta-item">Note saved</span>' : '') +
+      '</div>' +
+    '</div>' +
+    '<div class="task-actions"><button class="' + getReviewedBtnClass(rc) + '" style="cursor:default;">' + getReviewedBtnLabel(rc) + '</button></div>';
+  return card;
 }
 
 function renderAllSections() {
-[‘urgent-list’,‘needs-list’,‘callback-list’,‘reviewed-list’].forEach(function(id) {
-document.getElementById(id).innerHTML = ‘’;
-});
-Object.values(state.tasks).forEach(function(t) {
-if (t.status === ‘urgent_review’) document.getElementById(‘urgent-list’).appendChild(renderTaskCard(t));
-else if (t.status === ‘needs_review’) document.getElementById(‘needs-list’).appendChild(renderTaskCard(t));
-else if (t.status === ‘callback_needed’) document.getElementById(‘callback-list’).appendChild(renderTaskCard(t));
-else if (t.status === ‘reviewed’) document.getElementById(‘reviewed-list’).appendChild(renderReviewedCard(t));
-});
+  ['urgent-list','needs-list','callback-list','reviewed-list'].forEach(function(id) {
+    document.getElementById(id).innerHTML = '';
+  });
+  Object.values(state.tasks).forEach(function(t) {
+    if (t.status === 'urgent_review') document.getElementById('urgent-list').appendChild(renderTaskCard(t));
+    else if (t.status === 'needs_review') document.getElementById('needs-list').appendChild(renderTaskCard(t));
+    else if (t.status === 'callback_needed') document.getElementById('callback-list').appendChild(renderTaskCard(t));
+    else if (t.status === 'reviewed') document.getElementById('reviewed-list').appendChild(renderReviewedCard(t));
+  });
 }
 
 function recomputeCounts() {
-var c = {urgent_review:0,needs_review:0,callback_needed:0,reviewed:0};
-Object.values(state.tasks).forEach(function(t) { if (c[t.status]!==undefined) c[t.status]++; });
-document.getElementById(‘badge-urgent’).textContent = c.urgent_review;
-document.getElementById(‘badge-needs’).textContent = c.needs_review;
-document.getElementById(‘badge-callback’).textContent = c.callback_needed;
-document.getElementById(‘badge-reviewed’).textContent = c.reviewed;
-document.getElementById(‘urgent-count’).textContent = c.urgent_review;
-document.getElementById(‘needs-count’).textContent = c.needs_review;
-document.getElementById(‘callback-count’).textContent = c.callback_needed;
-document.getElementById(‘reviewed-count’).textContent = c.reviewed;
-document.getElementById(‘stat-urgent’).textContent = c.urgent_review;
-document.getElementById(‘stat-reviewed’).textContent = c.reviewed;
-var open = c.urgent_review + c.needs_review + c.callback_needed;
-document.getElementById(‘stat-open’).textContent = open;
-document.getElementById(‘badge-all’).textContent = open;
-document.getElementById(‘stat-calls’).textContent = state.callsToday;
+  var c = {urgent_review:0,needs_review:0,callback_needed:0,reviewed:0};
+  Object.values(state.tasks).forEach(function(t) { if (c[t.status]!==undefined) c[t.status]++; });
+  document.getElementById('badge-urgent').textContent = c.urgent_review;
+  document.getElementById('badge-needs').textContent = c.needs_review;
+  document.getElementById('badge-callback').textContent = c.callback_needed;
+  document.getElementById('badge-reviewed').textContent = c.reviewed;
+  document.getElementById('urgent-count').textContent = c.urgent_review;
+  document.getElementById('needs-count').textContent = c.needs_review;
+  document.getElementById('callback-count').textContent = c.callback_needed;
+  document.getElementById('reviewed-count').textContent = c.reviewed;
+  document.getElementById('stat-urgent').textContent = c.urgent_review;
+  document.getElementById('stat-reviewed').textContent = c.reviewed;
+  var open = c.urgent_review + c.needs_review + c.callback_needed;
+  document.getElementById('stat-open').textContent = open;
+  document.getElementById('badge-all').textContent = open;
+  document.getElementById('stat-calls').textContent = state.callsToday;
 }
 
 async function loadTasks() {
-try {
-var data = await apiFetch(’/tasks’);
-var next = {};
-(data.tasks || []).forEach(function(a) {
-try {
-var n = normalizeTask(a);
-next[n.id] = n;
-} catch(e) {
-console.error(‘normalizeTask failed’, a && a.id, e);
-}
-});
-state.tasks = next;
-state.callsToday = Object.keys(next).length;
-renderAllSections();
-recomputeCounts();
-applyCurrentFilter();
-} catch(err) {
-console.error(err);
-showToast(’Failed to load tasks: ’ + (err.message || ‘Unknown error’));
-}
+  try {
+    var data = await apiFetch('/tasks');
+    var next = {};
+    (data.tasks || []).forEach(function(a) {
+      try {
+        var n = normalizeTask(a);
+        next[n.id] = n;
+      } catch(e) {
+        console.error('normalizeTask failed', a && a.id, e);
+      }
+    });
+    state.tasks = next;
+    state.callsToday = Object.keys(next).length;
+    renderAllSections();
+    recomputeCounts();
+    applyCurrentFilter();
+  } catch(err) {
+    console.error(err);
+    if (err.message !== 'Not authenticated') {
+      showToast('Failed to load tasks: ' + (err.message || 'Unknown error'));
+    }
+  }
 }
 
 async function loadTaskDetail(id) {
-var data = await apiFetch(’/tasks/’ + id);
-var base = normalizeTask(data.task);
-base.notes = latestNote(data.notes);
-base.allNotes = data.notes || [];
-base.events = data.events || [];
-state.tasks[id] = Object.assign({}, state.tasks[id] || {}, base);
-return state.tasks[id];
+  var data = await apiFetch('/tasks/' + id);
+  var base = normalizeTask(data.task);
+  base.notes = latestNote(data.notes);
+  base.allNotes = data.notes || [];
+  base.events = data.events || [];
+  state.tasks[id] = Object.assign({}, state.tasks[id] || {}, base);
+  return state.tasks[id];
 }
 
 function filterTasks(filter, el) {
-state.currentFilter = filter;
-document.querySelectorAll(’.nav-item:not(.disabled)’).forEach(function(n) { n.classList.remove(‘active’); });
-el.classList.add(‘active’);
-document.querySelectorAll(’.task-card’).forEach(function(card) {
-var s = card.dataset.status;
-var show = filter === ‘open’ ? s !== ‘reviewed’ : filter === ‘reviewed’ ? s === ‘reviewed’ : s === filter;
-card.style.display = show ? ‘grid’ : ‘none’;
-});
+  state.currentFilter = filter;
+  document.querySelectorAll('.nav-item:not(.disabled)').forEach(function(n) { n.classList.remove('active'); });
+  el.classList.add('active');
+  document.querySelectorAll('.task-card').forEach(function(card) {
+    var s = card.dataset.status;
+    var show = filter === 'open' ? s !== 'reviewed' : filter === 'reviewed' ? s === 'reviewed' : s === filter;
+    card.style.display = show ? 'grid' : 'none';
+  });
 }
 
 function applyCurrentFilter() {
-var el = document.querySelector(’.nav-item.active’);
-if (el) filterTasks(state.currentFilter, el);
+  var el = document.querySelector('.nav-item.active');
+  if (el) filterTasks(state.currentFilter, el);
 }
 
 async function openReviewModal(id) {
-try {
-var t = await loadTaskDetail(id);
-state.currentModalId = id;
-document.getElementById(‘rm-title’).textContent = t.name;
-document.getElementById(‘rm-name’).textContent = t.name;
-document.getElementById(‘rm-dob’).textContent = t.dob;
-document.getElementById(‘rm-meds’).textContent = t.meds;
-document.getElementById(‘rm-type’).textContent = t.requestTypeLabel;
-document.getElementById(‘rm-phone’).textContent = t.phone;
-document.getElementById(‘rm-concern’).textContent = t.summary;
-document.getElementById(‘rm-transcript’).textContent = t.transcript;
-document.getElementById(‘rm-next’).textContent = t.nextStep;
-document.getElementById(‘rm-notes’).value = t.notes || ‘’;
-var fill = document.getElementById(‘rm-conf-fill’);
-fill.style.width = t.confidence + ‘%’;
-fill.className = ‘modal-conf-fill conf-fill’ + getConfClass(t.confidence);
-document.getElementById(‘rm-conf-text’).textContent = t.confidence + ’% - ’ +
-(t.confidence < 75 ? ‘manual verification recommended’ : t.confidence < 90 ? ‘review carefully’ : ‘high confidence’);
-var pill = document.getElementById(‘rm-pill’);
-pill.className = ’modal-status ’ + getStatusPillClass(t.status);
-pill.textContent = getStatusPillLabel(t.status);
-var btn = document.getElementById(‘rm-primary-btn’);
-btn.disabled = t.status === ‘reviewed’;
-btn.textContent = t.status === ‘reviewed’ ? ‘Already reviewed’ : t.status === ‘callback_needed’ ? ‘Assign callback’ : ‘Mark reviewed’;
-document.getElementById(‘review-modal’).classList.add(‘open’);
-} catch(err) {
-console.error(err);
-showToast(’Failed to open task: ’ + (err.message || ‘Unknown error’));
-}
+  try {
+    var t = await loadTaskDetail(id);
+    state.currentModalId = id;
+    document.getElementById('rm-title').textContent = t.name;
+    document.getElementById('rm-name').textContent = t.name;
+    document.getElementById('rm-dob').textContent = t.dob;
+    document.getElementById('rm-meds').textContent = t.meds;
+    document.getElementById('rm-type').textContent = t.requestTypeLabel;
+    document.getElementById('rm-phone').textContent = t.phone;
+    document.getElementById('rm-concern').textContent = t.summary;
+    document.getElementById('rm-transcript').textContent = t.transcript;
+    document.getElementById('rm-next').textContent = t.nextStep;
+    document.getElementById('rm-notes').value = t.notes || '';
+    var fill = document.getElementById('rm-conf-fill');
+    fill.style.width = t.confidence + '%';
+    fill.className = 'modal-conf-fill conf-fill' + getConfClass(t.confidence);
+    document.getElementById('rm-conf-text').textContent = t.confidence + '% - ' +
+      (t.confidence < 75 ? 'manual verification recommended' : t.confidence < 90 ? 'review carefully' : 'high confidence');
+    var pill = document.getElementById('rm-pill');
+    pill.className = 'modal-status ' + getStatusPillClass(t.status);
+    pill.textContent = getStatusPillLabel(t.status);
+    var btn = document.getElementById('rm-primary-btn');
+    btn.disabled = t.status === 'reviewed';
+    btn.textContent = t.status === 'reviewed' ? 'Already reviewed' : t.status === 'callback_needed' ? 'Assign callback' : 'Mark reviewed';
+    document.getElementById('review-modal').classList.add('open');
+  } catch(err) {
+    console.error(err);
+    showToast('Failed to open task: ' + (err.message || 'Unknown error'));
+  }
 }
 
 async function modalPrimaryAction() {
-if (!state.currentModalId) return;
-var t = state.tasks[state.currentModalId];
-if (!t || t.status === ‘reviewed’) return;
-try {
-var payload = {to_status:‘reviewed’, note: document.getElementById(‘rm-notes’).value || null};
-var data = await apiFetch(’/tasks/’ + t.id + ‘/status’, {method:‘POST’, body:JSON.stringify(payload)});
-var updated = normalizeTask(data.task);
-updated.notes = payload.note || t.notes || ‘’;
-state.tasks[t.id] = Object.assign({}, state.tasks[t.id], updated);
-closeReviewModal();
-renderAllSections();
-recomputeCounts();
-applyCurrentFilter();
-showToast(’Reviewed: ’ + updated.name);
-} catch(err) {
-console.error(err);
-showToast(’Failed to update task: ’ + (err.message || ‘Unknown error’));
-}
+  if (!state.currentModalId) return;
+  var t = state.tasks[state.currentModalId];
+  if (!t || t.status === 'reviewed') return;
+  try {
+    var payload = { to_status: 'reviewed', note: document.getElementById('rm-notes').value || null };
+    var data = await apiFetch('/tasks/' + t.id + '/status', { method: 'POST', body: JSON.stringify(payload) });
+    var updated = normalizeTask(data.task);
+    updated.notes = payload.note || t.notes || '';
+    state.tasks[t.id] = Object.assign({}, state.tasks[t.id], updated);
+    closeReviewModal();
+    renderAllSections();
+    recomputeCounts();
+    applyCurrentFilter();
+    showToast('Reviewed: ' + updated.name);
+  } catch(err) {
+    console.error(err);
+    showToast('Failed to update: ' + (err.message || 'Unknown error'));
+  }
 }
 
 function modalAlertPharmacist() {
-var t = state.currentModalId ? state.tasks[state.currentModalId] : null;
-closeReviewModal();
-showToast(’Pharmacist alerted: ’ + (t ? t.name : ‘Patient’));
+  var t = state.currentModalId ? state.tasks[state.currentModalId] : null;
+  closeReviewModal();
+  showToast('Pharmacist alerted: ' + (t ? t.name : 'Patient'));
 }
 
-function closeReviewModal() { document.getElementById(‘review-modal’).classList.remove(‘open’); state.currentModalId = null; }
-function closeReviewOutside(e) { if (e.target === document.getElementById(‘review-modal’)) closeReviewModal(); }
+function closeReviewModal() { document.getElementById('review-modal').classList.remove('open'); state.currentModalId = null; }
+function closeReviewOutside(e) { if (e.target === document.getElementById('review-modal')) closeReviewModal(); }
 
 async function openEditModal(id) {
-try {
-var t = (state.tasks[id] && state.tasks[id].updatedAt) ? state.tasks[id] : await loadTaskDetail(id);
-state.editModalId = id;
-document.getElementById(‘em-title’).textContent = ’Edit - ’ + t.name;
-document.getElementById(‘em-name’).value = t.name;
-document.getElementById(‘em-dob’).value = t.dob === ‘-’ ? ‘’ : t.dob;
-document.getElementById(‘em-meds’).value = t.meds;
-document.getElementById(‘em-phone’).value = t.phone === ‘-’ ? ‘’ : t.phone;
-document.getElementById(‘em-next’).value = t.nextStep;
-document.getElementById(‘em-notes’).value = t.notes || ‘’;
-document.getElementById(‘edit-modal’).classList.add(‘open’);
-} catch(err) {
-console.error(err);
-showToast(’Failed to open editor: ’ + (err.message || ‘Unknown error’));
-}
+  try {
+    var t = (state.tasks[id] && state.tasks[id].updatedAt) ? state.tasks[id] : await loadTaskDetail(id);
+    state.editModalId = id;
+    document.getElementById('em-title').textContent = 'Edit - ' + t.name;
+    document.getElementById('em-name').value = t.name;
+    document.getElementById('em-dob').value = t.dob === '-' ? '' : t.dob;
+    document.getElementById('em-meds').value = t.meds;
+    document.getElementById('em-phone').value = t.phone === '-' ? '' : t.phone;
+    document.getElementById('em-next').value = t.nextStep;
+    document.getElementById('em-notes').value = t.notes || '';
+    document.getElementById('edit-modal').classList.add('open');
+  } catch(err) {
+    console.error(err);
+    showToast('Failed to open editor: ' + (err.message || 'Unknown error'));
+  }
 }
 
 async function saveEdit() {
-if (!state.editModalId) return;
-var t = state.tasks[state.editModalId];
-if (!t) return;
-var payload = {
-patient_name: document.getElementById(‘em-name’).value || t.name,
-patient_dob: displayDobToIso(document.getElementById(‘em-dob’).value),
-medications: document.getElementById(‘em-meds’).value || t.meds,
-patient_phone: document.getElementById(‘em-phone’).value || t.phone,
-next_step: document.getElementById(‘em-next’).value || t.nextStep,
-notes: document.getElementById(‘em-notes’).value || null
-};
-try {
-var data = await apiFetch(’/tasks/’ + t.id, {method:‘PATCH’, body:JSON.stringify(payload)});
-var updated = normalizeTask(data.task);
-updated.notes = payload.notes || t.notes || ‘’;
-state.tasks[t.id] = Object.assign({}, state.tasks[t.id], updated);
-closeEditModal();
-renderAllSections();
-recomputeCounts();
-applyCurrentFilter();
-showToast(’Updated: ’ + updated.name);
-} catch(err) {
-console.error(err);
-showToast(’Failed to save: ’ + (err.message || ‘Unknown error’));
-}
+  if (!state.editModalId) return;
+  var t = state.tasks[state.editModalId];
+  if (!t) return;
+  var payload = {
+    patient_name: document.getElementById('em-name').value || t.name,
+    patient_dob: displayDobToIso(document.getElementById('em-dob').value),
+    medications: document.getElementById('em-meds').value || t.meds,
+    patient_phone: document.getElementById('em-phone').value || t.phone,
+    next_step: document.getElementById('em-next').value || t.nextStep,
+    notes: document.getElementById('em-notes').value || null
+  };
+  try {
+    var data = await apiFetch('/tasks/' + t.id, { method: 'PATCH', body: JSON.stringify(payload) });
+    var updated = normalizeTask(data.task);
+    updated.notes = payload.notes || t.notes || '';
+    state.tasks[t.id] = Object.assign({}, state.tasks[t.id], updated);
+    closeEditModal();
+    renderAllSections();
+    recomputeCounts();
+    applyCurrentFilter();
+    showToast('Updated: ' + updated.name);
+  } catch(err) {
+    console.error(err);
+    showToast('Failed to save: ' + (err.message || 'Unknown error'));
+  }
 }
 
-function closeEditModal() { document.getElementById(‘edit-modal’).classList.remove(‘open’); state.editModalId = null; }
-function closeEditOutside(e) { if (e.target === document.getElementById(‘edit-modal’)) closeEditModal(); }
+function closeEditModal() { document.getElementById('edit-modal').classList.remove('open'); state.editModalId = null; }
+function closeEditOutside(e) { if (e.target === document.getElementById('edit-modal')) closeEditModal(); }
 
 var simScenarios = [
-{name:‘Patricia Green’,meds:‘Omeprazole 20mg’,category:‘repeat’,requestType:‘repeat_request’,confidence:93,collectionSlot:‘Mon 9am’,summary:‘Repeat prescription captured.’,transcript:‘Patient called for repeat. Collection Monday 9am.’,nextStep:‘Review and queue.’,reviewedCopy:‘Reviewed - queued for dispensing’,status:‘needs_review’},
-{name:‘Mohammed Ahmed’,meds:‘Lisinopril 5mg’,category:‘repeat’,requestType:‘repeat_request’,confidence:89,collectionSlot:‘Tue 2pm’,summary:‘Repeat prescription captured.’,transcript:‘Patient called for repeat. Collection Tuesday 2pm.’,nextStep:‘Review and queue.’,reviewedCopy:‘Reviewed - queued for dispensing’,status:‘needs_review’},
-{name:‘Linda Watson’,meds:‘Amoxicillin 500mg’,category:‘query’,requestType:‘ready_check_query’,confidence:97,collectionSlot:’’,summary:‘Checking prescription readiness.’,transcript:‘Patient checking if prescription ready.’,nextStep:‘Call patient back.’,reviewedCopy:‘Callback assigned’,status:‘callback_needed’},
-{name:‘Thomas Hill’,meds:‘Codeine Phosphate 30mg’,category:‘repeat’,requestType:‘repeat_request’,confidence:71,collectionSlot:‘Wed 11am’,summary:‘Low confidence - verify medication.’,transcript:‘Medication unclear on call.’,nextStep:‘Confirm medication with patient.’,reviewedCopy:‘Verified and queued’,status:‘needs_review’}
+  { name:'Patricia Green', meds:'Omeprazole 20mg', category:'repeat', requestType:'repeat_request', confidence:93, collectionSlot:'Mon 9am', summary:'Repeat prescription captured.', transcript:'Patient called for repeat. Collection Monday 9am.', nextStep:'Review and queue.', reviewedCopy:'Reviewed - queued for dispensing', status:'needs_review' },
+  { name:'Mohammed Ahmed', meds:'Lisinopril 5mg', category:'repeat', requestType:'repeat_request', confidence:89, collectionSlot:'Tue 2pm', summary:'Repeat prescription captured.', transcript:'Patient called for repeat. Collection Tuesday 2pm.', nextStep:'Review and queue.', reviewedCopy:'Reviewed - queued for dispensing', status:'needs_review' },
+  { name:'Linda Watson', meds:'Amoxicillin 500mg', category:'query', requestType:'ready_check_query', confidence:97, collectionSlot:'', summary:'Checking prescription readiness.', transcript:'Patient checking if prescription ready.', nextStep:'Call patient back.', reviewedCopy:'Callback assigned', status:'callback_needed' },
+  { name:'Thomas Hill', meds:'Codeine Phosphate 30mg', category:'repeat', requestType:'repeat_request', confidence:71, collectionSlot:'Wed 11am', summary:'Low confidence - verify medication.', transcript:'Medication unclear on call.', nextStep:'Confirm medication with patient.', reviewedCopy:'Verified and queued', status:'needs_review' }
 ];
 var simIdx = 0;
 
 async function simulateCall() {
-var s = simScenarios[simIdx % simScenarios.length];
-simIdx++;
-var banner = document.getElementById(‘live-banner’);
-document.getElementById(‘live-caller’).textContent = s.name + ’ - capturing…’;
-banner.style.display = ‘flex’;
-var secs = 0;
-var timer = setInterval(function() {
-secs++;
-document.getElementById(‘live-timer’).textContent =
-String(Math.floor(secs/60)).padStart(2,‘0’) + ‘:’ + String(secs%60).padStart(2,‘0’);
-}, 1000);
-setTimeout(async function() {
-clearInterval(timer);
-banner.style.display = ‘none’;
-try {
-var yr = new Date().getFullYear() - 55;
-var dob = yr + ‘-0’ + (Math.floor(Math.random()*9)+1) + ‘-’ + String(Math.floor(Math.random()*28)+1).padStart(2,‘0’);
-await apiFetch(’/calls/ingest’, {
-method: ‘POST’,
-body: JSON.stringify({
-source: ‘demo_ingestion’,
-caller_name: s.name,
-caller_phone: ‘07700 9’ + Math.floor(Math.random()*89999+10000),
-transcript_summary: s.transcript,
-ai_extraction: {
-patient_name: s.name, patient_dob: dob,
-patient_phone: ‘07700 9’ + Math.floor(Math.random()*89999+10000),
-request_type: s.requestType, category: s.category,
-medications: s.meds, collection_slot: s.collectionSlot || null,
-urgency_level: ‘routine’, status: s.status,
-confidence_score: s.confidence, display_summary: s.summary,
-ai_summary: s.summary, next_step: s.nextStep, reviewed_copy: s.reviewedCopy
-}
-})
-});
-state.callsToday += 1;
-await loadTasks();
-showToast(’New task from ’ + s.name);
-} catch(err) {
-console.error(err);
-showToast(’Simulated call failed: ’ + (err.message || ‘Unknown error’));
-}
-}, 4000);
+  var s = simScenarios[simIdx % simScenarios.length];
+  simIdx++;
+  var banner = document.getElementById('live-banner');
+  document.getElementById('live-caller').textContent = s.name + ' - capturing...';
+  banner.style.display = 'flex';
+  var secs = 0;
+  var timer = setInterval(function() {
+    secs++;
+    document.getElementById('live-timer').textContent =
+      String(Math.floor(secs/60)).padStart(2,'0') + ':' + String(secs%60).padStart(2,'0');
+  }, 1000);
+  setTimeout(async function() {
+    clearInterval(timer);
+    banner.style.display = 'none';
+    try {
+      var yr = new Date().getFullYear() - 55;
+      var dob = yr + '-0' + (Math.floor(Math.random()*9)+1) + '-' + String(Math.floor(Math.random()*28)+1).padStart(2,'0');
+      await apiFetch('/calls/ingest', {
+        method: 'POST',
+        body: JSON.stringify({
+          source: 'demo_ingestion',
+          caller_name: s.name,
+          caller_phone: '07700 9' + Math.floor(Math.random()*89999+10000),
+          transcript_summary: s.transcript,
+          ai_extraction: {
+            patient_name: s.name, patient_dob: dob,
+            patient_phone: '07700 9' + Math.floor(Math.random()*89999+10000),
+            request_type: s.requestType, category: s.category,
+            medications: s.meds, collection_slot: s.collectionSlot || null,
+            urgency_level: 'routine', status: s.status,
+            confidence_score: s.confidence, display_summary: s.summary,
+            ai_summary: s.summary, next_step: s.nextStep, reviewed_copy: s.reviewedCopy
+          }
+        })
+      });
+      state.callsToday += 1;
+      await loadTasks();
+      showToast('New task from ' + s.name);
+    } catch(err) {
+      console.error(err);
+      showToast('Simulated call failed: ' + (err.message || 'Unknown error'));
+    }
+  }, 4000);
 }
 
 function showToast(msg) {
-var t = document.getElementById(‘toast’);
-document.getElementById(‘toast-msg’).textContent = msg;
-t.classList.add(‘show’);
-setTimeout(function() { t.classList.remove(‘show’); }, 3200);
+  var t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 3200);
 }
 
-document.getElementById(‘live-date’).textContent = ’ - ’ +
-new Date().toLocaleDateString(‘en-GB’, {weekday:‘long’,day:‘numeric’,month:‘long’});
+// -- INIT ---------------------------------------------------------------------
 
-loadTasks();
+document.getElementById('live-date').textContent = ' - ' +
+  new Date().toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long' });
+
+// Check for existing session on load
+var existingSession = getStoredSession();
+if (existingSession && existingSession.access_token) {
+  state.session = existingSession;
+  var userEmail = (existingSession.user && existingSession.user.email) || 'Admin';
+  document.getElementById('user-name-display').textContent = userEmail;
+  showAppScreen();
+  loadTasks();
+} else {
+  showLoginScreen();
+}
+
+// Enter key on login form
+document.getElementById('login-password').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') handleLogin();
+});
 </script>
 
 </body>
